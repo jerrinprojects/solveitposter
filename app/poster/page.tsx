@@ -1,0 +1,72 @@
+import PageHeader from "@/components/PageHeader";
+import SectionBlock from "@/components/SectionBlock";
+import PageFooter from "@/components/PageFooter";
+import PrintButton from "@/components/PrintButton";
+import { posterMeta, posterSkills, footerData } from "@/data/posterData";
+import type { PosterSkill } from "@/types";
+
+const TITLE_PAGE_COUNT = 4;
+const INNER_PAGE_COUNT = 5;
+
+function paginateSkills(skills: PosterSkill[]): PosterSkill[][] {
+  const pages: PosterSkill[][] = [];
+  pages.push(skills.slice(0, TITLE_PAGE_COUNT));
+  for (let i = TITLE_PAGE_COUNT; i < skills.length; i += INNER_PAGE_COUNT) {
+    pages.push(skills.slice(i, i + INNER_PAGE_COUNT));
+  }
+  return pages;
+}
+
+export default function PosterPage() {
+  const pages = paginateSkills(posterSkills);
+
+  return (
+    <main className="bg-pink-100">
+      {/* Screen-only back link */}
+      <div className="no-print max-w-4xl mx-auto px-6 pt-4">
+        <a
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 hover:text-pink-700 transition-colors"
+        >
+          <span>←</span> Back to Topics
+        </a>
+      </div>
+
+      {pages.map((pageSkills, pageIdx) => (
+        <div key={pageIdx} className="poster-page max-w-4xl mx-auto px-6 py-6">
+
+          {pageIdx === 0 && <PageHeader meta={posterMeta} />}
+
+          {pageIdx > 0 && (
+            <div className="pt-3 mb-4 pb-3 border-b-2 border-pink-200 flex items-baseline justify-between print-card">
+              <span className="font-fredoka font-bold text-xl text-pink-500">
+                {posterMeta.subject}
+              </span>
+              <span className="font-nunito text-xs font-semibold text-gray-400 tracking-wider uppercase">
+                {posterMeta.phase} &middot; {posterMeta.year} &middot; {posterMeta.theme}
+              </span>
+            </div>
+          )}
+
+          {pageIdx > 0 && (
+            <div className="no-print mb-2 text-center">
+              <span className="text-[10px] text-gray-300 tracking-widest uppercase">
+                Page {pageIdx + 1}
+              </span>
+            </div>
+          )}
+
+          <div className="space-y-3 print:space-y-2">
+            {pageSkills.map((skill) => (
+              <SectionBlock key={skill.code} skill={skill} />
+            ))}
+          </div>
+
+          <PageFooter data={footerData} />
+        </div>
+      ))}
+
+      <PrintButton />
+    </main>
+  );
+}

@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #fce7f3;
+  font-family: var(--font-nunito), sans-serif;
+}
+
+@layer utilities {
+  .no-print { }
+
+  .print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  body {
+    background-color: #fce7f3 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+  }
+
+  .print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* All pages: strip vertical padding — @page margin provides whitespace */
+  .poster-page {
+    padding-top: 20px !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Page 2+: force page break and remove all padding */
+  .poster-page + .poster-page {
+    break-before: page;
+    page-break-before: always;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
