@@ -117,7 +117,8 @@ export default function Addition2DigitPage() {
               <span className="bg-pink-500 text-white font-fredoka text-base rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0" style={{ fontWeight: 900 }}>3</span>
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Add tens, then add ones</p>
             </div>
-            <svg viewBox="0 0 480 92" className="w-full max-w-md mx-auto block" aria-label="30+20=50, 4+5=9">
+            <svg viewBox="0 0 480 104" className="w-full max-w-md mx-auto block" aria-label="30+20=50, 4+5=9">
+              {/* Tens row */}
               <rect x="70" y="6" width="58" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
               <text x="99" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">30</text>
               <text x="144" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
@@ -128,17 +129,18 @@ export default function Addition2DigitPage() {
               <text x="288" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">50</text>
               <text x="332" y="28" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← tens total</text>
 
-              <line x1="10" y1="54" x2="470" y2="54" stroke="#fce7f3" strokeWidth="1.5" strokeDasharray="5,4"/>
+              <line x1="10" y1="58" x2="470" y2="58" stroke="#fce7f3" strokeWidth="1.5" strokeDasharray="5,4"/>
 
-              <rect x="70" y="60" width="44" height="26" rx="7" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="92" y="78" textAnchor="middle" fontSize="16" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">4</text>
-              <text x="128" y="78" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="144" y="60" width="44" height="26" rx="7" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="166" y="78" textAnchor="middle" fontSize="16" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">5</text>
-              <text x="204" y="78" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="222" y="56" width="44" height="32" rx="8" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="244" y="78" textAnchor="middle" fontSize="20" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">9</text>
-              <text x="278" y="78" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← ones total</text>
+              {/* Ones row — same size as tens row */}
+              <rect x="70" y="64" width="44" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="92" y="87" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">4</text>
+              <text x="128" y="87" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="144" y="64" width="44" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <text x="166" y="87" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">5</text>
+              <text x="204" y="87" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="222" y="60" width="52" height="42" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="248" y="88" textAnchor="middle" fontSize="24" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">9</text>
+              <text x="286" y="86" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← ones total</text>
             </svg>
           </div>
 
