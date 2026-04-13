@@ -169,7 +169,7 @@ export default function Addition2DigitPage() {
         {/* ── Try It ── */}
         <div className="bg-white border-2 border-pink-200 rounded-xl px-5 py-2 mt-2 print-card">
           <p className="font-fredoka text-base text-pink-500 mb-1.5" style={{ fontWeight: 900 }}>Try It Yourself!</p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {[
               { q: "23 + 45", a: "68" },
               { q: "51 + 38", a: "89" },
