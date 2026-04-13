@@ -10,8 +10,8 @@ const topics = [
   {
     subject: "Math Strategies",
     items: [
-      { label: "Two-Digit Addition · Place Value Partitioning", href: "/math-strategies/addition-2digit" },
-      { label: "Two-Digit Addition · With Renaming", href: "/math-strategies/addition-2digit-renaming" },
+      { label: "2-Digit Addition — No Renaming", href: "/math-strategies/addition-2digit" },
+      { label: "2-Digit Addition — With Renaming", href: "/math-strategies/addition-2digit-renaming" },
     ],
   },
 ];

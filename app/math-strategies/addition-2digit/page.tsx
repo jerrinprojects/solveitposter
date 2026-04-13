@@ -18,25 +18,25 @@ export default function Addition2DigitPage() {
       </div>
 
       {/* Poster page */}
-      <div className="poster-page max-w-4xl mx-auto px-5 py-3">
+      <div className="poster-page max-w-4xl mx-auto px-3 sm:px-5 py-3">
 
         {/* ── Header ── */}
         <header className="mb-3 print-card">
-          <div className="bg-pink-200 rounded-2xl px-6 py-3 text-center relative overflow-visible">
-            <div>
-              <h1 className="font-fredoka text-4xl text-pink-600 leading-tight tracking-wide" style={{ fontWeight: 900, WebkitTextStroke: "1px #db2777" }}>
+          <div className="bg-pink-200 rounded-2xl px-4 sm:px-6 py-3 text-center relative overflow-visible">
+            <div className="pr-16 sm:pr-20">
+              <h1 className="font-fredoka text-2xl sm:text-4xl text-pink-600 leading-tight tracking-wide" style={{ fontWeight: 900, WebkitTextStroke: "1px #db2777" }}>
                 TWO-DIGIT ADDITION
               </h1>
-              <h2 className="font-fredoka text-xl text-gray-700 mt-0.5" style={{ fontWeight: 900 }}>
-                Place Value Partitioning &nbsp;·&nbsp; <span className="text-gray-500 text-base">No Renaming</span>
+              <h2 className="font-fredoka text-base sm:text-xl text-gray-700 mt-0.5" style={{ fontWeight: 900 }}>
+                Place Value Partitioning &nbsp;·&nbsp; <span className="text-gray-500 text-sm sm:text-base">No Renaming</span>
               </h2>
             </div>
-            <div className="absolute right-3 bottom-0 pointer-events-none select-none">
+            <div className="absolute right-2 sm:right-3 bottom-0 pointer-events-none select-none">
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/againsolveit.firebasestorage.app/o/Solvie_Number-removebg.png?alt=media&token=dec56a1b-bf95-4490-bb06-c642b8b9f753"
                 alt="Solvie mascot"
-                width={72}
-                className="object-contain"
+                width={60}
+                className="object-contain sm:w-[72px]"
                 style={{ mixBlendMode: "multiply" }}
               />
             </div>
@@ -62,14 +62,14 @@ export default function Addition2DigitPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Write the equation</p>
             </div>
             <svg viewBox="0 0 480 68" className="w-full max-w-sm mx-auto block" aria-label="34 + 25 = ?">
-              <rect x="40" y="6" width="88" height="52" rx="12" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
-              <text x="84" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">34</text>
-              <text x="158" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="188" y="6" width="88" height="52" rx="12" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
-              <text x="232" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">25</text>
-              <text x="306" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="332" y="6" width="68" height="52" rx="12" fill="#f3e8ff" stroke="#a855f7" strokeWidth="2.5" strokeDasharray="6,3"/>
-              <text x="366" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#7c3aed" fontFamily="Fredoka One, sans-serif">?</text>
+              <rect x="60" y="6" width="88" height="52" rx="12" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
+              <text x="104" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">34</text>
+              <text x="178" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="208" y="6" width="88" height="52" rx="12" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
+              <text x="252" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">25</text>
+              <text x="326" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="352" y="6" width="68" height="52" rx="12" fill="#f3e8ff" stroke="#a855f7" strokeWidth="2.5" strokeDasharray="6,3"/>
+              <text x="386" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#7c3aed" fontFamily="Fredoka One, sans-serif">?</text>
             </svg>
           </div>
 
@@ -118,27 +118,27 @@ export default function Addition2DigitPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Add tens, then add ones</p>
             </div>
             <svg viewBox="0 0 480 92" className="w-full max-w-md mx-auto block" aria-label="30+20=50, 4+5=9">
-              <rect x="10" y="6" width="58" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="39" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">30</text>
-              <text x="84" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="102" y="6" width="58" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="131" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
-              <text x="176" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="196" y="2" width="64" height="42" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="228" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">50</text>
-              <text x="272" y="28" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← tens total</text>
+              <rect x="70" y="6" width="58" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="99" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">30</text>
+              <text x="144" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="162" y="6" width="58" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <text x="191" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
+              <text x="236" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="256" y="2" width="64" height="42" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="288" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">50</text>
+              <text x="332" y="28" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← tens total</text>
 
               <line x1="10" y1="54" x2="470" y2="54" stroke="#fce7f3" strokeWidth="1.5" strokeDasharray="5,4"/>
 
-              <rect x="10" y="60" width="44" height="26" rx="7" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="32" y="78" textAnchor="middle" fontSize="16" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">4</text>
-              <text x="68" y="78" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="84" y="60" width="44" height="26" rx="7" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="106" y="78" textAnchor="middle" fontSize="16" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">5</text>
-              <text x="144" y="78" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="162" y="56" width="44" height="32" rx="8" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="184" y="78" textAnchor="middle" fontSize="20" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">9</text>
-              <text x="218" y="78" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← ones total</text>
+              <rect x="70" y="60" width="44" height="26" rx="7" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="92" y="78" textAnchor="middle" fontSize="16" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">4</text>
+              <text x="128" y="78" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="144" y="60" width="44" height="26" rx="7" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <text x="166" y="78" textAnchor="middle" fontSize="16" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">5</text>
+              <text x="204" y="78" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="222" y="56" width="44" height="32" rx="8" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="244" y="78" textAnchor="middle" fontSize="20" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">9</text>
+              <text x="278" y="78" textAnchor="start" fontSize="12" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← ones total</text>
             </svg>
           </div>
 
@@ -149,16 +149,16 @@ export default function Addition2DigitPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Combine to get the answer</p>
             </div>
             <svg viewBox="0 0 480 72" className="w-full max-w-md mx-auto block" aria-label="50 + 9 = 59">
-              <rect x="30" y="8" width="66" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="63" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">50</text>
-              <text x="114" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="134" y="8" width="56" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="162" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">9</text>
-              <text x="208" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="234" y="2" width="86" height="58" rx="14" fill="#db2777" stroke="#9d174d" strokeWidth="3"/>
-              <text x="277" y="40" textAnchor="middle" fontSize="34" fontWeight="900" fill="white" fontFamily="Fredoka One, sans-serif">59</text>
-              <text x="334" y="24" fontSize="15" fontWeight="900" fill="#db2777" fontFamily="Fredoka One, sans-serif">Answer!</text>
-              <text x="334" y="44" fontSize="13" fontWeight="700" fill="#9d174d" fontFamily="Nunito, sans-serif">34 + 25 = 59</text>
+              <rect x="45" y="8" width="66" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="78" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">50</text>
+              <text x="129" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="149" y="8" width="56" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="177" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">9</text>
+              <text x="223" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="249" y="2" width="86" height="58" rx="14" fill="#db2777" stroke="#9d174d" strokeWidth="3"/>
+              <text x="292" y="40" textAnchor="middle" fontSize="34" fontWeight="900" fill="white" fontFamily="Fredoka One, sans-serif">59</text>
+              <text x="349" y="24" fontSize="15" fontWeight="900" fill="#db2777" fontFamily="Fredoka One, sans-serif">Answer!</text>
+              <text x="349" y="44" fontSize="13" fontWeight="700" fill="#9d174d" fontFamily="Nunito, sans-serif">34 + 25 = 59</text>
             </svg>
           </div>
 
@@ -167,7 +167,7 @@ export default function Addition2DigitPage() {
         {/* ── Try It ── */}
         <div className="bg-white border-2 border-pink-200 rounded-xl px-5 py-2 mt-2 print-card">
           <p className="font-fredoka text-base text-pink-500 mb-1.5" style={{ fontWeight: 900 }}>Try It Yourself!</p>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {[
               { q: "23 + 45", a: "68" },
               { q: "51 + 38", a: "89" },

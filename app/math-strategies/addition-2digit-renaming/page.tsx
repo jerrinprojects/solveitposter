@@ -62,14 +62,14 @@ export default function Addition2DigitRenamingPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Write the equation</p>
             </div>
             <svg viewBox="0 0 480 68" className="w-full max-w-sm mx-auto block" aria-label="47 + 38 = ?">
-              <rect x="40" y="6" width="88" height="52" rx="12" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
-              <text x="84" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">47</text>
-              <text x="158" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="188" y="6" width="88" height="52" rx="12" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
-              <text x="232" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">38</text>
-              <text x="306" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="332" y="6" width="68" height="52" rx="12" fill="#f3e8ff" stroke="#a855f7" strokeWidth="2.5" strokeDasharray="6,3"/>
-              <text x="366" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#7c3aed" fontFamily="Fredoka One, sans-serif">?</text>
+              <rect x="60" y="6" width="88" height="52" rx="12" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
+              <text x="104" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">47</text>
+              <text x="178" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="208" y="6" width="88" height="52" rx="12" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
+              <text x="252" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">38</text>
+              <text x="326" y="40" textAnchor="middle" fontSize="30" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="352" y="6" width="68" height="52" rx="12" fill="#f3e8ff" stroke="#a855f7" strokeWidth="2.5" strokeDasharray="6,3"/>
+              <text x="386" y="40" textAnchor="middle" fontSize="30" fontWeight="900" fill="#7c3aed" fontFamily="Fredoka One, sans-serif">?</text>
             </svg>
           </div>
 
@@ -114,39 +114,39 @@ export default function Addition2DigitRenamingPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Add the ones — rename if 10 or more!</p>
             </div>
             <svg viewBox="0 0 480 138" className="w-full max-w-lg mx-auto block" aria-label="7 + 8 = 15, split 15 into 10 and 5">
-              {/* Row 1: 7 + 8 = 15 */}
-              <rect x="10" y="6" width="44" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="32" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">7</text>
-              <text x="70" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="88" y="6" width="44" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="110" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">8</text>
-              <text x="148" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              {/* 15 box — highlighted */}
-              <rect x="164" y="2" width="56" height="42" rx="10" fill="#ffe4e6" stroke="#f43f5e" strokeWidth="2.5"/>
-              <text x="192" y="30" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9f1239" fontFamily="Fredoka One, sans-serif">15</text>
-              {/* RENAME label */}
-              <rect x="232" y="10" width="76" height="24" rx="6" fill="#fff1f2" stroke="#f43f5e" strokeWidth="1.5"/>
-              <text x="270" y="26" textAnchor="middle" fontSize="12" fontWeight="800" fill="#f43f5e" fontFamily="Nunito, sans-serif">⚠ RENAME!</text>
+              {/* Row 1: 7 + 8 = 15 — centered around x=240 */}
+              <rect x="96" y="6" width="44" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="118" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">7</text>
+              <text x="156" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="174" y="6" width="44" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <text x="196" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">8</text>
+              <text x="234" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              {/* 15 box — highlighted, center x=276 */}
+              <rect x="250" y="2" width="52" height="42" rx="10" fill="#ffe4e6" stroke="#f43f5e" strokeWidth="2.5"/>
+              <text x="276" y="30" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9f1239" fontFamily="Fredoka One, sans-serif">15</text>
+              {/* RENAME badge — right of 15 */}
+              <rect x="312" y="10" width="82" height="24" rx="6" fill="#fff1f2" stroke="#f43f5e" strokeWidth="1.5"/>
+              <text x="353" y="26" textAnchor="middle" fontSize="12" fontWeight="800" fill="#f43f5e" fontFamily="Nunito, sans-serif">⚠ RENAME!</text>
 
-              {/* Branch lines from 15 down to 10 and 5 — drawn first */}
-              <line x1="182" y1="44" x2="152" y2="72" stroke="#f43f5e" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="202" y1="44" x2="232" y2="72" stroke="#f43f5e" strokeWidth="2.5" strokeLinecap="round"/>
+              {/* Branch lines from 15 (center x=276, y=44) → 10 and 5 — drawn first */}
+              <line x1="266" y1="44" x2="236" y2="72" stroke="#f43f5e" strokeWidth="2.5" strokeLinecap="round"/>
+              <line x1="286" y1="44" x2="316" y2="72" stroke="#f43f5e" strokeWidth="2.5" strokeLinecap="round"/>
 
-              {/* Child boxes */}
-              <rect x="118" y="72" width="68" height="36" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <rect x="198" y="72" width="68" height="36" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              {/* Child boxes — 10 center x=236, 5 center x=316 */}
+              <rect x="202" y="72" width="68" height="36" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <rect x="282" y="72" width="68" height="36" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
 
-              {/* Child text */}
-              <text x="152" y="96" textAnchor="middle" fontSize="22" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">10</text>
-              <text x="232" y="96" textAnchor="middle" fontSize="22" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">5</text>
-              <text x="152" y="118" textAnchor="middle" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">1 ten</text>
-              <text x="232" y="118" textAnchor="middle" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">5 ones</text>
+              {/* + between the two child boxes */}
+              <text x="278" y="96" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
 
-              {/* + between 10 and 5 */}
-              <text x="190" y="96" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              {/* Child text — on top */}
+              <text x="236" y="96" textAnchor="middle" fontSize="22" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">10</text>
+              <text x="316" y="96" textAnchor="middle" fontSize="22" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">5</text>
+              <text x="236" y="118" textAnchor="middle" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">1 ten</text>
+              <text x="316" y="118" textAnchor="middle" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">5 ones</text>
 
               {/* Note */}
-              <text x="10" y="134" fontSize="11" fontWeight="700" fill="#f43f5e" fontFamily="Nunito, sans-serif">15 ≥ 10 → split into 1 ten + 5 ones. The ten moves to the tens column!</text>
+              <text x="60" y="136" textAnchor="middle" fontSize="11" fontWeight="700" fill="#f43f5e" fontFamily="Nunito, sans-serif" textLength="360" lengthAdjust="spacing">15 ≥ 10 → split into 1 ten + 5 ones. The ten moves to the tens column!</text>
             </svg>
           </div>
 
@@ -157,22 +157,22 @@ export default function Addition2DigitRenamingPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Add the tens + the renamed ten</p>
             </div>
             <svg viewBox="0 0 480 68" className="w-full max-w-lg mx-auto block" aria-label="40 + 30 + 10 = 80">
-              <rect x="10" y="6" width="52" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="36" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">40</text>
-              <text x="76" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="92" y="6" width="52" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="118" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">30</text>
-              <text x="158" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="30" y="6" width="52" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="56" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">40</text>
+              <text x="96" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="112" y="6" width="52" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <text x="138" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">30</text>
+              <text x="178" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
               {/* renamed ten box */}
-              <rect x="172" y="6" width="52" height="34" rx="8" fill="#fce7f3" stroke="#ec4899" strokeWidth="2"/>
-              <text x="198" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">10</text>
+              <rect x="194" y="6" width="52" height="34" rx="8" fill="#fce7f3" stroke="#ec4899" strokeWidth="2"/>
+              <text x="220" y="29" textAnchor="middle" fontSize="20" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">10</text>
               {/* label BELOW the box */}
-              <text x="198" y="52" textAnchor="middle" fontSize="10" fontWeight="800" fill="#ec4899" fontFamily="Nunito, sans-serif">renamed ten</text>
-              <text x="238" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="258" y="2" width="64" height="42" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="290" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">80</text>
-              <text x="334" y="22" textAnchor="start" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← tens</text>
-              <text x="334" y="36" textAnchor="start" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">total</text>
+              <text x="220" y="52" textAnchor="middle" fontSize="10" fontWeight="800" fill="#ec4899" fontFamily="Nunito, sans-serif">renamed ten</text>
+              <text x="260" y="29" textAnchor="middle" fontSize="20" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="278" y="2" width="64" height="42" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="310" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">80</text>
+              <text x="354" y="22" textAnchor="start" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">← tens</text>
+              <text x="354" y="36" textAnchor="start" fontSize="11" fontWeight="800" fill="#be185d" fontFamily="Nunito, sans-serif">total</text>
             </svg>
           </div>
 
@@ -183,16 +183,16 @@ export default function Addition2DigitRenamingPage() {
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Combine tens total + leftover ones</p>
             </div>
             <svg viewBox="0 0 480 72" className="w-full max-w-md mx-auto block" aria-label="80 + 5 = 85">
-              <rect x="30" y="8" width="66" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="63" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">80</text>
-              <text x="114" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
-              <rect x="134" y="8" width="56" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
-              <text x="162" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">5</text>
-              <text x="208" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
-              <rect x="234" y="2" width="86" height="58" rx="14" fill="#db2777" stroke="#9d174d" strokeWidth="3"/>
-              <text x="277" y="40" textAnchor="middle" fontSize="34" fontWeight="900" fill="white" fontFamily="Fredoka One, sans-serif">85</text>
-              <text x="334" y="24" fontSize="15" fontWeight="900" fill="#db2777" fontFamily="Fredoka One, sans-serif">Answer!</text>
-              <text x="334" y="44" fontSize="13" fontWeight="700" fill="#9d174d" fontFamily="Nunito, sans-serif">47 + 38 = 85</text>
+              <rect x="50" y="8" width="66" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="83" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">80</text>
+              <text x="134" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="154" y="8" width="56" height="46" rx="10" fill="#fce7f3" stroke="#ec4899" strokeWidth="2.5"/>
+              <text x="182" y="38" textAnchor="middle" fontSize="26" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">5</text>
+              <text x="228" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="254" y="2" width="86" height="58" rx="14" fill="#db2777" stroke="#9d174d" strokeWidth="3"/>
+              <text x="297" y="40" textAnchor="middle" fontSize="34" fontWeight="900" fill="white" fontFamily="Fredoka One, sans-serif">85</text>
+              <text x="354" y="24" fontSize="15" fontWeight="900" fill="#db2777" fontFamily="Fredoka One, sans-serif">Answer!</text>
+              <text x="354" y="44" fontSize="13" fontWeight="700" fill="#9d174d" fontFamily="Nunito, sans-serif">47 + 38 = 85</text>
             </svg>
           </div>
 
