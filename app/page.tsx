@@ -12,6 +12,7 @@ const topics = [
     items: [
       { label: "2-Digit Addition — No Renaming", href: "/math-strategies/addition-2digit" },
       { label: "2-Digit Addition — With Renaming", href: "/math-strategies/addition-2digit-renaming" },
+      { label: "Subtraction — Subtract from Ten", href: "/math-strategies/subtraction-bridge-ten" },
     ],
   },
 ];
