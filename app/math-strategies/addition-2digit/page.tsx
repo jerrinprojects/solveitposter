@@ -101,7 +101,7 @@ export default function Addition2DigitPage() {
               <text x="38" y="118" textAnchor="middle" fontSize="10" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">TENS</text>
               <text x="94" y="118" textAnchor="middle" fontSize="10" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">ONES</text>
 
-              <text x="240" y="36" textAnchor="middle" fontSize="26" fontWeight="700" fill="#d1d5db" fontFamily="Fredoka One, sans-serif">+</text>
+              <text x="196" y="34" textAnchor="middle" fontSize="26" fontWeight="700" fill="#d1d5db" fontFamily="Fredoka One, sans-serif">+</text>
 
               <text x="324" y="34" textAnchor="middle" fontSize="26" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">25</text>
               <text x="294" y="96" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
