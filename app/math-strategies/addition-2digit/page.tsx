@@ -79,30 +79,35 @@ export default function Addition2DigitPage() {
               <span className="bg-pink-500 text-white font-fredoka text-base rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0" style={{ fontWeight: 900 }}>2</span>
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Partition into tens and ones</p>
             </div>
-            <svg viewBox="0 0 480 118" className="w-full max-w-md mx-auto block" aria-label="34 splits into 30 and 4, 25 splits into 20 and 5">
+            <svg viewBox="0 0 480 122" className="w-full max-w-md mx-auto block" aria-label="34 splits into 30 and 4, 25 splits into 20 and 5">
+              {/* ── Lines drawn first (will sit behind boxes) ── */}
+              <line x1="53" y1="52" x2="38" y2="74" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+              <line x1="83" y1="52" x2="98" y2="74" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
+              <line x1="309" y1="52" x2="294" y2="74" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round"/>
+              <line x1="339" y1="52" x2="354" y2="74" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round"/>
+
+              {/* ── Boxes drawn second (cover line ends) ── */}
               <rect x="30" y="4" width="76" height="46" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
-              <text x="68" y="34" textAnchor="middle" fontSize="26" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">34</text>
-              <line x1="53" y1="50" x2="38" y2="76" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="83" y1="50" x2="98" y2="76" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round"/>
-              <rect x="10" y="76" width="56" height="32" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="38" y="98" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">30</text>
-              <rect x="72" y="76" width="44" height="32" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="94" y="98" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">4</text>
-              <text x="38" y="115" textAnchor="middle" fontSize="10" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">TENS</text>
-              <text x="94" y="115" textAnchor="middle" fontSize="10" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">ONES</text>
-
-              <text x="240" y="38" textAnchor="middle" fontSize="26" fontWeight="700" fill="#d1d5db" fontFamily="Fredoka One, sans-serif">+</text>
-
+              <rect x="10" y="74" width="56" height="32" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <rect x="72" y="74" width="44" height="32" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
               <rect x="286" y="4" width="76" height="46" rx="10" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
+              <rect x="266" y="74" width="56" height="32" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <rect x="328" y="74" width="44" height="32" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+
+              {/* ── Text drawn last (always on top) ── */}
+              <text x="68" y="34" textAnchor="middle" fontSize="26" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">34</text>
+              <text x="38" y="96" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">30</text>
+              <text x="94" y="96" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">4</text>
+              <text x="38" y="114" textAnchor="middle" fontSize="10" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">TENS</text>
+              <text x="94" y="114" textAnchor="middle" fontSize="10" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">ONES</text>
+
+              <text x="240" y="36" textAnchor="middle" fontSize="26" fontWeight="700" fill="#d1d5db" fontFamily="Fredoka One, sans-serif">+</text>
+
               <text x="324" y="34" textAnchor="middle" fontSize="26" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">25</text>
-              <line x1="309" y1="50" x2="294" y2="76" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round"/>
-              <line x1="339" y1="50" x2="354" y2="76" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round"/>
-              <rect x="266" y="76" width="56" height="32" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="294" y="98" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
-              <rect x="328" y="76" width="44" height="32" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="350" y="98" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">5</text>
-              <text x="294" y="115" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a" fontFamily="Nunito, sans-serif">TENS</text>
-              <text x="350" y="115" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a" fontFamily="Nunito, sans-serif">ONES</text>
+              <text x="294" y="96" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
+              <text x="350" y="96" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">5</text>
+              <text x="294" y="114" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a" fontFamily="Nunito, sans-serif">TENS</text>
+              <text x="350" y="114" textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a" fontFamily="Nunito, sans-serif">ONES</text>
             </svg>
           </div>
 
