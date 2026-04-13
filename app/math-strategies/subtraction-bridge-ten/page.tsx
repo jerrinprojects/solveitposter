@@ -28,7 +28,7 @@ export default function SubtractionBridgeTenPage() {
                 SUBTRACTION
               </h1>
               <h2 className="font-fredoka text-base sm:text-xl text-gray-700 mt-0.5" style={{ fontWeight: 900 }}>
-                Subtract from Ten &nbsp;·&nbsp; <span className="text-gray-500 text-sm sm:text-base">Bridge Through 10</span>
+                Subtract from Ten
               </h2>
             </div>
             <div className="absolute right-2 sm:right-3 bottom-0 pointer-events-none select-none">
