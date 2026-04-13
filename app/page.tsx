@@ -7,6 +7,12 @@ const topics = [
       { label: "Year 0a · Count to 10", href: "/poster" },
     ],
   },
+  {
+    subject: "Math Strategies",
+    items: [
+      { label: "Two-Digit Addition · Place Value Partitioning", href: "/math-strategies/addition-2digit" },
+    ],
+  },
 ];
 
 export default function LandingPage() {
