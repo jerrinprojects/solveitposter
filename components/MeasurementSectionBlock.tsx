@@ -1,18 +1,13 @@
 import type { PosterSkill } from "@/types";
-import ExercisePreview from "./ExercisePreview";
+import { MEASUREMENT_PREVIEW_MAP } from "./MeasurementPreview";
 import ImageCard from "./ImageCard";
 
-// Codes that have a built-in static exercise preview
-const PREVIEW_CODES = new Set([
-  "0.1a","0.2a","0.3a","0.4a","0.5a","0.6a","0.7a","0.8a","0.9a",
-]);
-
-interface SectionBlockProps {
+interface MeasurementSectionBlockProps {
   skill: PosterSkill;
 }
 
-export default function SectionBlock({ skill }: SectionBlockProps) {
-  const hasPreview = PREVIEW_CODES.has(skill.code);
+export default function MeasurementSectionBlock({ skill }: MeasurementSectionBlockProps) {
+  const PreviewComponent = MEASUREMENT_PREVIEW_MAP[skill.code];
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 print-card">
@@ -36,8 +31,13 @@ export default function SectionBlock({ skill }: SectionBlockProps) {
             className="w-full h-full object-cover"
           />
         </div>
-      ) : hasPreview ? (
-        <ExercisePreview code={skill.code} />
+      ) : PreviewComponent ? (
+        <div
+          className="rounded-2xl border-2 border-pink-200 bg-white overflow-hidden"
+          style={{ minHeight: 178, display: "flex", flexDirection: "column" }}
+        >
+          <PreviewComponent />
+        </div>
       ) : (
         <div className="rounded-2xl overflow-hidden" style={{ minHeight: 178 }}>
           <ImageCard defaultAlt={`${skill.code} exercise screenshot`} />

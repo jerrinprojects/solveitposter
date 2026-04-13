@@ -33,13 +33,13 @@ export default function PosterPage() {
       </div>
 
       {pages.map((pageSkills, pageIdx) => (
-        <div key={pageIdx} className="poster-page max-w-4xl mx-auto px-6 py-6">
+        <div key={pageIdx} className="poster-page max-w-4xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
 
           {pageIdx === 0 && <PageHeader meta={posterMeta} />}
 
           {pageIdx > 0 && (
-            <div className="pt-3 mb-4 pb-3 border-b-2 border-pink-200 flex items-baseline justify-between print-card">
-              <span className="font-fredoka font-bold text-xl text-pink-500">
+            <div className="pt-3 mb-4 pb-3 border-b-2 border-pink-200 flex flex-wrap items-baseline gap-x-3 gap-y-1 justify-between print-card">
+              <span className="font-fredoka font-bold text-lg sm:text-xl text-pink-500">
                 {posterMeta.subject}
               </span>
               <span className="font-nunito text-xs font-semibold text-gray-400 tracking-wider uppercase">
