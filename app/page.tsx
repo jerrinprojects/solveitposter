@@ -11,6 +11,7 @@ const topics = [
     subject: "Math Strategies",
     items: [
       { label: "Two-Digit Addition · Place Value Partitioning", href: "/math-strategies/addition-2digit" },
+      { label: "Two-Digit Addition · With Renaming", href: "/math-strategies/addition-2digit-renaming" },
     ],
   },
 ];
@@ -24,7 +25,7 @@ export default function LandingPage() {
         <p className="font-nunito text-xs font-bold text-pink-400 tracking-[0.35em] uppercase mb-3">
           Solveitmaths.com
         </p>
-        <h1 className="font-fredoka font-bold text-5xl text-pink-600 leading-tight">
+        <h1 className="font-fredoka font-bold text-3xl sm:text-5xl text-pink-600 leading-tight">
           Maths Posters
         </h1>
         <p className="font-nunito text-base text-gray-400 mt-2">
