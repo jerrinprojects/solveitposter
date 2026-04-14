@@ -23,6 +23,14 @@ const topics = [
       { label: "Length — Phase 3 (Year 7–8)", href: "/measurement/length/phase-3" },
     ],
   },
+  {
+    subject: "Measurement · Mass",
+    items: [
+      { label: "Mass — Phase 1 (Year 0–3)", href: "/measurement/mass/phase-1" },
+      { label: "Mass — Phase 2 (Year 4–6)", href: "/measurement/mass/phase-2" },
+      { label: "Mass — Phase 3 (Year 7–8)", href: "/measurement/mass/phase-3" },
+    ],
+  },
 ];
 
 export default function LandingPage() {

@@ -13,9 +13,10 @@ interface YearSection {
 interface MeasurementPhasePostersPageProps {
   years: YearSection[];
   footerData: FooterData;
+  SectionBlock?: React.ComponentType<{ skill: PosterSkill }>;
 }
 
-export default function MeasurementPhasePostersPage({ years, footerData }: MeasurementPhasePostersPageProps) {
+export default function MeasurementPhasePostersPage({ years, footerData, SectionBlock = MeasurementSectionBlock }: MeasurementPhasePostersPageProps) {
   return (
     <main className="bg-pink-100">
       {/* Screen-only back link */}
@@ -33,7 +34,7 @@ export default function MeasurementPhasePostersPage({ years, footerData }: Measu
           <PageHeader meta={year.meta} />
           <div className="space-y-3 print:space-y-2 mt-3">
             {year.skills.map((skill) => (
-              <MeasurementSectionBlock key={skill.code} skill={skill} />
+              <SectionBlock key={skill.code} skill={skill} />
             ))}
           </div>
           <PageFooter data={footerData} />
