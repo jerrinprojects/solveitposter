@@ -171,7 +171,7 @@ function L21() {
   return (
     <Card>
       <Instr text="What measurement is the arrow pointing to?" />
-      <svg width="150" height="44" viewBox="0 0 150 44">
+      <svg overflow="visible" width="150" height="44" viewBox="0 0 150 44">
         {/* Ruler body */}
         <rect x="5" y="20" width="140" height="18" rx="2" fill="#fef9c3" stroke="#d1d5db" strokeWidth="1.5" />
         {/* Tick marks 0–10 */}
@@ -195,7 +195,7 @@ function L22() {
   return (
     <Card>
       <Instr text="Which measurement does the arrow show?" />
-      <svg width="140" height="42" viewBox="0 0 140 42">
+      <svg overflow="visible" width="140" height="42" viewBox="0 0 140 42">
         <rect x="5" y="20" width="130" height="16" rx="2" fill="#fef9c3" stroke="#d1d5db" strokeWidth="1.5" />
         {Array.from({ length: 10 }, (_, i) => (
           <g key={i}>
@@ -221,7 +221,7 @@ function L23() {
   return (
     <Card>
       <Instr text="Find the perimeter of this rectangle." />
-      <svg width={gw + ox + 28} height={gh + oy + 22} viewBox={`0 0 ${gw + ox + 28} ${gh + oy + 22}`}>
+      <svg overflow="visible" width={gw + ox + 28} height={gh + oy + 22} viewBox={`0 0 ${gw + ox + 28} ${gh + oy + 22}`}>
         {/* Grid cells */}
         {Array.from({ length: rows }, (_, r) =>
           Array.from({ length: cols }, (_, c) => (
@@ -246,7 +246,7 @@ function L24() {
   return (
     <Card>
       <Instr text="Count the squares on the outside." />
-      <svg width={gw + ox + 10} height={gh + oy + 10} viewBox={`0 0 ${gw + ox + 10} ${gh + oy + 10}`}>
+      <svg overflow="visible" width={gw + ox + 10} height={gh + oy + 10} viewBox={`0 0 ${gw + ox + 10} ${gh + oy + 10}`}>
         {Array.from({ length: rows }, (_, r) =>
           Array.from({ length: cols }, (_, c) => {
             const isOuter = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
@@ -284,7 +284,7 @@ function L32() {
   return (
     <Card>
       <Instr text="Find the perimeter of this shape." />
-      <svg width="110" height="75" viewBox="0 0 110 75">
+      <svg overflow="visible" width="110" height="75" viewBox="0 0 110 75">
         <rect x="10" y="10" width="85" height="48" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         <text x="52" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 cm</text>
         <text x="102" y="37" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
@@ -299,7 +299,7 @@ function L33() {
   return (
     <Card>
       <Instr text="Count the squares to find the area." />
-      <svg width="100" height="66" viewBox="0 0 100 66">
+      <svg overflow="visible" width="100" height="66" viewBox="0 0 100 66">
         {Array.from({ length: 3 }, (_, r) =>
           Array.from({ length: 5 }, (_, c) => (
             <rect key={`${r}-${c}`} x={5+c*18} y={5+r*18} width={18} height={18} fill="#fef08a" stroke="#d1d5db" strokeWidth="1" />
@@ -321,7 +321,7 @@ function L34() {
       <Instr text="Which shape has a bigger area?" />
       <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg width="52" height="44" viewBox="0 0 52 44">
+          <svg overflow="visible" width="52" height="44" viewBox="0 0 52 44">
             <rect x="3" y="3" width="46" height="36" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
             <text x="26" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">6 cm</text>
             <text x="50" y="24" textAnchor="middle" fontSize="8" fill="#6b7280">5 cm</text>
@@ -329,7 +329,7 @@ function L34() {
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg width="60" height="36" viewBox="0 0 60 36">
+          <svg overflow="visible" width="60" height="36" viewBox="0 0 60 36">
             <rect x="3" y="3" width="54" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
             <text x="30" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">9 cm</text>
             <text x="58" y="20" textAnchor="middle" fontSize="8" fill="#6b7280">3 cm</text>
@@ -366,7 +366,7 @@ function L42() {
   return (
     <Card>
       <Instr text="Find the perimeter." />
-      <svg width="115" height="65" viewBox="0 0 115 65">
+      <svg overflow="visible" width="115" height="65" viewBox="0 0 115 65">
         <rect x="8" y="8" width="98" height="42" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         <text x="57" y="6" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
         <text x="112" y="33" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
@@ -381,7 +381,7 @@ function L43() {
   return (
     <Card>
       <Instr text="Use multiplication to find the area." />
-      <svg width="105" height="65" viewBox="0 0 105 65">
+      <svg overflow="visible" width="105" height="65" viewBox="0 0 105 65">
         <rect x="5" y="5" width="90" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
         <text x="50" y="35" textAnchor="middle" fontSize="13" fill="#1d4ed8" fontWeight="bold">9 × 4</text>
       </svg>
@@ -398,7 +398,7 @@ function L44() {
   return (
     <Card>
       <Instr text="Find the area of this square." />
-      <svg width="80" height="75" viewBox="0 0 80 75">
+      <svg overflow="visible" width="80" height="75" viewBox="0 0 80 75">
         <rect x="5" y="5" width="60" height="60" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
         <text x="35" y="4" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 cm</text>
         <text x="72" y="38" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 cm</text>
@@ -417,7 +417,7 @@ function L45() {
   return (
     <Card>
       <Instr text="Find the area including half-squares." />
-      <svg width="90" height="90" viewBox="0 0 90 90">
+      <svg overflow="visible" width="90" height="90" viewBox="0 0 90 90">
         {/* 4×3 full-square grid */}
         {Array.from({ length: 3 }, (_, r) =>
           Array.from({ length: 4 }, (_, c) => (
@@ -459,7 +459,7 @@ function L52() {
   return (
     <Card>
       <Instr text="Find the perimeter of this shape." />
-      <svg width="115" height="75" viewBox="0 0 115 75">
+      <svg overflow="visible" width="115" height="75" viewBox="0 0 115 75">
         <rect x="8" y="10" width="90" height="52" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         <text x="53" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
         <text x="104" y="39" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
@@ -474,7 +474,7 @@ function L53() {
   return (
     <Card>
       <Instr text="Use the formula to find the area." />
-      <svg width="110" height="65" viewBox="0 0 110 65">
+      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
         <rect x="5" y="5" width="90" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
         <text x="5" y="3" fontSize="8" fill="#6b7280" fontWeight="bold">8</text>
         <text x="100" y="35" fontSize="8" fill="#6b7280" fontWeight="bold">5</text>
@@ -495,7 +495,7 @@ function L54() {
       <Instr text="What is the same about these shapes?" />
       <div style={{ display: "flex", gap: 10, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg width="55" height="40" viewBox="0 0 55 40">
+          <svg overflow="visible" width="55" height="40" viewBox="0 0 55 40">
             <rect x="3" y="3" width="48" height="32" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
             <text x="27" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">6</text>
             <text x="53" y="22" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
@@ -503,7 +503,7 @@ function L54() {
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg width="45" height="50" viewBox="0 0 45 50">
+          <svg overflow="visible" width="45" height="50" viewBox="0 0 45 50">
             <rect x="3" y="3" width="38" height="42" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
             <text x="22" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
             <text x="43" y="27" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
@@ -526,7 +526,7 @@ function L55() {
       <Instr text="Which shape has the bigger area?" />
       <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg width="52" height="44" viewBox="0 0 52 44">
+          <svg overflow="visible" width="52" height="44" viewBox="0 0 52 44">
             <rect x="3" y="3" width="46" height="38" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
             <text x="26" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">5 m</text>
             <text x="50" y="25" textAnchor="middle" fontSize="8" fill="#6b7280">3 m</text>
@@ -534,7 +534,7 @@ function L55() {
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg width="62" height="34" viewBox="0 0 62 34">
+          <svg overflow="visible" width="62" height="34" viewBox="0 0 62 34">
             <rect x="3" y="3" width="56" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
             <text x="31" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">8 m</text>
             <text x="60" y="20" textAnchor="middle" fontSize="8" fill="#6b7280">2 m</text>
@@ -587,7 +587,7 @@ function L63() {
   return (
     <Card>
       <Instr text="Find the area using the formula." />
-      <svg width="110" height="65" viewBox="0 0 110 65">
+      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
         <rect x="5" y="5" width="95" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
         <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 m</text>
         <text x="106" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 m</text>
@@ -605,7 +605,7 @@ function L64() {
   return (
     <Card>
       <Instr text="Find the area of this right-angled triangle." />
-      <svg width="110" height="75" viewBox="0 0 110 75">
+      <svg overflow="visible" width="110" height="75" viewBox="0 0 110 75">
         <polygon points="10,65 90,65 10,15" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         {/* Right angle marker */}
         <polyline points="10,55 20,55 20,65" fill="none" stroke="#6b7280" strokeWidth="1.5" />
@@ -622,7 +622,7 @@ function L65() {
   return (
     <Card>
       <Instr text="Find the area of this shape." />
-      <svg width="110" height="70" viewBox="0 0 110 70">
+      <svg overflow="visible" width="110" height="70" viewBox="0 0 110 70">
         <rect x="8" y="8" width="90" height="50" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
         <text x="53" y="6" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
         <text x="104" y="36" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
@@ -640,7 +640,7 @@ function L71() {
   return (
     <Card>
       <Instr text="Use the formula to find the perimeter." />
-      <svg width="110" height="65" viewBox="0 0 110 65">
+      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
         <rect x="5" y="5" width="95" height="50" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">11 cm</text>
         <text x="107" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
@@ -659,7 +659,7 @@ function L72() {
   return (
     <Card>
       <Instr text="Find the missing side length." />
-      <svg width="110" height="65" viewBox="0 0 110 65">
+      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
         <rect x="5" y="5" width="95" height="50" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
         <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">? cm</text>
         <text x="107" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
@@ -675,7 +675,7 @@ function L73() {
   return (
     <Card>
       <Instr text="Use the formula to find the area." />
-      <svg width="110" height="75" viewBox="0 0 110 75">
+      <svg overflow="visible" width="110" height="75" viewBox="0 0 110 75">
         <polygon points="10,68 100,68 10,15" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
         <polyline points="10,58 20,58 20,68" fill="none" stroke="#6b7280" strokeWidth="1.5" />
         <text x="50" y="73" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">10 m</text>
@@ -692,7 +692,7 @@ function L74() {
   return (
     <Card>
       <Instr text="Find the missing dimension." />
-      <svg width="110" height="65" viewBox="0 0 110 65">
+      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
         <rect x="5" y="5" width="95" height="50" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
         <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">? m</text>
         <text x="107" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 m</text>
@@ -708,7 +708,7 @@ function L75() {
   return (
     <Card>
       <Instr text="Split the shape and find the total area." />
-      <svg width="110" height="80" viewBox="0 0 110 80">
+      <svg overflow="visible" width="110" height="80" viewBox="0 0 110 80">
         {/* Main rectangle */}
         <rect x="5" y="25" width="80" height="48" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         {/* Smaller rect top-right */}
@@ -740,7 +740,7 @@ function L82() {
   return (
     <Card>
       <Instr text="Find the area of this parallelogram." />
-      <svg width="110" height="68" viewBox="0 0 110 68">
+      <svg overflow="visible" width="110" height="68" viewBox="0 0 110 68">
         <polygon points="20,60 100,60 90,10 10,10" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
         <text x="50" y="68" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">b = 8 cm</text>
         {/* Dashed height */}
@@ -758,7 +758,7 @@ function L83() {
   return (
     <Card>
       <Instr text="Find the area of this trapezium." />
-      <svg width="115" height="68" viewBox="0 0 115 68">
+      <svg overflow="visible" width="115" height="68" viewBox="0 0 115 68">
         <polygon points="25,60 90,60 75,12 40,12" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         <text x="57" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">a = 6 cm</text>
         <text x="57" y="68" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">b = 10 cm</text>
@@ -775,7 +775,7 @@ function L84() {
   return (
     <Card>
       <Instr text="Find both the area and the perimeter." />
-      <svg width="110" height="60" viewBox="0 0 110 60">
+      <svg overflow="visible" width="110" height="60" viewBox="0 0 110 60">
         <rect x="5" y="5" width="95" height="48" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
         <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
         <text x="107" y="32" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
@@ -799,7 +799,7 @@ function L85() {
   return (
     <Card>
       <Instr text="Name the parts of this circle." />
-      <svg width="120" height="100" viewBox="0 0 120 100">
+      <svg overflow="visible" width="120" height="100" viewBox="0 0 120 100">
         <circle cx="60" cy="50" r="40" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
         {/* Centre dot */}
         <circle cx="60" cy="50" r="3" fill="#ec4899" />
@@ -824,7 +824,7 @@ function L86() {
   return (
     <Card>
       <Instr text="Find the total area of this composite shape." />
-      <svg width="110" height="85" viewBox="0 0 110 85">
+      <svg overflow="visible" width="110" height="85" viewBox="0 0 110 85">
         {/* Rectangle bottom */}
         <rect x="10" y="38" width="80" height="38" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
         {/* Triangle on top */}

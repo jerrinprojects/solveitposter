@@ -33,7 +33,7 @@ export default function MeasurementSectionBlock({ skill }: MeasurementSectionBlo
         </div>
       ) : PreviewComponent ? (
         <div
-          className="rounded-2xl border-2 border-pink-200 bg-white overflow-hidden"
+          className="rounded-2xl border-2 border-pink-200 bg-white"
           style={{ minHeight: 178, display: "flex", flexDirection: "column" }}
         >
           <PreviewComponent />
