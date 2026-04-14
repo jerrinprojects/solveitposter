@@ -18,15 +18,9 @@ const topics = [
   {
     subject: "Measurement · Length",
     items: [
-      { label: "Length — Year 0", href: "/measurement/length/year-0" },
-      { label: "Length — Year 1", href: "/measurement/length/year-1" },
-      { label: "Length — Year 2", href: "/measurement/length/year-2" },
-      { label: "Length — Year 3", href: "/measurement/length/year-3" },
-      { label: "Length — Year 4", href: "/measurement/length/year-4" },
-      { label: "Length — Year 5", href: "/measurement/length/year-5" },
-      { label: "Length — Year 6", href: "/measurement/length/year-6" },
-      { label: "Length — Year 7", href: "/measurement/length/year-7" },
-      { label: "Length — Year 8", href: "/measurement/length/year-8" },
+      { label: "Length — Phase 1 (Year 0–3)", href: "/measurement/length/phase-1" },
+      { label: "Length — Phase 2 (Year 4–6)", href: "/measurement/length/phase-2" },
+      { label: "Length — Phase 3 (Year 7–8)", href: "/measurement/length/phase-3" },
     ],
   },
 ];

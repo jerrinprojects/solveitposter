@@ -5,6 +5,18 @@ import PrintButton from "./PrintButton";
 import MeasurementSectionBlock from "./MeasurementSectionBlock";
 import Link from "next/link";
 
+const TITLE_PAGE_COUNT = 4;
+const INNER_PAGE_COUNT = 5;
+
+function paginateSkills(skills: PosterSkill[]): PosterSkill[][] {
+  const pages: PosterSkill[][] = [];
+  pages.push(skills.slice(0, TITLE_PAGE_COUNT));
+  for (let i = TITLE_PAGE_COUNT; i < skills.length; i += INNER_PAGE_COUNT) {
+    pages.push(skills.slice(i, i + INNER_PAGE_COUNT));
+  }
+  return pages;
+}
+
 interface MeasurementPosterPageProps {
   meta: PosterMeta;
   skills: PosterSkill[];
@@ -12,32 +24,55 @@ interface MeasurementPosterPageProps {
 }
 
 export default function MeasurementPosterPage({ meta, skills, footerData }: MeasurementPosterPageProps) {
+  const pages = paginateSkills(skills);
+
   return (
-    <div className="min-h-screen bg-pink-50 px-4 sm:px-6 py-6 sm:py-8">
-      <div className="max-w-3xl mx-auto">
-
-        {/* Back link — screen only */}
-        <div className="no-print mb-4">
-          <Link
-            href="/"
-            className="font-nunito text-sm font-semibold text-pink-400 hover:text-pink-600 transition-colors"
-          >
-            ← Back to Topics
-          </Link>
-        </div>
-
-        <PageHeader meta={meta} />
-
-        <div className="space-y-3 mt-3">
-          {skills.map((skill) => (
-            <MeasurementSectionBlock key={skill.code} skill={skill} />
-          ))}
-        </div>
-
-        <PageFooter data={footerData} />
+    <main className="bg-pink-100">
+      {/* Screen-only back link */}
+      <div className="no-print max-w-4xl mx-auto px-6 pt-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 hover:text-pink-700 transition-colors"
+        >
+          <span>←</span> Back to Topics
+        </Link>
       </div>
 
+      {pages.map((pageSkills, pageIdx) => (
+        <div key={pageIdx} className="poster-page max-w-4xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
+
+          {pageIdx === 0 && <PageHeader meta={meta} />}
+
+          {pageIdx > 0 && (
+            <div className="pt-3 mb-4 pb-3 border-b-2 border-pink-200 flex flex-wrap items-baseline gap-x-3 gap-y-1 justify-between print-card">
+              <span className="font-fredoka font-bold text-lg sm:text-xl text-pink-500">
+                {meta.subject}
+              </span>
+              <span className="font-nunito text-xs font-semibold text-gray-400 tracking-wider uppercase">
+                {meta.phase} &middot; {meta.year} &middot; {meta.theme}
+              </span>
+            </div>
+          )}
+
+          {pageIdx > 0 && (
+            <div className="no-print mb-2 text-center">
+              <span className="text-[10px] text-gray-300 tracking-widest uppercase">
+                Page {pageIdx + 1}
+              </span>
+            </div>
+          )}
+
+          <div className="space-y-3 print:space-y-2">
+            {pageSkills.map((skill) => (
+              <MeasurementSectionBlock key={skill.code} skill={skill} />
+            ))}
+          </div>
+
+          <PageFooter data={footerData} />
+        </div>
+      ))}
+
       <PrintButton />
-    </div>
+    </main>
   );
 }
