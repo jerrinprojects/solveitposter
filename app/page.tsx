@@ -16,8 +16,10 @@ const topics = [
     items: [
       { label: "2-Digit Addition · No Renaming", href: "/math-strategies/addition-2digit" },
       { label: "2-Digit Addition · With Renaming", href: "/math-strategies/addition-2digit-renaming" },
-      { label: "Subtraction · Subtract from Ten", href: "/math-strategies/subtraction-bridge-ten" },
       { label: "Subtraction · Subtract from the Ones", href: "/math-strategies/subtraction-ones" },
+      { label: "Subtraction · Subtract from Ten", href: "/math-strategies/subtraction-bridge-ten" },
+      { label: "2-Digit Subtraction · No Renaming", href: "/math-strategies/subtraction-2digit" },
+      { label: "2-Digit Subtraction · With Renaming", href: "/math-strategies/subtraction-2digit-renaming" },
     ],
   },
 ];
