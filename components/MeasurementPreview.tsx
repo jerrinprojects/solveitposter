@@ -34,14 +34,23 @@ function Bar({ w, color, label }: { w: number; color: string; label?: string }) 
   );
 }
 
-// ── L0.1 — Tap the longer bar ────────────────────────────────────
+function VBar({ h, color, label }: { h: number; color: string; label?: string }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+      <div style={{ width: 20, height: h, borderRadius: 4, background: color }} />
+      {label && <span style={{ fontSize: 10, color: "#9ca3af", fontWeight: 700 }}>{label}</span>}
+    </div>
+  );
+}
+
+// ── L0.1 — Tap the taller bar ────────────────────────────────────
 function L01() {
   return (
     <Card>
-      <Instr text="Tap the longer bar." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
-        <Bar w={90} color="#f9a8d4" label="A" />
-        <Bar w={55} color="#93c5fd" label="B" />
+      <Instr text="Tap the taller bar." />
+      <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center" }}>
+        <VBar h={72} color="#fb923c" label="A" />
+        <VBar h={44} color="#4ade80" label="B" />
       </div>
     </Card>
   );
@@ -52,23 +61,23 @@ function L02() {
   return (
     <Card>
       <Instr text="Tap the shorter bar." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" }}>
-        <Bar w={80} color="#86efac" label="A" />
-        <Bar w={45} color="#fde68a" label="B" />
+      <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center" }}>
+        <VBar h={65} color="#fb923c" label="A" />
+        <VBar h={38} color="#4ade80" label="B" />
       </div>
     </Card>
   );
 }
 
-// ── L0.3 — Tap the longest bar ───────────────────────────────────
+// ── L0.3 — Tap the tallest bar ───────────────────────────────────
 function L03() {
   return (
     <Card>
-      <Instr text="Tap the longest bar." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 7, alignItems: "flex-start" }}>
-        <Bar w={65} color="#f9a8d4" label="A" />
-        <Bar w={100} color="#93c5fd" label="B" />
-        <Bar w={45} color="#86efac" label="C" />
+      <Instr text="Tap the tallest bar." />
+      <div style={{ display: "flex", gap: 10, alignItems: "flex-end", justifyContent: "center" }}>
+        <VBar h={50} color="#fb923c" label="A" />
+        <VBar h={78} color="#4ade80" label="B" />
+        <VBar h={34} color="#f9a8d4" label="C" />
       </div>
     </Card>
   );
@@ -79,10 +88,10 @@ function L04() {
   return (
     <Card>
       <Instr text="Tap the shortest bar." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 7, alignItems: "flex-start" }}>
-        <Bar w={80} color="#fca5a5" label="A" />
-        <Bar w={50} color="#fde68a" label="B" />
-        <Bar w={35} color="#c4b5fd" label="C" />
+      <div style={{ display: "flex", gap: 10, alignItems: "flex-end", justifyContent: "center" }}>
+        <VBar h={68} color="#fb923c" label="A" />
+        <VBar h={42} color="#4ade80" label="B" />
+        <VBar h={28} color="#f9a8d4" label="C" />
       </div>
     </Card>
   );
@@ -93,9 +102,9 @@ function L11() {
   return (
     <Card>
       <Instr text="Choose the correct word." />
-      <div style={{ display: "flex", flexDirection: "column", gap: 6, alignItems: "flex-start", marginBottom: 8 }}>
-        <Bar w={90} color="#f9a8d4" label="A" />
-        <Bar w={55} color="#93c5fd" label="B" />
+      <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center", marginBottom: 8 }}>
+        <VBar h={72} color="#fb923c" label="A" />
+        <VBar h={44} color="#93c5fd" label="B" />
       </div>
       <div style={{ display: "flex", gap: 5 }}>
         <ChoiceBtn label="longer" />
@@ -144,10 +153,10 @@ function L13() {
 function L14() {
   return (
     <Card>
-      <Instr text="Are these the same length?" />
-      <div style={{ display: "flex", flexDirection: "column", gap: 7, alignItems: "flex-start", marginBottom: 8 }}>
-        <Bar w={75} color="#f9a8d4" label="A" />
-        <Bar w={75} color="#93c5fd" label="B" />
+      <Instr text="Are these the same height?" />
+      <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center", marginBottom: 8 }}>
+        <VBar h={58} color="#fb923c" label="A" />
+        <VBar h={58} color="#93c5fd" label="B" />
       </div>
       <div style={{ display: "flex", gap: 6 }}>
         <ChoiceBtn label="Same" />
@@ -204,35 +213,53 @@ function L22() {
   );
 }
 
-// ── L2.3 — Rectangle perimeter with labels ───────────────────────
+// ── L2.3 — Rectangle grid perimeter with labels ──────────────────
 function L23() {
+  const cols = 5, rows = 3, cell = 14;
+  const gw = cols * cell, gh = rows * cell;
+  const ox = 8, oy = 12;
   return (
     <Card>
       <Instr text="Find the perimeter of this rectangle." />
-      <svg width="110" height="70" viewBox="0 0 110 70">
-        <rect x="10" y="10" width="90" height="45" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="55" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">8 cm</text>
-        <text x="105" y="36" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">3 cm</text>
+      <svg width={gw + ox + 28} height={gh + oy + 22} viewBox={`0 0 ${gw + ox + 28} ${gh + oy + 22}`}>
+        {/* Grid cells */}
+        {Array.from({ length: rows }, (_, r) =>
+          Array.from({ length: cols }, (_, c) => (
+            <rect key={`${r}-${c}`} x={ox + c * cell} y={oy + r * cell} width={cell} height={cell} fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1" />
+          ))
+        )}
+        {/* Width label on top */}
+        <text x={ox + gw / 2} y={oy - 3} textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
+        {/* Height label on right */}
+        <text x={ox + gw + 5} y={oy + gh / 2 + 4} fontSize="9" fill="#6b7280" fontWeight="bold">3 cm</text>
       </svg>
       <QBox />
     </Card>
   );
 }
 
-// ── L2.4 — L-shaped grid perimeter ───────────────────────────────
+// ── L2.4 — Rectangle perimeter grid (outer cells blue) ───────────
 function L24() {
+  const cols = 5, rows = 4, cell = 13;
+  const ox = 8, oy = 8;
+  const gw = cols * cell, gh = rows * cell;
   return (
     <Card>
-      <Instr text="Count units around the outside." />
-      <svg width="80" height="65" viewBox="0 0 80 65">
-        {/* L-shape: 3 wide × 2 tall on left, 1 wide × 1 tall bottom extension */}
-        {/* Row 0 */}
-        {[0,1,2].map(c => <rect key={c} x={10+c*18} y={5} width={18} height={18} fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />)}
-        {/* Row 1 */}
-        {[0,1,2].map(c => <rect key={c} x={10+c*18} y={23} width={18} height={18} fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />)}
-        {/* Row 2 — only first cell */}
-        <rect x={10} y={41} width={18} height={18} fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
-        <text x="40" y="62" textAnchor="middle" fontSize="8" fill="#9ca3af">= ? units</text>
+      <Instr text="Count the squares on the outside." />
+      <svg width={gw + ox + 10} height={gh + oy + 10} viewBox={`0 0 ${gw + ox + 10} ${gh + oy + 10}`}>
+        {Array.from({ length: rows }, (_, r) =>
+          Array.from({ length: cols }, (_, c) => {
+            const isOuter = r === 0 || r === rows - 1 || c === 0 || c === cols - 1;
+            return (
+              <rect key={`${r}-${c}`}
+                x={ox + c * cell} y={oy + r * cell}
+                width={cell} height={cell}
+                fill={isOuter ? "#bfdbfe" : "#f0f9ff"}
+                stroke="#93c5fd" strokeWidth="1"
+              />
+            );
+          })
+        )}
       </svg>
     </Card>
   );
@@ -252,19 +279,15 @@ function L31() {
   );
 }
 
-// ── L3.2 — Pentagon perimeter ────────────────────────────────────
+// ── L3.2 — Rectangle perimeter with labels ───────────────────────
 function L32() {
   return (
     <Card>
-      <Instr text="Find the perimeter of this pentagon." />
-      <svg width="110" height="85" viewBox="0 0 110 85">
-        {/* Pentagon approx */}
-        <polygon points="55,8 95,35 80,78 30,78 15,35" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="73" y="24" fontSize="8" fill="#6b7280" fontWeight="bold">5 cm</text>
-        <text x="86" y="60" fontSize="8" fill="#6b7280" fontWeight="bold">6 cm</text>
-        <text x="44" y="82" fontSize="8" fill="#6b7280" fontWeight="bold">5 cm</text>
-        <text x="8" y="60" fontSize="8" fill="#6b7280" fontWeight="bold">4 cm</text>
-        <text x="20" y="24" fontSize="8" fill="#6b7280" fontWeight="bold">4 cm</text>
+      <Instr text="Find the perimeter of this shape." />
+      <svg width="110" height="75" viewBox="0 0 110 75">
+        <rect x="10" y="10" width="85" height="48" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="52" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 cm</text>
+        <text x="102" y="37" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
       </svg>
       <QBox />
     </Card>
@@ -291,33 +314,27 @@ function L33() {
   );
 }
 
-// ── L3.4 — Compare two grids ─────────────────────────────────────
+// ── L3.4 — Compare two rectangles by area ────────────────────────
 function L34() {
   return (
     <Card>
       <Instr text="Which shape has a bigger area?" />
-      <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
-        {/* 3×3 */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 1, alignItems: "center" }}>
-          {Array.from({ length: 3 }, (_, r) => (
-            <div key={r} style={{ display: "flex", gap: 1 }}>
-              {Array.from({ length: 3 }, (_, c) => (
-                <div key={c} style={{ width: 12, height: 12, background: "#fce7f3", border: "1px solid #f9a8d4" }} />
-              ))}
-            </div>
-          ))}
-          <span style={{ fontSize: 10, color: "#9ca3af", fontWeight: 700, marginTop: 2 }}>A</span>
+      <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <svg width="52" height="44" viewBox="0 0 52 44">
+            <rect x="3" y="3" width="46" height="36" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+            <text x="26" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">6 cm</text>
+            <text x="50" y="24" textAnchor="middle" fontSize="8" fill="#6b7280">5 cm</text>
+          </svg>
+          <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
-        {/* 4×2 */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 1, alignItems: "center" }}>
-          {Array.from({ length: 2 }, (_, r) => (
-            <div key={r} style={{ display: "flex", gap: 1 }}>
-              {Array.from({ length: 4 }, (_, c) => (
-                <div key={c} style={{ width: 12, height: 12, background: "#dbeafe", border: "1px solid #93c5fd" }} />
-              ))}
-            </div>
-          ))}
-          <span style={{ fontSize: 10, color: "#9ca3af", fontWeight: 700, marginTop: 2 }}>B</span>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <svg width="60" height="36" viewBox="0 0 60 36">
+            <rect x="3" y="3" width="54" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
+            <text x="30" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">9 cm</text>
+            <text x="58" y="20" textAnchor="middle" fontSize="8" fill="#6b7280">3 cm</text>
+          </svg>
+          <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
       </div>
       <div style={{ display: "flex", gap: 6 }}>
@@ -394,23 +411,30 @@ function L44() {
   );
 }
 
-// ── L4.5 — Grid with half-squares ────────────────────────────────
+// ── L4.5 — Grid with half-squares below ──────────────────────────
 function L45() {
+  const cell = 16;
   return (
     <Card>
       <Instr text="Find the area including half-squares." />
-      <svg width="90" height="80" viewBox="0 0 90 80">
-        {/* 4×3 grid */}
+      <svg width="90" height="90" viewBox="0 0 90 90">
+        {/* 4×3 full-square grid */}
         {Array.from({ length: 3 }, (_, r) =>
-          Array.from({ length: 4 }, (_, c) => {
-            const isTriangle = r === 0 && c >= 2;
-            if (isTriangle) return null;
-            return <rect key={`${r}-${c}`} x={5+c*18} y={5+r*18} width={18} height={18} fill="#fef08a" stroke="#d1d5db" strokeWidth="1" />;
-          })
+          Array.from({ length: 4 }, (_, c) => (
+            <rect key={`${r}-${c}`} x={5 + c * cell} y={5 + r * cell} width={cell} height={cell} fill="#fef08a" stroke="#d1d5db" strokeWidth="1" />
+          ))
         )}
-        {/* Two triangle half-squares in top-right */}
-        <polygon points="41,5 59,5 41,23" fill="#fde68a" stroke="#d1d5db" strokeWidth="1" />
-        <polygon points="59,5 77,5 77,23" fill="#fde68a" stroke="#d1d5db" strokeWidth="1" />
+        {/* Row of triangle half-squares BELOW the full grid */}
+        {Array.from({ length: 4 }, (_, c) => {
+          const x = 5 + c * cell;
+          const y = 5 + 3 * cell + 4; // small gap below grid
+          return (
+            <polygon key={`tri-${c}`}
+              points={`${x},${y} ${x + cell},${y} ${x},${y + cell}`}
+              fill="#fde68a" stroke="#d1d5db" strokeWidth="1"
+            />
+          );
+        })}
       </svg>
       <QBox />
     </Card>
@@ -430,19 +454,15 @@ function L51() {
   );
 }
 
-// ── L5.2 — Hexagon perimeter ─────────────────────────────────────
+// ── L5.2 — Perimeter of a rectangle ─────────────────────────────
 function L52() {
   return (
     <Card>
-      <Instr text="Find the perimeter of this hexagon." />
-      <svg width="100" height="90" viewBox="0 0 100 90">
-        <polygon points="50,5 90,27 90,63 50,85 10,63 10,27" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="74" y="22" fontSize="8" fill="#6b7280" fontWeight="bold">4 m</text>
-        <text x="82" y="50" fontSize="8" fill="#6b7280" fontWeight="bold">5 m</text>
-        <text x="62" y="82" fontSize="8" fill="#6b7280" fontWeight="bold">4 m</text>
-        <text x="12" y="82" fontSize="8" fill="#6b7280" fontWeight="bold">5 m</text>
-        <text x="2" y="50" fontSize="8" fill="#6b7280" fontWeight="bold">4 m</text>
-        <text x="22" y="22" fontSize="8" fill="#6b7280" fontWeight="bold">4 m</text>
+      <Instr text="Find the perimeter of this shape." />
+      <svg width="115" height="75" viewBox="0 0 115 75">
+        <rect x="8" y="10" width="90" height="52" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="53" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
+        <text x="104" y="39" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
       </svg>
       <QBox />
     </Card>
@@ -499,24 +519,33 @@ function L54() {
   );
 }
 
-// ── L5.5 — Compare two areas ─────────────────────────────────────
+// ── L5.5 — Compare two rectangles by area ────────────────────────
 function L55() {
   return (
     <Card>
       <Instr text="Which shape has the bigger area?" />
-      <div style={{ display: "flex", gap: 10, marginBottom: 8 }}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <div style={{ background: "#fce7f3", border: "2px solid #f9a8d4", borderRadius: 8, padding: "8px 12px", fontSize: 12, fontWeight: 800, color: "#be185d" }}>15 cm²</div>
-          <span style={{ fontSize: 10, color: "#9ca3af", fontWeight: 700 }}>A</span>
+      <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <svg width="52" height="44" viewBox="0 0 52 44">
+            <rect x="3" y="3" width="46" height="38" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+            <text x="26" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">5 m</text>
+            <text x="50" y="25" textAnchor="middle" fontSize="8" fill="#6b7280">3 m</text>
+          </svg>
+          <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <div style={{ background: "#dcfce7", border: "2px solid #86efac", borderRadius: 8, padding: "8px 12px", fontSize: 12, fontWeight: 800, color: "#166534" }}>24 cm²</div>
-          <span style={{ fontSize: 10, color: "#9ca3af", fontWeight: 700 }}>B</span>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <svg width="62" height="34" viewBox="0 0 62 34">
+            <rect x="3" y="3" width="56" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
+            <text x="31" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">8 m</text>
+            <text x="60" y="20" textAnchor="middle" fontSize="8" fill="#6b7280">2 m</text>
+          </svg>
+          <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
       </div>
-      <div style={{ display: "flex", gap: 8 }}>
-        <ChoiceBtn label="A" />
-        <ChoiceBtn label="B" />
+      <div style={{ display: "flex", gap: 6 }}>
+        <ChoiceBtn label="A is larger" />
+        <ChoiceBtn label="B is larger" />
+        <ChoiceBtn label="Same" />
       </div>
     </Card>
   );
@@ -538,14 +567,14 @@ function L61() {
   );
 }
 
-// ── L6.2 — Choose area unit ──────────────────────────────────────
+// ── L6.2 — Choose the best unit (length or area) ─────────────────
 function L62() {
   return (
     <Card>
-      <Instr text="Choose the best unit for measuring area." />
-      <div style={{ fontSize: 28, marginBottom: 8 }}>🏠</div>
-      <div style={{ display: "flex", gap: 5 }}>
-        <ChoiceBtn label="mm²" />
+      <Instr text="What unit would you use to measure the floor area of a room?" />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        <ChoiceBtn label="cm" />
+        <ChoiceBtn label="m" />
         <ChoiceBtn label="cm²" />
         <ChoiceBtn label="m²" />
       </div>
@@ -588,18 +617,20 @@ function L64() {
   );
 }
 
-// ── L6.5 — Identify and find area ────────────────────────────────
+// ── L6.5 — Identify shape and find area ──────────────────────────
 function L65() {
   return (
     <Card>
-      <Instr text="Find the area of this triangle." />
-      <svg width="105" height="75" viewBox="0 0 105 75">
-        <polygon points="50,5 95,65 5,65" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
-        <text x="50" y="72" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
-        <line x1="50" y1="5" x2="50" y2="65" stroke="#9ca3af" strokeWidth="1" strokeDasharray="3,2" />
-        <text x="55" y="38" fontSize="8" fill="#6b7280" fontWeight="bold">h=4 m</text>
+      <Instr text="Find the area of this shape." />
+      <svg width="110" height="70" viewBox="0 0 110 70">
+        <rect x="8" y="8" width="90" height="50" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
+        <text x="53" y="6" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
+        <text x="104" y="36" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
       </svg>
-      <QBox />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>m²</span>
+      </div>
     </Card>
   );
 }
@@ -639,7 +670,7 @@ function L72() {
   );
 }
 
-// ── L7.3 — Triangle area formula A = ½bh ────────────────────────
+// ── L7.3 — Area formula (rectangle/square/triangle) ─────────────
 function L73() {
   return (
     <Card>
