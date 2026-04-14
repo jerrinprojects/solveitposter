@@ -9,8 +9,8 @@ export const meta: PosterMeta = {
 };
 
 export const skills: PosterSkill[] = [
-  { code: "L1.1", description: "I can use the words longer, shorter, and taller to compare objects." },
-  { code: "L1.2", description: "I can put objects in order from shortest to longest." },
-  { code: "L1.3", description: "I can put objects in order from longest to shortest." },
-  { code: "L1.4", description: "I can tell if two objects are the same length or different lengths." },
+  { code: "1.1", description: "I can use the words longer, shorter, and taller to compare objects." },
+  { code: "1.2", description: "I can put objects in order from shortest to longest." },
+  { code: "1.3", description: "I can put objects in order from longest to shortest." },
+  { code: "1.4", description: "I can tell if two objects are the same length or different lengths." },
 ];

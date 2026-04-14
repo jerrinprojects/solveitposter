@@ -9,9 +9,9 @@ export const meta: PosterMeta = {
 };
 
 export const skills: PosterSkill[] = [
-  { code: "L7.1", description: "I can use formulas to find the perimeter of shapes." },
-  { code: "L7.2", description: "I can work out a missing side length when I know the perimeter." },
-  { code: "L7.3", description: "I can use formulas to find the area of different shapes." },
-  { code: "L7.4", description: "I can find the missing base or height when I know the area." },
-  { code: "L7.5", description: "I can find the area of composite shapes by splitting them into parts." },
+  { code: "7.1", description: "I can use formulas to find the perimeter of shapes." },
+  { code: "7.2", description: "I can work out a missing side length when I know the perimeter." },
+  { code: "7.3", description: "I can use formulas to find the area of different shapes." },
+  { code: "7.4", description: "I can find the missing base or height when I know the area." },
+  { code: "7.5", description: "I can find the area of composite shapes by splitting them into parts." },
 ];

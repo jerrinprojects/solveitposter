@@ -9,9 +9,9 @@ export const meta: PosterMeta = {
 };
 
 export const skills: PosterSkill[] = [
-  { code: "L4.1", description: "I can choose the best unit to measure length — millimetres, centimetres, or metres." },
-  { code: "L4.2", description: "I can find the perimeter of shapes using mm, cm, or m." },
-  { code: "L4.3", description: "I can use multiplication to find the area of a rectangle." },
-  { code: "L4.4", description: "I can find the area of a square." },
-  { code: "L4.5", description: "I can find the area of shapes that include half-squares." },
+  { code: "4.1", description: "I can choose the best unit to measure length — millimetres, centimetres, or metres." },
+  { code: "4.2", description: "I can find the perimeter of shapes using mm, cm, or m." },
+  { code: "4.3", description: "I can use multiplication to find the area of a rectangle." },
+  { code: "4.4", description: "I can find the area of a square." },
+  { code: "4.5", description: "I can find the area of shapes that include half-squares." },
 ];

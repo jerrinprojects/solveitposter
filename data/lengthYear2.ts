@@ -9,8 +9,8 @@ export const meta: PosterMeta = {
 };
 
 export const skills: PosterSkill[] = [
-  { code: "L2.1", description: "I can read a ruler and measure in centimetres." },
-  { code: "L2.2", description: "I can choose the correct measurement shown on a ruler." },
-  { code: "L2.3", description: "I can find the perimeter of a rectangle when the side lengths are labelled." },
-  { code: "L2.4", description: "I can find the perimeter of a shape by counting the units around the outside." },
+  { code: "2.1", description: "I can read a ruler and measure in centimetres." },
+  { code: "2.2", description: "I can choose the correct measurement shown on a ruler." },
+  { code: "2.3", description: "I can find the perimeter of a rectangle when the side lengths are labelled." },
+  { code: "2.4", description: "I can find the perimeter of a shape by counting the units around the outside." },
 ];
