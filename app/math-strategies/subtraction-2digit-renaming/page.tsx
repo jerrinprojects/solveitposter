@@ -54,33 +54,33 @@ export default function Subtraction2DigitRenamingPage() {
               <span className="bg-pink-500 text-white font-fredoka text-base rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0" style={{ fontWeight: 900 }}>1</span>
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Split both numbers into tens and ones</p>
             </div>
-            <svg viewBox="0 0 480 130" className="w-full max-w-md mx-auto block" overflow="visible">
-              {/* ── 53 tree ── */}
-              <rect x="168" y="4" width="72" height="40" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
-              <text x="204" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">53</text>
-              <line x1="192" y1="44" x2="152" y2="62" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="216" y1="44" x2="256" y2="62" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/>
-              <rect x="112" y="64" width="80" height="34" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="152" y="87" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">50</text>
-              <text x="152" y="106" textAnchor="middle" fontSize="9" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">TENS</text>
-              <rect x="224" y="64" width="64" height="34" rx="8" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2"/>
-              <text x="256" y="87" textAnchor="middle" fontSize="20" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">3</text>
-              <text x="256" y="106" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b82f6" fontFamily="Nunito, sans-serif">ONES</text>
+            <svg viewBox="0 0 480 78" className="w-full max-w-md mx-auto block" overflow="visible">
+              {/* ── 53 = 50 + 3 ── */}
+              <rect x="4" y="6" width="54" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
+              <text x="31" y="34" textAnchor="middle" fontSize="24" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">53</text>
+              <text x="64" y="34" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="72" y="6" width="58" height="44" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="101" y="34" textAnchor="middle" fontSize="22" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">50</text>
+              <text x="101" y="64" textAnchor="middle" fontSize="9" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">TENS</text>
+              <text x="136" y="34" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="144" y="6" width="46" height="44" rx="10" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2"/>
+              <text x="167" y="34" textAnchor="middle" fontSize="22" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">3</text>
+              <text x="167" y="64" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b82f6" fontFamily="Nunito, sans-serif">ONES</text>
 
-              {/* minus between trees */}
-              <text x="98" y="88" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">−</text>
+              {/* minus between */}
+              <text x="210" y="34" textAnchor="middle" fontSize="26" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">−</text>
 
-              {/* ── 27 tree ── */}
-              <rect x="304" y="4" width="72" height="40" rx="10" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
-              <text x="340" y="30" textAnchor="middle" fontSize="24" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">27</text>
-              <line x1="328" y1="44" x2="300" y2="62" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
-              <line x1="352" y1="44" x2="380" y2="62" stroke="#22c55e" strokeWidth="2" strokeLinecap="round"/>
-              <rect x="260" y="64" width="80" height="34" rx="8" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
-              <text x="300" y="87" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
-              <text x="300" y="106" textAnchor="middle" fontSize="9" fontWeight="700" fill="#22c55e" fontFamily="Nunito, sans-serif">TENS</text>
-              <rect x="360" y="64" width="64" height="34" rx="8" fill="#d1fae5" stroke="#22c55e" strokeWidth="2"/>
-              <text x="392" y="87" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">7</text>
-              <text x="392" y="106" textAnchor="middle" fontSize="9" fontWeight="700" fill="#22c55e" fontFamily="Nunito, sans-serif">ONES</text>
+              {/* ── 27 = 20 + 7 ── */}
+              <rect x="228" y="6" width="54" height="44" rx="10" fill="#dcfce7" stroke="#22c55e" strokeWidth="2.5"/>
+              <text x="255" y="34" textAnchor="middle" fontSize="24" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">27</text>
+              <text x="288" y="34" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">=</text>
+              <rect x="296" y="6" width="58" height="44" rx="10" fill="#dcfce7" stroke="#22c55e" strokeWidth="2"/>
+              <text x="325" y="34" textAnchor="middle" fontSize="22" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">20</text>
+              <text x="325" y="64" textAnchor="middle" fontSize="9" fontWeight="700" fill="#22c55e" fontFamily="Nunito, sans-serif">TENS</text>
+              <text x="360" y="34" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af" fontFamily="Fredoka One, sans-serif">+</text>
+              <rect x="368" y="6" width="46" height="44" rx="10" fill="#d1fae5" stroke="#22c55e" strokeWidth="2"/>
+              <text x="391" y="34" textAnchor="middle" fontSize="22" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">7</text>
+              <text x="391" y="64" textAnchor="middle" fontSize="9" fontWeight="700" fill="#22c55e" fontFamily="Nunito, sans-serif">ONES</text>
             </svg>
           </div>
 
@@ -110,41 +110,44 @@ export default function Subtraction2DigitRenamingPage() {
               <span className="bg-pink-500 text-white font-fredoka text-base rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0" style={{ fontWeight: 900 }}>3</span>
               <p className="font-fredoka text-base text-gray-700" style={{ fontWeight: 900 }}>Rename a ten → subtract the ones</p>
             </div>
-            <svg viewBox="0 0 480 100" className="w-full max-w-md mx-auto block" overflow="visible">
-              {/* Before rename: 50 + 3 */}
-              <text x="78" y="14" textAnchor="middle" fontSize="9" fontWeight="700" fill="#9ca3af" fontFamily="Nunito, sans-serif">BEFORE</text>
-              <rect x="8" y="18" width="60" height="38" rx="9" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
-              <text x="38" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">50</text>
-              <text x="76" y="40" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af">+</text>
-              <rect x="88" y="18" width="46" height="38" rx="9" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2"/>
-              <text x="111" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">3</text>
+            <svg viewBox="0 0 480 118" className="w-full max-w-md mx-auto block" overflow="visible">
+              {/* ── Row 1: Rename ── */}
+              <text x="240" y="13" textAnchor="middle" fontSize="9" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">RENAME A TEN</text>
+
+              {/* Before: 50 + 3 */}
+              <rect x="20" y="18" width="60" height="40" rx="9" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2"/>
+              <text x="50" y="43" textAnchor="middle" fontSize="22" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">50</text>
+              <text x="88" y="42" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af">+</text>
+              <rect x="98" y="18" width="46" height="40" rx="9" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2"/>
+              <text x="121" y="43" textAnchor="middle" fontSize="22" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">3</text>
 
               {/* Arrow */}
-              <text x="155" y="42" textAnchor="middle" fontSize="18" fontWeight="900" fill="#f59e0b">→</text>
-              <text x="155" y="56" textAnchor="middle" fontSize="8" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">rename</text>
+              <text x="166" y="43" textAnchor="middle" fontSize="22" fontWeight="900" fill="#f59e0b">→</text>
+              <text x="166" y="57" textAnchor="middle" fontSize="8" fontWeight="700" fill="#d97706" fontFamily="Nunito, sans-serif">rename</text>
 
-              {/* After rename: 40 + 13 */}
-              <text x="218" y="14" textAnchor="middle" fontSize="9" fontWeight="700" fill="#9ca3af" fontFamily="Nunito, sans-serif">AFTER</text>
-              <rect x="170" y="18" width="60" height="38" rx="9" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
-              <text x="200" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">40</text>
-              <text x="238" y="40" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af">+</text>
-              <rect x="248" y="12" width="56" height="50" rx="9" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2.5"/>
-              <text x="276" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">13</text>
-              <text x="276" y="60" textAnchor="middle" fontSize="8" fontWeight="700" fill="#3b82f6" fontFamily="Nunito, sans-serif">3 + 10 ones</text>
+              {/* After: 40 + 13 */}
+              <rect x="196" y="18" width="60" height="40" rx="9" fill="#fef3c7" stroke="#f59e0b" strokeWidth="2.5"/>
+              <text x="226" y="43" textAnchor="middle" fontSize="22" fontWeight="900" fill="#92400e" fontFamily="Fredoka One, sans-serif">40</text>
+              <text x="264" y="42" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af">+</text>
+              <rect x="274" y="14" width="60" height="48" rx="9" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2.5"/>
+              <text x="304" y="41" textAnchor="middle" fontSize="22" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">13</text>
+              <text x="304" y="57" textAnchor="middle" fontSize="8" fontWeight="700" fill="#3b82f6" fontFamily="Nunito, sans-serif">3 + 10 ones</text>
 
-              {/* Divider */}
-              <line x1="318" y1="10" x2="318" y2="78" stroke="#e5e7eb" strokeWidth="1.5" strokeDasharray="4,3"/>
+              {/* ── Divider ── */}
+              <line x1="16" y1="74" x2="464" y2="74" stroke="#fce7f3" strokeWidth="1.5"/>
 
-              {/* Subtract ones: 13 - 7 = 6 */}
-              <text x="396" y="14" textAnchor="middle" fontSize="9" fontWeight="700" fill="#9ca3af" fontFamily="Nunito, sans-serif">SUBTRACT ONES</text>
-              <rect x="328" y="18" width="52" height="38" rx="9" fill="#dbeafe" stroke="#3b82f6" strokeWidth="2"/>
-              <text x="354" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">13</text>
-              <text x="390" y="40" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af">−</text>
-              <rect x="400" y="18" width="36" height="38" rx="9" fill="#d1fae5" stroke="#22c55e" strokeWidth="2"/>
-              <text x="418" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">7</text>
-              <text x="446" y="40" textAnchor="middle" fontSize="18" fontWeight="700" fill="#9ca3af">=</text>
-              <rect x="456" y="14" width="20" height="46" rx="9" fill="#fce7f3" stroke="#ec4899" strokeWidth="2"/>
-              <text x="466" y="42" textAnchor="middle" fontSize="20" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">6</text>
+              {/* ── Row 2: Subtract ones ── */}
+              <text x="240" y="86" textAnchor="middle" fontSize="9" fontWeight="700" fill="#3b82f6" fontFamily="Nunito, sans-serif">SUBTRACT THE ONES</text>
+
+              {/* 13 − 7 = 6 */}
+              <rect x="116" y="90" width="60" height="22" rx="7" fill="#dbeafe" stroke="#3b82f6" strokeWidth="1.5"/>
+              <text x="146" y="107" textAnchor="middle" fontSize="14" fontWeight="900" fill="#1e40af" fontFamily="Fredoka One, sans-serif">13</text>
+              <text x="188" y="107" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af">−</text>
+              <rect x="200" y="90" width="44" height="22" rx="7" fill="#d1fae5" stroke="#22c55e" strokeWidth="1.5"/>
+              <text x="222" y="107" textAnchor="middle" fontSize="14" fontWeight="900" fill="#166534" fontFamily="Fredoka One, sans-serif">7</text>
+              <text x="256" y="107" textAnchor="middle" fontSize="16" fontWeight="700" fill="#9ca3af">=</text>
+              <rect x="268" y="87" width="44" height="28" rx="7" fill="#fce7f3" stroke="#ec4899" strokeWidth="2"/>
+              <text x="290" y="107" textAnchor="middle" fontSize="18" fontWeight="900" fill="#9d174d" fontFamily="Fredoka One, sans-serif">6</text>
             </svg>
           </div>
 
