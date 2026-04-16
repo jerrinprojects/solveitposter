@@ -24,6 +24,10 @@ const topics = [
   },
 ];
 
+const measurementPosters = [
+  { label: "Shapes · Length, Width & Height", href: "/measurement/shapes" },
+];
+
 const measurementTopics = [
   {
     name: "Length",
@@ -81,6 +85,14 @@ export default function LandingPage() {
         {/* Measurement — groups Length and Mass together */}
         <section>
           <SectionHeading emoji="📐" title="Measurement" />
+          {/* Standalone measurement posters */}
+          {measurementPosters.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+              {measurementPosters.map((item) => (
+                <PosterCard key={item.href} label={item.label} href={item.href} />
+              ))}
+            </div>
+          )}
           <div className="space-y-5">
             {measurementTopics.map((topic) => (
               <div key={topic.name}>
