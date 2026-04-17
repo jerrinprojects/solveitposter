@@ -968,6 +968,287 @@ function P69() {
   );
 }
 
+// ── Year 7 ───────────────────────────────────────────────────────
+
+// Power-of-10 notation: base^exp inline
+function Pow10({ exp }: { exp: number | string }) {
+  return (
+    <span style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 20 }}>
+      <span>10</span>
+      <sup style={{ fontSize: 12, fontWeight: 800, marginTop: 1 }}>{exp}</sup>
+    </span>
+  );
+}
+
+// Expanded form row: ? × 10^n + ? × 10^m + ...
+function ExpandedPow10({ exponents }: { exponents: number[] }) {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center", alignItems: "center", margin: "6px 0 4px", fontSize: 13 }}>
+      {exponents.map((e, i) => (
+        <React.Fragment key={e}>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#9ca3af" }}>?</div>
+          <span style={{ fontWeight: 700 }}>×</span>
+          <Pow10 exp={e} />
+          {i < exponents.length - 1 && <span style={{ fontWeight: 700, color: "#6b7280" }}>+</span>}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+// Numbered answer boxes (for common multiples)
+function NumberedBoxes({ labels }: { labels: string[] }) {
+  return (
+    <div style={{ display: "flex", gap: 6, justifyContent: "center", margin: "6px 0 4px" }}>
+      {labels.map((lbl, i) => (
+        <div key={i} style={{ textAlign: "center" }}>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, marginBottom: 2 }} />
+          <div style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>{lbl}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Number tap row (for prime/composite click)
+function TapRow({ nums, highlightIdx }: { nums: number[]; highlightIdx?: number }) {
+  return (
+    <div style={{ display: "flex", gap: 8, justifyContent: "center", margin: "8px 0 6px" }}>
+      {nums.map((n, i) => (
+        <div key={i} style={{
+          border: `2px solid ${i === highlightIdx ? "#ec4899" : "#e5e7eb"}`,
+          borderRadius: 10,
+          padding: "6px 16px",
+          fontWeight: 800,
+          fontSize: 18,
+          color: i === highlightIdx ? "#ec4899" : "#374151",
+        }}>{n}</div>
+      ))}
+    </div>
+  );
+}
+
+function P71() {
+  return (
+    <Card>
+      <Instr text="Complete the place value sentence:" />
+      <div style={{ textAlign: "center", fontSize: 13, fontWeight: 700, color: "#6b7280", marginBottom: 6 }}>200,000 = 2 × 10<sup>?</sup></div>
+      <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center" }}>
+        <span style={{ fontWeight: 800, fontSize: 15 }}>200,000 = 2 ×</span>
+        <div style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 18 }}>
+          <span>10</span>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 26, height: 20, marginTop: 0, display: "inline-block" }} />
+        </div>
+      </div>
+    </Card>
+  );
+}
+function P72() {
+  return (
+    <Card>
+      <Instr text="Write 39,759 in expanded form. Fill each box with the correct digit." />
+      <ExpandedPow10 exponents={[4, 3, 2, 1, 0]} />
+    </Card>
+  );
+}
+function P73() {
+  return (
+    <Card>
+      <Instr text="Convert the expanded form into a number:" />
+      <div style={{ fontSize: 11, fontWeight: 700, textAlign: "center", margin: "4px 0 6px", color: "#374151" }}>
+        7×10<sup>4</sup> + 9×10<sup>3</sup> + 7×10<sup>2</sup> + 3×10<sup>1</sup> + 7×10<sup>0</sup>
+      </div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, height: 28, width: "80%", margin: "0 auto" }} />
+    </Card>
+  );
+}
+function P74() {
+  return (
+    <Card>
+      <Instr text="Work out the square root:" />
+      <div style={{ textAlign: "center", fontSize: 22, fontWeight: 800, margin: "6px 0 10px" }}>
+        <span style={{ fontSize: 18, marginRight: 2 }}>√</span>169
+      </div>
+      <QBox />
+    </Card>
+  );
+}
+function P75() {
+  return (
+    <Card>
+      <Instr text="Click the prime number." />
+      <TapRow nums={[4, 2, 27]} highlightIdx={1} />
+    </Card>
+  );
+}
+function P76() {
+  return (
+    <Card>
+      <Instr text="Write the common factors of 22 and 11 in order." />
+      <div style={{ fontSize: 10, color: "#6b7280", textAlign: "center", marginBottom: 4 }}>Common factors to find: 2</div>
+      <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+      </div>
+    </Card>
+  );
+}
+function P77() {
+  return (
+    <Card>
+      <Instr text="Write the first 3 common multiples of 9 and 19 in order." />
+      <NumberedBoxes labels={["#1", "#2", "#3"]} />
+    </Card>
+  );
+}
+function P78() {
+  return (
+    <Card>
+      <Instr text="Find the highest common factor (HCF) of 19, 12." />
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, height: 30, width: "60%", margin: "8px auto 4px", display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontSize: 12, fontWeight: 700 }}>HCF</div>
+    </Card>
+  );
+}
+function P79() {
+  return (
+    <Card>
+      <Instr text="Find the lowest common multiple (LCM) of 14, 3." />
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, height: 30, width: "60%", margin: "8px auto 4px", display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontSize: 12, fontWeight: 700 }}>LCM</div>
+    </Card>
+  );
+}
+
+// ── Year 8 ───────────────────────────────────────────────────────
+
+// Expanded form row with negative exponents
+function ExpandedPow10Neg({ exponents }: { exponents: number[] }) {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center", alignItems: "center", margin: "6px 0 4px", fontSize: 12 }}>
+      {exponents.map((e, i) => (
+        <React.Fragment key={e}>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#9ca3af", fontSize: 11 }}>?</div>
+          <span style={{ fontWeight: 700 }}>×</span>
+          <span style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 16 }}>
+            <span>10</span>
+            <sup style={{ fontSize: 10, fontWeight: 800, marginTop: 1 }}>{e}</sup>
+          </span>
+          {i < exponents.length - 1 && <span style={{ fontWeight: 700, color: "#6b7280" }}>+</span>}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+// Prime factorization: n = p^e × p^e ...
+function PrimeFactorBoxes({ n }: { n: number }) {
+  return (
+    <div style={{ margin: "6px 0 4px", textAlign: "center" }}>
+      <div style={{ fontSize: 18, fontWeight: 800, marginBottom: 6 }}>{n}</div>
+      <div style={{ display: "flex", gap: 6, justifyContent: "center", alignItems: "center" }}>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "2px 8px", fontSize: 13, color: "#9ca3af", fontWeight: 700 }}>p</div>
+        <sup style={{ fontSize: 11 }}><div style={{ border: "2px solid #e5e7eb", borderRadius: 4, width: 18, height: 16, display: "inline-block" }} /></sup>
+        <span style={{ fontWeight: 800, fontSize: 14 }}>×</span>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "2px 8px", fontSize: 13, color: "#9ca3af", fontWeight: 700 }}>p</div>
+        <sup style={{ fontSize: 11 }}><div style={{ border: "2px solid #e5e7eb", borderRadius: 4, width: 18, height: 16, display: "inline-block" }} /></sup>
+      </div>
+    </div>
+  );
+}
+
+function P81() {
+  return (
+    <Card>
+      <Instr text="Write as a decimal:" />
+      <div style={{ textAlign: "center", fontSize: 22, fontWeight: 800, margin: "4px 0 8px" }}>
+        10<sup style={{ fontSize: 14 }}>−3</sup> = ?
+      </div>
+      <div style={{ fontSize: 10, color: "#9ca3af", textAlign: "center", marginBottom: 6 }}>e.g. 0.01</div>
+      <QBox />
+    </Card>
+  );
+}
+function P82() {
+  return (
+    <Card>
+      <Instr text="Write 0.003 using powers of 10. Fill the boxes." />
+      <div style={{ display: "flex", gap: 6, justifyContent: "center", alignItems: "center", margin: "6px 0 4px" }}>
+        <span style={{ fontWeight: 800, fontSize: 15 }}>0.003 =</span>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 28, height: 26, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+        <span style={{ fontWeight: 800, fontSize: 15 }}>×</span>
+        <span style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 18 }}>
+          <span>10</span>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 4, width: 22, height: 18, marginTop: 1 }} />
+        </span>
+      </div>
+    </Card>
+  );
+}
+function P83() {
+  return (
+    <Card>
+      <Instr text="Expand 27.97 using powers of 10. Fill each box." />
+      <ExpandedPow10Neg exponents={[1, 0, -1, -2]} />
+    </Card>
+  );
+}
+function P84() {
+  return (
+    <Card>
+      <Instr text="Convert the expanded form into a number:" />
+      <div style={{ fontSize: 10, fontWeight: 700, textAlign: "center", margin: "4px 0 6px", color: "#374151" }}>
+        9×10<sup>1</sup> + 2×10<sup>0</sup> + 0×10<sup>−1</sup> + 4×10<sup>−2</sup>
+      </div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, height: 28, width: "80%", margin: "0 auto 4px" }} />
+      <div style={{ fontSize: 9, color: "#9ca3af", textAlign: "center" }}>You can type a dot or just a digit (e.g. 92.04)</div>
+    </Card>
+  );
+}
+function P85() {
+  return (
+    <Card>
+      <Instr text="Break 100 into prime factors." />
+      <PrimeFactorBoxes n={100} />
+    </Card>
+  );
+}
+function P86() {
+  return (
+    <Card>
+      <Instr text="Work out the cube root:" />
+      <div style={{ textAlign: "center", fontSize: 22, fontWeight: 800, margin: "6px 0 10px" }}>
+        <sup style={{ fontSize: 13 }}>3</sup><span style={{ fontSize: 18, marginRight: 1 }}>√</span>64
+      </div>
+      <QBox />
+    </Card>
+  );
+}
+function P87() {
+  return (
+    <Card>
+      <Instr text="Order the numbers smallest → largest. Click in order." />
+      <OrderRow nums={[10, -6, -15]} />
+    </Card>
+  );
+}
+function P88() {
+  return (
+    <Card>
+      <Instr text="Work out:" />
+      <div style={{ textAlign: "center", fontSize: 26, fontWeight: 800, margin: "6px 0 10px" }}>−11 + −3</div>
+      <QBox />
+    </Card>
+  );
+}
+function P89() {
+  return (
+    <Card>
+      <Instr text="Work out:" />
+      <div style={{ textAlign: "center", fontSize: 26, fontWeight: 800, margin: "6px 0 10px" }}>−42 ÷ 7</div>
+      <QBox />
+    </Card>
+  );
+}
+
 // ── Map & container ──────────────────────────────────────────────
 
 const MAP: Record<string, () => React.ReactElement> = {
@@ -998,6 +1279,12 @@ const MAP: Record<string, () => React.ReactElement> = {
   // Year 6
   "6.1": P61, "6.2": P62, "6.3": P63, "6.4": P64, "6.5": P65,
   "6.6": P66, "6.7": P67, "6.8": P68, "6.9": P69,
+  // Year 7
+  "7.1": P71, "7.2": P72, "7.3": P73, "7.4": P74, "7.5": P75,
+  "7.6": P76, "7.7": P77, "7.8": P78, "7.9": P79,
+  // Year 8
+  "8.1": P81, "8.2": P82, "8.3": P83, "8.4": P84, "8.5": P85,
+  "8.6": P86, "8.7": P87, "8.8": P88, "8.9": P89,
 };
 
 export default function ExercisePreview({ code }: { code: string }) {
