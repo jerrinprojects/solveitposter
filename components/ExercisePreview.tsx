@@ -890,16 +890,16 @@ function NegNumberLine({ min, max, target }: { min: number; max: number; target:
 function P61() {
   return (
     <Card>
-      <Instr text="Find a factor pair for 66." />
-      <FactorPairInput n={66} />
+      <Instr text="Find a factor pair for 24." />
+      <FactorPairInput n={24} />
     </Card>
   );
 }
 function P62() {
   return (
     <Card>
-      <Instr text="Find all the factor pairs for 33." />
-      <AllFactorPairs n={33} pairs={[[1, 33], [3, 11]]} />
+      <Instr text="Find all the factor pairs for 12." />
+      <AllFactorPairs n={12} pairs={[[1, 12], [2, 6], [3, 4]]} />
     </Card>
   );
 }
