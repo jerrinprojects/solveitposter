@@ -14,10 +14,10 @@ export default function PageHeader({ meta }: PageHeaderProps) {
           <h1 className="font-fredoka text-3xl sm:text-5xl text-pink-600 leading-tight tracking-wide" style={{ fontWeight: 900, WebkitTextStroke: "1.2px #db2777" }}>
             {meta.subject}
           </h1>
-          <h2 className="font-fredoka text-xl sm:text-2xl text-gray-700 mt-1" style={{ fontWeight: 900 }}>
+          <h2 className="font-fredoka text-2xl sm:text-3xl text-gray-700 mt-1" style={{ fontWeight: 900 }}>
             {meta.phase} &ndash; {meta.year}
           </h2>
-          <p className="font-fredoka text-sm sm:text-base text-gray-500 mt-0.5 tracking-[0.1em] uppercase" style={{ fontWeight: 800 }}>
+          <p className="font-fredoka text-base sm:text-xl text-gray-500 mt-0.5" style={{ fontWeight: 800 }}>
             {meta.theme}
           </p>
         </div>
