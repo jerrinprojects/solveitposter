@@ -7,11 +7,7 @@ const topics = [
     subject: "Number Structure",
     emoji: "🔢",
     items: [
-      { label: "Year 0a · Count to 10", href: "/poster" },
-      { label: "Year 0b · Count to 20", href: "/poster/year-0b" },
-      { label: "Year 1 · Count to 100", href: "/poster/year-1" },
-      { label: "Year 2 · Count to 120", href: "/poster/year-2" },
-      { label: "Year 3 · Count to 1,000", href: "/poster/year-3" },
+      { label: "Phase 1 · Year 0a–3", href: "/poster/phase-1" },
     ],
   },
   {
