@@ -10,7 +10,7 @@ export default function PageHeader({ meta }: PageHeaderProps) {
     <header className="mb-3 print-card">
       <div className="bg-pink-200 rounded-2xl px-5 sm:px-8 py-4 sm:py-5 text-center relative overflow-visible">
         {/* Title text — full width, centred independently of the mascot */}
-        <div className="pr-14 sm:pr-20">
+        <div>
           <h1 className="font-fredoka text-3xl sm:text-5xl text-pink-600 leading-tight tracking-wide" style={{ fontWeight: 900, WebkitTextStroke: "1.2px #db2777" }}>
             {meta.subject}
           </h1>
