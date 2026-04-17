@@ -42,7 +42,7 @@ export default function PosterPage() {
               <span className="font-fredoka font-bold text-lg sm:text-xl text-pink-500">
                 {posterMeta.subject}
               </span>
-              <span className="font-nunito text-xs font-semibold text-gray-400 tracking-wider capitalize">
+              <span className="font-nunito text-sm font-semibold text-gray-400 tracking-wider capitalize">
                 {posterMeta.phase} &middot; {posterMeta.year} &middot; {posterMeta.theme}
               </span>
             </div>
