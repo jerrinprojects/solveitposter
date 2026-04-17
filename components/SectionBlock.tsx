@@ -4,7 +4,16 @@ import ImageCard from "./ImageCard";
 
 // Codes that have a built-in static exercise preview
 const PREVIEW_CODES = new Set([
+  // Year 0a
   "0.1a","0.2a","0.3a","0.4a","0.5a","0.6a","0.7a","0.8a","0.9a",
+  // Year 0b
+  "0.1b","0.2b","0.3b","0.4b","0.5b","0.6b","0.7b","0.8b","0.9b",
+  // Year 1
+  "1.1","1.2","1.3","1.4","1.5","1.6","1.7","1.8","1.9",
+  // Year 2
+  "2.1","2.2","2.3","2.4","2.5","2.6","2.7","2.8","2.9",
+  // Year 3
+  "3.1","3.2","3.3","3.4","3.5","3.6","3.7","3.8","3.9",
 ]);
 
 interface SectionBlockProps {
