@@ -236,7 +236,7 @@ export default function ExercisePreview({ code }: { code: string }) {
   return (
     <div
       className="rounded-2xl border-2 border-pink-200 bg-white overflow-hidden"
-      style={{ minHeight: 148, display: "flex", flexDirection: "column" }}
+      style={{ minHeight: 148, height: "100%", display: "flex", flexDirection: "column" }}
     >
       <Preview />
     </div>

@@ -56,7 +56,7 @@ export default function PosterPage() {
             </div>
           )}
 
-          <div className="space-y-3 print:space-y-2">
+          <div className="skills-list space-y-3">
             {pageSkills.map((skill) => (
               <SectionBlock key={skill.code} skill={skill} />
             ))}
