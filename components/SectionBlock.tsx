@@ -18,7 +18,7 @@ export default function SectionBlock({ skill }: SectionBlockProps) {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 print-card">
 
       {/* Left: Skill code + "I can..." description */}
-      <div className="bg-white rounded-2xl border-2 border-pink-200 px-4 sm:px-6 py-5 sm:py-7 flex flex-col justify-center">
+      <div className="bg-white rounded-2xl border-2 border-pink-200 px-4 sm:px-6 py-3 sm:py-4 flex flex-col justify-center">
         <p className="font-fredoka font-bold text-2xl sm:text-3xl text-pink-500 text-center leading-none mb-2 sm:mb-3">
           {skill.code}
         </p>
@@ -29,7 +29,7 @@ export default function SectionBlock({ skill }: SectionBlockProps) {
 
       {/* Right: exercise preview > uploaded image > empty placeholder */}
       {skill.imageUrl ? (
-        <div className="rounded-2xl overflow-hidden border-2 border-pink-200" style={{ minHeight: 178 }}>
+        <div className="rounded-2xl overflow-hidden border-2 border-pink-200" style={{ minHeight: 148 }}>
           <img
             src={skill.imageUrl}
             alt={`${skill.code} exercise`}
@@ -39,7 +39,7 @@ export default function SectionBlock({ skill }: SectionBlockProps) {
       ) : hasPreview ? (
         <ExercisePreview code={skill.code} />
       ) : (
-        <div className="rounded-2xl overflow-hidden" style={{ minHeight: 178 }}>
+        <div className="rounded-2xl overflow-hidden" style={{ minHeight: 148 }}>
           <ImageCard defaultAlt={`${skill.code} exercise screenshot`} />
         </div>
       )}

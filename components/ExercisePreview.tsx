@@ -50,7 +50,7 @@ function SeqRow({ tokens }: { tokens: (number | null)[] }) {
 function Card({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
-      flex: 1, padding: "14px 16px",
+      flex: 1, padding: "10px 16px",
       display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
     }}>
@@ -236,7 +236,7 @@ export default function ExercisePreview({ code }: { code: string }) {
   return (
     <div
       className="rounded-2xl border-2 border-pink-200 bg-white overflow-hidden"
-      style={{ minHeight: 178, display: "flex", flexDirection: "column" }}
+      style={{ minHeight: 148, display: "flex", flexDirection: "column" }}
     >
       <Preview />
     </div>
