@@ -66,8 +66,9 @@ function PartWhole({ whole, p1, p2 }: { whole: number | string; p1: number | str
 }
 
 // Base-ten blocks SVG (blue rods = tens, yellow cubes = ones)
-function BTBSvg({ tens, ones, label }: { tens: number; ones: number; label?: string }) {
-  const cell = 9, vgap = 1.5, rodW = cell;
+// compact=true uses smaller cells so tall content doesn't overflow the card
+function BTBSvg({ tens, ones, label, compact = false }: { tens: number; ones: number; label?: string; compact?: boolean }) {
+  const cell = compact ? 5 : 9, vgap = compact ? 0.5 : 1.5, rodW = cell;
   const rodH = cell * 10 + vgap * 9; // 106.5
   const perRow = 5, colGap = 6, rowGap = 6;
   const oGap = 2, oPerRow = 5;
@@ -290,7 +291,7 @@ function P05a() {
   return (
     <Card>
       <Instr text="How many are there? Enter the number and the word." />
-      <div style={{ textAlign: "center", fontSize: 18, lineHeight: 1.8, margin: "4px 0 8px" }}>🌸 🌸 🌸 🌸 🌸<br />🌸 🌸</div>
+      <div style={{ textAlign: "center", fontSize: 13, lineHeight: 1.6, margin: "2px 0 5px" }}>🌸 🌸 🌸 🌸 🌸<br />🌸 🌸</div>
       <NumWordInputs />
     </Card>
   );
@@ -343,7 +344,7 @@ function P05b() {
   return (
     <Card>
       <Instr text="How many are there? Enter the number and the word." />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 2, fontSize: 14, margin: "3px auto 6px", width: 110 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 1, fontSize: 11, margin: "1px auto 4px", width: 85 }}>
         {Array.from({ length: 15 }).map((_, i) => <span key={i}>🐦</span>)}
       </div>
       <NumWordInputs />
@@ -384,8 +385,8 @@ function P12() {
 function P13() {
   return (
     <Card>
-      <Instr text="How many in total? Enter the number." />
-      <BTBSvg tens={5} ones={1} label="5 tens  1 ones" />
+      <Instr text="5 tens · 1 ones. How many in total?" />
+      <BTBSvg tens={5} ones={1} compact />
       <QBox />
     </Card>
   );
@@ -426,8 +427,8 @@ function P22() {
 function P23() {
   return (
     <Card>
-      <Instr text="How many in total? Enter the number." />
-      <BTBSvg tens={2} ones={8} label="2 tens  8 ones" />
+      <Instr text="2 tens · 8 ones. How many in total?" />
+      <BTBSvg tens={2} ones={8} compact />
       <QBox />
     </Card>
   );
