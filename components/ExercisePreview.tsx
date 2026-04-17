@@ -545,16 +545,24 @@ function ExpandRow({ parts }: { parts: number[] }) {
   );
 }
 
-// Place value form: e.g. "_ thousands _ hundreds _ tens _ ones"
+// Place value form boxes — labels can contain spaces to split onto two lines
 function PVForm({ labels }: { labels: string[] }) {
   return (
-    <div style={{ display: "flex", gap: 4, justifyContent: "center", flexWrap: "wrap", margin: "6px 0 4px" }}>
-      {labels.map((lbl, i) => (
-        <div key={i} style={{ textAlign: "center" }}>
-          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 32, height: 26, marginBottom: 2 }} />
-          <div style={{ fontSize: 8, color: "#6b7280", fontWeight: 700 }}>{lbl}</div>
-        </div>
-      ))}
+    <div style={{ display: "flex", gap: 5, justifyContent: "center", flexWrap: "wrap", margin: "6px 0 4px" }}>
+      {labels.map((lbl, i) => {
+        const words = lbl.split(" ");
+        const line1 = words.slice(0, Math.ceil(words.length / 2)).join(" ");
+        const line2 = words.slice(Math.ceil(words.length / 2)).join(" ");
+        return (
+          <div key={i} style={{ textAlign: "center" }}>
+            <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 36, height: 26, marginBottom: 2 }} />
+            <div style={{ fontSize: 7.5, color: "#6b7280", fontWeight: 700, lineHeight: 1.3, maxWidth: 40 }}>
+              {line1}
+              {line2 && <><br />{line2}</>}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -686,7 +694,7 @@ function P55a() {
   return (
     <Card>
       <Instr text="Write 826,899 in place value form." />
-      <PVForm labels={["hund-th", "ten-th", "thous", "hund", "tens", "ones"]} />
+      <PVForm labels={["hundred thousands", "ten thousands", "thousands", "hundreds", "tens", "ones"]} />
     </Card>
   );
 }
@@ -756,7 +764,7 @@ function P55b() {
   return (
     <Card>
       <Instr text="Write 778,488 in place value form." />
-      <PVForm labels={["hund-th", "ten-th", "thous", "hund", "tens", "ones"]} />
+      <PVForm labels={["hundred thousands", "ten thousands", "thousands", "hundreds", "tens", "ones"]} />
     </Card>
   );
 }
