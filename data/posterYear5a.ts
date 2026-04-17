@@ -4,7 +4,7 @@ export const posterMeta: PosterMeta = {
   subject: "NUMBER STRUCTURE",
   phase: "Phase 2",
   year: "Year 5a",
-  theme: "Numbers to 100,000",
+  theme: "Numbers to 100,000 (one hundred thousand)",
   brand: "Solveitmaths.com",
 };
 
