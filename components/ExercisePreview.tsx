@@ -23,13 +23,13 @@ function Dot({ color }: { color: string }) {
   return <div style={{ width: 12, height: 12, borderRadius: "50%", background: color, flexShrink: 0 }} />;
 }
 
-function SeqRow({ tokens, fontSize = 22 }: { tokens: (number | null)[]; fontSize?: number }) {
+function SeqRow({ tokens, fontSize = 22, formatted = false }: { tokens: (number | null)[]; fontSize?: number; formatted?: boolean }) {
   return (
     <div style={{ display: "flex", gap: 10, justifyContent: "center", alignItems: "center", margin: "6px 0 10px", flexWrap: "wrap" }}>
       {tokens.map((t, i) =>
         t === null
           ? <div key={i} style={{ width: 44, height: 34, border: "2px solid #e5e7eb", borderRadius: 8, flexShrink: 0 }} />
-          : <span key={i} style={{ display: "inline-block", minWidth: 24, textAlign: "center" as const, fontWeight: 800, fontSize }}>{t}</span>
+          : <span key={i} style={{ display: "inline-block", minWidth: 24, textAlign: "center" as const, fontWeight: 800, fontSize }}>{formatted ? t.toLocaleString() : t}</span>
       )}
     </div>
   );
@@ -185,7 +185,7 @@ function NumWordInputs() {
 function WordInput({ num }: { num: number }) {
   return (
     <>
-      <div style={{ fontSize: 32, fontWeight: 800, textAlign: "center", margin: "4px 0 8px" }}>{num}</div>
+      <div style={{ fontSize: 32, fontWeight: 800, textAlign: "center", margin: "4px 0 8px" }}>{num.toLocaleString()}</div>
       <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 0", fontSize: 12, color: "#9ca3af", textAlign: "center", width: "80%" }}>Write in words</div>
     </>
   );
@@ -514,6 +514,452 @@ function P39() {
   return <Card><Instr text="Find the missing part:" /><PartWhole whole={1000} p1={80} p2="?" /></Card>;
 }
 
+// ── Year 4 ───────────────────────────────────────────────────────
+
+// Highlight one digit in a formatted number (pos 0 = ones, counting right-to-left by digit only)
+function DigitHighlight({ num, pos }: { num: string; pos: number }) {
+  const totalDigits = num.replace(/,/g, "").length;
+  let di = 0;
+  return (
+    <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: 1 }}>
+      {num.split("").map((ch, i) => {
+        if (ch === ",") return <span key={i} style={{ color: "#6b7280" }}>{ch}</span>;
+        const fromRight = totalDigits - 1 - di++;
+        return <span key={i} style={{ color: fromRight === pos ? "#ec4899" : "#9ca3af" }}>{ch}</span>;
+      })}
+    </span>
+  );
+}
+
+// Expanded form boxes: e.g. 4385 → [4000, 300, 80, 5]
+function ExpandRow({ parts }: { parts: number[] }) {
+  return (
+    <div style={{ display: "flex", gap: 4, justifyContent: "center", alignItems: "center", flexWrap: "wrap", margin: "6px 0 4px" }}>
+      {parts.map((p, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <span style={{ fontWeight: 800, fontSize: 14, color: "#6b7280" }}>+</span>}
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "3px 8px", fontWeight: 700, fontSize: 13 }}>{p.toLocaleString()}</div>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
+// Place value form: e.g. "_ thousands _ hundreds _ tens _ ones"
+function PVForm({ labels }: { labels: string[] }) {
+  return (
+    <div style={{ display: "flex", gap: 4, justifyContent: "center", flexWrap: "wrap", margin: "6px 0 4px" }}>
+      {labels.map((lbl, i) => (
+        <div key={i} style={{ textAlign: "center" }}>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 32, height: 26, marginBottom: 2 }} />
+          <div style={{ fontSize: 8, color: "#6b7280", fontWeight: 700 }}>{lbl}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Compare two numbers with a blank symbol selector
+function CompareRow({ a, b }: { a: string; b: string }) {
+  return (
+    <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center", margin: "8px 0 6px" }}>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 14 }}>{a}</div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 32, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontSize: 18, fontWeight: 700 }}>?</div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 14 }}>{b}</div>
+    </div>
+  );
+}
+
+// Round number display
+function RoundDisplay({ num, unit }: { num: string; unit: string }) {
+  return (
+    <div style={{ textAlign: "center", margin: "4px 0 6px" }}>
+      <div style={{ fontSize: 28, fontWeight: 800, marginBottom: 4 }}>{num}</div>
+      <div style={{ fontSize: 10, color: "#6b7280", fontWeight: 700, marginBottom: 6 }}>Round to nearest {unit}</div>
+    </div>
+  );
+}
+
+function P41() {
+  return <Card><Instr text="Skip count by 1,000. Fill the missing numbers." /><SeqRow tokens={[1811, null, null, 4811]} fontSize={13} formatted /><QBox /></Card>;
+}
+function P42() {
+  return (
+    <Card>
+      <Instr text="Which digit is in the thousands place?" />
+      <div style={{ textAlign: "center", margin: "6px 0 10px" }}>
+        <DigitHighlight num="7,483" pos={3} />
+      </div>
+      <QBox />
+    </Card>
+  );
+}
+function P43() {
+  return (
+    <Card>
+      <Instr text="How many hundreds are in this number?" />
+      <div style={{ fontSize: 28, fontWeight: 800, textAlign: "center", margin: "6px 0 10px" }}>1,066</div>
+      <QBox />
+    </Card>
+  );
+}
+function P44() {
+  return (
+    <Card>
+      <Instr text="Write 4,385 in expanded form." />
+      <div style={{ fontSize: 16, fontWeight: 800, textAlign: "center", marginBottom: 4 }}>4,385 =</div>
+      <ExpandRow parts={[4000, 300, 80, 5]} />
+    </Card>
+  );
+}
+function P45() {
+  return (
+    <Card>
+      <Instr text="Write 7,436 in place value form." />
+      <PVForm labels={["thousands", "hundreds", "tens", "ones"]} />
+    </Card>
+  );
+}
+function P46() {
+  return <Card><Instr text="Write the number in words." /><WordInput num={9483} /></Card>;
+}
+function P47() {
+  return (
+    <Card>
+      <Instr text="Compare. Write &lt;, &gt;, or =." />
+      <CompareRow a="7,609" b="4,158" />
+      <div style={{ display: "flex", gap: 6, justifyContent: "center" }}>
+        {["<", ">", "="].map(s => (
+          <div key={s} style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 30, height: 26, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 14, color: "#9ca3af" }}>{s}</div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+function P48() {
+  return <Card><Instr text="Order from smallest to largest. Click in order." /><OrderRow nums={[1799, 627, 4715]} /></Card>;
+}
+function P49() {
+  return (
+    <Card>
+      <RoundDisplay num="6,852" unit="1,000" />
+      <QBox />
+    </Card>
+  );
+}
+
+// ── Year 5a ──────────────────────────────────────────────────────
+
+function P51a() {
+  return <Card><Instr text="Skip count by 10,000. Fill the missing numbers." /><SeqRow tokens={[39440, null, null, 69440]} fontSize={11} formatted /><QBox /></Card>;
+}
+function P52a() {
+  return (
+    <Card>
+      <Instr text="Which digit is in the hundred thousands place?" />
+      <div style={{ textAlign: "center", margin: "6px 0 10px" }}>
+        <DigitHighlight num="905,649" pos={5} />
+      </div>
+      <QBox />
+    </Card>
+  );
+}
+function P53a() {
+  return (
+    <Card>
+      <Instr text="How many ten thousands are in this number?" />
+      <div style={{ fontSize: 24, fontWeight: 800, textAlign: "center", margin: "6px 0 10px" }}>31,907</div>
+      <QBox />
+    </Card>
+  );
+}
+function P54a() {
+  return (
+    <Card>
+      <Instr text="Write 365,929 in expanded form." />
+      <div style={{ fontSize: 13, fontWeight: 800, textAlign: "center", marginBottom: 4 }}>365,929 =</div>
+      <ExpandRow parts={[300000, 60000, 5000, 900, 20, 9]} />
+    </Card>
+  );
+}
+function P55a() {
+  return (
+    <Card>
+      <Instr text="Write 826,899 in place value form." />
+      <PVForm labels={["hund-th", "ten-th", "thous", "hund", "tens", "ones"]} />
+    </Card>
+  );
+}
+function P56a() {
+  return <Card><Instr text="Write the number in words." /><WordInput num={83058} /></Card>;
+}
+function P57a() {
+  return (
+    <Card>
+      <Instr text="Compare. Write &lt;, &gt;, or =." />
+      <CompareRow a="76,400" b="47,830" />
+      <div style={{ display: "flex", gap: 6, justifyContent: "center" }}>
+        {["<", ">", "="].map(s => (
+          <div key={s} style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 30, height: 26, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 14, color: "#9ca3af" }}>{s}</div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+function P58a() {
+  return <Card><Instr text="Order from smallest to largest. Click in order." /><OrderRow nums={[8922, 41875, 92409]} /></Card>;
+}
+function P59a() {
+  return (
+    <Card>
+      <RoundDisplay num="85,697" unit="10,000" />
+      <QBox />
+    </Card>
+  );
+}
+
+// ── Year 5b ──────────────────────────────────────────────────────
+
+function P51b() {
+  return <Card><Instr text="Skip count by 100,000. Fill the missing numbers." /><SeqRow tokens={[200000, null, null, 500000]} fontSize={10} formatted /><QBox /></Card>;
+}
+function P52b() {
+  return (
+    <Card>
+      <Instr text="Which digit is in the millions place?" />
+      <div style={{ textAlign: "center", margin: "6px 0 10px" }}>
+        <DigitHighlight num="5,986,981" pos={6} />
+      </div>
+      <QBox />
+    </Card>
+  );
+}
+function P53b() {
+  return (
+    <Card>
+      <Instr text="How many hundred thousands are in this number?" />
+      <div style={{ fontSize: 22, fontWeight: 800, textAlign: "center", margin: "6px 0 10px" }}>432,841</div>
+      <QBox />
+    </Card>
+  );
+}
+function P54b() {
+  return (
+    <Card>
+      <Instr text="Write 358,782 in expanded form." />
+      <div style={{ fontSize: 13, fontWeight: 800, textAlign: "center", marginBottom: 4 }}>358,782 =</div>
+      <ExpandRow parts={[300000, 50000, 8000, 700, 80, 2]} />
+    </Card>
+  );
+}
+function P55b() {
+  return (
+    <Card>
+      <Instr text="Write 778,488 in place value form." />
+      <PVForm labels={["hund-th", "ten-th", "thous", "hund", "tens", "ones"]} />
+    </Card>
+  );
+}
+function P56b() {
+  return <Card><Instr text="Write the number in words." /><WordInput num={881548} /></Card>;
+}
+function P57b() {
+  return (
+    <Card>
+      <Instr text="Compare. Write &lt;, &gt;, or =." />
+      <CompareRow a="51,371" b="99,902" />
+      <div style={{ display: "flex", gap: 6, justifyContent: "center" }}>
+        {["<", ">", "="].map(s => (
+          <div key={s} style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 30, height: 26, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 14, color: "#9ca3af" }}>{s}</div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+function P58b() {
+  return <Card><Instr text="Order from smallest to largest. Click in order." /><OrderRow nums={[15345, 614872, 981600]} /></Card>;
+}
+function P59b() {
+  return (
+    <Card>
+      <RoundDisplay num="229,831" unit="100,000" />
+      <QBox />
+    </Card>
+  );
+}
+
+// ── Year 6 ───────────────────────────────────────────────────────
+
+// Factor pair input (__ × __ = n)
+function FactorPairInput({ n }: { n: number }) {
+  return (
+    <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center", margin: "8px 0 4px" }}>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+      <span style={{ fontWeight: 800, fontSize: 18 }}>×</span>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+      <span style={{ fontWeight: 800, fontSize: 18 }}>=</span>
+      <span style={{ fontWeight: 800, fontSize: 20 }}>{n}</span>
+    </div>
+  );
+}
+
+// All factor pairs boxes
+function AllFactorPairs({ n, pairs }: { n: number; pairs: [number, number][] }) {
+  return (
+    <div style={{ margin: "4px 0 4px" }}>
+      <div style={{ fontSize: 11, color: "#6b7280", fontWeight: 700, textAlign: "center", marginBottom: 4 }}>Factor pairs of {n}:</div>
+      <div style={{ display: "flex", gap: 4, justifyContent: "center", flexWrap: "wrap" }}>
+        {pairs.map(([a, b], i) => (
+          <div key={i} style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "2px 8px", fontSize: 12, fontWeight: 700, color: "#6b7280" }}>{a} × {b}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Square/cube notation display
+function PowerNotation({ base, exp }: { base: number | string; exp: number | string }) {
+  return (
+    <div style={{ display: "inline-flex", alignItems: "flex-start", fontSize: 28, fontWeight: 800, margin: "6px 0" }}>
+      <span>{base}</span>
+      <sup style={{ fontSize: 16, fontWeight: 800, marginTop: 2 }}>{exp}</sup>
+    </div>
+  );
+}
+
+// Recognise list (circle the square/cube numbers)
+function RecogniseList({ nums, targets }: { nums: number[]; targets: number[] }) {
+  return (
+    <div style={{ display: "flex", gap: 5, justifyContent: "center", flexWrap: "wrap", margin: "6px 0 6px" }}>
+      {nums.map(n => {
+        const isTarget = targets.includes(n);
+        return (
+          <div key={n} style={{
+            border: isTarget ? "2px solid #ec4899" : "2px solid #e5e7eb",
+            borderRadius: 20,
+            padding: "3px 10px",
+            fontWeight: 700,
+            fontSize: 14,
+            color: isTarget ? "#ec4899" : "#374151",
+          }}>{n}</div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Number line for negatives (static SVG)
+function NegNumberLine({ min, max, target }: { min: number; max: number; target: number }) {
+  const w = 220, h = 60, padX = 16, y = 30;
+  const innerW = w - padX * 2;
+  const toX = (v: number) => padX + ((v - min) / (max - min)) * innerW;
+  const vals: number[] = [];
+  for (let v = min; v <= max; v++) vals.push(v);
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ display: "block", margin: "0 auto" }}>
+      <line x1={padX} y1={y} x2={w - padX} y2={y} stroke="#374151" strokeWidth="1.5" />
+      {vals.map(v => {
+        const x = toX(v);
+        const isT = v === target;
+        const show = v === min || v === max || v === 0;
+        return (
+          <g key={v}>
+            <line x1={x} y1={y - 6} x2={x} y2={y + 6} stroke="#374151" strokeWidth="1" />
+            {isT && <circle cx={x} cy={y} r={7} fill="#ec4899" opacity={0.9} />}
+            {show && (
+              <text x={x} y={y + 20} textAnchor="middle" fontSize="10" fontWeight="700" fill="#374151">{v}</text>
+            )}
+            {!show && !isT && (
+              <rect x={x - 9} y={y + 11} width={18} height={12} rx={3} fill="#fff" stroke="#d1d5db" />
+            )}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function P61() {
+  return (
+    <Card>
+      <Instr text="Find a factor pair for 66." />
+      <FactorPairInput n={66} />
+    </Card>
+  );
+}
+function P62() {
+  return (
+    <Card>
+      <Instr text="Find all the factor pairs for 33." />
+      <AllFactorPairs n={33} pairs={[[1, 33], [3, 11]]} />
+    </Card>
+  );
+}
+function P63() {
+  return (
+    <Card>
+      <Instr text="Write 9² as a multiplication." />
+      <div style={{ textAlign: "center", margin: "4px 0" }}>
+        <PowerNotation base={9} exp={2} />
+        <div style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", marginTop: 2 }}>= <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px" }}>?</span> × <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px" }}>?</span></div>
+      </div>
+    </Card>
+  );
+}
+function P64() {
+  return (
+    <Card>
+      <Instr text="Write 12 × 12 as a square number." />
+      <div style={{ textAlign: "center", margin: "4px 0", fontSize: 18, fontWeight: 800 }}>
+        12 × 12 = <span style={{ display: "inline-flex", alignItems: "flex-start" }}>
+          <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px", fontSize: 15 }}>?</span>
+          <sup style={{ border: "2px solid #e5e7eb", borderRadius: 4, fontSize: 11, padding: "0 4px", marginTop: 2 }}>?</sup>
+        </span>
+      </div>
+    </Card>
+  );
+}
+function P65() {
+  return (
+    <Card>
+      <Instr text="Calculate the value." />
+      <div style={{ textAlign: "center", margin: "4px 0 8px" }}>
+        <PowerNotation base={4} exp={2} />
+        <span style={{ fontSize: 18, fontWeight: 700 }}> = </span>
+      </div>
+      <QBox />
+    </Card>
+  );
+}
+function P66() {
+  return (
+    <Card>
+      <Instr text="Circle the square numbers." />
+      <RecogniseList nums={[100, 126, 144, 35, 27]} targets={[100, 144]} />
+    </Card>
+  );
+}
+function P67() {
+  return <Card><Instr text="Count forwards. Fill the missing numbers." /><SeqRow tokens={[-10, null, null, -7, null]} fontSize={14} /><QBox /></Card>;
+}
+function P68() {
+  return (
+    <Card>
+      <Instr text="Write the number in words." />
+      <div style={{ fontSize: 34, fontWeight: 800, textAlign: "center", margin: "4px 0 8px" }}>−18</div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 0", fontSize: 11, color: "#9ca3af", textAlign: "center", width: "80%" }}>Write in words</div>
+    </Card>
+  );
+}
+function P69() {
+  return (
+    <Card>
+      <Instr text="Click on −3 on the number line." />
+      <NegNumberLine min={-6} max={3} target={-3} />
+    </Card>
+  );
+}
+
 // ── Map & container ──────────────────────────────────────────────
 
 const MAP: Record<string, () => React.ReactElement> = {
@@ -532,6 +978,18 @@ const MAP: Record<string, () => React.ReactElement> = {
   // Year 3
   "3.1": P31, "3.2": P32, "3.3": P33, "3.4": P34, "3.5": P35,
   "3.6": P36, "3.7": P37, "3.8": P38, "3.9": P39,
+  // Year 4
+  "4.1": P41, "4.2": P42, "4.3": P43, "4.4": P44, "4.5": P45,
+  "4.6": P46, "4.7": P47, "4.8": P48, "4.9": P49,
+  // Year 5a
+  "5.1a": P51a, "5.2a": P52a, "5.3a": P53a, "5.4a": P54a, "5.5a": P55a,
+  "5.6a": P56a, "5.7a": P57a, "5.8a": P58a, "5.9a": P59a,
+  // Year 5b
+  "5.1b": P51b, "5.2b": P52b, "5.3b": P53b, "5.4b": P54b, "5.5b": P55b,
+  "5.6b": P56b, "5.7b": P57b, "5.8b": P58b, "5.9b": P59b,
+  // Year 6
+  "6.1": P61, "6.2": P62, "6.3": P63, "6.4": P64, "6.5": P65,
+  "6.6": P66, "6.7": P67, "6.8": P68, "6.9": P69,
 };
 
 export default function ExercisePreview({ code }: { code: string }) {

@@ -8,6 +8,7 @@ const topics = [
     emoji: "🔢",
     items: [
       { label: "Phase 1 · Year 0a–3", href: "/poster/phase-1" },
+      { label: "Phase 2 · Year 4–6", href: "/poster/phase-2" },
     ],
   },
   {
