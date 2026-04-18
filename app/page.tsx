@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const topics = [
   {
-    subject: "Number Structure",
+    subject: "Number Structures",
     emoji: "🔢",
     items: [
       { label: "Phase 1 · Year 0a–3", href: "/poster/phase-1" },

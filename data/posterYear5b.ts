@@ -1,7 +1,7 @@
 import type { PosterSkill, PosterMeta, FooterData } from "@/types";
 
 export const posterMeta: PosterMeta = {
-  subject: "NUMBER STRUCTURE",
+  subject: "NUMBER STRUCTURES",
   phase: "Phase 2",
   year: "Year 5b",
   theme: "Numbers to 1,000,000 (one million)",

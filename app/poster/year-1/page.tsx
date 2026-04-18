@@ -3,7 +3,7 @@ import PosterPageLayout from "@/components/PosterPageLayout";
 import { posterMeta, posterSkills, footerData } from "@/data/posterYear1";
 
 export const metadata: Metadata = {
-  title: "Number Structure – Year 1 | Solve It Maths",
+  title: "Number Structures – Year 1 | Solve It Maths",
 };
 
 export default function Year1PosterPage() {

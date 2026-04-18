@@ -3,7 +3,7 @@ import PosterYearSection from "@/components/PosterYearSection";
 import PrintButton from "@/components/PrintButton";
 
 export const metadata: Metadata = {
-  title: "Number Structure – Phase 3 | Solve It Maths",
+  title: "Number Structures – Phase 3 | Solve It Maths",
 };
 
 import { posterMeta as meta7, posterSkills as skills7, footerData as footer7 } from "@/data/posterYear7";
