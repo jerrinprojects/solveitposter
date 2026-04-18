@@ -427,8 +427,8 @@ function P22() {
 function P23() {
   return (
     <Card>
-      <Instr text="2 tens · 8 ones. How many in total?" />
-      <BTBSvg tens={2} ones={8} compact />
+      <Instr text="11 tens · 4 ones. How many in total?" />
+      <BTBSvg tens={11} ones={4} compact />
       <QBox />
     </Card>
   );
