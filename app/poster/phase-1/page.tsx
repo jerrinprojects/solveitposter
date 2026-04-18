@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import PosterYearSection from "@/components/PosterYearSection";
 import PrintButton from "@/components/PrintButton";
+
+export const metadata: Metadata = {
+  title: "Number Structure – Phase 1 | Solve It Maths",
+};
 
 import { posterMeta as meta0a, posterSkills as skills0a, footerData as footer0a } from "@/data/posterData";
 import { posterMeta as meta0b, posterSkills as skills0b, footerData as footer0b } from "@/data/posterYear0b";

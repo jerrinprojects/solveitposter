@@ -1228,7 +1228,7 @@ function P87() {
   return (
     <Card>
       <Instr text="Order the numbers smallest → largest. Click in order." />
-      <OrderRow nums={[10, -6, -15]} />
+      <OrderRow nums={[10, -6, -15, 3]} />
     </Card>
   );
 }

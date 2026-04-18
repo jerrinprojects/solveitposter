@@ -10,8 +10,8 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata: Metadata = {
-  title: "Number Structure – Phase 1 | Solve It Maths",
-  description: "Solve It Maths – Number Structure Phase 1 poster",
+  title: "Solve It Maths",
+  description: "Solve It Maths – printable skill posters",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
