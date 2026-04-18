@@ -898,8 +898,8 @@ function P61() {
 function P62() {
   return (
     <Card>
-      <Instr text="Find all the factor pairs for 12." />
-      <AllFactorPairs n={12} pairs={[[1, 12], [2, 6], [3, 4]]} />
+      <Instr text="Find all the factor pairs for 18." />
+      <AllFactorPairs n={18} pairs={[[1, 18], [2, 9], [3, 6]]} />
     </Card>
   );
 }
@@ -954,7 +954,7 @@ function P68() {
   return (
     <Card>
       <Instr text="Write the number in words." />
-      <div style={{ fontSize: 34, fontWeight: 800, textAlign: "center", margin: "4px 0 8px" }}>−18</div>
+      <div style={{ fontSize: 34, fontWeight: 800, textAlign: "center", margin: "4px 0 8px" }}>−7</div>
       <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 0", fontSize: 11, color: "#9ca3af", textAlign: "center", width: "80%" }}>Write in words</div>
     </Card>
   );
