@@ -67,10 +67,12 @@ function PartWhole({ whole, p1, p2 }: { whole: number | string; p1: number | str
 
 // Base-ten blocks SVG (blue rods = tens, yellow cubes = ones)
 // compact=true uses smaller cells so tall content doesn't overflow the card
-function BTBSvg({ tens, ones, label, compact = false, perRow: perRowProp }: { tens: number; ones: number; label?: string; compact?: boolean; perRow?: number }) {
-  const cell = compact ? 5 : 9, vgap = compact ? 0.5 : 1.5, rodW = cell;
-  const rodH = cell * 10 + vgap * 9; // 106.5
-  const perRow = perRowProp ?? 5, colGap = 6, rowGap = 6;
+function BTBSvg({ tens, ones, label, compact = false, perRow: perRowProp, cellSize }: { tens: number; ones: number; label?: string; compact?: boolean; perRow?: number; cellSize?: number }) {
+  const cell = cellSize ?? (compact ? 5 : 9);
+  const vgap = cell <= 3 ? 0.3 : compact ? 0.5 : 1.5;
+  const rodW = cell;
+  const rodH = cell * 10 + vgap * 9;
+  const perRow = perRowProp ?? 5, colGap = cell <= 3 ? 4 : 6, rowGap = cell <= 3 ? 4 : 6;
   const oGap = 2, oPerRow = 5;
 
   const rodCols = Math.min(tens, perRow);
@@ -428,7 +430,7 @@ function P23() {
   return (
     <Card>
       <Instr text="11 tens · 4 ones. How many in total?" />
-      <BTBSvg tens={11} ones={4} compact perRow={11} />
+      <BTBSvg tens={11} ones={4} perRow={5} cellSize={3} />
       <QBox />
     </Card>
   );
