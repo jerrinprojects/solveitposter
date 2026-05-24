@@ -14,6 +14,17 @@ export default function TrickyTwelvePage() {
   return (
     <>
       <PosterPrintStyles orientation="landscape" />
+      <style>{`
+        @media print {
+          .poster-shell {
+            height: 196mm !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+          }
+        }
+      `}</style>
       <main style={{ background: "#fff3e6", minHeight: "100vh" }}>
         <BackToTopics />
         <PosterShell className="poster-shell">

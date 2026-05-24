@@ -148,13 +148,13 @@ function TrickyCard({ a, b, result, trick, Icon, accent, star }: typeof FACTS[0]
 
 export default function TrickyTwelve() {
   return (
-    <div style={{ padding: "14px 22px 10px" }}>
+    <div style={{ padding: "12px 22px 8px" }}>
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         gridTemplateRows: "repeat(3, 1fr)",
-        gap: 12,
-        height: 552,
+        gap: 10,
+        height: 520,
       }}>
         {FACTS.map((f) => (
           <TrickyCard key={`${f.a}x${f.b}`} {...f} />
@@ -168,7 +168,7 @@ export default function TrickyTwelve() {
         fontSize: 12,
         color: "#6b5560",
         fontWeight: 600,
-        marginTop: 10,
+        margin: "8px 0 0",
       }}>
         Master these twelve facts and you know{" "}
         <span style={{
