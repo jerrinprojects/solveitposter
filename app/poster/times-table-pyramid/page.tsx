@@ -18,8 +18,9 @@ export default function TimesTablePyramidPage() {
         <BackToTopics />
         <PosterShell width={760} className="poster-shell">
           <PosterHeader
+            compact
             section="Solveitmaths · Times Tables"
-            title={<>Times Table <CaveatAccent>Pyramid</CaveatAccent></>}
+            title={<>Times Table <CaveatAccent size={38}>Pyramid</CaveatAccent></>}
             tagline={<>Each triangle = one fact — <Highlight>top ÷ corner = other corner</Highlight></>}
           />
           <div style={{ padding: "14px 20px 12px 20px" }}>

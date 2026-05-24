@@ -14,6 +14,7 @@ export function CaveatAccent({ children, size = 48 }: { children: React.ReactNod
       fontSize: size,
       transform: "rotate(-3deg)",
       display: "inline-block",
+      lineHeight: 0.9,
     }}>
       {children}
     </span>
@@ -29,24 +30,29 @@ export function PosterHeader({
   section,
   title,
   tagline,
+  compact = false,
 }: {
   section: string;          // e.g., "Solveitmaths · Times Tables"
   title: React.ReactNode;   // can include <CaveatAccent>
   tagline: React.ReactNode; // can include <Highlight>
+  compact?: boolean;        // narrower posters (portrait) — smaller mascot/title
 }) {
+  const titleSize = compact ? 30 : 38;
+  const mascotSize = compact ? 50 : 60;
+  const mascotImg = compact ? 46 : 56;
   return (
     <div style={{
-      padding: "22px 28px 20px",
+      padding: compact ? "18px 22px 16px" : "22px 28px 20px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      gap: 24,
+      gap: compact ? 16 : 24,
       background: "linear-gradient(135deg, #fff5fa 0%, #fff0e8 100%)",
       borderBottom: "2px solid #ffd5e8",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: compact ? 14 : 18, minWidth: 0 }}>
         <div style={{
-          width: 60, height: 60, borderRadius: "50%",
+          width: mascotSize, height: mascotSize, borderRadius: "50%",
           background: "#fff", overflow: "hidden", flexShrink: 0,
           display: "flex", alignItems: "center", justifyContent: "center",
           border: "3px solid #ffd5e8",
@@ -55,12 +61,12 @@ export function PosterHeader({
           <Image
             src="/mascot.png"
             alt="Solveitmaths mascot"
-            width={56} height={56}
+            width={mascotImg} height={mascotImg}
             style={{ objectFit: "cover", mixBlendMode: "multiply" }}
           />
         </div>
 
-        <div>
+        <div style={{ minWidth: 0 }}>
           <p style={{
             fontFamily: "var(--font-body), sans-serif",
             fontSize: 10,
@@ -74,7 +80,7 @@ export function PosterHeader({
           </p>
           <h1 style={{
             fontFamily: "var(--font-display), sans-serif",
-            fontSize: 38,
+            fontSize: titleSize,
             fontWeight: 800,
             color: "#1f2937",
             lineHeight: 1,
@@ -83,7 +89,8 @@ export function PosterHeader({
             display: "flex",
             alignItems: "baseline",
             gap: 8,
-            flexWrap: "wrap",
+            flexWrap: "nowrap",
+            whiteSpace: "nowrap",
           }}>
             {title}
           </h1>
@@ -91,20 +98,21 @@ export function PosterHeader({
       </div>
 
       <div style={{
-        maxWidth: 300,
+        maxWidth: compact ? 220 : 300,
         alignSelf: "center",
         background: "#fff",
         borderRadius: 16,
-        padding: "10px 16px",
+        padding: compact ? "8px 12px" : "10px 16px",
         border: "2px solid #ffd5e8",
         textAlign: "right",
+        flexShrink: 0,
       }}>
         <p style={{
           fontFamily: "var(--font-body), sans-serif",
-          fontSize: 11,
+          fontSize: compact ? 10.5 : 11,
           fontWeight: 600,
           color: "#5b4954",
-          lineHeight: 1.45,
+          lineHeight: 1.4,
           margin: 0,
         }}>
           {tagline}

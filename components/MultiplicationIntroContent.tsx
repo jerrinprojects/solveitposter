@@ -161,7 +161,7 @@ export function WhatIsMultiplicationContent() {
           fontFamily: 'var(--font-body),sans-serif',
           fontSize: 15, fontWeight: 700, color: '#9d174d',
         }}>
-          💡 Multiplication is a <strong>fast way</strong> to count{' '}
+          Multiplication is a <strong>fast way</strong> to count{' '}
           <strong>equal groups</strong> — all three models show the same thing!
         </span>
       </div>
@@ -299,7 +299,7 @@ export function RepeatedAdditionContent() {
         <span style={{
           fontFamily: 'var(--font-body),sans-serif', fontSize: 15, fontWeight: 700, color: '#9d174d',
         }}>
-          💡 Multiplication = <strong>Repeated Addition</strong>
+          Multiplication = <strong>Repeated Addition</strong>
           &ensp;—&ensp; adding the same number again and again!
         </span>
       </div>
