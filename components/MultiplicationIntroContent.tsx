@@ -284,8 +284,8 @@ const CHIP_COLORS = [
 export function RepeatedAdditionContent() {
   return (
     <div style={{
-      padding: '16px 22px 14px',
-      display: 'flex', flexDirection: 'column', gap: 12,
+      padding: '12px 22px 10px',
+      display: 'flex', flexDirection: 'column', gap: 9,
       flex: 1, minHeight: 0, overflow: 'hidden',
     }}>
 
@@ -331,12 +331,12 @@ export function RepeatedAdditionContent() {
       </SectionCard>
 
       {/* Building the ×3 table — fills remaining height */}
-      <SectionCard title={`Building the ×${TABLE_N} Table`} accent="#7c3aed" bg="#f3edff" style={{ flex: 1, minHeight: 0 }}>
+      <SectionCard title={`Building the ×${TABLE_N} Table`} accent="#7c3aed" bg="#f3edff" style={{ flex: 1, minHeight: 0, padding: '8px 14px 10px', gap: 6 }}>
         <div style={{ display: 'flex', gap: 16, flex: 1, minHeight: 0, overflow: 'hidden' }}>
-          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {[1,2,3,4,5].map((n) => <TableRow key={n} n={n} />)}
           </div>
-          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
             {[6,7,8,9,10].map((n) => <TableRow key={n} n={n} />)}
           </div>
         </div>
@@ -409,7 +409,7 @@ function TableRow({ n }: { n: number }) {
       display: 'flex', alignItems: 'center', gap: 8,
       background: 'white', borderRadius: 8,
       border: `1.5px solid ${chipColor}50`,
-      padding: '4px 10px',
+      padding: '3px 10px',
     }}>
       <span style={{
         fontFamily: 'var(--font-display),sans-serif', fontSize: 17, fontWeight: 700,
