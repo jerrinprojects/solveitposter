@@ -112,11 +112,11 @@ function TrickyCard({ a, b, result, trick, Icon, accent, star }: typeof FACTS[0]
       {/* Trick footer — solid chip with chunky icon */}
       <div style={{
         background: chip,
-        padding: "9px 12px",
+        padding: "7px 12px",
         display: "flex",
         alignItems: "center",
         gap: 9,
-        minHeight: 46,
+        minHeight: 40,
         flexShrink: 0,
       }}>
         <span style={{
@@ -154,7 +154,7 @@ export default function TrickyTwelve() {
         gridTemplateColumns: "repeat(4, 1fr)",
         gridTemplateRows: "repeat(3, 1fr)",
         gap: 10,
-        height: 520,
+        height: 548,
       }}>
         {FACTS.map((f) => (
           <TrickyCard key={`${f.a}x${f.b}`} {...f} />

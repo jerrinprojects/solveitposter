@@ -42,7 +42,7 @@ export function PosterHeader({
   const mascotImg = compact ? 46 : 56;
   return (
     <div style={{
-      padding: compact ? "18px 22px 16px" : "22px 28px 20px",
+      padding: compact ? "14px 22px 12px" : "16px 28px 14px",
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
