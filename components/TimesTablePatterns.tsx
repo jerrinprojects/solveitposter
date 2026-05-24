@@ -1,31 +1,43 @@
 // Times Table Patterns Poster
 
+// Brand-aligned palette (matches Tricky 12 — pink / mint / sunny / grape rotation).
+// Names kept for backwards-compat with card refs; values map to brand accents.
 const ACCENT = {
-  teal:   '#22d3ee',
-  blue:   '#60a5fa',
-  purple: '#a78bfa',
-  orange: '#fb923c',
-  green:  '#34d399',
-  pink:   '#f472b6',
+  teal:   '#14b8a6', // mint (Card 1 Commutative)
+  blue:   '#a78bda', // grape (Card 2 Doubling)
+  purple: '#ec407a', // pink  (Card 3 ×9 Patterns)
+  orange: '#e8a93e', // sunny (Card 4 ×5 ×10)
+  green:  '#14b8a6', // mint  (Card 5 Squares)
+  pink:   '#a78bda', // grape (Card 6 Tripling)
 };
 const DARK = {
-  teal:   '#164e63',
-  blue:   '#1e40af',
-  purple: '#4c1d95',
-  orange: '#9a3412',
-  green:  '#065f46',
-  pink:   '#9d174d',
+  teal:   '#0d9488',
+  blue:   '#7c3aed',
+  purple: '#d6336c',
+  orange: '#b8860b',
+  green:  '#0d9488',
+  pink:   '#7c3aed',
+};
+// Card bg washes for each accent
+const SOFT = {
+  teal:   '#e6fbf5', // mint bg
+  blue:   '#f3edff', // grape bg
+  purple: '#fff0f7', // pink bg
+  orange: '#fff7d9', // sunny bg
+  green:  '#e6fbf5', // mint bg
+  pink:   '#f3edff', // grape bg
 };
 
 function Card({ children, color }: { children: React.ReactNode; color: string }) {
   return (
     <div style={{
-      borderRadius: 12,
+      borderRadius: 20,
       border: `2px solid ${color}`,
       overflow: 'hidden',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#fff',
+      backgroundColor: '#fffaf3',
+      boxShadow: '0 2px 0 rgba(0,0,0,0.04)',
     }}>
       {children}
     </div>
@@ -74,7 +86,7 @@ function CommutativeCard() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: 8, fontWeight: 700,
                     borderRadius: 3,
-                    backgroundColor: isDiag ? ACCENT.teal : isAbove ? '#f3f4f6' : '#ecfeff',
+                    backgroundColor: isDiag ? ACCENT.teal : isAbove ? '#f3f4f6' : '#e6fbf5',
                     color: isDiag ? '#fff' : isAbove ? '#d1d5db' : DARK.teal,
                   }}>
                     {(ri + 1) * (ci + 1)}
@@ -88,7 +100,7 @@ function CommutativeCard() {
         <div style={{ marginTop: 7, display: 'flex', gap: 10, fontSize: 9, fontWeight: 600, flexWrap: 'wrap' }}>
           {[
             { bg: ACCENT.teal, border: 'none', color: '#fff', label: 'Squares (n×n)' },
-            { bg: '#ecfeff', border: `1px solid ${ACCENT.teal}`, color: DARK.teal, label: 'Learn these' },
+            { bg: '#e6fbf5', border: `1px solid ${ACCENT.teal}`, color: DARK.teal, label: 'Learn these' },
             { bg: '#f3f4f6', border: 'none', color: '#9ca3af', label: 'Covered by earlier row' },
           ].map(({ bg, border, color, label }) => (
             <span key={label} style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
@@ -160,7 +172,7 @@ function NinesCard() {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
           {multiples.map(({ n, tens, ones }) => (
             <div key={n} style={{
-              backgroundColor: '#f5f3ff',
+              backgroundColor: '#fff0f7',
               border: `1.5px solid ${ACCENT.purple}66`,
               borderRadius: 6,
               padding: '3px 6px',
@@ -168,13 +180,13 @@ function NinesCard() {
             }}>
               <div style={{ fontSize: 9, color: '#9ca3af', fontWeight: 600, lineHeight: 1 }}>{n}×9</div>
               <div style={{ fontSize: 16, fontWeight: 900, lineHeight: 1.1 }}>
-                <span style={{ color: '#7c3aed' }}>{tens}</span>
+                <span style={{ color: DARK.purple }}>{tens}</span>
                 <span style={{ color: ACCENT.purple }}>{ones}</span>
               </div>
             </div>
           ))}
         </div>
-        <div style={{ marginTop: 8, backgroundColor: '#ede9fe', borderRadius: 7, padding: '5px 8px' }}>
+        <div style={{ marginTop: 8, backgroundColor: '#fff0f7', borderRadius: 7, padding: '5px 8px' }}>
           <span style={{ fontSize: 10, fontWeight: 700, color: DARK.purple }}>
             Shortcut: 9×n = (10×n) − n
           </span>
@@ -209,7 +221,7 @@ function FivesAndTensCard() {
               <span style={{ fontSize: 9, color: '#9ca3af', fontWeight: 600 }}>…and so on</span>
             </div>
           </div>
-          <div style={{ width: 1, backgroundColor: '#fed7aa', flexShrink: 0 }} />
+          <div style={{ width: 1, backgroundColor: '#f3edff', flexShrink: 0 }} />
           {/* ×5 */}
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 11, fontWeight: 800, color: DARK.orange, marginBottom: 5 }}>×5 = Half of ×10</div>
@@ -220,7 +232,7 @@ function FivesAndTensCard() {
                 </div>
               ))}
             </div>
-            <div style={{ marginTop: 6, backgroundColor: '#ffedd5', borderRadius: 6, padding: '4px 7px', fontSize: 9, fontWeight: 700, color: DARK.orange }}>
+            <div style={{ marginTop: 6, backgroundColor: '#fff7d9', borderRadius: 6, padding: '4px 7px', fontSize: 9, fontWeight: 700, color: DARK.orange }}>
               Always ends in <strong>0</strong> or <strong>5</strong>
             </div>
           </div>
@@ -244,7 +256,7 @@ function SquaresCard() {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
           {squares.map(({ n, sq }) => (
             <div key={n} style={{
-              backgroundColor: '#ecfdf5',
+              backgroundColor: '#e6fbf5',
               border: `2px solid ${ACCENT.green}`,
               borderRadius: 8,
               padding: '4px 8px',

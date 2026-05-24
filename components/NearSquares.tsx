@@ -3,14 +3,15 @@
 // n=3 through n=9 (7 rows)
 const ROWS = [3, 4, 5, 6, 7, 8, 9];
 
+// Brand 4-color rotation (pink / mint / sunny / grape) — cycle across 7 rows
 const ROW_COLORS: Record<number, { accent: string; dark: string; bg: string }> = {
-  3: { accent: '#6ee7b7', dark: '#065f46', bg: '#ecfdf5' },
-  4: { accent: '#a5b4fc', dark: '#3730a3', bg: '#eef2ff' },
-  5: { accent: '#fde68a', dark: '#78350f', bg: '#fffbeb' },
-  6: { accent: '#fbb6ce', dark: '#9d174d', bg: '#fdf2f8' },
-  7: { accent: '#93c5fd', dark: '#1e40af', bg: '#eff6ff' },
-  8: { accent: '#6ee7b7', dark: '#065f46', bg: '#f0fdfa' },
-  9: { accent: '#c4b5fd', dark: '#4c1d95', bg: '#f5f3ff' },
+  3: { accent: '#14b8a6', dark: '#0d9488', bg: '#e6fbf5' }, // mint
+  4: { accent: '#a78bda', dark: '#7c3aed', bg: '#f3edff' }, // grape
+  5: { accent: '#e8a93e', dark: '#b8860b', bg: '#fff7d9' }, // sunny
+  6: { accent: '#ec407a', dark: '#d6336c', bg: '#fff0f7' }, // pink
+  7: { accent: '#a78bda', dark: '#7c3aed', bg: '#f3edff' }, // grape
+  8: { accent: '#14b8a6', dark: '#0d9488', bg: '#e6fbf5' }, // mint
+  9: { accent: '#ec407a', dark: '#d6336c', bg: '#fff0f7' }, // pink
 };
 
 const ROW_H   = 72; // px per row

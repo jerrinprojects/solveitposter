@@ -49,18 +49,18 @@ export function WhatIsMultiplicationContent() {
 
       {/* Top: labelled equation */}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-        <TermBox value="4" label="factor" bg="#fce7f3" border="#f472b6" text="#9d174d" />
+        <TermBox value="4" label="factor" bg="#fff0f7" border="#ec407a" text="#d6336c" />
         <OpGlyph>×</OpGlyph>
-        <TermBox value="3" label="factor" bg="#fce7f3" border="#f472b6" text="#9d174d" />
+        <TermBox value="3" label="factor" bg="#fff0f7" border="#ec407a" text="#d6336c" />
         <OpGlyph>=</OpGlyph>
-        <TermBox value="12" label="product" bg="#f0fdfa" border="#0d9488" text="#0f766e" />
+        <TermBox value="12" label="product" bg="#e6fbf5" border="#0d9488" text="#0f766e" />
       </div>
 
       {/* Three visual models — fills remaining height */}
       <div style={{ display: 'flex', gap: 14, flex: 1, minHeight: 0, overflow: 'hidden' }}>
 
         {/* Equal Groups */}
-        <SectionCard title="① Equal Groups" accent="#f472b6" bg="#fdf2f8">
+        <SectionCard title="① Equal Groups" accent="#ec407a" bg="#fff0f7">
           {/* Groups visual — fills card */}
           <div style={{
             flex: 1, display: 'flex', gap: 8, justifyContent: 'center',
@@ -77,23 +77,23 @@ export function WhatIsMultiplicationContent() {
                 {[0,1,2].map((d) => (
                   <div key={d} style={{
                     width: '38%', aspectRatio: '1',
-                    borderRadius: '50%', background: '#f472b6',
+                    borderRadius: '50%', background: '#ec407a',
                   }}/>
                 ))}
               </div>
             ))}
           </div>
-          <Caption color="#9d174d">"4 groups of 3"</Caption>
+          <Caption color="#d6336c">"4 groups of 3"</Caption>
           <div style={{
             textAlign: 'center', flexShrink: 0,
-            fontFamily: 'var(--font-body),sans-serif', fontSize: 15, color: '#9d174d', fontWeight: 800,
+            fontFamily: 'var(--font-body),sans-serif', fontSize: 15, color: '#d6336c', fontWeight: 800,
           }}>
             3 + 3 + 3 + 3 = <strong style={{ fontSize: 17 }}>12</strong>
           </div>
         </SectionCard>
 
         {/* Array */}
-        <SectionCard title="② Array" accent="#0d9488" bg="#f0fdfa">
+        <SectionCard title="② Array" accent="#0d9488" bg="#e6fbf5">
           <div style={{
             flex: 1, display: 'flex', flexDirection: 'column',
             gap: 10, alignItems: 'center', justifyContent: 'center',
@@ -135,7 +135,7 @@ export function WhatIsMultiplicationContent() {
         </SectionCard>
 
         {/* Skip Counting */}
-        <SectionCard title="③ Skip Counting" accent="#7c3aed" bg="#f5f3ff">
+        <SectionCard title="③ Skip Counting" accent="#7c3aed" bg="#f3edff">
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <SkipCountViz jump={3} steps={4} />
           </div>
@@ -159,7 +159,7 @@ export function WhatIsMultiplicationContent() {
       }}>
         <span style={{
           fontFamily: 'var(--font-body),sans-serif',
-          fontSize: 15, fontWeight: 700, color: '#9d174d',
+          fontSize: 15, fontWeight: 700, color: '#d6336c',
         }}>
           Multiplication is a <strong>fast way</strong> to count{' '}
           <strong>equal groups</strong> — all three models show the same thing!
@@ -215,7 +215,7 @@ function SkipCountViz({ jump, steps }: { jump: number; steps: number }) {
   const max = jump * steps;
   const lineY = 100;
   const mx = (n: number) => PAD + (n / max) * (W - 2 * PAD);
-  const arrowColors = ['#f472b6', '#f97316', '#eab308', '#7c3aed'];
+  const arrowColors = ['#ec407a', '#f97316', '#eab308', '#7c3aed'];
 
   return (
     <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`}
@@ -276,7 +276,7 @@ function SkipCountViz({ jump, steps }: { jump: number; steps: number }) {
 
 const TABLE_N = 3;
 const CHIP_COLORS = [
-  '#f472b6','#f97316','#facc15','#4ade80',
+  '#ec407a','#f97316','#facc15','#4ade80',
   '#22d3ee','#818cf8','#c084fc','#fb7185',
   '#34d399','#60a5fa',
 ];
@@ -297,7 +297,7 @@ export function RepeatedAdditionContent() {
         padding: '10px 24px', textAlign: 'center',
       }}>
         <span style={{
-          fontFamily: 'var(--font-body),sans-serif', fontSize: 15, fontWeight: 700, color: '#9d174d',
+          fontFamily: 'var(--font-body),sans-serif', fontSize: 15, fontWeight: 700, color: '#d6336c',
         }}>
           Multiplication = <strong>Repeated Addition</strong>
           &ensp;—&ensp; adding the same number again and again!
@@ -326,12 +326,12 @@ export function RepeatedAdditionContent() {
       </div>
 
       {/* Number line */}
-      <SectionCard title={`Number Line — counting by ${TABLE_N}s (0 to 30)`} accent="#0d9488" bg="#f0fdfa" style={{ flexShrink: 0 }}>
+      <SectionCard title={`Number Line — counting by ${TABLE_N}s (0 to 30)`} accent="#0d9488" bg="#e6fbf5" style={{ flexShrink: 0 }}>
         <BigNumberLine steps={10} jump={TABLE_N} />
       </SectionCard>
 
       {/* Building the ×3 table — fills remaining height */}
-      <SectionCard title={`Building the ×${TABLE_N} Table`} accent="#7c3aed" bg="#f5f3ff" style={{ flex: 1, minHeight: 0 }}>
+      <SectionCard title={`Building the ×${TABLE_N} Table`} accent="#7c3aed" bg="#f3edff" style={{ flex: 1, minHeight: 0 }}>
         <div style={{ display: 'flex', gap: 16, flex: 1, minHeight: 0, overflow: 'hidden' }}>
           <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 5 }}>
             {[1,2,3,4,5].map((n) => <TableRow key={n} n={n} />)}

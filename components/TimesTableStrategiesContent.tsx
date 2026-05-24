@@ -28,15 +28,17 @@ function PanelShell({ borderColor, headerBg, title, subtitle, children }: {
 
 // ── Doubling: ×2 → ×4 → ×8 ──────────────────────────────────────
 
+// Brand grape rotation for Doubling Family (×2 → ×4 → ×8 — shades of grape)
 const DUP = [
-  { mult: 2, bg: '#eff6ff', border: '#bfdbfe', text: '#1e3a8a', headBg: '#93c5fd', headText: '#1e3a8a' },
-  { mult: 4, bg: '#dbeafe', border: '#93c5fd', text: '#1e40af', headBg: '#60a5fa', headText: '#fff'    },
-  { mult: 8, bg: '#bfdbfe', border: '#3b82f6', text: '#1e3a8a', headBg: '#3b82f6', headText: '#fff'    },
+  { mult: 2, bg: '#f3edff', border: '#dccdfb', text: '#5b21b6', headBg: '#dccdfb', headText: '#5b21b6' },
+  { mult: 4, bg: '#dccdfb', border: '#a78bda', text: '#7c3aed', headBg: '#a78bda', headText: '#fff'    },
+  { mult: 8, bg: '#bfa2f0', border: '#7c3aed', text: '#5b21b6', headBg: '#7c3aed', headText: '#fff'    },
 ];
 
+// Brand pink rotation for Tripling Family (×3 → ×6)
 const TRIP = [
-  { mult: 3, bg: '#fdf2f8', border: '#fbcfe8', text: '#831843', headBg: '#f9a8d4', headText: '#831843' },
-  { mult: 6, bg: '#fbcfe8', border: '#f472b6', text: '#9d174d', headBg: '#f472b6', headText: '#fff'    },
+  { mult: 3, bg: '#fff0f7', border: '#ffd5e8', text: '#9d2c5b', headBg: '#ffd5e8', headText: '#9d2c5b' },
+  { mult: 6, bg: '#ffd5e8', border: '#ec407a', text: '#d6336c', headBg: '#ec407a', headText: '#fff'    },
 ];
 
 // cell dimensions
@@ -141,13 +143,13 @@ export function DoublingTriplingContent() {
     <div style={{ padding: '10px 20px 10px', display: 'flex', gap: 12 }}>
 
       <PanelShell
-        borderColor="#60a5fa"
-        headerBg="#3b82f6"
+        borderColor="#a78bda"
+        headerBg="#7c3aed"
         title="Doubling Family"
         subtitle="×2 → ×4 → ×8"
       >
-        <div style={{ padding: '8px 0 0', backgroundColor: '#f0f9ff' }}>
-          <p style={{ fontSize: 11, color: '#1e40af', fontWeight: 700, padding: '0 18px 6px', lineHeight: 1.4 }}>
+        <div style={{ padding: '8px 0 0', backgroundColor: '#f3edff' }}>
+          <p style={{ fontSize: 11, color: '#7c3aed', fontWeight: 700, padding: '0 18px 6px', lineHeight: 1.4 }}>
             Know ×2? <strong>Double it</strong> to get ×4. Double again for ×8!
           </p>
           <FamilyGrid cols={DUP} cw={CW_DUP} />
@@ -155,13 +157,13 @@ export function DoublingTriplingContent() {
       </PanelShell>
 
       <PanelShell
-        borderColor="#f9a8d4"
-        headerBg="#db2777"
+        borderColor="#ec407a"
+        headerBg="#ec407a"
         title="Tripling Family"
         subtitle="×3 → ×6"
       >
-        <div style={{ padding: '8px 0 0', backgroundColor: '#fdf2f8' }}>
-          <p style={{ fontSize: 11, color: '#831843', fontWeight: 700, padding: '0 18px 6px', lineHeight: 1.4 }}>
+        <div style={{ padding: '8px 0 0', backgroundColor: '#fff0f7' }}>
+          <p style={{ fontSize: 11, color: '#d6336c', fontWeight: 700, padding: '0 18px 6px', lineHeight: 1.4 }}>
             Know ×3? <strong>Double it</strong> to get ×6!
           </p>
           <FamilyGrid cols={TRIP} cw={CW_TRIP} />
@@ -174,9 +176,10 @@ export function DoublingTriplingContent() {
 
 // ── Page 2: Complete Chart ×1–×9 ─────────────────────────────────
 
-const CHART_ACCENTS  = ['#94a3b8','#f472b6','#60a5fa','#34d399','#a78bfa','#fb923c','#fbbf24','#e879f9','#6366f1'];
-const CHART_HEAD_TXT = ['#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#78350f','#fff',   '#fff'  ];
-const CHART_RESULT   = ['#475569','#9d174d','#1e40af','#065f46','#4c1d95','#9a3412','#78350f','#86198f','#3730a3'];
+// Brand 4-color rotation cycled across 9 columns (×1 to ×9)
+const CHART_ACCENTS  = ['#ec407a','#a78bda','#14b8a6','#e8a93e','#ec407a','#a78bda','#14b8a6','#e8a93e','#ec407a'];
+const CHART_HEAD_TXT = ['#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff'  ];
+const CHART_RESULT   = ['#d6336c','#7c3aed','#0d9488','#b8860b','#d6336c','#7c3aed','#0d9488','#b8860b','#d6336c'];
 
 const CHART_CW  = 107;
 const CHART_CH  = 50;

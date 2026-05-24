@@ -8,11 +8,10 @@ const LEARNING_ORDER = [1, 10, 5, 2, 3, 4, 6, 7, 8, 9];
 const RANK: Record<number, number> = {};
 LEARNING_ORDER.forEach((n, i) => { RANK[n] = i; });
 
-// One solid accent colour per column (no gradients)
-// Chosen to be readable in both colour AND greyscale (progressively darker)
-const ACCENT   = ['#f472b6','#60a5fa','#34d399','#a78bfa','#fb923c','#fbbf24','#e879f9','#6366f1','#22d3ee','#f87171'];
-const HEAD_TXT = ['#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#78350f','#fff',   '#fff',   '#fff',   '#fff'  ];
-const RESULT   = ['#9d174d','#1e40af','#065f46','#4c1d95','#9a3412','#78350f','#86198f','#3730a3','#164e63','#991b1b'];
+// Brand 4-color rotation (pink / mint / sunny / grape) cycled across 10 columns
+const ACCENT   = ['#ec407a','#a78bda','#14b8a6','#e8a93e','#ec407a','#a78bda','#14b8a6','#e8a93e','#ec407a','#a78bda'];
+const HEAD_TXT = ['#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff',   '#fff'  ];
+const RESULT   = ['#d6336c','#7c3aed','#0d9488','#b8860b','#d6336c','#7c3aed','#0d9488','#b8860b','#d6336c','#7c3aed'];
 
 function getNewFacts(n: number): { a: number; result: number }[] {
   const rn = RANK[n];

@@ -21,15 +21,16 @@ interface C {
   fill: string; stroke: string; result: string; factor: string;
   labelFill: string; labelText: string;
 }
+// Brand 4-color rotation (pink / mint / sunny / grape) — cycled across 8 ×N rows
 const COL: Record<number, C> = {
-  9: { fill:'#fecdd3', stroke:'#fb7185', result:'#be123c', factor:'#9f1239', labelFill:'#f43f5e', labelText:'#fff' },
-  8: { fill:'#ddd6fe', stroke:'#a78bfa', result:'#5b21b6', factor:'#4c1d95', labelFill:'#8b5cf6', labelText:'#fff' },
-  7: { fill:'#bfdbfe', stroke:'#60a5fa', result:'#1e40af', factor:'#1e3a8a', labelFill:'#3b82f6', labelText:'#fff' },
-  6: { fill:'#a7f3d0', stroke:'#34d399', result:'#065f46', factor:'#064e3b', labelFill:'#10b981', labelText:'#fff' },
-  5: { fill:'#fef08a', stroke:'#facc15', result:'#713f12', factor:'#78350f', labelFill:'#eab308', labelText:'#fff' },
-  4: { fill:'#bbf7d0', stroke:'#4ade80', result:'#14532d', factor:'#166534', labelFill:'#22c55e', labelText:'#fff' },
-  3: { fill:'#fed7aa', stroke:'#fb923c', result:'#7c2d12', factor:'#9a3412', labelFill:'#f97316', labelText:'#fff' },
-  2: { fill:'#fecaca', stroke:'#f87171', result:'#7f1d1d', factor:'#991b1b', labelFill:'#ef4444', labelText:'#fff' },
+  9: { fill:'#ffd5e8', stroke:'#ec407a', result:'#d6336c', factor:'#9d2c5b', labelFill:'#ec407a', labelText:'#fff' }, // pink
+  8: { fill:'#dccdfb', stroke:'#a78bda', result:'#7c3aed', factor:'#5b21b6', labelFill:'#a78bda', labelText:'#fff' }, // grape
+  7: { fill:'#bff3e6', stroke:'#14b8a6', result:'#0d9488', factor:'#0a6e63', labelFill:'#14b8a6', labelText:'#fff' }, // mint
+  6: { fill:'#ffe8a0', stroke:'#e8a93e', result:'#b8860b', factor:'#8a6308', labelFill:'#e8a93e', labelText:'#fff' }, // sunny
+  5: { fill:'#ffd5e8', stroke:'#ec407a', result:'#d6336c', factor:'#9d2c5b', labelFill:'#ec407a', labelText:'#fff' }, // pink
+  4: { fill:'#dccdfb', stroke:'#a78bda', result:'#7c3aed', factor:'#5b21b6', labelFill:'#a78bda', labelText:'#fff' }, // grape
+  3: { fill:'#bff3e6', stroke:'#14b8a6', result:'#0d9488', factor:'#0a6e63', labelFill:'#14b8a6', labelText:'#fff' }, // mint
+  2: { fill:'#ffe8a0', stroke:'#e8a93e', result:'#b8860b', factor:'#8a6308', labelFill:'#e8a93e', labelText:'#fff' }, // sunny
 };
 
 // Triangle SVG — upward-pointing equilateral
