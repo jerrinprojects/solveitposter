@@ -11,13 +11,33 @@ export default function PageHeader({ meta }: PageHeaderProps) {
       <div className="bg-pink-200 rounded-2xl px-5 sm:px-8 py-4 sm:py-5 text-center relative overflow-visible">
         {/* Title text — full width, centred independently of the mascot */}
         <div>
-          <h1 className="font-fredoka text-3xl sm:text-5xl text-pink-600 leading-tight tracking-wide" style={{ fontWeight: 900, WebkitTextStroke: "1.2px #db2777" }}>
+          <h1
+            className="text-3xl sm:text-5xl text-pink-600 leading-tight tracking-wide"
+            style={{
+              fontFamily: "var(--font-display), sans-serif",
+              fontWeight: 800,
+              letterSpacing: "-0.01em",
+            }}
+          >
             {meta.subject}
           </h1>
-          <h2 className="font-fredoka text-2xl sm:text-3xl text-gray-700 mt-1" style={{ fontWeight: 900 }}>
+          <h2
+            className="text-2xl sm:text-3xl text-gray-700 mt-1"
+            style={{
+              fontFamily: "var(--font-display), sans-serif",
+              fontWeight: 800,
+              letterSpacing: "-0.02em",
+            }}
+          >
             {meta.phase} &ndash; {meta.year}
           </h2>
-          <p className="font-fredoka text-base sm:text-xl text-gray-500 mt-0.5" style={{ fontWeight: 800 }}>
+          <p
+            className="text-base sm:text-xl text-gray-500 mt-0.5"
+            style={{
+              fontFamily: "var(--font-display), sans-serif",
+              fontWeight: 700,
+            }}
+          >
             {meta.theme}
           </p>
         </div>

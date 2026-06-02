@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import BrandYearSection from "@/components/BrandYearSection";
+import PosterYearSection from "@/components/PosterYearSection";
 import PrintButton from "@/components/PrintButton";
-import { BackToTopics } from "@/components/PosterFrame";
 
 export const metadata: Metadata = {
   title: "Number Structures – Phase 2 | Solve It Maths",
@@ -21,11 +20,18 @@ const years = [
 
 export default function Phase2PosterPage() {
   return (
-    <main style={{ background: "#fff3e6", minHeight: "100vh", paddingBottom: 48 }}>
-      <BackToTopics />
+    <main className="bg-pink-100">
+      <div className="no-print max-w-4xl mx-auto px-6 pt-4">
+        <a
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 hover:text-pink-700 transition-colors"
+        >
+          <span>←</span> Back to Topics
+        </a>
+      </div>
 
       {years.map(({ meta, skills, footer }) => (
-        <BrandYearSection key={meta.year} meta={meta} skills={skills} footer={footer} />
+        <PosterYearSection key={meta.year} meta={meta} skills={skills} footer={footer} />
       ))}
 
       <PrintButton />
