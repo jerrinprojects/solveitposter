@@ -15,7 +15,7 @@ function Instr({ text }: { text: string }) {
 
 function QBox() {
   return (
-    <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 52, height: 32, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#bbb", fontSize: 13, margin: "0 auto" }}>?</div>
+    <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 52, height: 32, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#bbb", fontSize: 13, margin: "0 auto" }}></div>
   );
 }
 
@@ -574,7 +574,7 @@ function CompareRow({ a, b }: { a: string; b: string }) {
   return (
     <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center", margin: "8px 0 6px" }}>
       <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 14 }}>{a}</div>
-      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 32, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontSize: 18, fontWeight: 700 }}>?</div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 32, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontSize: 18, fontWeight: 700 }}></div>
       <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 14 }}>{b}</div>
     </div>
   );
@@ -804,9 +804,9 @@ function P59b() {
 function FactorPairInput({ n }: { n: number }) {
   return (
     <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center", margin: "8px 0 4px" }}>
-      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}></div>
       <span style={{ fontWeight: 800, fontSize: 18 }}>×</span>
-      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+      <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 36, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}></div>
       <span style={{ fontWeight: 800, fontSize: 18 }}>=</span>
       <span style={{ fontWeight: 800, fontSize: 20 }}>{n}</span>
     </div>
@@ -911,7 +911,7 @@ function P63() {
       <Instr text="Write 9² as a multiplication." />
       <div style={{ textAlign: "center", margin: "4px 0" }}>
         <PowerNotation base={9} exp={2} />
-        <div style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", marginTop: 2 }}>= <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px" }}>?</span> × <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px" }}>?</span></div>
+        <div style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", marginTop: 2 }}>= <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px" }}></span> × <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px" }}></span></div>
       </div>
     </Card>
   );
@@ -922,8 +922,8 @@ function P64() {
       <Instr text="Write 12 × 12 as a square number." />
       <div style={{ textAlign: "center", margin: "4px 0", fontSize: 18, fontWeight: 800 }}>
         12 × 12 = <span style={{ display: "inline-flex", alignItems: "flex-start" }}>
-          <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px", fontSize: 15 }}>?</span>
-          <sup style={{ border: "2px solid #e5e7eb", borderRadius: 4, fontSize: 11, padding: "0 4px", marginTop: 2 }}>?</sup>
+          <span style={{ border: "2px solid #e5e7eb", borderRadius: 6, padding: "1px 8px", fontSize: 15 }}></span>
+          <sup style={{ border: "2px solid #e5e7eb", borderRadius: 4, fontSize: 11, padding: "0 4px", marginTop: 2 }}></sup>
         </span>
       </div>
     </Card>
@@ -988,7 +988,7 @@ function ExpandedPow10({ exponents }: { exponents: number[] }) {
     <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center", alignItems: "center", margin: "6px 0 4px", fontSize: 13 }}>
       {exponents.map((e, i) => (
         <React.Fragment key={e}>
-          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#9ca3af" }}>?</div>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#9ca3af" }}></div>
           <span style={{ fontWeight: 700 }}>×</span>
           <Pow10 exp={e} />
           {i < exponents.length - 1 && <span style={{ fontWeight: 700, color: "#6b7280" }}>+</span>}
@@ -1034,13 +1034,18 @@ function P71() {
   return (
     <Card>
       <Instr text="Complete the place value sentence:" />
-      <div style={{ textAlign: "center", fontSize: 13, fontWeight: 700, color: "#6b7280", marginBottom: 6 }}>200,000 = 2 × 10<sup>?</sup></div>
-      <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center", marginTop: 8 }}>
         <span style={{ fontWeight: 800, fontSize: 15 }}>200,000 = 2 ×</span>
-        <div style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 18 }}>
+        <span style={{ fontWeight: 800, fontSize: 18, display: "inline-flex", alignItems: "flex-start" }}>
           <span>10</span>
-          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 26, height: 20, marginTop: 0, display: "inline-block" }} />
-        </div>
+          <div style={{
+            width: 18, height: 14,
+            border: "1.5px solid #e5e7eb",
+            borderRadius: 4,
+            marginTop: -2,
+            marginLeft: 2,
+          }} />
+        </span>
       </div>
     </Card>
   );
@@ -1089,8 +1094,8 @@ function P76() {
       <Instr text="Write the common factors of 22 and 11 in order." />
       <div style={{ fontSize: 10, color: "#6b7280", textAlign: "center", marginBottom: 4 }}>Common factors to find: 2</div>
       <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-        <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
-        <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}></div>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 40, height: 30, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}></div>
       </div>
     </Card>
   );
@@ -1128,7 +1133,7 @@ function ExpandedPow10Neg({ exponents }: { exponents: number[] }) {
     <div style={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center", alignItems: "center", margin: "6px 0 4px", fontSize: 12 }}>
       {exponents.map((e, i) => (
         <React.Fragment key={e}>
-          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#9ca3af", fontSize: 11 }}>?</div>
+          <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#9ca3af", fontSize: 11 }}></div>
           <span style={{ fontWeight: 700 }}>×</span>
           <span style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 16 }}>
             <span>10</span>
@@ -1175,7 +1180,7 @@ function P82() {
       <Instr text="Write 0.003 using powers of 10. Fill the boxes." />
       <div style={{ display: "flex", gap: 6, justifyContent: "center", alignItems: "center", margin: "6px 0 4px" }}>
         <span style={{ fontWeight: 800, fontSize: 15 }}>0.003 =</span>
-        <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 28, height: 26, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}>?</div>
+        <div style={{ border: "2px solid #e5e7eb", borderRadius: 6, width: 28, height: 26, display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontWeight: 700 }}></div>
         <span style={{ fontWeight: 800, fontSize: 15 }}>×</span>
         <span style={{ display: "inline-flex", alignItems: "flex-start", fontWeight: 800, fontSize: 18 }}>
           <span>10</span>
