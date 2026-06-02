@@ -81,42 +81,62 @@ function VerticalProblem({
         alignItems: "center",
         justifyContent: "flex-start",
         marginTop: 4,
-        fontFamily: "var(--font-mono), 'Courier New', monospace",
-        fontSize: 22,
-        fontWeight: 700,
         color: num,
         lineHeight: 1.15,
       }}>
-        {/* place-value label row (H / T / O) — small, muted */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${totalCols}, 0.9ch)`,
-          justifyItems: "center",
-          fontFamily: "var(--font-body), sans-serif",
-          fontSize: 9, fontWeight: 800, color: ink, opacity: 0.55,
-          letterSpacing: "0.04em",
-          marginBottom: 2,
-        }}>
-          <span>&nbsp;</span>
-          {Array.from({ length: digitCols }).map((_, i) => (
-            <span key={"pv" + i}>{pvForCol(i)}</span>
-          ))}
-        </div>
+        {/* Unified grid — labels, a, b all share the SAME column widths
+           so H / T / O sit precisely above their digit. Fixed-pixel column
+           widths keep alignment regardless of inner font sizes. */}
+        {(() => {
+          const COL_W = 18; // px per column, matches monospace 22px char width
+          const cols = `repeat(${totalCols}, ${COL_W}px)`;
+          const monoStyle: React.CSSProperties = {
+            fontFamily: "var(--font-mono), 'Courier New', monospace",
+            fontSize: 22, fontWeight: 700,
+          };
+          return (
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: cols,
+              justifyItems: "center",
+              alignItems: "center",
+              rowGap: 2,
+            }}>
+              {/* Row 1: place-value labels (H / T / O) */}
+              <span>&nbsp;</span>
+              {Array.from({ length: digitCols }).map((_, i) => (
+                <span key={"pv" + i} style={{
+                  fontFamily: "var(--font-body), sans-serif",
+                  fontSize: 9, fontWeight: 800, color: ink, opacity: 0.6,
+                  letterSpacing: "0.04em",
+                }}>
+                  {pvForCol(i)}
+                </span>
+              ))}
 
-        {/* row 1: a (right-aligned by spacing) */}
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${totalCols}, 0.9ch)`, justifyItems: "center" }}>
-          {Array.from({ length: totalCols - aStr.length }).map((_, i) => <span key={"pad-a" + i}>&nbsp;</span>)}
-          {aStr.split("").map((d, i) => <span key={"a" + i}>{d}</span>)}
-        </div>
-        {/* row 2: × b */}
-        <div style={{ display: "grid", gridTemplateColumns: `repeat(${totalCols}, 0.9ch)`, justifyItems: "center" }}>
-          <span>×</span>
-          {Array.from({ length: totalCols - bStr.length - 1 }).map((_, i) => <span key={"pad-b" + i}>&nbsp;</span>)}
-          {bStr.split("").map((d, i) => <span key={"b" + i}>{d}</span>)}
-        </div>
+              {/* Row 2: a (right-aligned by leading padding cells) */}
+              {Array.from({ length: totalCols - aStr.length }).map((_, i) => (
+                <span key={"pad-a" + i}>&nbsp;</span>
+              ))}
+              {aStr.split("").map((d, i) => (
+                <span key={"a" + i} style={monoStyle}>{d}</span>
+              ))}
+
+              {/* Row 3: × b */}
+              <span style={monoStyle}>×</span>
+              {Array.from({ length: totalCols - bStr.length - 1 }).map((_, i) => (
+                <span key={"pad-b" + i}>&nbsp;</span>
+              ))}
+              {bStr.split("").map((d, i) => (
+                <span key={"b" + i} style={monoStyle}>{d}</span>
+              ))}
+            </div>
+          );
+        })()}
+
         {/* underline */}
         <div style={{
-          width: `${totalCols * 0.9}ch`,
+          width: 18 * totalCols,
           borderBottom: `2px solid ${ink}`,
           marginTop: 2, marginBottom: 4,
         }} />
