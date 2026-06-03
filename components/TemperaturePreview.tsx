@@ -418,6 +418,176 @@ function Te65() {
   );
 }
 
+// ── Compact temperature table (cities/days × °C) ─────────────────
+function TempTable({ rows }: { rows: { label: string; value: number }[] }) {
+  return (
+    <div style={{
+      background: "#fef2f2", border: "2px solid #fecaca", borderRadius: 8,
+      padding: "5px 8px", margin: "2px 0 4px",
+      fontFamily: "monospace", minWidth: 130,
+    }}>
+      {rows.map((r, i) => (
+        <div key={i} style={{
+          display: "grid", gridTemplateColumns: "1fr auto",
+          fontSize: 10, color: "#991b1b", fontWeight: 700,
+          padding: "1px 4px",
+          borderTop: i > 0 ? "1px solid #fecaca" : "none",
+        }}>
+          <span>{r.label}</span>
+          <span>{r.value}°C</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Year 7 ───────────────────────────────────────────────────────
+function Te71() {
+  return (
+    <Card>
+      <Instr text="Which is coldest: -8°C, 4°C, -2°C?" />
+      <div style={{ display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "center" }}>
+        {["-8°C", "4°C", "-2°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te72() {
+  return (
+    <Card>
+      <Instr text="From 8°C to -3°C. What is the change? (use + or -)" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te73() {
+  return (
+    <Card>
+      <Instr text="Starts at 4°C. Rises 6°C, then falls 3°C. Final temperature?" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te74() {
+  return (
+    <Card>
+      <Instr text="What temperature does Wellington show?" />
+      <TempTable rows={[
+        { label: "Auckland",     value: 21 },
+        { label: "Wellington",   value: 14 },
+        { label: "Christchurch", value: -2 },
+        { label: "Dunedin",      value: 8 },
+      ]} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 2 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te75() {
+  return (
+    <Card>
+      <Instr text="What is the temperature range for the week? (highest − lowest)" />
+      <TempTable rows={[
+        { label: "Mon", value: 12 },
+        { label: "Tue", value: 18 },
+        { label: "Wed", value: -3 },
+        { label: "Thu", value: 9 },
+        { label: "Fri", value: 22 },
+      ]} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 2 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 8 ───────────────────────────────────────────────────────
+function Te81() {
+  return (
+    <Card>
+      <Instr text="From -7°C to 5°C. What is the change? (use + or -)" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te82() {
+  return (
+    <Card>
+      <Instr text="Starts at 3°C. Rises 5°C, falls 4°C, rises 2°C. Final temperature?" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te83() {
+  return (
+    <Card>
+      <Instr text="Which city has the bigger temperature range?" />
+      <div style={{
+        background: "#fef2f2", border: "2px solid #fecaca", borderRadius: 8,
+        padding: "5px 8px", margin: "2px 0 4px", fontFamily: "monospace",
+        fontSize: 10, color: "#991b1b", fontWeight: 700, minWidth: 170,
+      }}>
+        <div style={{ padding: "1px 4px" }}>City A: 2, 14, -1°C</div>
+        <div style={{ padding: "1px 4px", borderTop: "1px solid #fecaca" }}>City B: 8, 12, 10°C</div>
+      </div>
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 2 }}>
+        {["City A", "City B", "same"].map(c => <ChoiceBtn key={c} label={c} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te84() {
+  return (
+    <Card>
+      <Instr text="Which day had the highest temperature?" />
+      <TempTable rows={[
+        { label: "Mon", value: 12 },
+        { label: "Tue", value: 18 },
+        { label: "Wed", value: -3 },
+        { label: "Thu", value: 22 },
+        { label: "Fri", value: 9 },
+      ]} />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 2 }}>
+        {["Mon", "Tue", "Wed", "Thu", "Fri"].map(d => <ChoiceBtn key={d} label={d} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te85() {
+  return (
+    <Card>
+      <Instr text="At dawn it was -4°C. By midday it had risen 9°C. What was the midday temperature?" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
 // ── Map ──────────────────────────────────────────────────────────
 
 export const TEMPERATURE_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
@@ -428,4 +598,6 @@ export const TEMPERATURE_PREVIEW_MAP: Record<string, () => React.ReactElement> =
   "4.1": Te41, "4.2": Te42, "4.3": Te43, "4.4": Te44, "4.5": Te45,
   "5.1": Te51, "5.2": Te52, "5.3": Te53, "5.4": Te54, "5.5": Te55,
   "6.1": Te61, "6.2": Te62, "6.3": Te63, "6.4": Te64, "6.5": Te65,
+  "7.1": Te71, "7.2": Te72, "7.3": Te73, "7.4": Te74, "7.5": Te75,
+  "8.1": Te81, "8.2": Te82, "8.3": Te83, "8.4": Te84, "8.5": Te85,
 };
