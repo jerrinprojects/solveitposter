@@ -1,0 +1,235 @@
+// Static visual mockups for Measurement · Temperature exercise previews.
+// Mirrors solveit's temperatureGen.js — no interactivity.
+
+import React from "react";
+
+// ── Shared atoms ─────────────────────────────────────────────────
+
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ flex: 1, padding: "12px 14px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      {children}
+    </div>
+  );
+}
+
+function Instr({ text }: { text: string }) {
+  return <p style={{ fontSize: 11, color: "#6b7280", lineHeight: 1.4, marginBottom: 8, textAlign: "center", fontWeight: 600 }}>{text}</p>;
+}
+
+function ChoiceBtn({ label }: { label: string }) {
+  return <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, padding: "4px 10px", fontSize: 11, fontWeight: 700, color: "#6b7280" }}>{label}</div>;
+}
+
+function QBoxT() {
+  return <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 52, height: 32, display: "flex", alignItems: "center", justifyContent: "center", color: "#bbb", fontWeight: 700 }} />;
+}
+
+function SceneCard({ emoji, label }: { emoji: string; label: string }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, background: "#fef2f2", border: "2px solid #fecaca", borderRadius: 10, padding: "6px 10px", minWidth: 64, maxWidth: 92 }}>
+      <span style={{ fontSize: 22 }}>{emoji}</span>
+      <span style={{ fontSize: 9, color: "#991b1b", fontWeight: 700, textAlign: "center", lineHeight: 1.15 }}>{label}</span>
+    </div>
+  );
+}
+
+// ── Thermometer SVG ──────────────────────────────────────────────
+// Vertical tube with mercury fill to {value} on {min..max} scale.
+function Thermometer({ value, min = 0, max = 50, step = 10 }:
+  { value: number; min?: number; max?: number; step?: number }) {
+  const W = 56, H = 110;
+  const tubeTop = 8;
+  const tubeBottom = H - 18;
+  const usable = tubeBottom - tubeTop;
+  const yFromVal = (v: number) => tubeBottom - ((v - min) / (max - min)) * usable;
+  const bulbCY = H - 10;
+  const bulbR = 8;
+  const fillTop = yFromVal(value);
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} overflow="visible">
+      {/* Tube outline */}
+      <rect x="18" y={tubeTop} width="10" height={tubeBottom - tubeTop + 4} rx="5" fill="#fff" stroke="#475569" strokeWidth="1.5" />
+      {/* Bulb */}
+      <circle cx="23" cy={bulbCY} r={bulbR} fill="#ef4444" stroke="#475569" strokeWidth="1.5" />
+      {/* Mercury fill (red) */}
+      <rect x="20" y={fillTop} width="6" height={tubeBottom - fillTop + 4} fill="#ef4444" />
+      {/* Tick marks + labels */}
+      {Array.from({ length: Math.floor((max - min) / step) + 1 }).map((_, i) => {
+        const v = min + i * step;
+        const y = yFromVal(v);
+        return (
+          <g key={i}>
+            <line x1="30" y1={y} x2="36" y2={y} stroke="#475569" strokeWidth="1.2" />
+            <text x="38" y={y + 3} fontSize="8" fill="#475569" fontWeight="700">{v}°</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// ── Year 0 ───────────────────────────────────────────────────────
+function Te01() {
+  return (
+    <Card>
+      <Instr text="Is a campfire hot or cold?" />
+      <div style={{ fontSize: 28, marginBottom: 6 }}>🔥</div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="hot" />
+        <ChoiceBtn label="cold" />
+      </div>
+    </Card>
+  );
+}
+
+function Te02() {
+  return (
+    <Card>
+      <Instr text="Which is hotter?" />
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
+        <SceneCard emoji="🧊" label="an ice cube" />
+        <SceneCard emoji="☀️" label="a hot summer day" />
+      </div>
+    </Card>
+  );
+}
+
+function Te03() {
+  return (
+    <Card>
+      <Instr text="Which is colder?" />
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
+        <SceneCard emoji="⛄" label="a snowman" />
+        <SceneCard emoji="🏖️" label="a sunny beach" />
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 1 ───────────────────────────────────────────────────────
+function Te11() {
+  return (
+    <Card>
+      <Instr text="Which is warmer (or cooler)?" />
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
+        <SceneCard emoji="🌧️" label="a rainy day" />
+        <SceneCard emoji="👕" label="a t-shirt day" />
+      </div>
+    </Card>
+  );
+}
+
+function Te12() {
+  return (
+    <Card>
+      <Instr text="Order from coldest to hottest." />
+      <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
+        <SceneCard emoji="🌧️" label="a rainy day" />
+        <SceneCard emoji="❄️" label="falling snow" />
+        <SceneCard emoji="🔥" label="a campfire" />
+      </div>
+    </Card>
+  );
+}
+
+function Te13() {
+  return (
+    <Card>
+      <Instr text="Which word best matches an ice cube?" />
+      <div style={{ fontSize: 22, marginBottom: 4 }}>🧊</div>
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["freezing", "warm", "hot"].map(w => <ChoiceBtn key={w} label={w} />)}
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 2 ───────────────────────────────────────────────────────
+function Te21() {
+  return (
+    <Card>
+      <Instr text='Which word best describes "eating hot soup"?' />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["hot", "cold", "warm"].map(w => <ChoiceBtn key={w} label={w} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te22() {
+  return (
+    <Card>
+      <Instr text="Which scene is the coldest?" />
+      <div style={{ display: "flex", gap: 8, alignItems: "flex-end", marginBottom: 4 }}>
+        <SceneCard emoji="🌤️" label="spring morning" />
+        <SceneCard emoji="🍦" label="ice cream" />
+        <SceneCard emoji="☀️" label="hot summer" />
+      </div>
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["spring morning", "ice cream", "hot summer"].map(w => <ChoiceBtn key={w} label={w} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te23() {
+  return (
+    <Card>
+      <Instr text="Order from coldest to hottest." />
+      <div style={{ display: "flex", gap: 6, alignItems: "flex-end", flexWrap: "wrap", justifyContent: "center" }}>
+        <SceneCard emoji="❄️" label="snow" />
+        <SceneCard emoji="🧥" label="winter jacket" />
+        <SceneCard emoji="👕" label="t-shirt day" />
+        <SceneCard emoji="🔥" label="campfire" />
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 3 ───────────────────────────────────────────────────────
+function Te31() {
+  return (
+    <Card>
+      <Instr text="What temperature does the thermometer show?" />
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <Thermometer value={30} min={0} max={50} step={10} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {["20°C", "30°C", "40°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function Te32() {
+  return (
+    <Card>
+      <Instr text="Which temperature best matches a hot summer afternoon?" />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["10°C", "20°C", "32°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te33() {
+  return (
+    <Card>
+      <Instr text="Which temperature is hotter: 12°C or 25°C?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="12°C" />
+        <ChoiceBtn label="25°C" />
+      </div>
+    </Card>
+  );
+}
+
+// ── Map ──────────────────────────────────────────────────────────
+
+export const TEMPERATURE_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
+  "0.1": Te01, "0.2": Te02, "0.3": Te03,
+  "1.1": Te11, "1.2": Te12, "1.3": Te13,
+  "2.1": Te21, "2.2": Te22, "2.3": Te23,
+  "3.1": Te31, "3.2": Te32, "3.3": Te33,
+};

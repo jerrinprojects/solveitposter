@@ -80,6 +80,13 @@ const measurementTopics = [
       { label: "Phase 3", sub: "Year 7–8", href: "/measurement/time/phase-3" },
     ],
   },
+  {
+    name: "Temperature",
+    emoji: "🌡️",
+    items: [
+      { label: "Phase 1", sub: "Year 0–3", href: "/measurement/temperature/phase-1" },
+    ],
+  },
 ];
 
 // ── Page ─────────────────────────────────────────────────────────
