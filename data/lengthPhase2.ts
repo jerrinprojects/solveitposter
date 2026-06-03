@@ -26,5 +26,5 @@ export const skills: PosterSkill[] = [
   { code: "6.2", description: "I can choose the correct unit for measuring area." },
   { code: "6.3", description: "I can find the area of rectangles using the formula." },
   { code: "6.4", description: "I can find the area of right-angled triangles." },
-  { code: "6.5", description: "I can tell if a shape is a rectangle or a triangle and find its area." },
+  { code: "6.5", description: "I can find the area of a rectangle or a right-angled triangle." },
 ];

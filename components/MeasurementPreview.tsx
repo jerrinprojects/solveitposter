@@ -612,25 +612,37 @@ function L64() {
   );
 }
 
-// ── L6.5 — Identify shape (rectangle or triangle) and find area ──
+// ── L6.5 — Rectangle OR triangle (alternating) — find the area ───
 function L65() {
   return (
     <Card>
-      <Instr text="Rectangle or triangle? Find the area." />
-      <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
-        <svg overflow="visible" width="72" height="50" viewBox="0 0 72 50">
-          <rect x="3" y="9" width="52" height="36" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5" />
-          <text x="29" y="6" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">9 m</text>
-          <text x="59" y="28" textAnchor="start" fontSize="8" fill="#6b7280" fontWeight="bold">6 m</text>
+      <Instr text="Find the area of this shape." />
+      <div style={{
+        display: "flex", alignItems: "center", gap: 10,
+        margin: "4px 0 8px",
+      }}>
+        {/* Sample shape — alternates per attempt between rectangle and triangle.
+            Show a triangle here (rectangle area already shown in 6.3). */}
+        <svg overflow="visible" width="86" height="58" viewBox="0 0 86 58">
+          <polygon points="6,50 74,50 6,12" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+          <polyline points="6,42 14,42 14,50" fill="none" stroke="#6b7280" strokeWidth="1.2" />
+          <text x="40" y="57" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">8 m</text>
+          <text x="0" y="33" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
         </svg>
-        <svg overflow="visible" width="60" height="54" viewBox="0 0 60 54">
-          <polygon points="5,46 55,46 5,11" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
-          <polyline points="5,38 13,38 13,46" fill="none" stroke="#6b7280" strokeWidth="1.2" />
-          <text x="29" y="52" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">8 m</text>
-          <text x="1" y="31" fontSize="8" fill="#6b7280" fontWeight="bold">5 m</text>
-        </svg>
+        {/* "or" badge with mini icons */}
+        <div style={{
+          display: "flex", flexDirection: "column", alignItems: "center", gap: 3,
+        }}>
+          <svg width="22" height="14" viewBox="0 0 22 14">
+            <rect x="1" y="2" width="20" height="10" rx="1.5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1" />
+          </svg>
+          <span style={{ fontSize: 9, fontWeight: 700, color: "#9ca3af", letterSpacing: "0.05em" }}>or</span>
+          <svg width="22" height="14" viewBox="0 0 22 14">
+            <polygon points="1,12 21,12 1,1" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1" />
+          </svg>
+        </div>
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <QBox />
         <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>m²</span>
       </div>
