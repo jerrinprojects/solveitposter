@@ -114,7 +114,7 @@ function M02() {
 function M03() {
   return (
     <Card>
-      <Instr text="Same weight or different weight?" />
+      <Instr text="Are these the same weight or different?" />
       <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 8 }}>
         <ObjCard emoji="🍎" name="apple" />
         <ObjCard emoji="🍊" name="orange" />
@@ -127,11 +127,11 @@ function M03() {
   );
 }
 
-// ── M1.1 — Heavier or lighter? ───────────────────────────────────
+// ── M1.1 — Heavier or lighter? (alternates) ──────────────────────
 function M11() {
   return (
     <Card>
-      <Instr text="Which one is heavier?" />
+      <Instr text="Which one is heavier (or lighter)?" />
       <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
         <ObjCard emoji="🐱" name="cat" />
         <ObjCard emoji="✏️" name="pencil" />
@@ -186,7 +186,7 @@ function M14() {
 function M21() {
   return (
     <Card>
-      <Instr text="Which side is heavier?" />
+      <Instr text="Which side is heavier (or lighter)?" />
       <BalanceScale leftVal={320} rightVal={180} />
       <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
         <ChoiceBtn label="left" />
