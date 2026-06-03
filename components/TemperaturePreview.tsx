@@ -225,6 +225,199 @@ function Te33() {
   );
 }
 
+// ── Year 4 ───────────────────────────────────────────────────────
+function Te41() {
+  return (
+    <Card>
+      <Instr text="Read the thermometer. Type the temperature in °C." />
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <Thermometer value={25} min={0} max={40} step={5} />
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <QBoxT />
+          <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function Te42() {
+  return (
+    <Card>
+      <Instr text="Which reading matches the thermometer?" />
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <Thermometer value={20} min={0} max={50} step={5} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {["15°C", "20°C", "25°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function Te43() {
+  return (
+    <Card>
+      <Instr text="Which is hotter: 12°C or 27°C?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="12°C" />
+        <ChoiceBtn label="27°C" />
+      </div>
+    </Card>
+  );
+}
+
+function Te44() {
+  return (
+    <Card>
+      <Instr text="Order from coldest to hottest." />
+      <div style={{ display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "center" }}>
+        {["15°C", "32°C", "8°C", "21°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te45() {
+  return (
+    <Card>
+      <Instr text="Which is a sensible temperature for the inside of a fridge?" />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["-10°C", "4°C", "18°C", "35°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 5 ───────────────────────────────────────────────────────
+function Te51() {
+  return (
+    <Card>
+      <Instr text="Read the thermometer in 2°C steps. Type the temperature." />
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <Thermometer value={22} min={0} max={40} step={2} />
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <QBoxT />
+          <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function Te52() {
+  return (
+    <Card>
+      <Instr text="Which number matches the thermometer?" />
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <Thermometer value={18} min={0} max={40} step={2} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {["16°C", "18°C", "19°C", "20°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function Te53() {
+  return (
+    <Card>
+      <Instr text="The temperature rises from 12°C to 19°C. What is the change?" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te54() {
+  return (
+    <Card>
+      <Instr text="From 18°C to 11°C — did it increase or decrease?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="increase" />
+        <ChoiceBtn label="decrease" />
+      </div>
+    </Card>
+  );
+}
+
+function Te55() {
+  return (
+    <Card>
+      <Instr text="Mon 17°C, Tue 22°C. Which day was warmer?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="Monday" />
+        <ChoiceBtn label="Tuesday" />
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 6 ───────────────────────────────────────────────────────
+function Te61() {
+  return (
+    <Card>
+      <Instr text="Read the thermometer. Type the temperature in °C." />
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <Thermometer value={-5} min={-15} max={15} step={5} />
+        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <QBoxT />
+          <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function Te62() {
+  return (
+    <Card>
+      <Instr text="Which is hotter: -4°C or 6°C?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="-4°C" />
+        <ChoiceBtn label="6°C" />
+      </div>
+    </Card>
+  );
+}
+
+function Te63() {
+  return (
+    <Card>
+      <Instr text="Order from coldest to hottest." />
+      <div style={{ display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "center" }}>
+        {["-7°C", "3°C", "-2°C", "12°C"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function Te64() {
+  return (
+    <Card>
+      <Instr text="What is the difference between -3°C and 8°C?" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
+function Te65() {
+  return (
+    <Card>
+      <Instr text="The temperature rose from -5°C to 7°C. By how many degrees?" />
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>°C</span>
+      </div>
+    </Card>
+  );
+}
+
 // ── Map ──────────────────────────────────────────────────────────
 
 export const TEMPERATURE_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
@@ -232,4 +425,7 @@ export const TEMPERATURE_PREVIEW_MAP: Record<string, () => React.ReactElement> =
   "1.1": Te11, "1.2": Te12, "1.3": Te13,
   "2.1": Te21, "2.2": Te22, "2.3": Te23,
   "3.1": Te31, "3.2": Te32, "3.3": Te33,
+  "4.1": Te41, "4.2": Te42, "4.3": Te43, "4.4": Te44, "4.5": Te45,
+  "5.1": Te51, "5.2": Te52, "5.3": Te53, "5.4": Te54, "5.5": Te55,
+  "6.1": Te61, "6.2": Te62, "6.3": Te63, "6.4": Te64, "6.5": Te65,
 };

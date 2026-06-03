@@ -85,6 +85,7 @@ const measurementTopics = [
     emoji: "🌡️",
     items: [
       { label: "Phase 1", sub: "Year 0–3", href: "/measurement/temperature/phase-1" },
+      { label: "Phase 2", sub: "Year 4–6", href: "/measurement/temperature/phase-2" },
     ],
   },
 ];
