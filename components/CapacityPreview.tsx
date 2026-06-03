@@ -298,14 +298,19 @@ function C31() {
 function C32() {
   return (
     <Card>
-      <Instr text="Read the container. How many litres?" />
-      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-        <MeasuringJug max={10} level={6} unit="L" ticks={[2, 4, 6, 8, 10]} />
-        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          <QBox />
-          <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>L</span>
+      <Instr text="Read the container in millilitres or litres." />
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <MeasuringJug max={500} level={300} unit="ml" ticks={[100, 200, 300, 400, 500]} />
+          <span style={{ fontSize: 9, fontWeight: 800, color: "#0891b2" }}>ml</span>
+        </div>
+        <span style={{ fontSize: 11, fontWeight: 800, color: "#9ca3af" }}>or</span>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <MeasuringJug max={10} level={6} unit="L" ticks={[2, 4, 6, 8, 10]} />
+          <span style={{ fontSize: 9, fontWeight: 800, color: "#0891b2" }}>L</span>
         </div>
       </div>
+      <QBox />
     </Card>
   );
 }
@@ -452,7 +457,7 @@ function PrismLabel({ l, w, h, cell = 10 }: { l: number; w: number; h: number; c
 function C41() {
   return (
     <Card>
-      <Instr text="Choose the best capacity unit for a jug of milk." />
+      <Instr text="What is the best unit to measure a jug of milk?" />
       <div style={{ fontSize: 26, marginBottom: 8 }}>🥛</div>
       <div style={{ display: "flex", gap: 8 }}>
         <ChoiceBtn label="ml" />
@@ -752,7 +757,7 @@ function C71() {
       <Instr text="Which formula gives the volume of a rectangular prism?" />
       <PrismLabel l={4} w={2} h={3} cell={9} />
       <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 2 }}>
-        {["l × w × h", "s × s × s", "½ × b × h × L"].map(l => <ChoiceBtn key={l} label={l} />)}
+        {["l × w × h", "s × s × s", "½ × b × h × L", "π × r² × h"].map(l => <ChoiceBtn key={l} label={l} />)}
       </div>
     </Card>
   );
