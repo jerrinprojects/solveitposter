@@ -232,10 +232,11 @@ function T24() {
     <Card>
       <Instr text="What time is it?" />
       <AnalogueClock h={2} m={30} />
-      <div style={{ display: "flex", gap: 5, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
+      <div style={{ display: "flex", gap: 4, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
         <ChoiceBtn label="half past 2" />
         <ChoiceBtn label="quarter past 2" />
         <ChoiceBtn label="2 o'clock" />
+        <ChoiceBtn label="quarter to 3" />
       </div>
     </Card>
   );
@@ -246,10 +247,11 @@ function T25() {
     <Card>
       <Instr text="What time is it?" />
       <AnalogueClock h={4} m={15} />
-      <div style={{ display: "flex", gap: 5, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
+      <div style={{ display: "flex", gap: 4, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
         <ChoiceBtn label="quarter past 4" />
         <ChoiceBtn label="half past 4" />
         <ChoiceBtn label="4 o'clock" />
+        <ChoiceBtn label="quarter to 5" />
       </div>
     </Card>
   );
@@ -260,10 +262,11 @@ function T26() {
     <Card>
       <Instr text="What time is it?" />
       <AnalogueClock h={7} m={45} />
-      <div style={{ display: "flex", gap: 5, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
+      <div style={{ display: "flex", gap: 4, marginTop: 4, flexWrap: "wrap", justifyContent: "center" }}>
         <ChoiceBtn label="quarter to 8" />
         <ChoiceBtn label="quarter past 7" />
         <ChoiceBtn label="half past 7" />
+        <ChoiceBtn label="7 o'clock" />
       </div>
     </Card>
   );
@@ -372,6 +375,7 @@ function Timetable() {
     { activity: "Reading", start: "9:00",  end: "9:30" },
     { activity: "Maths",   start: "9:30",  end: "10:15" },
     { activity: "Writing", start: "10:30", end: "11:15" },
+    { activity: "PE",      start: "11:15", end: "11:50" },
   ];
   return (
     <div style={{ background: "#fffbeb", border: "2px solid #fde68a", borderRadius: 8, padding: "5px 8px", margin: "2px 0 4px", fontFamily: "monospace", minWidth: 130 }}>
