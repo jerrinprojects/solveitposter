@@ -349,8 +349,7 @@ function L34() {
 function L41() {
   return (
     <Card>
-      <Instr text="Choose the best unit to measure this." />
-      <div style={{ fontSize: 26, marginBottom: 8 }}>🖊️</div>
+      <Instr text="What is the best unit to measure a pen?" />
       <div style={{ display: "flex", gap: 6 }}>
         <ChoiceBtn label="mm" />
         <ChoiceBtn label="cm" />
@@ -446,7 +445,7 @@ function L51() {
     <Card>
       <Instr text="Convert the measurement." />
       <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
-        2 m 45 cm = ___ cm
+        3 m = ___ cm
       </div>
       <QBox />
     </Card>
@@ -472,12 +471,11 @@ function L52() {
 function L53() {
   return (
     <Card>
-      <Instr text="Use the formula to find the area." />
+      <Instr text="Find the area of the rectangle." />
       <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
         <rect x="5" y="5" width="90" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
-        <text x="5" y="3" fontSize="8" fill="#6b7280" fontWeight="bold">8</text>
-        <text x="100" y="35" fontSize="8" fill="#6b7280" fontWeight="bold">5</text>
-        <text x="50" y="35" textAnchor="middle" fontSize="10" fill="#1d4ed8" fontWeight="bold">A = l × w</text>
+        <text x="50" y="4" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">8 cm</text>
+        <text x="100" y="35" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <QBox />
@@ -510,9 +508,10 @@ function L54() {
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
       </div>
-      <div style={{ display: "flex", gap: 5 }}>
-        <ChoiceBtn label="Same area" />
-        <ChoiceBtn label="Same perimeter" />
+      <div style={{ display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "center" }}>
+        <ChoiceBtn label="same area" />
+        <ChoiceBtn label="same perimeter" />
+        <ChoiceBtn label="neither" />
       </div>
     </Card>
   );
@@ -522,7 +521,7 @@ function L54() {
 function L55() {
   return (
     <Card>
-      <Instr text="Which shape has the bigger area?" />
+      <Instr text="Which rectangle has the larger area?" />
       <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
           <svg overflow="visible" width="52" height="44" viewBox="0 0 52 44">
@@ -541,10 +540,10 @@ function L55() {
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
       </div>
-      <div style={{ display: "flex", gap: 6 }}>
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "center" }}>
         <ChoiceBtn label="A is larger" />
         <ChoiceBtn label="B is larger" />
-        <ChoiceBtn label="Same" />
+        <ChoiceBtn label="same area" />
       </div>
     </Card>
   );
@@ -554,14 +553,11 @@ function L55() {
 function L61() {
   return (
     <Card>
-      <Instr text="Convert to mixed units." />
+      <Instr text="Convert the measurement." />
       <div style={{ fontSize: 13, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
-        325 cm = ___ m ___ cm
+        2 m 45 cm = ___ cm
       </div>
-      <div style={{ display: "flex", gap: 8 }}>
-        <QBox />
-        <QBox />
-      </div>
+      <QBox />
     </Card>
   );
 }
@@ -616,17 +612,25 @@ function L64() {
   );
 }
 
-// ── L6.5 — Identify shape and find area ──────────────────────────
+// ── L6.5 — Identify shape (rectangle or triangle) and find area ──
 function L65() {
   return (
     <Card>
-      <Instr text="Find the area of this shape." />
-      <svg overflow="visible" width="110" height="70" viewBox="0 0 110 70">
-        <rect x="8" y="8" width="90" height="50" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
-        <text x="53" y="6" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
-        <text x="104" y="36" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
-      </svg>
-      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      <Instr text="Rectangle or triangle? Find the area." />
+      <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
+        <svg overflow="visible" width="60" height="44" viewBox="0 0 60 44">
+          <rect x="3" y="3" width="52" height="36" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5" />
+          <text x="29" y="2" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">9 m</text>
+          <text x="58" y="22" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">6 m</text>
+        </svg>
+        <svg overflow="visible" width="60" height="48" viewBox="0 0 60 48">
+          <polygon points="5,40 55,40 5,5" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+          <polyline points="5,32 13,32 13,40" fill="none" stroke="#6b7280" strokeWidth="1.2" />
+          <text x="29" y="46" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">8 m</text>
+          <text x="1" y="25" fontSize="8" fill="#6b7280" fontWeight="bold">5 m</text>
+        </svg>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
         <QBox />
         <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>m²</span>
       </div>
