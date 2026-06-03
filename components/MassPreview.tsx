@@ -300,7 +300,7 @@ function M34() {
 function M41() {
   return (
     <Card>
-      <Instr text="Choose the best unit to measure mass." />
+      <Instr text="What is the best unit to measure the mass of a car?" />
       <div style={{ fontSize: 26, marginBottom: 8 }}>🚗</div>
       <div style={{ display: "flex", gap: 8 }}>
         <ChoiceBtn label="g" />
