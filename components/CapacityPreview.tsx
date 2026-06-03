@@ -337,6 +337,361 @@ function C34() {
   );
 }
 
+// ── Isometric 3D cube / prism (for volume) ───────────────────────
+// Draws a stacked-cubes prism in an isometric-ish projection.
+// l × w × h unit cubes, where l = length (x), w = width (z, depth), h = height (y).
+function CubePrism({ l, w, h, cell = 12 }: { l: number; w: number; h: number; cell?: number }) {
+  // 30° isometric vectors
+  const dx = cell;       // along length (right)
+  const dyDown = cell;   // along height (down)
+  const depthX = cell * 0.55; // depth offset x (back/right)
+  const depthY = -cell * 0.32; // depth offset y (back/up)
+
+  // Total SVG dims
+  const W = Math.ceil(l * dx + w * depthX + 4);
+  const H = Math.ceil(h * dyDown + w * Math.abs(depthY) + 4);
+  const originX = 2;
+  const originY = Math.ceil(h * dyDown + w * Math.abs(depthY)) - 2;
+
+  // Each cube: render top, right, front faces with depth at (i, j, k)
+  // i: along l (0..l-1), j: along h (0..h-1, top=h-1), k: along w (0..w-1, back=w-1)
+  const cubes: { i: number; j: number; k: number }[] = [];
+  for (let k = w - 1; k >= 0; k--) {
+    for (let j = 0; j < h; j++) {
+      for (let i = 0; i < l; i++) {
+        cubes.push({ i, j, k });
+      }
+    }
+  }
+  // Sort by k desc (back first), j asc (bottom first), i asc (left first)
+  cubes.sort((a, b) => (b.k - a.k) || (a.j - b.j) || (a.i - b.i));
+
+  function cubeFaces(i: number, j: number, k: number) {
+    // bottom-left-front corner of this cube
+    const bx = originX + i * dx + k * depthX;
+    const by = originY - j * dyDown + k * depthY;
+    const top = [
+      [bx, by - dyDown],
+      [bx + dx, by - dyDown],
+      [bx + dx + depthX, by - dyDown + depthY],
+      [bx + depthX, by - dyDown + depthY],
+    ];
+    const front = [
+      [bx, by - dyDown],
+      [bx + dx, by - dyDown],
+      [bx + dx, by],
+      [bx, by],
+    ];
+    const right = [
+      [bx + dx, by - dyDown],
+      [bx + dx + depthX, by - dyDown + depthY],
+      [bx + dx + depthX, by + depthY],
+      [bx + dx, by],
+    ];
+    return { top, front, right };
+  }
+
+  const polyStr = (pts: number[][]) => pts.map((p) => p.join(",")).join(" ");
+
+  return (
+    <svg overflow="visible" width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+      {cubes.map(({ i, j, k }) => {
+        const { top, front, right } = cubeFaces(i, j, k);
+        return (
+          <g key={`${i}-${j}-${k}`}>
+            <polygon points={polyStr(top)} fill="#bae6fd" stroke="#0284c7" strokeWidth="0.9" />
+            <polygon points={polyStr(right)} fill="#7dd3fc" stroke="#0284c7" strokeWidth="0.9" />
+            <polygon points={polyStr(front)} fill="#e0f2fe" stroke="#0284c7" strokeWidth="0.9" />
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+// Compact dimensioned rectangular prism (just an outline + l/w/h labels)
+function PrismLabel({ l, w, h, cell = 10 }: { l: number; w: number; h: number; cell?: number }) {
+  const dx = cell;
+  const dyDown = cell;
+  const depthX = cell * 0.6;
+  const depthY = -cell * 0.34;
+  const W = Math.ceil(l * dx + w * depthX + 30);
+  const H = Math.ceil(h * dyDown + w * Math.abs(depthY) + 18);
+  const ox = 4;
+  const oy = Math.ceil(h * dyDown + w * Math.abs(depthY)) + 4;
+
+  // Front face (l × h)
+  const fA = [ox, oy - h * dyDown];
+  const fB = [ox + l * dx, oy - h * dyDown];
+  const fC = [ox + l * dx, oy];
+  const fD = [ox, oy];
+  // Back face (top-right)
+  const bA = [fA[0] + w * depthX, fA[1] + w * depthY];
+  const bB = [fB[0] + w * depthX, fB[1] + w * depthY];
+  const bC = [fC[0] + w * depthX, fC[1] + w * depthY];
+
+  const poly = (pts: number[][]) => pts.map((p) => p.join(",")).join(" ");
+
+  return (
+    <svg overflow="visible" width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+      {/* Top */}
+      <polygon points={poly([fA, fB, bB, bA])} fill="#bae6fd" stroke="#0284c7" strokeWidth="1.2" />
+      {/* Front */}
+      <polygon points={poly([fA, fB, fC, fD])} fill="#e0f2fe" stroke="#0284c7" strokeWidth="1.2" />
+      {/* Right */}
+      <polygon points={poly([fB, bB, bC, fC])} fill="#7dd3fc" stroke="#0284c7" strokeWidth="1.2" />
+      {/* Labels */}
+      <text x={(fA[0] + fB[0]) / 2} y={fC[1] + 10} textAnchor="middle" fontSize="9" fill="#0c4a6e" fontWeight="bold">{l} cm</text>
+      <text x={fC[0] + (bC[0] - fC[0]) / 2 + 2} y={fC[1] + (bC[1] - fC[1]) / 2 + 6} fontSize="9" fill="#0c4a6e" fontWeight="bold">{w} cm</text>
+      <text x={fC[0] + 4} y={(fB[1] + fC[1]) / 2 + 3} fontSize="9" fill="#0c4a6e" fontWeight="bold">{h} cm</text>
+    </svg>
+  );
+}
+
+// ── C4.1 — Best unit (ml or L) ───────────────────────────────────
+function C41() {
+  return (
+    <Card>
+      <Instr text="Choose the best capacity unit for a jug of milk." />
+      <div style={{ fontSize: 26, marginBottom: 8 }}>🥛</div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="ml" />
+        <ChoiceBtn label="L" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C4.2 — Mixed L + ml → ml ─────────────────────────────────────
+function C42() {
+  return (
+    <Card>
+      <Instr text="Convert to millilitres." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        3 L 400 ml = ___ ml
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>ml</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C4.3 — Compare two mixed-unit capacities ─────────────────────
+function C43() {
+  return (
+    <Card>
+      <Instr text="Which holds more?" />
+      <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+        <CapTag label="2 L 800 ml" />
+        <CapTag label="3 L 200 ml" />
+      </div>
+      <div style={{ display: "flex", gap: 6 }}>
+        <ChoiceBtn label="2 L 800 ml" />
+        <ChoiceBtn label="3 L 200 ml" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C4.4 — Count unit cubes ──────────────────────────────────────
+function C44() {
+  return (
+    <Card>
+      <Instr text="How many unit cubes make up this shape?" />
+      <CubePrism l={3} w={2} h={2} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cubes</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C4.5 — Capacity vs Volume concept ────────────────────────────
+function C45() {
+  return (
+    <Card>
+      <Instr text={'Is "the amount of water a jug can hold" capacity or volume?'} />
+      <div style={{ display: "flex", gap: 6 }}>
+        <ChoiceBtn label="capacity" />
+        <ChoiceBtn label="volume" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C5.1 — L → ml ────────────────────────────────────────────────
+function C51() {
+  return (
+    <Card>
+      <Instr text="Convert litres to millilitres." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        4 L = ___ ml
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>ml</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C5.2 — ml → L ────────────────────────────────────────────────
+function C52() {
+  return (
+    <Card>
+      <Instr text="Convert millilitres to litres." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        5000 ml = ___ L
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>L</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C5.3 — Mixed L+ml → ml (multiple choice) ─────────────────────
+function C53() {
+  return (
+    <Card>
+      <Instr text="2 L 500 ml = ?" />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["250 ml", "2500 ml", "2050 ml", "25000 ml"].map(l => <ChoiceBtn key={l} label={l} />)}
+      </div>
+    </Card>
+  );
+}
+
+// ── C5.4 — Volume from layers of cubes ───────────────────────────
+function C54() {
+  return (
+    <Card>
+      <Instr text="How many cubes in total?" />
+      <CubePrism l={4} w={3} h={2} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cubes</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C5.5 — Compare two prism volumes ─────────────────────────────
+function C55() {
+  return (
+    <Card>
+      <Instr text="Which shape has the greater volume?" />
+      <div style={{ display: "flex", gap: 14, alignItems: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <CubePrism l={3} w={2} h={3} cell={9} />
+          <span style={{ fontSize: 9, fontWeight: 800, color: "#475569" }}>A</span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <CubePrism l={4} w={2} h={2} cell={9} />
+          <span style={{ fontSize: 9, fontWeight: 800, color: "#475569" }}>B</span>
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+        <ChoiceBtn label="A" />
+        <ChoiceBtn label="B" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C6.1 — L + ml → ml ───────────────────────────────────────────
+function C61() {
+  return (
+    <Card>
+      <Instr text="Convert to millilitres." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        2 L 350 ml = ___ ml
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>ml</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C6.2 — ml total → decimal L ──────────────────────────────────
+function C62() {
+  return (
+    <Card>
+      <Instr text="Convert to litres." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        3750 ml = ___ L
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>L</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C6.3 — Compare ml vs L ───────────────────────────────────────
+function C63() {
+  return (
+    <Card>
+      <Instr text="Which holds more: 2500 ml or 3 L?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="2500 ml" />
+        <ChoiceBtn label="3 L" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C6.4 — Volume of rectangular prism ───────────────────────────
+function C64() {
+  return (
+    <Card>
+      <Instr text="Find the volume of this rectangular prism." />
+      <PrismLabel l={5} w={3} h={4} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C6.5 — Best volume unit (cm³ or m³) ──────────────────────────
+function C65() {
+  return (
+    <Card>
+      <Instr text="What is the best unit for the volume of a swimming pool?" />
+      <div style={{ fontSize: 26, marginBottom: 8 }}>🏊</div>
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="cm³" />
+        <ChoiceBtn label="m³" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C6.6 — ml ↔ cm³ ──────────────────────────────────────────────
+function C66() {
+  return (
+    <Card>
+      <Instr text="Convert between millilitres and cubic centimetres." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        250 ml = ___ cm³
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
 // ── Map ──────────────────────────────────────────────────────────
 
 export const CAPACITY_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
@@ -344,4 +699,7 @@ export const CAPACITY_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
   "1.1": C11, "1.2": C12, "1.3": C13, "1.4": C14,
   "2.1": C21, "2.2": C22, "2.3": C23, "2.4": C24,
   "3.1": C31, "3.2": C32, "3.3": C33, "3.4": C34,
+  "4.1": C41, "4.2": C42, "4.3": C43, "4.4": C44, "4.5": C45,
+  "5.1": C51, "5.2": C52, "5.3": C53, "5.4": C54, "5.5": C55,
+  "6.1": C61, "6.2": C62, "6.3": C63, "6.4": C64, "6.5": C65, "6.6": C66,
 };
