@@ -159,8 +159,8 @@ function L14() {
         <VBar h={58} color="#93c5fd" label="B" />
       </div>
       <div style={{ display: "flex", gap: 6 }}>
-        <ChoiceBtn label="Same" />
-        <ChoiceBtn label="Different" />
+        <ChoiceBtn label="same" />
+        <ChoiceBtn label="different" />
       </div>
     </Card>
   );
@@ -339,7 +339,7 @@ function L34() {
       <div style={{ display: "flex", gap: 6 }}>
         <ChoiceBtn label="A" />
         <ChoiceBtn label="B" />
-        <ChoiceBtn label="Same" />
+        <ChoiceBtn label="same" />
       </div>
     </Card>
   );
