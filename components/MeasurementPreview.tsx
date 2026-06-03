@@ -47,7 +47,7 @@ function VBar({ h, color, label }: { h: number; color: string; label?: string })
 function L01() {
   return (
     <Card>
-      <Instr text="Tap the taller bar." />
+      <Instr text="Tap the longer bar." />
       <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center" }}>
         <VBar h={72} color="#fb923c" label="A" />
         <VBar h={44} color="#4ade80" label="B" />
@@ -73,7 +73,7 @@ function L02() {
 function L03() {
   return (
     <Card>
-      <Instr text="Tap the tallest bar." />
+      <Instr text="Tap the longest bar." />
       <div style={{ display: "flex", gap: 10, alignItems: "flex-end", justifyContent: "center" }}>
         <VBar h={50} color="#fb923c" label="A" />
         <VBar h={78} color="#4ade80" label="B" />
@@ -101,7 +101,7 @@ function L04() {
 function L11() {
   return (
     <Card>
-      <Instr text="Choose the correct word." />
+      <Instr text="Bar A is ___ than bar B." />
       <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center", marginBottom: 8 }}>
         <VBar h={72} color="#fb923c" label="A" />
         <VBar h={44} color="#93c5fd" label="B" />
@@ -153,7 +153,7 @@ function L13() {
 function L14() {
   return (
     <Card>
-      <Instr text="Are these the same height?" />
+      <Instr text="Are the two bars the same length or different?" />
       <div style={{ display: "flex", gap: 14, alignItems: "flex-end", justifyContent: "center", marginBottom: 8 }}>
         <VBar h={58} color="#fb923c" label="A" />
         <VBar h={58} color="#93c5fd" label="B" />
@@ -245,7 +245,7 @@ function L24() {
   const gw = cols * cell, gh = rows * cell;
   return (
     <Card>
-      <Instr text="Count the squares on the outside." />
+      <Instr text="Count the side units around the outside." />
       <svg overflow="visible" width={gw + ox + 10} height={gh + oy + 10} viewBox={`0 0 ${gw + ox + 10} ${gh + oy + 10}`}>
         {Array.from({ length: rows }, (_, r) =>
           Array.from({ length: cols }, (_, c) => {
@@ -269,8 +269,7 @@ function L24() {
 function L31() {
   return (
     <Card>
-      <Instr text="Would you measure this in cm or m?" />
-      <div style={{ fontSize: 28, marginBottom: 8 }}>✏️</div>
+      <Instr text="A pencil is about how long? Choose the best unit." />
       <div style={{ display: "flex", gap: 8 }}>
         <ChoiceBtn label="cm" />
         <ChoiceBtn label="m" />
@@ -318,7 +317,7 @@ function L33() {
 function L34() {
   return (
     <Card>
-      <Instr text="Which shape has a bigger area?" />
+      <Instr text="Which shape has the greater area?" />
       <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
           <svg overflow="visible" width="52" height="44" viewBox="0 0 52 44">
