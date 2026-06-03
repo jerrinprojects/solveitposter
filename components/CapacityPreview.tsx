@@ -35,9 +35,9 @@ function CapTag({ label }: { label: string }) {
 
 // ── Container SVG (bottle / cup / jug shape with optional water fill) ──
 // kind: "wide" (cup/glass), "tall" (bottle), "spout" (jug)
-function Container({ kind = "tall", widthPx = 38, fill = 1, label, color = "#22d3ee" }:
-  { kind?: "wide" | "tall" | "spout"; widthPx?: number; fill?: number; label?: string; color?: string }) {
-  const h = kind === "wide" ? 44 : 60;
+function Container({ kind = "tall", widthPx = 38, heightPx, fill = 1, label, color = "#22d3ee" }:
+  { kind?: "wide" | "tall" | "spout"; widthPx?: number; heightPx?: number; fill?: number; label?: string; color?: string }) {
+  const h = heightPx ?? (kind === "wide" ? 44 : 60);
   const w = widthPx;
   // Body path
   let bodyPath = "";
@@ -124,39 +124,42 @@ function MeasuringJug({ max = 500, level = 300, unit = "ml", ticks }:
 }
 
 // ── C0.1 — Tap the container that holds more ─────────────────────
+// Small cup vs big tall bottle — clearly larger
 function C01() {
   return (
     <Card>
       <Instr text="Tap the container that holds more." />
-      <div style={{ display: "flex", gap: 14, justifyContent: "center", alignItems: "flex-end" }}>
-        <Container kind="wide" widthPx={36} color="#60a5fa" />
-        <Container kind="tall" widthPx={32} color="#34d399" />
+      <div style={{ display: "flex", gap: 18, justifyContent: "center", alignItems: "flex-end" }}>
+        <Container kind="wide" widthPx={26} heightPx={34} color="#60a5fa" />
+        <Container kind="tall" widthPx={46} heightPx={84} color="#34d399" />
       </div>
     </Card>
   );
 }
 
 // ── C0.2 — Tap the container that holds less ─────────────────────
+// Big bucket-style vs tiny cup — clearly smaller
 function C02() {
   return (
     <Card>
       <Instr text="Tap the container that holds less." />
-      <div style={{ display: "flex", gap: 14, justifyContent: "center", alignItems: "flex-end" }}>
-        <Container kind="tall" widthPx={34} color="#a78bfa" />
-        <Container kind="wide" widthPx={30} color="#38bdf8" />
+      <div style={{ display: "flex", gap: 18, justifyContent: "center", alignItems: "flex-end" }}>
+        <Container kind="tall" widthPx={50} heightPx={82} color="#a78bfa" />
+        <Container kind="wide" widthPx={22} heightPx={30} color="#38bdf8" />
       </div>
     </Card>
   );
 }
 
 // ── C0.3 — Same or different capacity? ───────────────────────────
+// One small + one big — clearly different
 function C03() {
   return (
     <Card>
       <Instr text="Do these hold the same or different capacity?" />
-      <div style={{ display: "flex", gap: 14, justifyContent: "center", alignItems: "flex-end", marginBottom: 6 }}>
-        <Container kind="tall" widthPx={32} color="#22d3ee" />
-        <Container kind="wide" widthPx={32} color="#60a5fa" />
+      <div style={{ display: "flex", gap: 18, justifyContent: "center", alignItems: "flex-end", marginBottom: 6 }}>
+        <Container kind="tall" widthPx={44} heightPx={76} color="#22d3ee" />
+        <Container kind="wide" widthPx={26} heightPx={36} color="#60a5fa" />
       </div>
       <div style={{ display: "flex", gap: 6 }}>
         <ChoiceBtn label="same capacity" />
