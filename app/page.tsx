@@ -71,6 +71,13 @@ const measurementTopics = [
       { label: "Phase 3", sub: "Year 7–8", href: "/measurement/capacity/phase-3" },
     ],
   },
+  {
+    name: "Time",
+    emoji: "⏰",
+    items: [
+      { label: "Phase 1", sub: "Year 0–3", href: "/measurement/time/phase-1" },
+    ],
+  },
 ];
 
 // ── Page ─────────────────────────────────────────────────────────
