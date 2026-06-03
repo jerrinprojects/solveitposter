@@ -22,6 +22,15 @@ body {
     margin: 10mm;
   }
 
+  /* Times table poster overrides to landscape */
+  .times-table-poster {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
   body {
     background-color: #fce7f3 !important;
     -webkit-print-color-adjust: exact;
