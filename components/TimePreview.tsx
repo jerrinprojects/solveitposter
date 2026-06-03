@@ -361,6 +361,269 @@ function T37() {
   );
 }
 
+// Small answer box (named QBoxT for Time scope)
+function QBoxT() {
+  return <div style={{ border: "2px solid #e5e7eb", borderRadius: 8, width: 52, height: 32, display: "flex", alignItems: "center", justifyContent: "center", color: "#bbb", fontWeight: 700 }} />;
+}
+
+// Mini timetable shown in 6.4 / 6.5
+function Timetable() {
+  const rows = [
+    { activity: "Reading", start: "9:00",  end: "9:30" },
+    { activity: "Maths",   start: "9:30",  end: "10:15" },
+    { activity: "Writing", start: "10:30", end: "11:15" },
+  ];
+  return (
+    <div style={{ background: "#fffbeb", border: "2px solid #fde68a", borderRadius: 8, padding: "5px 8px", margin: "2px 0 4px", fontFamily: "monospace", minWidth: 130 }}>
+      {rows.map((r, i) => (
+        <div key={i} style={{
+          display: "grid", gridTemplateColumns: "1fr auto",
+          fontSize: 10, color: "#92400e", fontWeight: 700,
+          padding: "1px 4px",
+          borderTop: i > 0 ? "1px solid #fde68a" : "none",
+        }}>
+          <span>{r.activity}</span>
+          <span>{r.start}–{r.end}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Year 4 ───────────────────────────────────────────────────────
+function T41() {
+  return (
+    <Card>
+      <Instr text="Read the clock to the minute. Type the time." />
+      <AnalogueClock h={2} m={47} />
+      <DigitalTime text="_:__" />
+    </Card>
+  );
+}
+
+function T42() {
+  return (
+    <Card>
+      <Instr text="Read 4:15. Which description is correct?" />
+      <DigitalTime text="4:15" />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["quarter past 4", "half past 4", "quarter to 5", "5 past 4"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function T43() {
+  return (
+    <Card>
+      <Instr text="Convert hours to minutes." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        2 hours = ___ minutes
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T44() {
+  return (
+    <Card>
+      <Instr text="Convert minutes to seconds." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        3 minutes = ___ seconds
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>sec</span>
+      </div>
+    </Card>
+  );
+}
+
+function T45() {
+  return (
+    <Card>
+      <Instr text="Add the two durations." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        25 minutes + 35 minutes = ___
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T46() {
+  return (
+    <Card>
+      <Instr text="Are 60 minutes and 1 hour equal?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="yes" />
+        <ChoiceBtn label="no" />
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 5 ───────────────────────────────────────────────────────
+function T51() {
+  return (
+    <Card>
+      <Instr text='Is "going to school in the morning" a.m. or p.m.?' />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="a.m." />
+        <ChoiceBtn label="p.m." />
+      </div>
+    </Card>
+  );
+}
+
+function T52() {
+  return (
+    <Card>
+      <Instr text="Convert 3:30 p.m. to 24-hour time." />
+      <DigitalTime text="3:30 p.m." />
+      <DigitalTime text="__:__" />
+    </Card>
+  );
+}
+
+function T53() {
+  return (
+    <Card>
+      <Instr text="What is 18:45 in 12-hour time?" />
+      <DigitalTime text="18:45" />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 2 }}>
+        {["6:45 p.m.", "6:45 a.m.", "7:45 p.m."].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function T54() {
+  return (
+    <Card>
+      <Instr text="How many minutes pass from 3:10 to 3:45?" />
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <AnalogueClock h={3} m={10} size={56} />
+        <span style={{ fontSize: 14, color: "#9ca3af", fontWeight: 800 }}>→</span>
+        <AnalogueClock h={3} m={45} size={56} />
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T55() {
+  return (
+    <Card>
+      <Instr text="How many minutes from 2:50 to 3:20?" />
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <AnalogueClock h={2} m={50} size={56} />
+        <span style={{ fontSize: 14, color: "#9ca3af", fontWeight: 800 }}>→</span>
+        <AnalogueClock h={3} m={20} size={56} />
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T56() {
+  return (
+    <Card>
+      <Instr text="A movie starts at 6:15 and lasts 45 minutes. What time does it end?" />
+      <DigitalTime text="_:__" />
+    </Card>
+  );
+}
+
+// ── Year 6 ───────────────────────────────────────────────────────
+function T61() {
+  return (
+    <Card>
+      <Instr text="How many minutes pass from 9:45 to 10:20?" />
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <AnalogueClock h={9} m={45} size={56} />
+        <span style={{ fontSize: 14, color: "#9ca3af", fontWeight: 800 }}>→</span>
+        <AnalogueClock h={10} m={20} size={56} />
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T62() {
+  return (
+    <Card>
+      <Instr text="A piano lesson starts at 8:30 and lasts 75 minutes. What time does it end?" />
+      <DigitalTime text="_:__" />
+    </Card>
+  );
+}
+
+function T63() {
+  return (
+    <Card>
+      <Instr text="A class ended at 14:30. It lasted 60 minutes. What time did it start?" />
+      <DigitalTime text="_:__" />
+    </Card>
+  );
+}
+
+function T64() {
+  return (
+    <Card>
+      <Instr text="What time does Maths start?" />
+      <Timetable />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 4 }}>
+        {["9:00", "9:30", "10:00"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function T65() {
+  return (
+    <Card>
+      <Instr text="How many minutes does Reading last?" />
+      <Timetable />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T66() {
+  return (
+    <Card>
+      <Instr text="Convert the time unit." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        3 weeks = ___ days
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>days</span>
+      </div>
+    </Card>
+  );
+}
+
 // ── Map ──────────────────────────────────────────────────────────
 
 export const TIME_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
@@ -368,4 +631,7 @@ export const TIME_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
   "1.1": T11, "1.2": T12, "1.3": T13, "1.4": T14, "1.5": T15,
   "2.1": T21, "2.2": T22, "2.3": T23, "2.4": T24, "2.5": T25, "2.6": T26, "2.7": T27,
   "3.1": T31, "3.2": T32, "3.3": T33, "3.4": T34, "3.5": T35, "3.6": T36, "3.7": T37,
+  "4.1": T41, "4.2": T42, "4.3": T43, "4.4": T44, "4.5": T45, "4.6": T46,
+  "5.1": T51, "5.2": T52, "5.3": T53, "5.4": T54, "5.5": T55, "5.6": T56,
+  "6.1": T61, "6.2": T62, "6.3": T63, "6.4": T64, "6.5": T65, "6.6": T66,
 };
