@@ -13,6 +13,19 @@ const topics = [
     ],
   },
   {
+    subject: "Times Tables",
+    emoji: "✖️",
+    items: [
+      { label: "What is Multiplication? · Year 0–8", href: "/poster/multiplication-intro" },
+      { label: "Times Tables Chart · Year 0–8", href: "/poster/times-table" },
+      { label: "Times Table Patterns · Year 0–8", href: "/poster/times-table-patterns" },
+      { label: "Times Table Strategies · Year 0–8", href: "/poster/times-table-strategies" },
+      { label: "The Tricky 12 · Year 0–8", href: "/poster/times-table-tricky" },
+      { label: "Near Squares · Year 0–8", href: "/poster/times-table-near-squares" },
+      { label: "Times Table Pyramid · Year 0–8", href: "/poster/times-table-pyramid" },
+    ],
+  },
+  {
     subject: "Math Strategies",
     emoji: "➕",
     items: [
@@ -47,6 +60,13 @@ const measurementTopics = [
       { label: "Phase 1", sub: "Year 0–3", href: "/measurement/mass/phase-1" },
       { label: "Phase 2", sub: "Year 4–6", href: "/measurement/mass/phase-2" },
       { label: "Phase 3", sub: "Year 7–8", href: "/measurement/mass/phase-3" },
+    ],
+  },
+  {
+    name: "Capacity & Volume",
+    emoji: "🥤",
+    items: [
+      { label: "Phase 1", sub: "Year 0–3", href: "/measurement/capacity/phase-1" },
     ],
   },
 ];
