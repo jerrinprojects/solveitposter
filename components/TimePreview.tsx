@@ -624,6 +624,194 @@ function T66() {
   );
 }
 
+// ── Year 7 ───────────────────────────────────────────────────────
+function T71() {
+  return (
+    <Card>
+      <Instr text="What time does Writing end?" />
+      <Timetable />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 4 }}>
+        {["10:45", "11:15", "11:30"].map(t => <ChoiceBtn key={t} label={t} />)}
+      </div>
+    </Card>
+  );
+}
+
+function T72() {
+  return (
+    <Card>
+      <Instr text="How many minutes does Maths last?" />
+      <Timetable />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T73() {
+  return (
+    <Card>
+      <Instr text="Which activity lasts the longest?" />
+      <Timetable />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 4 }}>
+        {["Reading", "Maths", "Writing"].map(a => <ChoiceBtn key={a} label={a} />)}
+      </div>
+    </Card>
+  );
+}
+
+function T74() {
+  return (
+    <Card>
+      <Instr text="Work out the fraction of an hour." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        ¾ of an hour = ___ minutes
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T75() {
+  return (
+    <Card>
+      <Instr text="Work out the fraction of a day." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        ¼ of a day = ___ hours
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>hours</span>
+      </div>
+    </Card>
+  );
+}
+
+function T76() {
+  return (
+    <Card>
+      <Instr text="Work out the total time." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        2 h 30 min + 1 h 45 min = ___ min
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── Year 8 ───────────────────────────────────────────────────────
+function T81() {
+  return (
+    <Card>
+      <Instr text="Convert to total minutes." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        3 hours 45 minutes = ___ minutes
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T82() {
+  return (
+    <Card>
+      <Instr text="Convert to total seconds." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        4 minutes 30 seconds = ___ seconds
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>sec</span>
+      </div>
+    </Card>
+  );
+}
+
+function T83() {
+  return (
+    <Card>
+      <Instr text="Convert across hours, minutes and seconds." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px" }}>
+        2 hours 30 minutes = ___ seconds
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>sec</span>
+      </div>
+    </Card>
+  );
+}
+
+function T84() {
+  return (
+    <Card>
+      <Instr text="Train leaves at 9:30 and takes 2 h 15 min. What time does it arrive?" />
+      <DigitalTime text="_:__" />
+    </Card>
+  );
+}
+
+function T85() {
+  return (
+    <Card>
+      <Instr text="How many minutes from the start of Reading to the end of Writing?" />
+      <Timetable />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBoxT />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>min</span>
+      </div>
+    </Card>
+  );
+}
+
+function T86() {
+  return (
+    <Card>
+      <Instr text="Who had the fastest time?" />
+      <ResultsChart />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 4 }}>
+        {["Sam", "Alex", "Jo", "Kai"].map(n => <ChoiceBtn key={n} label={n} />)}
+      </div>
+    </Card>
+  );
+}
+
+// Mini results chart (4 names × seconds) for T86
+function ResultsChart() {
+  const rows = [
+    { name: "Sam",  secs: 42 },
+    { name: "Alex", secs: 38 },
+    { name: "Jo",   secs: 51 },
+    { name: "Kai",  secs: 47 },
+  ];
+  return (
+    <div style={{ background: "#f1f5f9", border: "2px solid #cbd5e1", borderRadius: 8, padding: "5px 8px", margin: "2px 0 4px", fontFamily: "monospace", minWidth: 130 }}>
+      {rows.map((r, i) => (
+        <div key={i} style={{
+          display: "grid", gridTemplateColumns: "1fr auto",
+          fontSize: 10, color: "#1e293b", fontWeight: 700,
+          padding: "1px 4px",
+          borderTop: i > 0 ? "1px solid #cbd5e1" : "none",
+        }}>
+          <span>{r.name}</span>
+          <span>{r.secs}s</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Map ──────────────────────────────────────────────────────────
 
 export const TIME_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
@@ -634,4 +822,6 @@ export const TIME_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
   "4.1": T41, "4.2": T42, "4.3": T43, "4.4": T44, "4.5": T45, "4.6": T46,
   "5.1": T51, "5.2": T52, "5.3": T53, "5.4": T54, "5.5": T55, "5.6": T56,
   "6.1": T61, "6.2": T62, "6.3": T63, "6.4": T64, "6.5": T65, "6.6": T66,
+  "7.1": T71, "7.2": T72, "7.3": T73, "7.4": T74, "7.5": T75, "7.6": T76,
+  "8.1": T81, "8.2": T82, "8.3": T83, "8.4": T84, "8.5": T85, "8.6": T86,
 };
