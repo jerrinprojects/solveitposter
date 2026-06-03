@@ -217,11 +217,11 @@ function L22() {
 function L23() {
   const cols = 5, rows = 3, cell = 14;
   const gw = cols * cell, gh = rows * cell;
-  const ox = 8, oy = 12;
+  const ox = 8, oy = 18;
   return (
     <Card>
       <Instr text="Find the perimeter of this rectangle." />
-      <svg overflow="visible" width={gw + ox + 28} height={gh + oy + 22} viewBox={`0 0 ${gw + ox + 28} ${gh + oy + 22}`}>
+      <svg overflow="visible" width={gw + ox + 28} height={gh + oy + 14} viewBox={`0 0 ${gw + ox + 28} ${gh + oy + 14}`}>
         {/* Grid cells */}
         {Array.from({ length: rows }, (_, r) =>
           Array.from({ length: cols }, (_, c) => (
@@ -229,7 +229,7 @@ function L23() {
           ))
         )}
         {/* Width label on top */}
-        <text x={ox + gw / 2} y={oy - 3} textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
+        <text x={ox + gw / 2} y={oy - 7} textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
         {/* Height label on right */}
         <text x={ox + gw + 5} y={oy + gh / 2 + 4} fontSize="9" fill="#6b7280" fontWeight="bold">3 cm</text>
       </svg>
@@ -283,10 +283,10 @@ function L32() {
   return (
     <Card>
       <Instr text="Find the perimeter of this shape." />
-      <svg overflow="visible" width="110" height="75" viewBox="0 0 110 75">
-        <rect x="10" y="10" width="85" height="48" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="52" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 cm</text>
-        <text x="102" y="37" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
+      <svg overflow="visible" width="110" height="80" viewBox="0 0 110 80">
+        <rect x="10" y="18" width="85" height="48" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="52" y="12" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 cm</text>
+        <text x="102" y="45" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
       </svg>
       <QBox />
     </Card>
@@ -320,18 +320,18 @@ function L34() {
       <Instr text="Which shape has the greater area?" />
       <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg overflow="visible" width="52" height="44" viewBox="0 0 52 44">
-            <rect x="3" y="3" width="46" height="36" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
-            <text x="26" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">6 cm</text>
-            <text x="50" y="24" textAnchor="middle" fontSize="8" fill="#6b7280">5 cm</text>
+          <svg overflow="visible" width="52" height="50" viewBox="0 0 52 50">
+            <rect x="3" y="9" width="46" height="36" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+            <text x="26" y="6" textAnchor="middle" fontSize="8" fill="#6b7280">6 cm</text>
+            <text x="50" y="30" textAnchor="middle" fontSize="8" fill="#6b7280">5 cm</text>
           </svg>
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg overflow="visible" width="60" height="36" viewBox="0 0 60 36">
-            <rect x="3" y="3" width="54" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
-            <text x="30" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">9 cm</text>
-            <text x="58" y="20" textAnchor="middle" fontSize="8" fill="#6b7280">3 cm</text>
+          <svg overflow="visible" width="60" height="42" viewBox="0 0 60 42">
+            <rect x="3" y="9" width="54" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
+            <text x="30" y="6" textAnchor="middle" fontSize="8" fill="#6b7280">9 cm</text>
+            <text x="58" y="26" textAnchor="middle" fontSize="8" fill="#6b7280">3 cm</text>
           </svg>
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
@@ -364,10 +364,10 @@ function L42() {
   return (
     <Card>
       <Instr text="Find the perimeter." />
-      <svg overflow="visible" width="115" height="65" viewBox="0 0 115 65">
-        <rect x="8" y="8" width="98" height="42" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="57" y="6" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
-        <text x="112" y="33" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
+      <svg overflow="visible" width="115" height="72" viewBox="0 0 115 72">
+        <rect x="8" y="16" width="98" height="42" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="57" y="10" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
+        <text x="112" y="40" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
       </svg>
       <QBox />
     </Card>
@@ -396,10 +396,10 @@ function L44() {
   return (
     <Card>
       <Instr text="Find the area of this square." />
-      <svg overflow="visible" width="80" height="75" viewBox="0 0 80 75">
-        <rect x="5" y="5" width="60" height="60" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
-        <text x="35" y="4" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 cm</text>
-        <text x="72" y="38" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 cm</text>
+      <svg overflow="visible" width="82" height="82" viewBox="0 0 82 82">
+        <rect x="5" y="14" width="60" height="60" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
+        <text x="35" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 cm</text>
+        <text x="74" y="47" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 cm</text>
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <QBox />
@@ -457,10 +457,10 @@ function L52() {
   return (
     <Card>
       <Instr text="Find the perimeter of this shape." />
-      <svg overflow="visible" width="115" height="75" viewBox="0 0 115 75">
-        <rect x="8" y="10" width="90" height="52" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="53" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
-        <text x="104" y="39" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
+      <svg overflow="visible" width="115" height="82" viewBox="0 0 115 82">
+        <rect x="8" y="18" width="90" height="52" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="53" y="12" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
+        <text x="104" y="47" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
       </svg>
       <QBox />
     </Card>
@@ -472,10 +472,10 @@ function L53() {
   return (
     <Card>
       <Instr text="Find the area of the rectangle." />
-      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
-        <rect x="5" y="5" width="90" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
-        <text x="50" y="4" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">8 cm</text>
-        <text x="100" y="35" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
+      <svg overflow="visible" width="110" height="72" viewBox="0 0 110 72">
+        <rect x="5" y="14" width="90" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
+        <text x="50" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">8 cm</text>
+        <text x="102" y="42" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <QBox />
@@ -492,18 +492,18 @@ function L54() {
       <Instr text="What is the same about these shapes?" />
       <div style={{ display: "flex", gap: 10, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg overflow="visible" width="55" height="40" viewBox="0 0 55 40">
-            <rect x="3" y="3" width="48" height="32" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
-            <text x="27" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">6</text>
-            <text x="53" y="22" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
+          <svg overflow="visible" width="55" height="46" viewBox="0 0 55 46">
+            <rect x="3" y="11" width="48" height="32" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+            <text x="27" y="7" textAnchor="middle" fontSize="8" fill="#6b7280">6</text>
+            <text x="53" y="30" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
           </svg>
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg overflow="visible" width="45" height="50" viewBox="0 0 45 50">
-            <rect x="3" y="3" width="38" height="42" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
-            <text x="22" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
-            <text x="43" y="27" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
+          <svg overflow="visible" width="45" height="56" viewBox="0 0 45 56">
+            <rect x="3" y="11" width="38" height="42" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
+            <text x="22" y="7" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
+            <text x="43" y="35" textAnchor="middle" fontSize="8" fill="#6b7280">4</text>
           </svg>
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
@@ -524,18 +524,18 @@ function L55() {
       <Instr text="Which rectangle has the larger area?" />
       <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-end" }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg overflow="visible" width="52" height="44" viewBox="0 0 52 44">
-            <rect x="3" y="3" width="46" height="38" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
-            <text x="26" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">5 m</text>
-            <text x="50" y="25" textAnchor="middle" fontSize="8" fill="#6b7280">3 m</text>
+          <svg overflow="visible" width="52" height="50" viewBox="0 0 52 50">
+            <rect x="3" y="9" width="46" height="38" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+            <text x="26" y="6" textAnchor="middle" fontSize="8" fill="#6b7280">5 m</text>
+            <text x="50" y="32" textAnchor="middle" fontSize="8" fill="#6b7280">3 m</text>
           </svg>
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>A</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <svg overflow="visible" width="62" height="34" viewBox="0 0 62 34">
-            <rect x="3" y="3" width="56" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
-            <text x="31" y="2" textAnchor="middle" fontSize="8" fill="#6b7280">8 m</text>
-            <text x="60" y="20" textAnchor="middle" fontSize="8" fill="#6b7280">2 m</text>
+          <svg overflow="visible" width="62" height="40" viewBox="0 0 62 40">
+            <rect x="3" y="9" width="56" height="28" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5" />
+            <text x="31" y="6" textAnchor="middle" fontSize="8" fill="#6b7280">8 m</text>
+            <text x="60" y="27" textAnchor="middle" fontSize="8" fill="#6b7280">2 m</text>
           </svg>
           <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>B</span>
         </div>
@@ -582,10 +582,10 @@ function L63() {
   return (
     <Card>
       <Instr text="Find the area using the formula." />
-      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
-        <rect x="5" y="5" width="95" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
-        <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 m</text>
-        <text x="106" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 m</text>
+      <svg overflow="visible" width="110" height="72" viewBox="0 0 110 72">
+        <rect x="5" y="14" width="95" height="50" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
+        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 m</text>
+        <text x="106" y="42" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">7 m</text>
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <QBox />
@@ -618,16 +618,16 @@ function L65() {
     <Card>
       <Instr text="Rectangle or triangle? Find the area." />
       <div style={{ display: "flex", gap: 8, alignItems: "flex-end" }}>
-        <svg overflow="visible" width="60" height="44" viewBox="0 0 60 44">
-          <rect x="3" y="3" width="52" height="36" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5" />
-          <text x="29" y="2" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">9 m</text>
-          <text x="58" y="22" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">6 m</text>
+        <svg overflow="visible" width="60" height="50" viewBox="0 0 60 50">
+          <rect x="3" y="9" width="52" height="36" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5" />
+          <text x="29" y="6" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">9 m</text>
+          <text x="58" y="28" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">6 m</text>
         </svg>
-        <svg overflow="visible" width="60" height="48" viewBox="0 0 60 48">
-          <polygon points="5,40 55,40 5,5" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
-          <polyline points="5,32 13,32 13,40" fill="none" stroke="#6b7280" strokeWidth="1.2" />
-          <text x="29" y="46" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">8 m</text>
-          <text x="1" y="25" fontSize="8" fill="#6b7280" fontWeight="bold">5 m</text>
+        <svg overflow="visible" width="60" height="54" viewBox="0 0 60 54">
+          <polygon points="5,46 55,46 5,11" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+          <polyline points="5,38 13,38 13,46" fill="none" stroke="#6b7280" strokeWidth="1.2" />
+          <text x="29" y="52" textAnchor="middle" fontSize="8" fill="#6b7280" fontWeight="bold">8 m</text>
+          <text x="1" y="31" fontSize="8" fill="#6b7280" fontWeight="bold">5 m</text>
         </svg>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
@@ -643,11 +643,11 @@ function L71() {
   return (
     <Card>
       <Instr text="Use the formula to find the perimeter." />
-      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
-        <rect x="5" y="5" width="95" height="50" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">11 cm</text>
-        <text x="107" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
-        <text x="52" y="35" textAnchor="middle" fontSize="9" fill="#be185d" fontWeight="bold">P = 2(l+w)</text>
+      <svg overflow="visible" width="110" height="72" viewBox="0 0 110 72">
+        <rect x="5" y="14" width="95" height="50" rx="2" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">11 cm</text>
+        <text x="107" y="42" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 cm</text>
+        <text x="52" y="43" textAnchor="middle" fontSize="9" fill="#be185d" fontWeight="bold">P = 2(l+w)</text>
       </svg>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <QBox />
@@ -662,11 +662,11 @@ function L72() {
   return (
     <Card>
       <Instr text="Find the missing side length." />
-      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
-        <rect x="5" y="5" width="95" height="50" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
-        <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">? cm</text>
-        <text x="107" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
-        <text x="52" y="35" textAnchor="middle" fontSize="9" fill="#92400e" fontWeight="bold">P = 28 cm</text>
+      <svg overflow="visible" width="110" height="72" viewBox="0 0 110 72">
+        <rect x="5" y="14" width="95" height="50" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
+        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">? cm</text>
+        <text x="107" y="42" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">5 cm</text>
+        <text x="52" y="43" textAnchor="middle" fontSize="9" fill="#92400e" fontWeight="bold">P = 28 cm</text>
       </svg>
       <QBox />
     </Card>
@@ -695,11 +695,11 @@ function L74() {
   return (
     <Card>
       <Instr text="Find the missing dimension." />
-      <svg overflow="visible" width="110" height="65" viewBox="0 0 110 65">
-        <rect x="5" y="5" width="95" height="50" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
-        <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">? m</text>
-        <text x="107" y="34" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 m</text>
-        <text x="52" y="35" textAnchor="middle" fontSize="9" fill="#166534" fontWeight="bold">A = 32 m²</text>
+      <svg overflow="visible" width="110" height="72" viewBox="0 0 110 72">
+        <rect x="5" y="14" width="95" height="50" rx="2" fill="#f0fdf4" stroke="#86efac" strokeWidth="2" />
+        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">? m</text>
+        <text x="107" y="42" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">4 m</text>
+        <text x="52" y="43" textAnchor="middle" fontSize="9" fill="#166534" fontWeight="bold">A = 32 m²</text>
       </svg>
       <QBox />
     </Card>
@@ -761,12 +761,12 @@ function L83() {
   return (
     <Card>
       <Instr text="Find the area of this trapezium." />
-      <svg overflow="visible" width="115" height="68" viewBox="0 0 115 68">
-        <polygon points="25,60 90,60 75,12 40,12" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="57" y="8" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">a = 6 cm</text>
-        <text x="57" y="68" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">b = 10 cm</text>
-        <line x1="75" y1="12" x2="75" y2="60" stroke="#9ca3af" strokeWidth="1" strokeDasharray="3,2" />
-        <text x="82" y="40" fontSize="8" fill="#6b7280" fontWeight="bold">h=4</text>
+      <svg overflow="visible" width="115" height="76" viewBox="0 0 115 76">
+        <polygon points="25,66 90,66 75,18 40,18" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
+        <text x="57" y="14" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">a = 6 cm</text>
+        <text x="57" y="74" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">b = 10 cm</text>
+        <line x1="75" y1="18" x2="75" y2="66" stroke="#9ca3af" strokeWidth="1" strokeDasharray="3,2" />
+        <text x="82" y="46" fontSize="8" fill="#6b7280" fontWeight="bold">h=4</text>
       </svg>
       <QBox />
     </Card>
@@ -778,10 +778,10 @@ function L84() {
   return (
     <Card>
       <Instr text="Find both the area and the perimeter." />
-      <svg overflow="visible" width="110" height="60" viewBox="0 0 110 60">
-        <rect x="5" y="5" width="95" height="48" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
-        <text x="52" y="3" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
-        <text x="107" y="32" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
+      <svg overflow="visible" width="110" height="68" viewBox="0 0 110 68">
+        <rect x="5" y="14" width="95" height="48" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
+        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
+        <text x="107" y="41" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
       </svg>
       <div style={{ display: "flex", gap: 8 }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
