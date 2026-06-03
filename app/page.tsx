@@ -68,6 +68,7 @@ const measurementTopics = [
     items: [
       { label: "Phase 1", sub: "Year 0–3", href: "/measurement/capacity/phase-1" },
       { label: "Phase 2", sub: "Year 4–6", href: "/measurement/capacity/phase-2" },
+      { label: "Phase 3", sub: "Year 7–8", href: "/measurement/capacity/phase-3" },
     ],
   },
 ];

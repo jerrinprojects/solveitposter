@@ -692,6 +692,255 @@ function C66() {
   );
 }
 
+// ── Triangular prism (right-angled cross-section) ────────────────
+function TriPrism({ base, triH, length, cell = 9 }: { base: number; triH: number; length: number; cell?: number }) {
+  const dx = cell;
+  const depthX = cell * 0.6;
+  const depthY = -cell * 0.34;
+  const W = Math.ceil(base * dx + length * depthX + 30);
+  const H = Math.ceil(triH * cell + length * Math.abs(depthY) + 22);
+  const ox = 4;
+  const oy = Math.ceil(triH * cell + length * Math.abs(depthY)) + 4;
+
+  // Front triangle
+  const fA = [ox, oy];                                 // bottom-left (right angle)
+  const fB = [ox + base * dx, oy];                     // bottom-right
+  const fC = [ox, oy - triH * cell];                   // top
+  // Back triangle (shifted by length * depth)
+  const bA = [fA[0] + length * depthX, fA[1] + length * depthY];
+  const bB = [fB[0] + length * depthX, fB[1] + length * depthY];
+  const bC = [fC[0] + length * depthX, fC[1] + length * depthY];
+
+  const poly = (pts: number[][]) => pts.map((p) => p.join(",")).join(" ");
+  return (
+    <svg overflow="visible" width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+      {/* Bottom face */}
+      <polygon points={poly([fA, fB, bB, bA])} fill="#bae6fd" stroke="#0284c7" strokeWidth="1.2" />
+      {/* Slanted face */}
+      <polygon points={poly([fB, fC, bC, bB])} fill="#7dd3fc" stroke="#0284c7" strokeWidth="1.2" />
+      {/* Front triangle */}
+      <polygon points={poly([fA, fB, fC])} fill="#e0f2fe" stroke="#0284c7" strokeWidth="1.2" />
+      {/* Back triangle outline */}
+      <polygon points={poly([bA, bB, bC])} fill="none" stroke="#0284c7" strokeWidth="1" strokeDasharray="2,2" />
+      {/* Right-angle marker */}
+      <polyline points={`${fA[0] + 4},${fA[1]} ${fA[0] + 4},${fA[1] - 4} ${fA[0]},${fA[1] - 4}`} fill="none" stroke="#0c4a6e" strokeWidth="1" />
+      {/* Labels */}
+      <text x={(fA[0] + fB[0]) / 2} y={fA[1] + 11} textAnchor="middle" fontSize="9" fill="#0c4a6e" fontWeight="bold">b = {base}</text>
+      <text x={fA[0] - 2} y={(fA[1] + fC[1]) / 2 + 3} textAnchor="end" fontSize="9" fill="#0c4a6e" fontWeight="bold">h = {triH}</text>
+      <text x={fB[0] + (bB[0] - fB[0]) / 2 + 3} y={fB[1] + (bB[1] - fB[1]) / 2 + 9} fontSize="9" fill="#0c4a6e" fontWeight="bold">L = {length}</text>
+    </svg>
+  );
+}
+
+// ── Composite shape: two prisms stacked ──────────────────────────
+function CompositePrism({ a, b, cell = 8 }:
+  { a: { l: number; w: number; h: number }; b: { l: number; w: number; h: number }; cell?: number }) {
+  // Render two cube-stacks side by side with a small "+" label
+  return (
+    <div style={{ display: "flex", alignItems: "flex-end", gap: 10 }}>
+      <CubePrism l={a.l} w={a.w} h={a.h} cell={cell} />
+      <span style={{ fontSize: 14, fontWeight: 800, color: "#0c4a6e", paddingBottom: 6 }}>+</span>
+      <CubePrism l={b.l} w={b.w} h={b.h} cell={cell} />
+    </div>
+  );
+}
+
+// ── C7.1 — Choose the volume formula ─────────────────────────────
+function C71() {
+  return (
+    <Card>
+      <Instr text="Which formula gives the volume of a rectangular prism?" />
+      <PrismLabel l={4} w={2} h={3} cell={9} />
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center", marginTop: 2 }}>
+        {["l × w × h", "s × s × s", "½ × b × h × L"].map(l => <ChoiceBtn key={l} label={l} />)}
+      </div>
+    </Card>
+  );
+}
+
+// ── C7.2 — Volume of a cube ──────────────────────────────────────
+function C72() {
+  return (
+    <Card>
+      <Instr text="Find the volume of this cube." />
+      <PrismLabel l={4} w={4} h={4} cell={10} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C7.3 — Volume of a rectangular prism ─────────────────────────
+function C73() {
+  return (
+    <Card>
+      <Instr text="Find the volume of this rectangular prism." />
+      <PrismLabel l={6} w={3} h={4} cell={9} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C7.4 — Missing side from volume ──────────────────────────────
+function C74() {
+  return (
+    <Card>
+      <Instr text="The volume is 48 cm³. Find the missing side." />
+      <PrismLabelHidden l={4} w={3} hLabel="?" cell={10} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C7.5 — Compare two prism volumes (formulas variant) ──────────
+function C75() {
+  return (
+    <Card>
+      <Instr text="Which prism has the greater volume?" />
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-end" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <CubePrism l={4} w={2} h={3} cell={8} />
+          <span style={{ fontSize: 9, fontWeight: 800, color: "#475569" }}>A</span>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+          <CubePrism l={3} w={3} h={3} cell={8} />
+          <span style={{ fontSize: 9, fontWeight: 800, color: "#475569" }}>B</span>
+        </div>
+      </div>
+      <div style={{ display: "flex", gap: 8, marginTop: 4 }}>
+        <ChoiceBtn label="A" />
+        <ChoiceBtn label="B" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C8.1 — cm³ ↔ m³ ──────────────────────────────────────────────
+function C81() {
+  return (
+    <Card>
+      <Instr text="Convert between cm³ and m³." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        2 m³ = ___ cm³
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C8.2 — Capacity ↔ Volume ─────────────────────────────────────
+function C82() {
+  return (
+    <Card>
+      <Instr text="Convert between capacity and volume." />
+      <div style={{ fontSize: 14, fontWeight: 800, color: "#374151", textAlign: "center", margin: "6px 0 10px", lineHeight: 1.6 }}>
+        3 L = ___ cm³
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C8.3 — Triangular prism volume ───────────────────────────────
+function C83() {
+  return (
+    <Card>
+      <Instr text="Find the volume of this triangular prism." />
+      <TriPrism base={6} triH={4} length={5} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C8.4 — Composite shape volume ────────────────────────────────
+function C84() {
+  return (
+    <Card>
+      <Instr text="Find the total volume of this composite shape." />
+      <CompositePrism a={{ l: 4, w: 3, h: 3 }} b={{ l: 3, w: 2, h: 2 }} />
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm³</span>
+      </div>
+    </Card>
+  );
+}
+
+// ── C8.5 — Compare capacity vs volume ────────────────────────────
+function C85() {
+  return (
+    <Card>
+      <Instr text="Which is greater: 1500 ml or 1200 cm³?" />
+      <div style={{ display: "flex", gap: 8 }}>
+        <ChoiceBtn label="1500 ml" />
+        <ChoiceBtn label="1200 cm³" />
+      </div>
+    </Card>
+  );
+}
+
+// ── C8.6 — Sensible capacity (estimation) ────────────────────────
+function C86() {
+  return (
+    <Card>
+      <Instr text="A glass of water holds about..." />
+      <div style={{ fontSize: 26, marginBottom: 8 }}>🥛</div>
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+        {["25 ml", "250 ml", "2.5 L", "25 L"].map(l => <ChoiceBtn key={l} label={l} />)}
+      </div>
+    </Card>
+  );
+}
+
+// PrismLabel variant with one side hidden (for 7.4 missing-side)
+function PrismLabelHidden({ l, w, hLabel, cell = 10 }: { l: number; w: number; hLabel: string; cell?: number }) {
+  // Render fixed-shape prism; just swap the height label to "?"
+  const h = 3; // visual h (doesn't represent actual answer)
+  const dx = cell;
+  const dyDown = cell;
+  const depthX = cell * 0.6;
+  const depthY = -cell * 0.34;
+  const W = Math.ceil(l * dx + w * depthX + 30);
+  const H = Math.ceil(h * dyDown + w * Math.abs(depthY) + 18);
+  const ox = 4;
+  const oy = Math.ceil(h * dyDown + w * Math.abs(depthY)) + 4;
+  const fA = [ox, oy - h * dyDown];
+  const fB = [ox + l * dx, oy - h * dyDown];
+  const fC = [ox + l * dx, oy];
+  const fD = [ox, oy];
+  const bA = [fA[0] + w * depthX, fA[1] + w * depthY];
+  const bB = [fB[0] + w * depthX, fB[1] + w * depthY];
+  const bC = [fC[0] + w * depthX, fC[1] + w * depthY];
+  const poly = (pts: number[][]) => pts.map((p) => p.join(",")).join(" ");
+  return (
+    <svg overflow="visible" width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+      <polygon points={poly([fA, fB, bB, bA])} fill="#bae6fd" stroke="#0284c7" strokeWidth="1.2" />
+      <polygon points={poly([fA, fB, fC, fD])} fill="#e0f2fe" stroke="#0284c7" strokeWidth="1.2" />
+      <polygon points={poly([fB, bB, bC, fC])} fill="#7dd3fc" stroke="#0284c7" strokeWidth="1.2" />
+      <text x={(fA[0] + fB[0]) / 2} y={fC[1] + 10} textAnchor="middle" fontSize="9" fill="#0c4a6e" fontWeight="bold">{l} cm</text>
+      <text x={fC[0] + (bC[0] - fC[0]) / 2 + 2} y={fC[1] + (bC[1] - fC[1]) / 2 + 6} fontSize="9" fill="#0c4a6e" fontWeight="bold">{w} cm</text>
+      <text x={fC[0] + 4} y={(fB[1] + fC[1]) / 2 + 3} fontSize="10" fill="#be123c" fontWeight="bold">{hLabel}</text>
+    </svg>
+  );
+}
+
 // ── Map ──────────────────────────────────────────────────────────
 
 export const CAPACITY_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
@@ -702,4 +951,6 @@ export const CAPACITY_PREVIEW_MAP: Record<string, () => React.ReactElement> = {
   "4.1": C41, "4.2": C42, "4.3": C43, "4.4": C44, "4.5": C45,
   "5.1": C51, "5.2": C52, "5.3": C53, "5.4": C54, "5.5": C55,
   "6.1": C61, "6.2": C62, "6.3": C63, "6.4": C64, "6.5": C65, "6.6": C66,
+  "7.1": C71, "7.2": C72, "7.3": C73, "7.4": C74, "7.5": C75,
+  "8.1": C81, "8.2": C82, "8.3": C83, "8.4": C84, "8.5": C85, "8.6": C86,
 };
