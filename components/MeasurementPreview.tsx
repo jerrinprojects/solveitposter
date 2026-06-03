@@ -685,18 +685,34 @@ function L72() {
   );
 }
 
-// ── L7.3 — Area formula (rectangle/square/triangle) ─────────────
+// ── L7.3 — Area formula (rectangle / square / triangle alternates) ──
 function L73() {
   return (
     <Card>
       <Instr text="Use the formula to find the area." />
-      <svg overflow="visible" width="110" height="75" viewBox="0 0 110 75">
-        <polygon points="10,68 100,68 10,15" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
-        <polyline points="10,58 20,58 20,68" fill="none" stroke="#6b7280" strokeWidth="1.5" />
-        <text x="50" y="73" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">10 m</text>
-        <text x="2" y="44" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
-        <text x="52" y="52" textAnchor="middle" fontSize="9" fill="#1d4ed8" fontWeight="bold">A = ½bh</text>
-      </svg>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, margin: "2px 0 6px" }}>
+        <svg overflow="visible" width="92" height="68" viewBox="0 0 92 68">
+          <polygon points="6,60 82,60 6,18" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
+          <polyline points="6,52 14,52 14,60" fill="none" stroke="#6b7280" strokeWidth="1.2" />
+          <text x="44" y="67" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">10 m</text>
+          <text x="0" y="40" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
+          <text x="40" y="46" textAnchor="middle" fontSize="9" fill="#1d4ed8" fontWeight="bold">A = ½bh</text>
+        </svg>
+        {/* "rect / sq / tri" rotation badge */}
+        <div style={{
+          display: "flex", flexDirection: "column", alignItems: "center", gap: 2,
+        }}>
+          <svg width="20" height="12" viewBox="0 0 20 12">
+            <rect x="1" y="2" width="18" height="8" rx="1.2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.9" />
+          </svg>
+          <svg width="14" height="12" viewBox="0 0 14 12">
+            <rect x="1" y="1" width="12" height="10" rx="1.2" fill="#f0fdf4" stroke="#86efac" strokeWidth="0.9" />
+          </svg>
+          <svg width="20" height="12" viewBox="0 0 20 12">
+            <polygon points="1,10 19,10 1,1" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="0.9" />
+          </svg>
+        </div>
+      </div>
       <QBox />
     </Card>
   );
@@ -779,73 +795,69 @@ function L83() {
         <text x="57" y="74" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">b = 10 cm</text>
         <line x1="75" y1="18" x2="75" y2="66" stroke="#9ca3af" strokeWidth="1" strokeDasharray="3,2" />
         <text x="82" y="46" fontSize="8" fill="#6b7280" fontWeight="bold">h=4</text>
+        <text x="57" y="44" textAnchor="middle" fontSize="9" fill="#be185d" fontWeight="bold">A = ½(a+b)h</text>
       </svg>
       <QBox />
     </Card>
   );
 }
 
-// ── L8.4 — Area AND perimeter of rectangle ───────────────────────
+// ── L8.4 — Perimeter given → find the area ───────────────────────
 function L84() {
   return (
     <Card>
-      <Instr text="Find both the area and the perimeter." />
-      <svg overflow="visible" width="128" height="68" viewBox="0 0 128 68">
-        <rect x="5" y="14" width="95" height="48" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
-        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 m</text>
-        <text x="104" y="41" textAnchor="start" fontSize="9" fill="#6b7280" fontWeight="bold">6 m</text>
+      <Instr text="Perimeter = 30 cm. Find the area." />
+      <svg overflow="visible" width="128" height="72" viewBox="0 0 128 72">
+        <rect x="5" y="14" width="95" height="50" rx="2" fill="#fef9c3" stroke="#fde68a" strokeWidth="2" />
+        <text x="52" y="9" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">9 cm</text>
+        <text x="104" y="42" textAnchor="start" fontSize="9" fill="#6b7280" fontWeight="bold">? cm</text>
+        <text x="52" y="43" textAnchor="middle" fontSize="9" fill="#92400e" fontWeight="bold">P = 30 cm</text>
       </svg>
-      <div style={{ display: "flex", gap: 8 }}>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>Area</span>
-          <QBox />
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
-          <span style={{ fontSize: 9, color: "#9ca3af", fontWeight: 700 }}>Perimeter</span>
-          <QBox />
-        </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <QBox />
+        <span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>cm²</span>
       </div>
     </Card>
   );
 }
 
-// ── L8.5 — Parts of a circle ─────────────────────────────────────
+// ── L8.5 — Definition → choose the circle part ───────────────────
 function L85() {
   return (
     <Card>
-      <Instr text="Name the parts of this circle." />
-      <svg overflow="visible" width="120" height="100" viewBox="0 0 120 100">
-        <circle cx="60" cy="50" r="40" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        {/* Centre dot */}
-        <circle cx="60" cy="50" r="3" fill="#ec4899" />
-        {/* Radius */}
-        <line x1="60" y1="50" x2="100" y2="50" stroke="#ec4899" strokeWidth="1.5" />
-        {/* Diameter */}
-        <line x1="20" y1="50" x2="100" y2="50" stroke="#93c5fd" strokeWidth="1" strokeDasharray="4,2" />
-        <text x="63" y="48" fontSize="7" fill="#be185d" fontWeight="bold">centre</text>
-        <text x="80" y="44" fontSize="7" fill="#ec4899" fontWeight="bold">radius</text>
-        <text x="22" y="68" fontSize="7" fill="#2563eb" fontWeight="bold">diameter</text>
-        <text x="5" y="22" fontSize="7" fill="#059669" fontWeight="bold">circumference</text>
-        {/* Arrow to circumference */}
-        <line x1="38" y1="22" x2="26" y2="14" stroke="#059669" strokeWidth="1" />
-        <circle cx="60" cy="50" r="40" fill="none" stroke="#059669" strokeWidth="1" strokeDasharray="3,3" />
+      <Instr text='Which part is "the distance from the centre to the edge"?' />
+      <svg overflow="visible" width="72" height="56" viewBox="0 0 72 56">
+        <circle cx="36" cy="28" r="22" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="1.5" />
+        <circle cx="36" cy="28" r="2" fill="#ec4899" />
+        <line x1="36" y1="28" x2="58" y2="28" stroke="#ec4899" strokeWidth="1.5" />
       </svg>
+      <div style={{ display: "flex", gap: 5, flexWrap: "wrap", justifyContent: "center", marginTop: 4 }}>
+        <ChoiceBtn label="radius" />
+        <ChoiceBtn label="diameter" />
+        <ChoiceBtn label="circumference" />
+      </div>
     </Card>
   );
 }
 
-// ── L8.6 — Composite rectangle + triangle ────────────────────────
+// ── L8.6 — Advanced composite (L-shape, same family as 7.5, scaled) ──
 function L86() {
   return (
     <Card>
       <Instr text="Find the total area of this composite shape." />
-      <svg overflow="visible" width="110" height="85" viewBox="0 0 110 85">
-        {/* Rectangle bottom */}
-        <rect x="10" y="38" width="80" height="38" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="2" />
-        {/* Triangle on top */}
-        <polygon points="10,40 90,40 50,8" fill="#fce7f3" stroke="#f9a8d4" strokeWidth="2" />
-        <text x="46" y="63" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">8 m × 4 m</text>
-        <text x="46" y="28" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">b=8, h=4</text>
+      <svg overflow="visible" width="120" height="92" viewBox="0 0 120 92">
+        {/* L-shape rectilinear polygon — bigger than 7.5 */}
+        <polygon
+          points="8,10 92,10 92,46 50,46 50,82 8,82"
+          fill="#dbeafe" stroke="#93c5fd" strokeWidth="2"
+        />
+        {/* Side labels */}
+        <text x="50" y="6" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">24 cm</text>
+        <text x="96" y="30" textAnchor="start" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
+        <text x="71" y="44" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
+        <text x="54" y="68" textAnchor="start" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
+        <text x="29" y="88" textAnchor="middle" fontSize="9" fill="#6b7280" fontWeight="bold">12 cm</text>
+        <text x="1" y="48" fontSize="9" fill="#6b7280" fontWeight="bold">24 cm</text>
       </svg>
       <QBox />
     </Card>
