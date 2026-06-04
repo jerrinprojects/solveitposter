@@ -73,6 +73,8 @@ const ADDITION_TEMPLATES: Array<(a: number, b: number) => string> = [
 ];
 
 // 24 integer division templates — "share X into Y groups" / "X ÷ Y per group".
+// All names rotate (Liam, Noah, Ella, Olivia, Lucas, Ava, Mia, Aroha, Tane,
+// Kiri, Sione). Contexts cover sharing, grouping, per-unit and rate.
 const DIVISION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Liam has ${a} marbles. He shares them equally among ${b} friends. How many does each friend get?`,
   (a, b) => `A teacher has ${a} stickers to share equally among ${b} students. How many does each student get?`,
@@ -85,47 +87,55 @@ const DIVISION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `${a} eggs are packed into cartons of ${b}. How many full cartons?`,
   (a, b) => `Mia has ${a} metres of rope. She cuts it into pieces of ${b} m. How many pieces?`,
   (a, b) => `A school has ${a} chairs to set up in rows of ${b}. How many rows?`,
-  (a, b) => `Tane has ${a} biscuits to share equally between ${b} plates. How many on each plate?`,
+  (a, b) => `Tane bakes ${a} biscuits over ${b} batches of equal size. How many biscuits per batch?`,
   (a, b) => `${a} students go to camp on ${b} buses (equal numbers). How many students per bus?`,
-  (a, b) => `Olivia practises for ${a} minutes over ${b} days. How many minutes per day on average?`,
+  (a, b) => `Olivia practises piano for ${a} minutes over ${b} days. How many minutes per day on average?`,
   (a, b) => `A garden has ${a} flowers planted equally in ${b} rows. How many flowers per row?`,
-  (a, b) => `Kiri has ${a} stickers to share equally with ${b} friends. How many each?`,
+  (a, b) => `Ava ran ${a} laps across ${b} training sessions of equal length. How many laps per session?`,
   (a, b) => `A tournament has ${a} players split into teams of ${b}. How many teams?`,
   (a, b) => `Ella has ${a} pages to read across ${b} days. How many pages per day if she reads equally?`,
   (a, b) => `Noah has ${a} cards and puts them in piles of ${b}. How many piles?`,
-  (a, b) => `${a} biscuits are shared equally among ${b} children. How many each?`,
+  (a, b) => `${a} cupcakes are shared equally among ${b} children. How many each?`,
   (a, b) => `An orchard has ${a} kiwifruit. They go into trays of ${b}. How many trays?`,
-  (a, b) => `Lucas counts ${a} steps. He walks at ${b} steps per minute. How many minutes?`,
+  (a, b) => `Lucas runs ${a} metres in ${b} laps of the field. How long is each lap (in metres)?`,
   (a, b) => `A beekeeper has ${a} bees evenly across ${b} hives. How many bees per hive?`,
   (a, b) => `Sione plants ${a} seedlings in rows of ${b}. How many rows?`,
 ];
 
-// 24 decimal division templates — money / measurement contexts.
+// 24 decimal division templates — for Stage 5 where divisor can be either a
+// whole or a decimal. All templates treat B as a measurement / per-unit
+// quantity (kg, m, L, ml, $ per item) so they still make sense whether B is
+// 10 (Stage 5.1) or 0.05 (Stage 5.6). Names rotate the full NZ roster.
 const DECIMAL_DIVISION_TEMPLATES: Array<(a: string, b: string) => string> = [
-  (a, b) => `Liam has $${a} to share equally between ${b} people. How much does each get?`,
-  (a, b) => `A bag of flour weighs ${a} kg. ${b} kg are used per loaf. How many loaves can be made?`,
-  (a, b) => `A bottle holds ${a} L of juice. Pour ${b} L into each cup. How many cups can be filled?`,
-  (a, b) => `Aroha walks ${a} km in total at ${b} km per hour. How many hours did she walk?`,
-  (a, b) => `A piece of ribbon is ${a} m long. Cut into pieces of ${b} m. How many pieces?`,
-  (a, b) => `Mia ran ${a} km in ${b} laps of equal length. How long is each lap (in km)?`,
-  (a, b) => `A board game costs $${a}. Pay in ${b} equal weekly instalments. How much each week?`,
-  (a, b) => `Tane has ${a} kg of flour. Each cake uses ${b} kg. How many cakes can he make?`,
-  (a, b) => `A jug holds ${a} L. Pour into cups of ${b} L each. How many cups?`,
-  (a, b) => `Olivia practised for ${a} minutes over ${b} sessions of equal length. How long was each session?`,
+  // ── "Cut into Y-size pieces / pour into Y-size cups" — works at any B ──
+  (a, b) => `Liam has ${a} m of ribbon. He cuts pieces of ${b} m. How many pieces?`,
   (a, b) => `A plank is ${a} m long. Sione cuts it into ${b} m sections. How many sections?`,
-  (a, b) => `Noah pays $${a} total for ${b} packs of cards. How much per pack?`,
+  (a, b) => `A garden bed is ${a} m long. Lucas divides it into ${b} m sections. How many sections?`,
+  (a, b) => `Mia's jug holds ${a} L. She pours into cups of ${b} L each. How many cups?`,
   (a, b) => `A water tank has ${a} L. Empty into buckets of ${b} L. How many bucketfuls?`,
-  (a, b) => `Ella saved $${a} over ${b} months of equal saving. How much per month?`,
-  (a, b) => `Ava ran ${a} km in ${b} km laps. How many laps?`,
-  (a, b) => `A pavlova needs ${a} eggs across ${b} pavlovas (equal). How many eggs each?`,
-  (a, b) => `Kiri walks ${a} km in ${b} hours at a steady pace. How many km per hour?`,
+  (a, b) => `A bottle holds ${a} L of juice. Pour ${b} L into each cup. How many cups?`,
+  (a, b) => `Aroha has ${a} m of string. She cuts it into ${b} m pieces. How many pieces?`,
+  // ── Weight per unit (works at any B kg/g per item) ──
+  (a, b) => `A bag of flour weighs ${a} kg. Each loaf uses ${b} kg. How many loaves can be made?`,
+  (a, b) => `Tane has ${a} kg of flour. Each cake uses ${b} kg. How many cakes can he make?`,
   (a, b) => `A piece of cheese weighs ${a} kg. Cut into ${b} kg blocks. How many blocks?`,
-  (a, b) => `Lucas earned $${a} over ${b} hours. How much per hour?`,
-  (a, b) => `A jug of paint holds ${a} L. Each room uses ${b} L. How many rooms?`,
-  (a, b) => `${a} kg of rice are split into bags of ${b} kg. How many bags?`,
-  (a, b) => `A book costs $${a}. Split the cost between ${b} friends. How much each?`,
-  (a, b) => `A tap leaked ${a} L in ${b} hours, steady rate. How many L per hour?`,
-  (a, b) => `A garden bed is ${a} m long. Divide into ${b} m sections. How many sections?`,
+  (a, b) => `${a} kg of rice are packed into bags of ${b} kg. How many bags?`,
+  (a, b) => `Ava has ${a} kg of apples to pack into bags of ${b} kg each. How many bags?`,
+  // ── Rate × time / total ÷ rate (B is a rate) ──
+  (a, b) => `Aroha walks ${a} km in total at ${b} km per hour. How many hours did she walk?`,
+  (a, b) => `Kiri walks ${a} km in ${b} hours at a steady pace. How many km per hour?`,
+  (a, b) => `A tap leaks ${a} L in ${b} hours, steady rate. How many L per hour?`,
+  (a, b) => `Lucas read ${a} pages at ${b} pages per minute. How many minutes?`,
+  (a, b) => `A car uses ${a} L of fuel travelling ${b} km. How many L per km?`,
+  (a, b) => `A delivery truck travels ${a} km at ${b} km per hour. How many hours of driving?`,
+  // ── Money per unit ──
+  (a, b) => `Ella spent $${a} on stickers that cost $${b} each. How many stickers?`,
+  (a, b) => `Noah pays $${a} for biscuits at $${b} each. How many biscuits did he buy?`,
+  (a, b) => `Kiri bought a roll of fabric for $${a}. Each metre costs $${b}. How many metres?`,
+  // ── Paint / portion-per-unit ──
+  (a, b) => `A jug of paint holds ${a} L. Each wall needs ${b} L. How many walls can be painted?`,
+  (a, b) => `Olivia has ${a} ml of medicine. Each dose is ${b} ml. How many doses?`,
+  (a, b) => `A roll of tape is ${a} m. Each package needs ${b} m. How many packages?`,
 ];
 
 // 24 integer subtraction templates — "has X, gives away/loses Y → result".
