@@ -98,7 +98,7 @@ export default function LandingPage() {
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
 
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-8">
         <p className="font-nunito text-xs font-bold text-pink-400 tracking-[0.35em] uppercase mb-3">
           Solveitmaths.com
         </p>
@@ -108,6 +108,18 @@ export default function LandingPage() {
         <p className="font-nunito text-sm text-gray-400 mt-2">
           Choose a topic to view and print
         </p>
+      </div>
+
+      {/* Worksheets nav button */}
+      <div className="mb-10">
+        <Link
+          href="/worksheets"
+          className="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-600 text-white font-fredoka font-bold text-base sm:text-lg px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all"
+        >
+          <span>📝</span>
+          <span>Worksheets</span>
+          <span className="text-pink-100">→</span>
+        </Link>
       </div>
 
       <div className="w-full max-w-2xl space-y-10">
