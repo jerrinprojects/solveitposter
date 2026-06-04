@@ -72,6 +72,62 @@ const ADDITION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `A pack has ${a} cards. Liam adds ${b} more cards from another pack. How many cards in total?`,
 ];
 
+// 24 integer subtraction templates — "has X, gives away/loses Y → result".
+const SUBTRACTION_TEMPLATES: Array<(a: number, b: number) => string> = [
+  (a, b) => `Liam has ${a} marbles. He gives ${b} to a friend. How many marbles does he have left?`,
+  (a, b) => `Ella has ${a} pages to read. She reads ${b} of them. How many pages are left?`,
+  (a, b) => `A box has ${a} crayons. ${b} crayons go missing. How many crayons are left?`,
+  (a, b) => `Aroha collected ${a} shells. She gives ${b} to her cousin. How many shells does she have now?`,
+  (a, b) => `A bus has ${a} students. ${b} get off at the school. How many students are still on the bus?`,
+  (a, b) => `A library has ${a} books. ${b} books are borrowed. How many books are left in the library?`,
+  (a, b) => `Mia has ${a} metres of ribbon. She uses ${b} metres for a craft. How many metres are left?`,
+  (a, b) => `Olivia has ${a} stickers. She gives away ${b}. How many stickers does she have left?`,
+  (a, b) => `Noah baked ${a} biscuits. His family eats ${b}. How many biscuits are left?`,
+  (a, b) => `A garden has ${a} flowers. ${b} are picked for a bouquet. How many flowers remain?`,
+  (a, b) => `A jar has ${a} jellybeans. ${b} are eaten. How many jellybeans are left?`,
+  (a, b) => `An orchard has ${a} kiwifruit. ${b} are picked. How many kiwifruit remain?`,
+  (a, b) => `Lucas counted ${a} steps. He took ${b} steps back. How many steps forward is he?`,
+  (a, b) => `Tane had ${a} biscuits. He gave ${b} to his class. How many does he have left?`,
+  (a, b) => `Kiri had ${a} stickers. She used ${b} on her project. How many are left?`,
+  (a, b) => `A beehive had ${a} bees. ${b} flew out. How many bees are still in the hive?`,
+  (a, b) => `A tournament had ${a} players. ${b} left after the first round. How many players are still in?`,
+  (a, b) => `A hall has ${a} chairs. ${b} are taken outside. How many chairs are left in the hall?`,
+  (a, b) => `Sione had ${a} seedlings. He planted ${b}. How many seedlings does he still have?`,
+  (a, b) => `A bakery had ${a} eggs. They used ${b} for pavlovas. How many eggs are left?`,
+  (a, b) => `Ava ran ${a} laps. ${b} were warm-up. How many were the main run?`,
+  (a, b) => `A school van had ${a} bags. ${b} are unloaded. How many bags are still on the van?`,
+  (a, b) => `A box has ${a} marbles. ${b} are taken out. How many marbles are still in the box?`,
+  (a, b) => `A pack has ${a} cards. Liam removes ${b}. How many cards are left in the pack?`,
+];
+
+// 24 decimal subtraction templates — money / measurement contexts.
+const DECIMAL_SUBTRACTION_TEMPLATES: Array<(a: string, b: string) => string> = [
+  (a, b) => `Liam has $${a}. He spends $${b}. How much money does he have left?`,
+  (a, b) => `A book costs $${a}. Kiri gets a $${b} discount. How much does she pay?`,
+  (a, b) => `Aroha has ${a} m of ribbon. She uses ${b} m for a present. How many metres are left?`,
+  (a, b) => `Tane has ${a} kg of flour. He uses ${b} kg for baking. How many kg are left?`,
+  (a, b) => `A bottle has ${a} L of juice. Ella drinks ${b} L. How many litres are left?`,
+  (a, b) => `Mia ran ${a} km in total, with ${b} km as warm-up. How long was the main run?`,
+  (a, b) => `A water tank holds ${a} L. ${b} L are drained. How many litres remain?`,
+  (a, b) => `Noah weighed ${a} kg. He lost ${b} kg over a month. What's his weight now?`,
+  (a, b) => `A piece of wood is ${a} m long. Lucas cuts off ${b} m. How long is the remaining piece?`,
+  (a, b) => `Olivia had $${a} in savings. She spent $${b} on a gift. How much is left?`,
+  (a, b) => `A rope is ${a} m. Sione cuts ${b} m off. How long is the remaining rope?`,
+  (a, b) => `Ava ran ${a} km in total. ${b} km were uphill. How many km were not uphill?`,
+  (a, b) => `A jug had ${a} L of milk. The chef poured out ${b} L. How many litres are left?`,
+  (a, b) => `Liam had $${a}. He gave $${b} to his sister. How much does he have now?`,
+  (a, b) => `A bag of sand weighs ${a} kg. ${b} kg are removed. How much is left?`,
+  (a, b) => `A bottle has ${a} L of water. ${b} L spill out. How much water remains?`,
+  (a, b) => `Mia had ${a} kg of fruit. She used ${b} kg to make jam. How much is left?`,
+  (a, b) => `A delivery van carried ${a} kg of cargo. ${b} kg were delivered. How much remains?`,
+  (a, b) => `Noah's bottle had ${a} ml. He drank ${b} ml. How many ml are left?`,
+  (a, b) => `A garden hose is ${a} m long. ${b} m are coiled up. How many m are stretched out?`,
+  (a, b) => `Ella saved $${a}. She spent $${b} on art supplies. How much is left?`,
+  (a, b) => `A reservoir has ${a} L. ${b} L are used. How many litres remain?`,
+  (a, b) => `A board game has ${a} chips. ${b} are lost. How many chips are left?`,
+  (a, b) => `Tane's wood pile weighed ${a} kg. He burned ${b} kg. What's left?`,
+];
+
 // 24 decimal addition templates — money / measurement / time contexts.
 const DECIMAL_ADDITION_TEMPLATES: Array<(a: string, b: string) => string> = [
   (a, b) => `Liam has $${a}. He earns another $${b}. How much money does he have now?`,
@@ -164,7 +220,9 @@ export function buildWordProblems(
   for (let i = 0; i < TOTAL; i++) {
     pairs.push(shuffled[i % shuffled.length]);
   }
-  const isAddition = pairs[0]?.op === "+";
+  const op = pairs[0]?.op ?? "×";
+  const isAddition = op === "+";
+  const isSubtraction = op === "−";
   const isDecimal = pairs.some((p) =>
     (p.aDisplay && p.aDisplay.includes(".")) ||
     (p.bDisplay && p.bDisplay.includes(".")) ||
@@ -174,11 +232,13 @@ export function buildWordProblems(
   // Pick the right template bank
   const stringTemplates =
     isAddition && isDecimal ? DECIMAL_ADDITION_TEMPLATES :
-    !isAddition && isDecimal ? DECIMAL_TEMPLATES :
+    isSubtraction && isDecimal ? DECIMAL_SUBTRACTION_TEMPLATES :
+    !isAddition && !isSubtraction && isDecimal ? DECIMAL_TEMPLATES :
     null;
   const numberTemplates =
     isAddition && !isDecimal ? ADDITION_TEMPLATES :
-    !isAddition && !isDecimal ? TEMPLATES :
+    isSubtraction && !isDecimal ? SUBTRACTION_TEMPLATES :
+    !isAddition && !isSubtraction && !isDecimal ? TEMPLATES :
     null;
 
   const templateLen = stringTemplates?.length ?? numberTemplates?.length ?? 0;
@@ -189,14 +249,16 @@ export function buildWordProblems(
 
   return pairs.map((p, i) => {
     const idx = templateOrder[i % templateOrder.length];
+    const computeNum = (x: number, y: number) =>
+      isAddition ? x + y : isSubtraction ? x - y : x * y;
     if (stringTemplates) {
       const aStr = p.aDisplay ?? String(p.a);
       const bStr = p.bDisplay ?? String(p.b);
-      const ansStr = p.answerDisplay ?? String(isAddition ? p.a + p.b : p.a * p.b);
+      const ansStr = p.answerDisplay ?? String(computeNum(p.a, p.b));
       return { prompt: stringTemplates[idx](aStr, bStr), answer: ansStr };
     }
     const template = numberTemplates![idx];
-    return { prompt: template(p.a, p.b), answer: isAddition ? p.a + p.b : p.a * p.b };
+    return { prompt: template(p.a, p.b), answer: computeNum(p.a, p.b) };
   });
 }
 

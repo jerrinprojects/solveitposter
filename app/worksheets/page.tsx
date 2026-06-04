@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { ADDITION_STAGES } from "@/data/additionStages";
+import { SUBTRACTION_STAGES } from "@/data/subtractionStages";
 
 function StageCard({ basePath, id, fullId, shortTitle }: {
   basePath: string; id: string; fullId: string; shortTitle: string;
@@ -74,6 +75,21 @@ export default function WorksheetsLandingPage() {
               title={`Stage ${n}${n === 1 ? " — Single Digit" : n === 5 ? " — Decimals" : ""}`}
               basePath={addBase}
               stages={byStage(ADDITION_STAGES, `${n}.`)}
+            />
+          ))}
+        </div>
+
+        {/* ── Subtraction ───────────────────────────────────────── */}
+        <div className="space-y-8">
+          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
+            <span>➖</span> Subtraction
+          </h2>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <StageGroup
+              key={`sub-${n}`}
+              title={`Stage ${n}${n === 1 ? " — Under 20" : n === 5 ? " — Decimals" : ""}`}
+              basePath="/worksheets/subtraction"
+              stages={byStage(SUBTRACTION_STAGES, `${n}.`)}
             />
           ))}
         </div>

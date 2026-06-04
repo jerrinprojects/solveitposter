@@ -47,14 +47,16 @@ function VerticalCell({
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
   let aStr = aDisplay ?? String(a);
   let bStr = bDisplay ?? String(b);
-  let answerStr = answerDisplay ?? String(op === "+" ? a + b : a * b);
+  let answerStr = answerDisplay ?? String(
+    op === "+" ? a + b : op === "−" ? a - b : a * b,
+  );
   // Decimal problems are detected by the presence of a "." in any string —
   // PV labels (H/T/O) don't apply, so we suppress them.
   const isDecimal = aStr.includes(".") || bStr.includes(".") || answerStr.includes(".");
-  // For column ADDITION of decimals, decimal points must align. Pad shorter
-  // operands with trailing zeros (and a decimal point if needed) so the .
-  // sits in the same column across all three strings.
-  if (isDecimal && op === "+") {
+  // For column ADDITION and SUBTRACTION of decimals, decimal points must
+  // align. Pad shorter operands with trailing zeros (and a decimal point
+  // if needed) so the . sits in the same column across all three strings.
+  if (isDecimal && (op === "+" || op === "−")) {
     const dpOf = (s: string) => s.includes(".") ? s.length - s.indexOf(".") - 1 : 0;
     const maxDp = Math.max(dpOf(aStr), dpOf(bStr), dpOf(answerStr));
     const padDp = (s: string): string => {

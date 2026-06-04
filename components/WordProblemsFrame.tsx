@@ -46,7 +46,10 @@ export default function WordProblemsFrame({
   ];
   const versionLabel = `V${version}`;
   const operation = stage.operation ?? "Multiplication";
-  const operationVerb = operation === "Addition" ? "addition" : "multiplication";
+  const operationVerb =
+    operation === "Addition" ? "addition" :
+    operation === "Subtraction" ? "subtraction" :
+    "multiplication";
 
   return (
     <>
