@@ -170,19 +170,19 @@ const STAGE_21_SEEDS: Record<WorksheetVersion, number> = {
   3: 271,
 };
 
-export function buildStage21Pages(version: WorksheetVersion): {
-  page1: InlineProblem[]; page2: InlineProblem[];
-} {
+export function buildStage21Pages(
+  version: WorksheetVersion,
+  perPage: number = 25,
+): { page1: InlineProblem[]; page2: InlineProblem[] } {
   const pool = stage21Problems();
-  const PER_PAGE = 25;
-  const TOTAL = PER_PAGE * 2;
+  const total = perPage * 2;
   const shuffled = seededShuffle(pool, STAGE_21_SEEDS[version]);
   const sequence: InlineProblem[] = [];
-  for (let i = 0; i < TOTAL; i++) {
+  for (let i = 0; i < total; i++) {
     sequence.push(shuffled[i % shuffled.length]);
   }
   return {
-    page1: sequence.slice(0, PER_PAGE),
-    page2: sequence.slice(PER_PAGE),
+    page1: sequence.slice(0, perPage),
+    page2: sequence.slice(perPage),
   };
 }
