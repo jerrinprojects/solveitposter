@@ -1,13 +1,9 @@
 import Link from "next/link";
-
-const multiplicationWorksheets = [
-  { label: "Stage 2.1", sub: "12 × 3 · No carrying", href: "/worksheets/multiplication/stage-2-1" },
-];
+import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 
 export default function WorksheetsLandingPage() {
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
-      {/* Header */}
       <div className="text-center mb-12">
         <p className="font-nunito text-xs font-bold text-pink-400 tracking-[0.35em] uppercase mb-3">
           Solveitmaths.com
@@ -16,7 +12,7 @@ export default function WorksheetsLandingPage() {
           Worksheets
         </h1>
         <p className="font-nunito text-sm text-gray-400 mt-2">
-          Printable practice sheets — questions + answer keys
+          Printable practice sheets — Inline, Column, and Word Problems
         </p>
       </div>
 
@@ -24,20 +20,20 @@ export default function WorksheetsLandingPage() {
         <section>
           <div className="flex items-center gap-2 mb-3 px-1">
             <span className="text-xl">✖️</span>
-            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication</h2>
+            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 2</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {multiplicationWorksheets.map((item) => (
+            {MULTIPLICATION_STAGES.map((stage) => (
               <Link
-                key={item.href}
-                href={item.href}
+                key={stage.id}
+                href={`/worksheets/multiplication/${stage.id}`}
                 className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
               >
                 <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
-                  {item.label}
+                  Stage {stage.fullId}
                 </p>
-                <p className="font-nunito text-xs font-semibold text-gray-400 mt-1">
-                  {item.sub}
+                <p className="font-nunito text-xs font-semibold text-gray-400 mt-1 leading-tight">
+                  {stage.shortTitle}
                 </p>
                 <span className="text-pink-300 group-hover:text-pink-500 text-sm mt-2 transition-colors">
                   →

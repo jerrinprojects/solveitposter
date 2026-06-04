@@ -171,20 +171,25 @@ function VerticalCell({
   );
 }
 
-export function Stage21ColumnPage({
-  pageNumber, problems, accent, showAnswer,
+export function ColumnProblemPage({
+  pageNumber, problems, accent, showAnswer, stageFullId, instructionHint,
 }: {
-  pageNumber: 1 | 2; problems: InlineProblem[]; accent: AccentKey; showAnswer: boolean;
+  pageNumber: 1 | 2;
+  problems: InlineProblem[];
+  accent: AccentKey;
+  showAnswer: boolean;
+  stageFullId: string;
+  instructionHint: string;
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   return (
     <div style={{ padding: "16px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
       <PageBanner
         accent={accent}
-        label={`Stage 2.1 · Column · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
+        label={`Stage ${stageFullId} · Column · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
         hint={showAnswer
           ? "Filled-in answers match the multiplicand and multiplier above."
-          : "Set up in columns, multiply each digit, write the product below."}
+          : instructionHint}
       />
       <div style={{
         flex: 1, display: "grid",

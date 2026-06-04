@@ -4,9 +4,7 @@
 // so a × b is always a 2-digit × 1-digit no-carrying problem.
 
 import type { InlineProblem } from "./MultiplicationInlineWorksheet";
-import {
-  stage21Problems, WorksheetVersion,
-} from "./MultiplicationInlineWorksheet";
+import { WorksheetVersion } from "./MultiplicationInlineWorksheet";
 
 const PAGE_PALETTE = {
   pink:   { ink: "#d6336c", soft: "#fff0f7", chip: "#ffd5e8", num: "#ec407a" },
@@ -33,7 +31,7 @@ const TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Ava runs ${a} laps each day for ${b} days. How many laps in total?`,
 ];
 
-const STAGE_21_WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number }> = {
+const WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number }> = {
   1: { problems: 1009, templates: 17 },
   2: { problems: 4357, templates: 53 },
   3: { problems: 9871, templates: 89 },
@@ -55,12 +53,19 @@ export type WordProblem = {
   answer: number;
 };
 
-// 24 word problems per version. Pool has 35 unique (a,b) pairs so no number-pair
-// repeats are needed; template assignment is also shuffled so context contexts
-// rotate independently of the (a,b) order.
-export function buildStage21WordProblems(version: WorksheetVersion): WordProblem[] {
-  const seeds = STAGE_21_WORD_SEEDS[version];
-  const pairs = seededShuffle(stage21Problems(), seeds.problems).slice(0, 24);
+// 24 word problems per version. (a,b) pairs come from the supplied pool;
+// if the pool has < 24 unique pairs we cycle through with shuffling.
+export function buildWordProblems(
+  pool: InlineProblem[],
+  version: WorksheetVersion,
+): WordProblem[] {
+  const seeds = WORD_SEEDS[version];
+  const shuffled = seededShuffle(pool, seeds.problems);
+  const TOTAL = 24;
+  const pairs: InlineProblem[] = [];
+  for (let i = 0; i < TOTAL; i++) {
+    pairs.push(shuffled[i % shuffled.length]);
+  }
   const templateOrder = seededShuffle(
     Array.from({ length: TEMPLATES.length }, (_, i) => i),
     seeds.templates,
@@ -175,20 +180,21 @@ function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string;
   );
 }
 
-export function Stage21WordProblemsPage({
-  pageNumber, problems, accent, showAnswer,
+export function WordProblemsProblemPage({
+  pageNumber, problems, accent, showAnswer, stageFullId,
 }: {
   pageNumber: 1 | 2 | 3 | 4;
   problems: WordProblem[];
   accent: AccentKey;
   showAnswer: boolean;
+  stageFullId: string;
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   return (
     <div style={{ padding: "16px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
       <PageBanner
         accent={accent}
-        label={`Stage 2.1 · Word Problems · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
+        label={`Stage ${stageFullId} · Word Problems · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
         hint={showAnswer
           ? "Highlighted numbers are the correct answers."
           : "Read carefully, show your working, then write your answer."}

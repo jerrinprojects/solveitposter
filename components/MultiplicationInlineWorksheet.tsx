@@ -94,22 +94,6 @@ function InlineCell({
   );
 }
 
-// Deterministic problem list for Stage 2.1 (2-digit × 1-digit, no carrying).
-// Mirrors solveit's MultiplicationLevel.jsx 2.1 generator: twoDigit 11–49,
-// oneDigit 2–4, neither (tens*oneDigit) nor (ones*oneDigit) ≥ 10.
-export function stage21Problems(): InlineProblem[] {
-  const all: InlineProblem[] = [];
-  for (let b = 2; b <= 4; b++) {
-    for (let a = 11; a <= 49; a++) {
-      const tens = Math.floor(a / 10);
-      const ones = a % 10;
-      if (tens * b >= 10) continue;
-      if (ones * b >= 10) continue;
-      all.push({ a, b });
-    }
-  }
-  return all;
-}
 
 // Deterministic Fisher–Yates shuffle. Same seed → same ordering.
 function seededShuffle<T>(arr: T[], seed: number): T[] {
@@ -123,20 +107,25 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return out;
 }
 
-export function Stage21Page({
-  pageNumber, problems, accent, showAnswer,
+export function InlineProblemPage({
+  pageNumber, problems, accent, showAnswer, stageFullId, instructionHint,
 }: {
-  pageNumber: 1 | 2; problems: InlineProblem[]; accent: AccentKey; showAnswer: boolean;
+  pageNumber: 1 | 2;
+  problems: InlineProblem[];
+  accent: AccentKey;
+  showAnswer: boolean;
+  stageFullId: string;
+  instructionHint: string;
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   return (
     <div style={{ padding: "16px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
       <PageBanner
         accent={accent}
-        label={`Stage 2.1 · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
+        label={`Stage ${stageFullId} · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
         hint={showAnswer
           ? "Check your answers against the highlighted numbers."
-          : "Two-digit × one-digit — no carrying. Solve in your head if you can."}
+          : instructionHint}
       />
       <div style={{
         flex: 1, display: "grid",
@@ -159,24 +148,23 @@ export function Stage21Page({
   );
 }
 
-// Build two 25-question pages from the Stage 2.1 pool. Each version uses a
-// distinct seeded shuffle, so V1/V2/V3 have different orderings and different
-// repeats (the pool has 35 unique problems but each version needs 50).
+// Each version uses a distinct seeded shuffle, so V1/V2/V3 have different
+// orderings (and different repeats if the pool is smaller than `total`).
 export type WorksheetVersion = 1 | 2 | 3;
 
-const STAGE_21_SEEDS: Record<WorksheetVersion, number> = {
+export const VERSION_SEEDS: Record<WorksheetVersion, number> = {
   1: 42,
   2: 137,
   3: 271,
 };
 
-export function buildStage21Pages(
+export function buildPages(
+  pool: InlineProblem[],
   version: WorksheetVersion,
-  perPage: number = 25,
+  perPage: number,
 ): { page1: InlineProblem[]; page2: InlineProblem[] } {
-  const pool = stage21Problems();
   const total = perPage * 2;
-  const shuffled = seededShuffle(pool, STAGE_21_SEEDS[version]);
+  const shuffled = seededShuffle(pool, VERSION_SEEDS[version]);
   const sequence: InlineProblem[] = [];
   for (let i = 0; i < total; i++) {
     sequence.push(shuffled[i % shuffled.length]);
@@ -186,3 +174,5 @@ export function buildStage21Pages(
     page2: sequence.slice(perPage),
   };
 }
+
+export { seededShuffle };
