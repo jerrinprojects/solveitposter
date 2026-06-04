@@ -19,6 +19,75 @@ export type MultiplicationStageSpec = {
 
 // ── Pool generators ───────────────────────────────────────────────────────
 
+// ── Stage 1 (single-digit / times tables) ────────────────────────────────
+
+function stage11Pool(): InlineProblem[] {
+  // 1.1: repeated addition — factor 1–4, times 2–5. Displayed as multiplication.
+  const out: InlineProblem[] = [];
+  for (let a = 1; a <= 4; a++) {
+    for (let b = 2; b <= 5; b++) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage12Pool(): InlineProblem[] {
+  // 1.2: × 0 and × 1, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (const a of [0, 1]) for (let b = 1; b <= 12; b++) out.push({ a, b });
+  return out;
+}
+
+function stage13Pool(): InlineProblem[] {
+  // 1.3: × 2 and × 5, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (const a of [2, 5]) for (let b = 1; b <= 12; b++) out.push({ a, b });
+  return out;
+}
+
+function stage14Pool(): InlineProblem[] {
+  // 1.4: × 10, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (let b = 1; b <= 12; b++) out.push({ a: 10, b });
+  return out;
+}
+
+function stage15Pool(): InlineProblem[] {
+  // 1.5: × 3 and × 4, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (const a of [3, 4]) for (let b = 1; b <= 12; b++) out.push({ a, b });
+  return out;
+}
+
+function stage16Pool(): InlineProblem[] {
+  // 1.6: × 6 and × 7, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (const a of [6, 7]) for (let b = 1; b <= 12; b++) out.push({ a, b });
+  return out;
+}
+
+function stage17Pool(): InlineProblem[] {
+  // 1.7: × 8 and × 9, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (const a of [8, 9]) for (let b = 1; b <= 12; b++) out.push({ a, b });
+  return out;
+}
+
+function stage18Pool(): InlineProblem[] {
+  // 1.8: mixed facts 0–10 × 0–10
+  const out: InlineProblem[] = [];
+  for (let a = 0; a <= 10; a++) for (let b = 0; b <= 10; b++) out.push({ a, b });
+  return out;
+}
+
+function stage19Pool(): InlineProblem[] {
+  // 1.9: × 11 and × 12, multiplier 1–12
+  const out: InlineProblem[] = [];
+  for (const a of [11, 12]) for (let b = 1; b <= 12; b++) out.push({ a, b });
+  return out;
+}
+
+// ── Stage 2 ──────────────────────────────────────────────────────────────
+
 function stage21Pool(): InlineProblem[] {
   // 2.1: twoDigit 11–49, oneDigit 2–4, no carrying on either column.
   const out: InlineProblem[] = [];
@@ -489,6 +558,80 @@ function stage59Pool(): InlineProblem[] {
 // ── Stage registry ────────────────────────────────────────────────────────
 
 export const MULTIPLICATION_STAGES: MultiplicationStageSpec[] = [
+  // ── Stage 1 (single-digit / times tables) ──────────────────────────────
+  {
+    id: "stage-1-1",
+    fullId: "1.1",
+    shortTitle: "Repeated addition",
+    inlineTagline: "Repeated addition — small whole-number multiplication (1–4 × 2–5).",
+    columnTagline: "Multiply the small numbers — think of it as repeated addition.",
+    pool: stage11Pool,
+  },
+  {
+    id: "stage-1-2",
+    fullId: "1.2",
+    shortTitle: "Times tables for 0 & 1",
+    inlineTagline: "Times tables for 0 and 1 (multiplier 1–12).",
+    columnTagline: "× 0 always gives 0; × 1 keeps the number the same.",
+    pool: stage12Pool,
+  },
+  {
+    id: "stage-1-3",
+    fullId: "1.3",
+    shortTitle: "Times tables for 2 & 5",
+    inlineTagline: "Times tables for 2 and 5 (multiplier 1–12).",
+    columnTagline: "× 2 doubles the number; × 5 lands on 5, 10, 15, 20…",
+    pool: stage13Pool,
+  },
+  {
+    id: "stage-1-4",
+    fullId: "1.4",
+    shortTitle: "Times table for 10",
+    inlineTagline: "Times table for 10 (multiplier 1–12).",
+    columnTagline: "× 10 — add a zero on the end.",
+    pool: stage14Pool,
+  },
+  {
+    id: "stage-1-5",
+    fullId: "1.5",
+    shortTitle: "Times tables for 3 & 4",
+    inlineTagline: "Times tables for 3 and 4 (multiplier 1–12).",
+    columnTagline: "× 3 is doubling and adding one more group; × 4 is doubling twice.",
+    pool: stage15Pool,
+  },
+  {
+    id: "stage-1-6",
+    fullId: "1.6",
+    shortTitle: "Times tables for 6 & 7",
+    inlineTagline: "Times tables for 6 and 7 (multiplier 1–12).",
+    columnTagline: "× 6 is doubling × 3; × 7 — use known facts to build new ones.",
+    pool: stage16Pool,
+  },
+  {
+    id: "stage-1-7",
+    fullId: "1.7",
+    shortTitle: "Times tables for 8 & 9",
+    inlineTagline: "Times tables for 8 and 9 (multiplier 1–12).",
+    columnTagline: "× 8 is doubling × 4; × 9 — try × 10 then subtract one group.",
+    pool: stage17Pool,
+  },
+  {
+    id: "stage-1-8",
+    fullId: "1.8",
+    shortTitle: "Mixed facts 0–10",
+    inlineTagline: "Mixed times tables (0–10 × 0–10).",
+    columnTagline: "All times tables mixed — practise recall.",
+    pool: stage18Pool,
+  },
+  {
+    id: "stage-1-9",
+    fullId: "1.9",
+    shortTitle: "Times tables for 11 & 12",
+    inlineTagline: "Times tables for 11 and 12 (multiplier 1–12).",
+    columnTagline: "× 11 — repeat the digit (for 1-digit); × 12 is × 10 plus × 2.",
+    pool: stage19Pool,
+  },
+  // ── Stage 2 ────────────────────────────────────────────────────────────
   {
     id: "stage-2-1",
     fullId: "2.1",

@@ -21,6 +21,7 @@ function StageCard({ id, fullId, shortTitle }: { id: string; fullId: string; sho
 }
 
 export default function WorksheetsLandingPage() {
+  const stage1 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("1."));
   const stage2 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("2."));
   const stage3 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("3."));
   const stage4 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("4."));
@@ -41,6 +42,16 @@ export default function WorksheetsLandingPage() {
       </div>
 
       <div className="w-full max-w-2xl space-y-10">
+        <section>
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <span className="text-xl">✖️</span>
+            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 1 — Times Tables</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+            {stage1.map((s) => <StageCard key={s.id} {...s} />)}
+          </div>
+        </section>
+
         <section>
           <div className="flex items-center gap-2 mb-3 px-1">
             <span className="text-xl">✖️</span>
