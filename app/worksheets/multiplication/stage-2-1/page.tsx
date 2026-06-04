@@ -17,6 +17,12 @@ const columnVersions = [
   { label: "V3", href: "/worksheets/multiplication/stage-2-1/column-v3" },
 ];
 
+const wordVersions = [
+  { label: "V1", href: "/worksheets/multiplication/stage-2-1/word-v1" },
+  { label: "V2", href: "/worksheets/multiplication/stage-2-1/word-v2" },
+  { label: "V3", href: "/worksheets/multiplication/stage-2-1/word-v3" },
+];
+
 function VersionGroup({
   title, sub, versions,
 }: {
@@ -73,6 +79,11 @@ export default function Stage21VersionsPage() {
           title="Column"
           sub="Vertical form — long multiplication · 20 per page"
           versions={columnVersions}
+        />
+        <VersionGroup
+          title="Word Problems"
+          sub="Story problems · 6 per page · 4 pages + answers"
+          versions={wordVersions}
         />
 
         <div className="pt-2">

@@ -55,7 +55,7 @@ function VerticalCell({
   const COL_W = 18;
   const monoStyle: React.CSSProperties = {
     fontFamily: "var(--font-mono), 'Courier New', monospace",
-    fontSize: 22, fontWeight: 700,
+    fontSize: 20, fontWeight: 700,
   };
 
   return (
@@ -63,11 +63,12 @@ function VerticalCell({
       borderRadius: 14,
       background: "#fffaf3",
       border: `1.5px solid ${chip}`,
-      padding: "8px 10px",
+      padding: "5px 10px 8px",
       display: "flex",
       flexDirection: "column",
       minHeight: 0,
       boxSizing: "border-box",
+      overflow: "hidden",
       boxShadow: "0 1px 0 rgba(0,0,0,0.04)",
     }}>
       <div style={{
@@ -84,9 +85,9 @@ function VerticalCell({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "flex-start",
-        marginTop: 4,
+        marginTop: 1,
         color: num,
-        lineHeight: 1.15,
+        lineHeight: 1.1,
       }}>
         <div style={{
           display: "grid",
