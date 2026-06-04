@@ -49,6 +49,7 @@ export default function WordProblemsFrame({
   const operationVerb =
     operation === "Addition" ? "addition" :
     operation === "Subtraction" ? "subtraction" :
+    operation === "Division" ? "division" :
     "multiplication";
 
   return (

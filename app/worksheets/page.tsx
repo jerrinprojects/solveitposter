@@ -2,6 +2,7 @@ import Link from "next/link";
 import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { ADDITION_STAGES } from "@/data/additionStages";
 import { SUBTRACTION_STAGES } from "@/data/subtractionStages";
+import { DIVISION_STAGES } from "@/data/divisionStages";
 
 function StageCard({ basePath, id, fullId, shortTitle }: {
   basePath: string; id: string; fullId: string; shortTitle: string;
@@ -105,6 +106,21 @@ export default function WorksheetsLandingPage() {
               title={`Stage ${n}${n === 1 ? " — Times Tables" : n === 5 ? " — Decimals" : ""}`}
               basePath={mulBase}
               stages={byStage(MULTIPLICATION_STAGES, `${n}.`)}
+            />
+          ))}
+        </div>
+
+        {/* ── Division ─────────────────────────────────────────── */}
+        <div className="space-y-8">
+          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
+            <span>➗</span> Division
+          </h2>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <StageGroup
+              key={`div-${n}`}
+              title={`Stage ${n}${n === 1 ? " — Facts" : n === 5 ? " — Decimals" : ""}`}
+              basePath="/worksheets/division"
+              stages={byStage(DIVISION_STAGES, `${n}.`)}
             />
           ))}
         </div>

@@ -7,6 +7,7 @@ import {
   buildPages, WorksheetVersion,
 } from "@/components/MultiplicationInlineWorksheet";
 import { ColumnProblemPage } from "@/components/Stage21ColumnWorksheet";
+import { DivisionColumnPage } from "@/components/DivisionColumnCell";
 import type { MultiplicationStageSpec } from "@/data/multiplicationStages";
 
 const POSTER_W = 1063;
@@ -38,6 +39,8 @@ export default function ColumnWorksheetFrame({
   const versionLabel = `V${version}`;
   const hint = stage.columnTagline;
   const operation = stage.operation ?? "Multiplication";
+  const isDivision = (stage.pool()[0]?.op ?? "×") === "÷";
+  const ProblemPage = isDivision ? DivisionColumnPage : ColumnProblemPage;
 
   return (
     <>
@@ -75,7 +78,7 @@ export default function ColumnWorksheetFrame({
             tagline={<><Highlight>{stage.shortTitle}</Highlight>.</>}
           />
           <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <ColumnProblemPage
+            <ProblemPage
               pageNumber={1} problems={page1} accent="pink" showAnswer={false}
               stageFullId={stage.fullId} instructionHint={hint}
             />
@@ -90,7 +93,7 @@ export default function ColumnWorksheetFrame({
             tagline={<>Keep going — <Highlight>line up the place values</Highlight>.</>}
           />
           <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <ColumnProblemPage
+            <ProblemPage
               pageNumber={2} problems={page2} accent="mint" showAnswer={false}
               stageFullId={stage.fullId} instructionHint={hint}
             />
@@ -105,7 +108,7 @@ export default function ColumnWorksheetFrame({
             tagline={<>Column-form answer key for <Highlight>Page 1</Highlight>.</>}
           />
           <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <ColumnProblemPage
+            <ProblemPage
               pageNumber={1} problems={page1} accent="pink" showAnswer={true}
               stageFullId={stage.fullId} instructionHint={hint}
             />
@@ -120,7 +123,7 @@ export default function ColumnWorksheetFrame({
             tagline={<>Column-form answer key for <Highlight>Page 2</Highlight>.</>}
           />
           <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <ColumnProblemPage
+            <ProblemPage
               pageNumber={2} problems={page2} accent="mint" showAnswer={true}
               stageFullId={stage.fullId} instructionHint={hint}
             />

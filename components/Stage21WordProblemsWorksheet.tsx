@@ -72,6 +72,62 @@ const ADDITION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `A pack has ${a} cards. Liam adds ${b} more cards from another pack. How many cards in total?`,
 ];
 
+// 24 integer division templates — "share X into Y groups" / "X ÷ Y per group".
+const DIVISION_TEMPLATES: Array<(a: number, b: number) => string> = [
+  (a, b) => `Liam has ${a} marbles. He shares them equally among ${b} friends. How many does each friend get?`,
+  (a, b) => `A teacher has ${a} stickers to share equally among ${b} students. How many does each student get?`,
+  (a, b) => `A bakery makes ${a} biscuits and packs them into bags of ${b}. How many bags?`,
+  (a, b) => `An orchard has ${a} apples. The pickers fill boxes of ${b}. How many boxes can they fill?`,
+  (a, b) => `${a} students are split evenly into ${b} groups for a project. How many in each group?`,
+  (a, b) => `A library has ${a} books to put on shelves with ${b} books each. How many shelves are needed?`,
+  (a, b) => `Aroha has ${a} shells and ties them into bracelets of ${b}. How many bracelets can she make?`,
+  (a, b) => `A box of crayons holds ${a} crayons. The teacher splits them between ${b} tables equally. How many per table?`,
+  (a, b) => `${a} eggs are packed into cartons of ${b}. How many full cartons?`,
+  (a, b) => `Mia has ${a} metres of rope. She cuts it into pieces of ${b} m. How many pieces?`,
+  (a, b) => `A school has ${a} chairs to set up in rows of ${b}. How many rows?`,
+  (a, b) => `Tane has ${a} biscuits to share equally between ${b} plates. How many on each plate?`,
+  (a, b) => `${a} students go to camp on ${b} buses (equal numbers). How many students per bus?`,
+  (a, b) => `Olivia practises for ${a} minutes over ${b} days. How many minutes per day on average?`,
+  (a, b) => `A garden has ${a} flowers planted equally in ${b} rows. How many flowers per row?`,
+  (a, b) => `Kiri has ${a} stickers to share equally with ${b} friends. How many each?`,
+  (a, b) => `A tournament has ${a} players split into teams of ${b}. How many teams?`,
+  (a, b) => `Ella has ${a} pages to read across ${b} days. How many pages per day if she reads equally?`,
+  (a, b) => `Noah has ${a} cards and puts them in piles of ${b}. How many piles?`,
+  (a, b) => `${a} biscuits are shared equally among ${b} children. How many each?`,
+  (a, b) => `An orchard has ${a} kiwifruit. They go into trays of ${b}. How many trays?`,
+  (a, b) => `Lucas counts ${a} steps. He walks at ${b} steps per minute. How many minutes?`,
+  (a, b) => `A beekeeper has ${a} bees evenly across ${b} hives. How many bees per hive?`,
+  (a, b) => `Sione plants ${a} seedlings in rows of ${b}. How many rows?`,
+];
+
+// 24 decimal division templates — money / measurement contexts.
+const DECIMAL_DIVISION_TEMPLATES: Array<(a: string, b: string) => string> = [
+  (a, b) => `Liam has $${a} to share equally between ${b} people. How much does each get?`,
+  (a, b) => `A bag of flour weighs ${a} kg. ${b} kg are used per loaf. How many loaves can be made?`,
+  (a, b) => `A bottle holds ${a} L of juice. Pour ${b} L into each cup. How many cups can be filled?`,
+  (a, b) => `Aroha walks ${a} km in total at ${b} km per hour. How many hours did she walk?`,
+  (a, b) => `A piece of ribbon is ${a} m long. Cut into pieces of ${b} m. How many pieces?`,
+  (a, b) => `Mia ran ${a} km in ${b} laps of equal length. How long is each lap (in km)?`,
+  (a, b) => `A board game costs $${a}. Pay in ${b} equal weekly instalments. How much each week?`,
+  (a, b) => `Tane has ${a} kg of flour. Each cake uses ${b} kg. How many cakes can he make?`,
+  (a, b) => `A jug holds ${a} L. Pour into cups of ${b} L each. How many cups?`,
+  (a, b) => `Olivia practised for ${a} minutes over ${b} sessions of equal length. How long was each session?`,
+  (a, b) => `A plank is ${a} m long. Sione cuts it into ${b} m sections. How many sections?`,
+  (a, b) => `Noah pays $${a} total for ${b} packs of cards. How much per pack?`,
+  (a, b) => `A water tank has ${a} L. Empty into buckets of ${b} L. How many bucketfuls?`,
+  (a, b) => `Ella saved $${a} over ${b} months of equal saving. How much per month?`,
+  (a, b) => `Ava ran ${a} km in ${b} km laps. How many laps?`,
+  (a, b) => `A pavlova needs ${a} eggs across ${b} pavlovas (equal). How many eggs each?`,
+  (a, b) => `Kiri walks ${a} km in ${b} hours at a steady pace. How many km per hour?`,
+  (a, b) => `A piece of cheese weighs ${a} kg. Cut into ${b} kg blocks. How many blocks?`,
+  (a, b) => `Lucas earned $${a} over ${b} hours. How much per hour?`,
+  (a, b) => `A jug of paint holds ${a} L. Each room uses ${b} L. How many rooms?`,
+  (a, b) => `${a} kg of rice are split into bags of ${b} kg. How many bags?`,
+  (a, b) => `A book costs $${a}. Split the cost between ${b} friends. How much each?`,
+  (a, b) => `A tap leaked ${a} L in ${b} hours, steady rate. How many L per hour?`,
+  (a, b) => `A garden bed is ${a} m long. Divide into ${b} m sections. How many sections?`,
+];
+
 // 24 integer subtraction templates — "has X, gives away/loses Y → result".
 const SUBTRACTION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Liam has ${a} marbles. He gives ${b} to a friend. How many marbles does he have left?`,
@@ -223,6 +279,8 @@ export function buildWordProblems(
   const op = pairs[0]?.op ?? "×";
   const isAddition = op === "+";
   const isSubtraction = op === "−";
+  const isDivision = op === "÷";
+  const isMul = !isAddition && !isSubtraction && !isDivision;
   const isDecimal = pairs.some((p) =>
     (p.aDisplay && p.aDisplay.includes(".")) ||
     (p.bDisplay && p.bDisplay.includes(".")) ||
@@ -233,12 +291,14 @@ export function buildWordProblems(
   const stringTemplates =
     isAddition && isDecimal ? DECIMAL_ADDITION_TEMPLATES :
     isSubtraction && isDecimal ? DECIMAL_SUBTRACTION_TEMPLATES :
-    !isAddition && !isSubtraction && isDecimal ? DECIMAL_TEMPLATES :
+    isDivision && isDecimal ? DECIMAL_DIVISION_TEMPLATES :
+    isMul && isDecimal ? DECIMAL_TEMPLATES :
     null;
   const numberTemplates =
     isAddition && !isDecimal ? ADDITION_TEMPLATES :
     isSubtraction && !isDecimal ? SUBTRACTION_TEMPLATES :
-    !isAddition && !isSubtraction && !isDecimal ? TEMPLATES :
+    isDivision && !isDecimal ? DIVISION_TEMPLATES :
+    isMul && !isDecimal ? TEMPLATES :
     null;
 
   const templateLen = stringTemplates?.length ?? numberTemplates?.length ?? 0;
@@ -250,7 +310,10 @@ export function buildWordProblems(
   return pairs.map((p, i) => {
     const idx = templateOrder[i % templateOrder.length];
     const computeNum = (x: number, y: number) =>
-      isAddition ? x + y : isSubtraction ? x - y : x * y;
+      isAddition ? x + y :
+      isSubtraction ? x - y :
+      isDivision ? x / y :
+      x * y;
     if (stringTemplates) {
       const aStr = p.aDisplay ?? String(p.a);
       const bStr = p.bDisplay ?? String(p.b);

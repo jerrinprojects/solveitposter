@@ -17,7 +17,7 @@ export type MultiplicationStageSpec = {
   inlineRows?: number;
   // Display name in the header section line. Defaults to "Multiplication";
   // addition/subtraction stages set their own.
-  operation?: "Addition" | "Subtraction" | "Multiplication";
+  operation?: "Addition" | "Subtraction" | "Multiplication" | "Division";
 };
 
 // ── Pool generators ───────────────────────────────────────────────────────

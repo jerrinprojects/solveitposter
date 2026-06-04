@@ -21,7 +21,7 @@ export type InlineProblem = {
   aDisplay?: string;
   bDisplay?: string;
   answerDisplay?: string;
-  op?: "+" | "−" | "×";
+  op?: "+" | "−" | "×" | "÷";
 };
 
 // Banner pill used at the top of each page's grid.
@@ -61,7 +61,10 @@ function InlineCell({
   const aStr = aDisplay ?? String(a);
   const bStr = bDisplay ?? String(b);
   const ansStr = answerDisplay ?? String(
-    op === "+" ? a + b : op === "−" ? a - b : a * b,
+    op === "+" ? a + b :
+    op === "−" ? a - b :
+    op === "÷" ? a / b :
+    a * b,
   );
   const totalChars = aStr.length + bStr.length + ansStr.length;
   const digitFont =
