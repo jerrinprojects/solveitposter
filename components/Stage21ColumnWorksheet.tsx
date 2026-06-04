@@ -43,11 +43,11 @@ function VerticalCell({
 }: {
   index: number; problem: InlineProblem; accent: AccentKey; showAnswer: boolean;
 }) {
-  const { a, b, aDisplay, bDisplay, answerDisplay } = problem;
+  const { a, b, aDisplay, bDisplay, answerDisplay, op = "×" } = problem;
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
   const aStr = aDisplay ?? String(a);
   const bStr = bDisplay ?? String(b);
-  const answerStr = answerDisplay ?? String(a * b);
+  const answerStr = answerDisplay ?? String(op === "+" ? a + b : a * b);
   // Decimal problems are detected by the presence of a "." in any string —
   // PV labels (H/T/O) don't apply, so we suppress them and let the layout
   // right-align decimals (with the . treated as just another column slot).
@@ -125,11 +125,11 @@ function VerticalCell({
             <span key={"a" + i} style={monoStyle}>{d}</span>
           ))}
 
-          {/* × b — × sits in the column directly left of b's leading digit */}
+          {/* op b — operator sits in the column directly left of b's leading digit */}
           {Array.from({ length: totalCols - bStr.length - 1 }).map((_, i) => (
             <span key={"pad-b" + i}>&nbsp;</span>
           ))}
-          <span style={monoStyle}>×</span>
+          <span style={monoStyle}>{op}</span>
           {bStr.split("").map((d, i) => (
             <span key={"b" + i} style={monoStyle}>{d}</span>
           ))}

@@ -45,6 +45,8 @@ export default function WordProblemsFrame({
     all.slice(PER_PAGE * 3, PER_PAGE * 4),
   ];
   const versionLabel = `V${version}`;
+  const operation = stage.operation ?? "Multiplication";
+  const operationVerb = operation === "Addition" ? "addition" : "multiplication";
 
   return (
     <>
@@ -81,9 +83,9 @@ export default function WordProblemsFrame({
           return (
             <Page key={`q${pageNumber}`}>
               <PosterHeader
-                section={`Solveitmaths · Multiplication · ${versionLabel}`}
+                section={`Solveitmaths · ${operation} · ${versionLabel}`}
                 title={<>Stage {stage.fullId} <CaveatAccent>Word Problems</CaveatAccent></>}
-                tagline={<>Read carefully — <Highlight>set up the multiplication and solve</Highlight>.</>}
+                tagline={<>Read carefully — <Highlight>set up the {operationVerb} and solve</Highlight>.</>}
               />
               <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
                 <WordProblemsProblemPage
@@ -92,7 +94,7 @@ export default function WordProblemsFrame({
                   stageFullId={stage.fullId}
                 />
               </div>
-              <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} Word · ${versionLabel} · Page ${pageNumber}`} />
+              <PosterFooter rightLabel={`${operation} · Stage ${stage.fullId} Word · ${versionLabel} · Page ${pageNumber}`} />
             </Page>
           );
         })}
@@ -103,7 +105,7 @@ export default function WordProblemsFrame({
           return (
             <Page key={`a${pageNumber}`}>
               <PosterHeader
-                section={`Solveitmaths · Multiplication · ${versionLabel}`}
+                section={`Solveitmaths · ${operation} · ${versionLabel}`}
                 title={<>Stage {stage.fullId} <CaveatAccent>Answers</CaveatAccent></>}
                 tagline={<>Word-problem answer key for <Highlight>Page {pageNumber}</Highlight>.</>}
               />
@@ -114,7 +116,7 @@ export default function WordProblemsFrame({
                   stageFullId={stage.fullId}
                 />
               </div>
-              <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} Word · ${versionLabel} · Page ${pageNumber} Answers`} />
+              <PosterFooter rightLabel={`${operation} · Stage ${stage.fullId} Word · ${versionLabel} · Page ${pageNumber} Answers`} />
             </Page>
           );
         })}

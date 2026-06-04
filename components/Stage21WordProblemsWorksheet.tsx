@@ -44,8 +44,63 @@ const TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Sione plants ${a} seedlings in each row. He plants ${b} rows. How many seedlings in total?`,
 ];
 
-// 24 decimal templates — money, measurement, area, rate contexts that work
-// with decimal × decimal, decimal × whole, and decimal × small-decimal pairs.
+// 24 integer addition templates — "has X, gets/adds Y more" pattern.
+const ADDITION_TEMPLATES: Array<(a: number, b: number) => string> = [
+  (a, b) => `Liam has ${a} marbles. He gets ${b} more. How many marbles altogether?`,
+  (a, b) => `Ella reads ${a} pages on Monday and ${b} pages on Tuesday. How many pages in total?`,
+  (a, b) => `A box has ${a} crayons. Another box has ${b} crayons. How many crayons in total?`,
+  (a, b) => `Aroha picks ${a} shells in the morning and ${b} shells in the afternoon. How many shells altogether?`,
+  (a, b) => `A bus has ${a} students. ${b} more students get on. How many students are on the bus now?`,
+  (a, b) => `A library has ${a} books. ${b} more books are donated. How many books in total?`,
+  (a, b) => `Mia swam ${a} metres yesterday and ${b} metres today. How many metres altogether?`,
+  (a, b) => `Olivia practises piano for ${a} minutes in the morning and ${b} minutes after school. How many minutes in total?`,
+  (a, b) => `Noah has ${a} stickers. His friend gives him ${b} more. How many does he have now?`,
+  (a, b) => `A garden has ${a} red flowers and ${b} yellow flowers. How many flowers altogether?`,
+  (a, b) => `A jar has ${a} jellybeans. The shopkeeper adds ${b} more. How many jellybeans in total?`,
+  (a, b) => `An orchard has ${a} apple trees and ${b} pear trees. How many trees altogether?`,
+  (a, b) => `Lucas walked ${a} steps in the park and ${b} steps on the way home. How many steps in total?`,
+  (a, b) => `Tane baked ${a} biscuits in one batch and ${b} in another. How many biscuits altogether?`,
+  (a, b) => `Kiri gave ${a} stickers to her best friend and ${b} to her sister. How many stickers did she give in total?`,
+  (a, b) => `A beehive has ${a} bees in the morning. ${b} more bees return by evening. How many bees are in the hive?`,
+  (a, b) => `A netball tournament has ${a} players on day 1 and ${b} more arrive on day 2. How many players in total?`,
+  (a, b) => `A hall has ${a} chairs set out. ${b} more chairs are added. How many chairs in total?`,
+  (a, b) => `Sione plants ${a} seedlings before lunch and ${b} after lunch. How many seedlings altogether?`,
+  (a, b) => `A pavlova recipe uses ${a} eggs. Another recipe uses ${b} eggs. How many eggs are needed for both?`,
+  (a, b) => `Ava ran ${a} laps yesterday and ${b} laps today. How many laps altogether?`,
+  (a, b) => `A school van has ${a} bags. ${b} more bags are loaded on. How many bags in total?`,
+  (a, b) => `A kiwifruit orchard has ${a} ripe fruit. ${b} more ripen overnight. How many ripe kiwifruit?`,
+  (a, b) => `A pack has ${a} cards. Liam adds ${b} more cards from another pack. How many cards in total?`,
+];
+
+// 24 decimal addition templates — money / measurement / time contexts.
+const DECIMAL_ADDITION_TEMPLATES: Array<(a: string, b: string) => string> = [
+  (a, b) => `Liam has $${a}. He earns another $${b}. How much money does he have now?`,
+  (a, b) => `A book costs $${a} and a pen costs $${b}. How much for both?`,
+  (a, b) => `Kiri saves $${a} in week 1 and $${b} in week 2. How much has she saved altogether?`,
+  (a, b) => `Noah pays $${a} for lunch and $${b} for a drink. How much did he spend in total?`,
+  (a, b) => `Aroha walks ${a} km in the morning and ${b} km after school. How many km in total?`,
+  (a, b) => `Mia ran ${a} km yesterday and ${b} km today. How many km altogether?`,
+  (a, b) => `A piece of ribbon is ${a} m long. A second piece is ${b} m. How long when joined?`,
+  (a, b) => `Tane has a plank ${a} m long. He joins it to another plank ${b} m long. How long is it now?`,
+  (a, b) => `Lucas walks ${a} km in the morning and ${b} km in the evening. How many km in total?`,
+  (a, b) => `An apple weighs ${a} kg and a banana weighs ${b} kg. What is the total weight?`,
+  (a, b) => `A bag of rice weighs ${a} kg. A bag of flour weighs ${b} kg. Total weight?`,
+  (a, b) => `Olivia carries a backpack weighing ${a} kg and a lunchbox weighing ${b} kg. Total weight?`,
+  (a, b) => `A jug has ${a} L of water. Ella pours in another ${b} L. How many litres in the jug now?`,
+  (a, b) => `A bottle has ${a} L of juice. Sione adds ${b} L more. How many litres in total?`,
+  (a, b) => `A cup holds ${a} L. A second cup holds ${b} L. How many litres altogether?`,
+  (a, b) => `A water tank has ${a} L. ${b} L more is added. How many litres now?`,
+  (a, b) => `A garden bed is ${a} m long. Another bed is ${b} m long. Total length?`,
+  (a, b) => `Ava jumps ${a} m on her first attempt and ${b} m on her second. Combined distance?`,
+  (a, b) => `A tape measure shows ${a} m. Then ${b} m more is measured. Total length?`,
+  (a, b) => `A bakery uses ${a} kg of flour on Monday and ${b} kg on Tuesday. How many kg total?`,
+  (a, b) => `Noah's relay race split: he ran ${a} km then ${b} km. How far did he run in total?`,
+  (a, b) => `A delivery truck travels ${a} km then ${b} km more. How many km altogether?`,
+  (a, b) => `A swimmer covers ${a} km in the morning session and ${b} km in the afternoon. Total?`,
+  (a, b) => `A chocolate bar weighs ${a} g. A muesli bar weighs ${b} g. Total weight in grams?`,
+];
+
+// 24 decimal multiplication templates — money, measurement, area, rate contexts.
 const DECIMAL_TEMPLATES: Array<(a: string, b: string) => string> = [
   (a, b) => `Each apple costs $${a}. Liam buys ${b} apples. How much altogether?`,
   (a, b) => `Each pencil costs $${a}. Noah buys ${b} pencils. How much altogether?`,
@@ -109,32 +164,39 @@ export function buildWordProblems(
   for (let i = 0; i < TOTAL; i++) {
     pairs.push(shuffled[i % shuffled.length]);
   }
+  const isAddition = pairs[0]?.op === "+";
   const isDecimal = pairs.some((p) =>
     (p.aDisplay && p.aDisplay.includes(".")) ||
     (p.bDisplay && p.bDisplay.includes(".")) ||
     (p.answerDisplay && p.answerDisplay.includes("."))
   );
-  if (isDecimal) {
-    const templates = DECIMAL_TEMPLATES;
-    const templateOrder = seededShuffle(
-      Array.from({ length: templates.length }, (_, i) => i),
-      seeds.templates,
-    );
-    return pairs.map((p, i) => {
-      const template = templates[templateOrder[i % templates.length]];
-      const aStr = p.aDisplay ?? String(p.a);
-      const bStr = p.bDisplay ?? String(p.b);
-      const ansStr = p.answerDisplay ?? String(p.a * p.b);
-      return { prompt: template(aStr, bStr), answer: ansStr };
-    });
-  }
+
+  // Pick the right template bank
+  const stringTemplates =
+    isAddition && isDecimal ? DECIMAL_ADDITION_TEMPLATES :
+    !isAddition && isDecimal ? DECIMAL_TEMPLATES :
+    null;
+  const numberTemplates =
+    isAddition && !isDecimal ? ADDITION_TEMPLATES :
+    !isAddition && !isDecimal ? TEMPLATES :
+    null;
+
+  const templateLen = stringTemplates?.length ?? numberTemplates?.length ?? 0;
   const templateOrder = seededShuffle(
-    Array.from({ length: TEMPLATES.length }, (_, i) => i),
+    Array.from({ length: templateLen }, (_, i) => i),
     seeds.templates,
   );
-  return pairs.map(({ a, b }, i) => {
-    const template = TEMPLATES[templateOrder[i % templateOrder.length]];
-    return { prompt: template(a, b), answer: a * b };
+
+  return pairs.map((p, i) => {
+    const idx = templateOrder[i % templateOrder.length];
+    if (stringTemplates) {
+      const aStr = p.aDisplay ?? String(p.a);
+      const bStr = p.bDisplay ?? String(p.b);
+      const ansStr = p.answerDisplay ?? String(isAddition ? p.a + p.b : p.a * p.b);
+      return { prompt: stringTemplates[idx](aStr, bStr), answer: ansStr };
+    }
+    const template = numberTemplates![idx];
+    return { prompt: template(p.a, p.b), answer: isAddition ? p.a + p.b : p.a * p.b };
   });
 }
 

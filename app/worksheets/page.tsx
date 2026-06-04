@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
+import { ADDITION_STAGES } from "@/data/additionStages";
 
-function StageCard({ id, fullId, shortTitle }: { id: string; fullId: string; shortTitle: string }) {
+function StageCard({ basePath, id, fullId, shortTitle }: {
+  basePath: string; id: string; fullId: string; shortTitle: string;
+}) {
   return (
     <Link
-      href={`/worksheets/multiplication/${id}`}
+      href={`${basePath}/${id}`}
       className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
     >
       <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
@@ -20,12 +23,30 @@ function StageCard({ id, fullId, shortTitle }: { id: string; fullId: string; sho
   );
 }
 
+function StageGroup({
+  title, basePath, stages,
+}: {
+  title: string;
+  basePath: string;
+  stages: { id: string; fullId: string; shortTitle: string }[];
+}) {
+  return (
+    <section>
+      <div className="flex items-center gap-2 mb-3 px-1">
+        <h2 className="font-fredoka font-bold text-2xl text-gray-700">{title}</h2>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+        {stages.map((s) => <StageCard key={s.id} basePath={basePath} {...s} />)}
+      </div>
+    </section>
+  );
+}
+
 export default function WorksheetsLandingPage() {
-  const stage1 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("1."));
-  const stage2 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("2."));
-  const stage3 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("3."));
-  const stage4 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("4."));
-  const stage5 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("5."));
+  const addBase = "/worksheets/addition";
+  const mulBase = "/worksheets/multiplication";
+  const byStage = (stages: typeof MULTIPLICATION_STAGES, prefix: string) =>
+    stages.filter((s) => s.fullId.startsWith(prefix));
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
@@ -41,56 +62,36 @@ export default function WorksheetsLandingPage() {
         </p>
       </div>
 
-      <div className="w-full max-w-2xl space-y-10">
-        <section>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <span className="text-xl">✖️</span>
-            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 1 — Times Tables</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {stage1.map((s) => <StageCard key={s.id} {...s} />)}
-          </div>
-        </section>
+      <div className="w-full max-w-2xl space-y-12">
+        {/* ── Addition ─────────────────────────────────────────── */}
+        <div className="space-y-8">
+          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
+            <span>➕</span> Addition
+          </h2>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <StageGroup
+              key={`add-${n}`}
+              title={`Stage ${n}${n === 1 ? " — Single Digit" : n === 5 ? " — Decimals" : ""}`}
+              basePath={addBase}
+              stages={byStage(ADDITION_STAGES, `${n}.`)}
+            />
+          ))}
+        </div>
 
-        <section>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <span className="text-xl">✖️</span>
-            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 2</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {stage2.map((s) => <StageCard key={s.id} {...s} />)}
-          </div>
-        </section>
-
-        <section>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <span className="text-xl">✖️</span>
-            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 3</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {stage3.map((s) => <StageCard key={s.id} {...s} />)}
-          </div>
-        </section>
-
-        <section>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <span className="text-xl">✖️</span>
-            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 4</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {stage4.map((s) => <StageCard key={s.id} {...s} />)}
-          </div>
-        </section>
-
-        <section>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <span className="text-xl">✖️</span>
-            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 5 — Decimals</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {stage5.map((s) => <StageCard key={s.id} {...s} />)}
-          </div>
-        </section>
+        {/* ── Multiplication ────────────────────────────────────── */}
+        <div className="space-y-8">
+          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
+            <span>✖️</span> Multiplication
+          </h2>
+          {[1, 2, 3, 4, 5].map((n) => (
+            <StageGroup
+              key={`mul-${n}`}
+              title={`Stage ${n}${n === 1 ? " — Times Tables" : n === 5 ? " — Decimals" : ""}`}
+              basePath={mulBase}
+              stages={byStage(MULTIPLICATION_STAGES, `${n}.`)}
+            />
+          ))}
+        </div>
 
         <div className="pt-4">
           <Link

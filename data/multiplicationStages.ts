@@ -15,6 +15,9 @@ export type MultiplicationStageSpec = {
   // layout instead of the default 5×5 so questions don't overflow horizontally.
   inlineCols?: number;
   inlineRows?: number;
+  // Display name in the header section line. Defaults to "Multiplication";
+  // addition stages set "Addition".
+  operation?: "Addition" | "Multiplication";
 };
 
 // ── Pool generators ───────────────────────────────────────────────────────

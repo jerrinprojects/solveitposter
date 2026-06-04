@@ -39,6 +39,7 @@ export default function InlineWorksheetFrame({
   const { page1, page2 } = buildPages(stage.pool(), version, perPage);
   const versionLabel = `V${version}`;
   const hint = stage.inlineTagline;
+  const operation = stage.operation ?? "Multiplication";
 
   return (
     <>
@@ -71,7 +72,7 @@ export default function InlineWorksheetFrame({
 
         <Page>
           <PosterHeader
-            section={`Solveitmaths · Multiplication · ${versionLabel}`}
+            section={`Solveitmaths · ${operation} · ${versionLabel}`}
             title={<>Stage {stage.fullId} <CaveatAccent>Worksheet</CaveatAccent></>}
             tagline={<><Highlight>{stage.shortTitle}</Highlight>.</>}
           />
@@ -82,12 +83,12 @@ export default function InlineWorksheetFrame({
               cols={cols} rows={rows}
             />
           </div>
-          <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 1`} />
+          <PosterFooter rightLabel={`${operation} · Stage ${stage.fullId} · ${versionLabel} · Page 1`} />
         </Page>
 
         <Page>
           <PosterHeader
-            section={`Solveitmaths · Multiplication · ${versionLabel}`}
+            section={`Solveitmaths · ${operation} · ${versionLabel}`}
             title={<>Stage {stage.fullId} <CaveatAccent>Worksheet</CaveatAccent></>}
             tagline={<>Keep going — <Highlight>same idea, more practice</Highlight>.</>}
           />
@@ -98,12 +99,12 @@ export default function InlineWorksheetFrame({
               cols={cols} rows={rows}
             />
           </div>
-          <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 2`} />
+          <PosterFooter rightLabel={`${operation} · Stage ${stage.fullId} · ${versionLabel} · Page 2`} />
         </Page>
 
         <Page>
           <PosterHeader
-            section={`Solveitmaths · Multiplication · ${versionLabel}`}
+            section={`Solveitmaths · ${operation} · ${versionLabel}`}
             title={<>Stage {stage.fullId} <CaveatAccent>Answers</CaveatAccent></>}
             tagline={<>Answer key for <Highlight>Page 1</Highlight>.</>}
           />
@@ -114,12 +115,12 @@ export default function InlineWorksheetFrame({
               cols={cols} rows={rows}
             />
           </div>
-          <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 1 Answers`} />
+          <PosterFooter rightLabel={`${operation} · Stage ${stage.fullId} · ${versionLabel} · Page 1 Answers`} />
         </Page>
 
         <Page>
           <PosterHeader
-            section={`Solveitmaths · Multiplication · ${versionLabel}`}
+            section={`Solveitmaths · ${operation} · ${versionLabel}`}
             title={<>Stage {stage.fullId} <CaveatAccent>Answers</CaveatAccent></>}
             tagline={<>Answer key for <Highlight>Page 2</Highlight>.</>}
           />
@@ -130,7 +131,7 @@ export default function InlineWorksheetFrame({
               cols={cols} rows={rows}
             />
           </div>
-          <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 2 Answers`} />
+          <PosterFooter rightLabel={`${operation} · Stage ${stage.fullId} · ${versionLabel} · Page 2 Answers`} />
         </Page>
 
         <PrintButton />

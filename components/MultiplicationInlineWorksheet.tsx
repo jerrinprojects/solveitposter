@@ -11,14 +11,17 @@ const PAGE_PALETTE = {
 type AccentKey = keyof typeof PAGE_PALETTE;
 
 // `aDisplay/bDisplay/answerDisplay` let a stage override the default numeric
-// formatting (used by Stage 5 to show "0.37" instead of "0.37" coerced to
-// "0.37" — most importantly to preserve trailing zeros like "0.50").
+// formatting (used by Stage 5 multiplication to preserve trailing zeros like
+// "0.50"). `op` overrides the operator symbol (defaults to "×"); addition
+// stages set it to "+". If `answerDisplay` is set the cell renders that
+// verbatim — so addition problems compute their answer at pool time.
 export type InlineProblem = {
   a: number;
   b: number;
   aDisplay?: string;
   bDisplay?: string;
   answerDisplay?: string;
+  op?: "+" | "×";
 };
 
 // Banner pill used at the top of each page's grid.
@@ -53,11 +56,11 @@ function InlineCell({
 }: {
   index: number; problem: InlineProblem; accent: AccentKey; showAnswer: boolean;
 }) {
-  const { a, b, aDisplay, bDisplay, answerDisplay } = problem;
+  const { a, b, aDisplay, bDisplay, answerDisplay, op = "×" } = problem;
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
   const aStr = aDisplay ?? String(a);
   const bStr = bDisplay ?? String(b);
-  const ansStr = answerDisplay ?? String(a * b);
+  const ansStr = answerDisplay ?? String(op === "+" ? a + b : a * b);
   const totalChars = aStr.length + bStr.length + ansStr.length;
   const digitFont =
     totalChars >= 14 ? 14 :
@@ -92,7 +95,7 @@ function InlineCell({
         fontSize: digitFont, fontWeight: 700, color: num, lineHeight: 1.1,
       }}>
         <span>{aStr}</span>
-        <span style={{ color: ink, fontSize: opFont }}>×</span>
+        <span style={{ color: ink, fontSize: opFont }}>{op}</span>
         <span>{bStr}</span>
         <span style={{ color: ink, fontSize: opFont }}>=</span>
         {showAnswer ? (
