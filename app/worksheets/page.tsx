@@ -1,7 +1,29 @@
 import Link from "next/link";
 import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 
+function StageCard({ id, fullId, shortTitle }: { id: string; fullId: string; shortTitle: string }) {
+  return (
+    <Link
+      href={`/worksheets/multiplication/${id}`}
+      className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
+    >
+      <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
+        Stage {fullId}
+      </p>
+      <p className="font-nunito text-xs font-semibold text-gray-400 mt-1 leading-tight">
+        {shortTitle}
+      </p>
+      <span className="text-pink-300 group-hover:text-pink-500 text-sm mt-2 transition-colors">
+        →
+      </span>
+    </Link>
+  );
+}
+
 export default function WorksheetsLandingPage() {
+  const stage2 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("2."));
+  const stage3 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("3."));
+
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
       <div className="text-center mb-12">
@@ -23,23 +45,17 @@ export default function WorksheetsLandingPage() {
             <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 2</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-            {MULTIPLICATION_STAGES.map((stage) => (
-              <Link
-                key={stage.id}
-                href={`/worksheets/multiplication/${stage.id}`}
-                className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
-              >
-                <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
-                  Stage {stage.fullId}
-                </p>
-                <p className="font-nunito text-xs font-semibold text-gray-400 mt-1 leading-tight">
-                  {stage.shortTitle}
-                </p>
-                <span className="text-pink-300 group-hover:text-pink-500 text-sm mt-2 transition-colors">
-                  →
-                </span>
-              </Link>
-            ))}
+            {stage2.map((s) => <StageCard key={s.id} {...s} />)}
+          </div>
+        </section>
+
+        <section>
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <span className="text-xl">✖️</span>
+            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 3</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+            {stage3.map((s) => <StageCard key={s.id} {...s} />)}
           </div>
         </section>
 
