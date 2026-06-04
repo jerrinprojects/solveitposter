@@ -45,13 +45,27 @@ function VerticalCell({
 }) {
   const { a, b, aDisplay, bDisplay, answerDisplay, op = "×" } = problem;
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
-  const aStr = aDisplay ?? String(a);
-  const bStr = bDisplay ?? String(b);
-  const answerStr = answerDisplay ?? String(op === "+" ? a + b : a * b);
+  let aStr = aDisplay ?? String(a);
+  let bStr = bDisplay ?? String(b);
+  let answerStr = answerDisplay ?? String(op === "+" ? a + b : a * b);
   // Decimal problems are detected by the presence of a "." in any string —
-  // PV labels (H/T/O) don't apply, so we suppress them and let the layout
-  // right-align decimals (with the . treated as just another column slot).
+  // PV labels (H/T/O) don't apply, so we suppress them.
   const isDecimal = aStr.includes(".") || bStr.includes(".") || answerStr.includes(".");
+  // For column ADDITION of decimals, decimal points must align. Pad shorter
+  // operands with trailing zeros (and a decimal point if needed) so the .
+  // sits in the same column across all three strings.
+  if (isDecimal && op === "+") {
+    const dpOf = (s: string) => s.includes(".") ? s.length - s.indexOf(".") - 1 : 0;
+    const maxDp = Math.max(dpOf(aStr), dpOf(bStr), dpOf(answerStr));
+    const padDp = (s: string): string => {
+      const cur = dpOf(s);
+      if (cur === maxDp) return s;
+      return (s.includes(".") ? s : s + ".") + "0".repeat(maxDp - cur);
+    };
+    aStr = padDp(aStr);
+    bStr = padDp(bStr);
+    answerStr = padDp(answerStr);
+  }
   // Grid width fits the widest of multiplicand, multiplier, and product.
   // Otherwise 4-digit answers (e.g. 52 × 53 = 2756) overflow a 3-column grid
   // and the trailing digit gets clipped.

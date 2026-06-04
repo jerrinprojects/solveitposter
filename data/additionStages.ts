@@ -398,18 +398,29 @@ function stageAdd58Pool(): InlineProblem[] {
 }
 
 function stageAdd59Pool(): InlineProblem[] {
-  // 5.9: mixed decimals (varying DP), with renaming
+  // 5.9: mixed decimals (varying DP), with renaming.
+  // Step must be < 10^dp so fractional digits actually vary; without that
+  // every candidate lands on a whole number and fa+fb is always 0.
   const out: InlineProblem[] = [];
-  const dps = [1, 2, 3] as const;
-  for (const dA of dps) for (const dB of dps) {
+  const combos: Array<[number, number]> = [
+    [1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3],
+  ];
+  for (const [dA, dB] of combos) {
     const sA = Math.pow(10, dA);
     const sB = Math.pow(10, dB);
-    for (let a = sA; a <= 50 * sA; a += sA * 2) for (let b = sB; b <= 50 * sB; b += sB * 2) {
-      const aV = a / sA;
-      const bV = b / sB;
-      const fa = aV - Math.floor(aV);
-      const fb = bV - Math.floor(bV);
-      if (fa + fb >= 1) out.push(dp(aV, dA, bV, dB));
+    const stepA = dA === 1 ? 3 : dA === 2 ? 23 : 137;
+    const stepB = dB === 1 ? 7 : dB === 2 ? 31 : 191;
+    let count = 0;
+    outer: for (let a = stepA; a <= 30 * sA; a += stepA) {
+      for (let b = stepB; b <= 30 * sB; b += stepB) {
+        const aV = a / sA;
+        const bV = b / sB;
+        const fa = aV - Math.floor(aV);
+        const fb = bV - Math.floor(bV);
+        if (fa + fb < 1) continue;
+        out.push(dp(aV, dA, bV, dB));
+        if (++count >= 60) break outer;
+      }
     }
   }
   return out;
