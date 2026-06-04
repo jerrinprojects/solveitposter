@@ -46,12 +46,15 @@ function VerticalCell({
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
   const aStr = String(a);
   const bStr = String(b);
-  const digitCols = Math.max(aStr.length, bStr.length);
-  const totalCols = digitCols + 1;
-  const PV_LABELS = ["H", "T", "O"];
-  const pvForCol = (i: number) => PV_LABELS[3 - digitCols + i];
   const answer = a * b;
   const answerStr = String(answer);
+  // Grid width fits the widest of multiplicand, multiplier, and product.
+  // Otherwise 4-digit answers (e.g. 52 × 53 = 2756) overflow a 3-column grid
+  // and the trailing digit gets clipped.
+  const digitCols = Math.max(aStr.length, bStr.length, answerStr.length);
+  const totalCols = digitCols + 1;
+  const PV_LABELS = ["Th", "H", "T", "O"];
+  const pvForCol = (i: number) => PV_LABELS[4 - digitCols + i];
   const COL_W = 18;
   const monoStyle: React.CSSProperties = {
     fontFamily: "var(--font-mono), 'Courier New', monospace",
@@ -116,11 +119,11 @@ function VerticalCell({
             <span key={"a" + i} style={monoStyle}>{d}</span>
           ))}
 
-          {/* × b */}
-          <span style={monoStyle}>×</span>
+          {/* × b — × sits in the column directly left of b's leading digit */}
           {Array.from({ length: totalCols - bStr.length - 1 }).map((_, i) => (
             <span key={"pad-b" + i}>&nbsp;</span>
           ))}
+          <span style={monoStyle}>×</span>
           {bStr.split("").map((d, i) => (
             <span key={"b" + i} style={monoStyle}>{d}</span>
           ))}

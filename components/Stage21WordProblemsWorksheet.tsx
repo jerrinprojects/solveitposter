@@ -15,20 +15,35 @@ const PAGE_PALETTE = {
 
 type AccentKey = keyof typeof PAGE_PALETTE;
 
-// 12 context templates, each parameterised on (a, b). a×b answers the question.
+// 24 context templates, each parameterised on (a, b). a×b answers the question.
+// Scales across Stage 2.1–2.9: avoids currency contexts that get unrealistic
+// at high numbers; uses bulk-quantity, distance, time and group contexts
+// instead. Names are an NZ-flavoured mix.
 const TEMPLATES: Array<(a: number, b: number) => string> = [
-  (a, b) => `A box has ${a} marbles. There are ${b} boxes. How many marbles in total?`,
-  (a, b) => `Ella reads ${a} pages each day for ${b} days. How many pages has she read?`,
-  (a, b) => `Each shelf holds ${a} books. There are ${b} shelves. How many books fit on the shelves?`,
-  (a, b) => `A bus carries ${a} students. There are ${b} buses going on a trip. How many students go altogether?`,
+  (a, b) => `A box has ${a} marbles. There are ${b} boxes. How many marbles altogether?`,
   (a, b) => `A pack of stickers has ${a}. Liam buys ${b} packs. How many stickers does he have?`,
-  (a, b) => `A netball team has ${a} players. ${b} teams come to the tournament. How many players in total?`,
-  (a, b) => `Mia saves $${a} a week for ${b} weeks. How much has she saved?`,
-  (a, b) => `A tray holds ${a} cupcakes. A bakery uses ${b} trays. How many cupcakes did they bake?`,
-  (a, b) => `An ice cream costs $${a}. Noah buys ${b} ice creams. How much does it cost altogether?`,
-  (a, b) => `A garden row has ${a} flowers. There are ${b} rows. How many flowers in the garden?`,
   (a, b) => `A box of crayons has ${a}. The teacher hands out ${b} boxes. How many crayons in total?`,
-  (a, b) => `Ava runs ${a} laps each day for ${b} days. How many laps in total?`,
+  (a, b) => `A pack of trading cards has ${a} cards. Noah opens ${b} packs. How many cards does he have?`,
+  (a, b) => `A tray holds ${a} cupcakes. A bakery uses ${b} trays. How many cupcakes did they bake?`,
+  (a, b) => `Each shelf holds ${a} books. There are ${b} shelves. How many books fit altogether?`,
+  (a, b) => `A jar holds ${a} jellybeans. The shop has ${b} jars. How many jellybeans in total?`,
+  (a, b) => `Ella reads ${a} pages each day for ${b} days. How many pages does she read in total?`,
+  (a, b) => `Olivia practises piano for ${a} minutes each day for ${b} days. How many minutes altogether?`,
+  (a, b) => `Lucas walks ${a} steps each minute for ${b} minutes. How many steps in total?`,
+  (a, b) => `Ava runs ${a} laps each day for ${b} days. How many laps altogether?`,
+  (a, b) => `Mia swims ${a} metres each day for ${b} days. How many metres has she swum?`,
+  (a, b) => `A bus carries ${a} students. ${b} buses go on a school trip. How many students altogether?`,
+  (a, b) => `A netball team has ${a} players. ${b} teams come to a tournament. How many players altogether?`,
+  (a, b) => `A school van seats ${a} children. ${b} vans take children to camp. How many children altogether?`,
+  (a, b) => `A garden row has ${a} flowers. There are ${b} rows. How many flowers in the garden?`,
+  (a, b) => `Each kiwifruit tree gives ${a} fruit. The orchard has ${b} trees. How many kiwifruit in total?`,
+  (a, b) => `Aroha collects ${a} shells each weekend for ${b} weekends. How many shells altogether?`,
+  (a, b) => `Tane bakes ${a} biscuits in each batch. He makes ${b} batches. How many biscuits altogether?`,
+  (a, b) => `Each pavlova needs ${a} eggs. The bakery makes ${b} pavlovas. How many eggs are needed?`,
+  (a, b) => `Each row of seats has ${a} chairs. The hall has ${b} rows. How many seats altogether?`,
+  (a, b) => `Kiri gives ${a} stickers to each friend. She has ${b} friends. How many stickers in total?`,
+  (a, b) => `Each beehive has ${a} bees. The beekeeper has ${b} hives. How many bees altogether?`,
+  (a, b) => `Sione plants ${a} seedlings in each row. He plants ${b} rows. How many seedlings in total?`,
 ];
 
 const WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number }> = {
