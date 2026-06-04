@@ -1,123 +1,61 @@
 import type { Metadata } from "next";
-import PrintButton from "@/components/PrintButton";
-import {
-  BackToTopics, CaveatAccent, Highlight,
-  PosterFooter, PosterHeader,
-} from "@/components/PosterFrame";
-import {
-  Stage21Page, buildStage21Pages,
-} from "@/components/MultiplicationInlineWorksheet";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Multiplication Stage 2.1 Worksheet | Solve It Maths",
+  title: "Multiplication Stage 2.1 Worksheets | Solve It Maths",
 };
 
-const POSTER_W = 1063;
-const POSTER_H = 741;
+const versions = [
+  { label: "Version 1", sub: "50 problems · seeded shuffle", href: "/worksheets/multiplication/stage-2-1/v1" },
+  { label: "Version 2", sub: "Same level, different mix", href: "/worksheets/multiplication/stage-2-1/v2" },
+  { label: "Version 3", sub: "Same level, another mix", href: "/worksheets/multiplication/stage-2-1/v3" },
+];
 
-function Page({ children }: { children: React.ReactNode }) {
+export default function Stage21VersionsPage() {
   return (
-    <div
-      className="worksheet-page"
-      style={{
-        width: POSTER_W, height: POSTER_H, background: "#fffaf3",
-        borderRadius: 28, overflow: "hidden",
-        boxShadow: "0 8px 32px rgba(236, 64, 122, 0.10)",
-        display: "flex", flexDirection: "column",
-        margin: "16px auto",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+    <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
+      <div className="text-center mb-10">
+        <p className="font-nunito text-xs font-bold text-pink-400 tracking-[0.35em] uppercase mb-3">
+          Solveitmaths · Multiplication
+        </p>
+        <h1 className="font-fredoka font-bold text-4xl sm:text-5xl text-pink-600 leading-tight">
+          Stage 2.1 Worksheets
+        </h1>
+        <p className="font-nunito text-sm text-gray-500 mt-2">
+          Two-digit × one-digit · no carrying · 3 versions to choose from
+        </p>
+      </div>
 
-export default function MultiplicationStage21WorksheetPage() {
-  const { page1, page2 } = buildStage21Pages();
+      <div className="w-full max-w-2xl space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {versions.map((v) => (
+            <Link
+              key={v.href}
+              href={v.href}
+              className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-4 py-5 hover:border-pink-400 hover:shadow-md transition-all group text-center"
+            >
+              <p className="font-fredoka font-bold text-lg text-pink-500 leading-none">
+                {v.label}
+              </p>
+              <p className="font-nunito text-xs font-semibold text-gray-400 mt-2">
+                {v.sub}
+              </p>
+              <span className="text-pink-300 group-hover:text-pink-500 text-sm mt-3 transition-colors">
+                Open →
+              </span>
+            </Link>
+          ))}
+        </div>
 
-  return (
-    <>
-      <style>{`
-        @media print {
-          @page { size: A4 landscape; margin: 7mm; }
-          body { background-color: #fff3e6 !important; }
-          .worksheet-page {
-            width: 100% !important;
-            max-width: none !important;
-            margin: 0 !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            height: 196mm !important;
-            box-sizing: border-box !important;
-            overflow: hidden !important;
-            display: flex !important;
-            flex-direction: column !important;
-          }
-          .worksheet-page + .worksheet-page {
-            break-before: page;
-            page-break-before: always;
-            margin-top: 0 !important;
-          }
-        }
-      `}</style>
-
-      <main style={{ background: "#fff3e6", minHeight: "100vh", paddingBottom: 48 }}>
-        <BackToTopics />
-
-        {/* ── Page 1: Questions ── */}
-        <Page>
-          <PosterHeader
-            section="Solveitmaths · Multiplication"
-            title={<>Stage 2.1 <CaveatAccent>Worksheet</CaveatAccent></>}
-            tagline={<>Two-digit × one-digit, <Highlight>no carrying</Highlight>.</>}
-          />
-          <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <Stage21Page pageNumber={1} problems={page1} accent="pink" showAnswer={false} />
-          </div>
-          <PosterFooter rightLabel="Multiplication · Stage 2.1 · Page 1" />
-        </Page>
-
-        {/* ── Page 2: Questions ── */}
-        <Page>
-          <PosterHeader
-            section="Solveitmaths · Multiplication"
-            title={<>Stage 2.1 <CaveatAccent>Worksheet</CaveatAccent></>}
-            tagline={<>Keep going — <Highlight>tens × digit, ones × digit, add them</Highlight>.</>}
-          />
-          <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <Stage21Page pageNumber={2} problems={page2} accent="mint" showAnswer={false} />
-          </div>
-          <PosterFooter rightLabel="Multiplication · Stage 2.1 · Page 2" />
-        </Page>
-
-        {/* ── Page 3: Answers for Page 1 ── */}
-        <Page>
-          <PosterHeader
-            section="Solveitmaths · Multiplication"
-            title={<>Stage 2.1 <CaveatAccent>Answers</CaveatAccent></>}
-            tagline={<>Answer key for <Highlight>Page 1</Highlight>.</>}
-          />
-          <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <Stage21Page pageNumber={1} problems={page1} accent="pink" showAnswer={true} />
-          </div>
-          <PosterFooter rightLabel="Multiplication · Stage 2.1 · Page 1 Answers" />
-        </Page>
-
-        {/* ── Page 4: Answers for Page 2 ── */}
-        <Page>
-          <PosterHeader
-            section="Solveitmaths · Multiplication"
-            title={<>Stage 2.1 <CaveatAccent>Answers</CaveatAccent></>}
-            tagline={<>Answer key for <Highlight>Page 2</Highlight>.</>}
-          />
-          <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column" }}>
-            <Stage21Page pageNumber={2} problems={page2} accent="mint" showAnswer={true} />
-          </div>
-          <PosterFooter rightLabel="Multiplication · Stage 2.1 · Page 2 Answers" />
-        </Page>
-
-        <PrintButton />
-      </main>
-    </>
+        <div className="pt-2">
+          <Link
+            href="/worksheets"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 hover:text-pink-700 transition-colors"
+          >
+            <span>←</span> All Worksheets
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }

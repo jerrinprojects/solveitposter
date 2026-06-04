@@ -111,14 +111,14 @@ export function stage21Problems(): InlineProblem[] {
   return all;
 }
 
-// Pick `count` problems with deterministic spread — avoids near-duplicates
-// being adjacent. Cycles the unique pool if count > pool size.
-function pickSpread(pool: InlineProblem[], count: number, offset = 0): InlineProblem[] {
-  if (pool.length === 0) return [];
-  const out: InlineProblem[] = [];
-  const step = Math.max(1, Math.floor(pool.length / count));
-  for (let i = 0; i < count; i++) {
-    out.push(pool[(offset + i * step) % pool.length]);
+// Deterministic Fisher–Yates shuffle. Same seed → same ordering.
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  let state = seed >>> 0;
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
+    state = (state * 1103515245 + 12345) & 0x7fffffff;
+    const j = state % (i + 1);
+    [out[i], out[j]] = [out[j], out[i]];
   }
   return out;
 }
@@ -159,12 +159,30 @@ export function Stage21Page({
   );
 }
 
-// Build two 25-question pages from the Stage 2.1 pool, with the second page
-// offset to maximise variety across the worksheet.
-export function buildStage21Pages(): { page1: InlineProblem[]; page2: InlineProblem[] } {
+// Build two 25-question pages from the Stage 2.1 pool. Each version uses a
+// distinct seeded shuffle, so V1/V2/V3 have different orderings and different
+// repeats (the pool has 35 unique problems but each version needs 50).
+export type WorksheetVersion = 1 | 2 | 3;
+
+const STAGE_21_SEEDS: Record<WorksheetVersion, number> = {
+  1: 42,
+  2: 137,
+  3: 271,
+};
+
+export function buildStage21Pages(version: WorksheetVersion): {
+  page1: InlineProblem[]; page2: InlineProblem[];
+} {
   const pool = stage21Problems();
   const PER_PAGE = 25;
-  const page1 = pickSpread(pool, PER_PAGE, 0);
-  const page2 = pickSpread(pool, PER_PAGE, Math.floor(pool.length / 2));
-  return { page1, page2 };
+  const TOTAL = PER_PAGE * 2;
+  const shuffled = seededShuffle(pool, STAGE_21_SEEDS[version]);
+  const sequence: InlineProblem[] = [];
+  for (let i = 0; i < TOTAL; i++) {
+    sequence.push(shuffled[i % shuffled.length]);
+  }
+  return {
+    page1: sequence.slice(0, PER_PAGE),
+    page2: sequence.slice(PER_PAGE),
+  };
 }
