@@ -23,6 +23,7 @@ function StageCard({ id, fullId, shortTitle }: { id: string; fullId: string; sho
 export default function WorksheetsLandingPage() {
   const stage2 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("2."));
   const stage3 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("3."));
+  const stage4 = MULTIPLICATION_STAGES.filter((s) => s.fullId.startsWith("4."));
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
@@ -56,6 +57,16 @@ export default function WorksheetsLandingPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
             {stage3.map((s) => <StageCard key={s.id} {...s} />)}
+          </div>
+        </section>
+
+        <section>
+          <div className="flex items-center gap-2 mb-3 px-1">
+            <span className="text-xl">✖️</span>
+            <h2 className="font-fredoka font-bold text-2xl text-gray-700">Multiplication · Stage 4</h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+            {stage4.map((s) => <StageCard key={s.id} {...s} />)}
           </div>
         </section>
 

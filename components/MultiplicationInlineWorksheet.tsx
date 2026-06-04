@@ -38,12 +38,21 @@ function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string;
 }
 
 // One inline problem cell. Shows "Qn  AA × B = ____" or with the answer filled in.
+// Font auto-scales down for wider content so 4-digit × 4-digit still fits.
 function InlineCell({
   index, a, b, accent, showAnswer,
 }: {
   index: number; a: number; b: number; accent: AccentKey; showAnswer: boolean;
 }) {
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
+  const totalChars = String(a).length + String(b).length + String(a * b).length;
+  const digitFont =
+    totalChars >= 14 ? 14 :
+    totalChars >= 11 ? 16 :
+    totalChars >= 9  ? 18 :
+                       22;
+  const opFont = Math.max(12, digitFont - 4);
+  const underlineMin = digitFont >= 20 ? 60 : digitFont >= 18 ? 50 : 40;
   return (
     <div style={{
       borderRadius: 14,
@@ -55,6 +64,7 @@ function InlineCell({
       justifyContent: "center",
       gap: 4,
       boxShadow: "0 1px 0 rgba(0,0,0,0.04)",
+      overflow: "hidden",
     }}>
       <div style={{
         fontFamily: "var(--font-body), sans-serif",
@@ -66,17 +76,17 @@ function InlineCell({
       <div style={{
         display: "flex", alignItems: "baseline", gap: 6,
         fontFamily: "var(--font-mono), 'Courier New', monospace",
-        fontSize: 22, fontWeight: 700, color: num, lineHeight: 1.1,
+        fontSize: digitFont, fontWeight: 700, color: num, lineHeight: 1.1,
       }}>
         <span>{a}</span>
-        <span style={{ color: ink, fontSize: 18 }}>×</span>
+        <span style={{ color: ink, fontSize: opFont }}>×</span>
         <span>{b}</span>
-        <span style={{ color: ink, fontSize: 18 }}>=</span>
+        <span style={{ color: ink, fontSize: opFont }}>=</span>
         {showAnswer ? (
           <span style={{
             color: ink,
             background: soft,
-            padding: "1px 10px",
+            padding: "1px 8px",
             borderRadius: 8,
           }}>
             {a * b}
@@ -85,8 +95,8 @@ function InlineCell({
           <span style={{
             flex: 1,
             borderBottom: `2px solid ${ink}`,
-            minWidth: 60,
-            height: 18,
+            minWidth: underlineMin,
+            height: digitFont - 4,
           }} />
         )}
       </div>
@@ -109,6 +119,7 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 
 export function InlineProblemPage({
   pageNumber, problems, accent, showAnswer, stageFullId, instructionHint,
+  cols = 5, rows = 5,
 }: {
   pageNumber: 1 | 2;
   problems: InlineProblem[];
@@ -116,6 +127,8 @@ export function InlineProblemPage({
   showAnswer: boolean;
   stageFullId: string;
   instructionHint: string;
+  cols?: number;
+  rows?: number;
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   return (
@@ -129,8 +142,8 @@ export function InlineProblemPage({
       />
       <div style={{
         flex: 1, display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
-        gridTemplateRows: "repeat(5, 1fr)",
+        gridTemplateColumns: `repeat(${cols}, 1fr)`,
+        gridTemplateRows: `repeat(${rows}, 1fr)`,
         gap: 10, minHeight: 0,
       }}>
         {problems.map((p, i) => (

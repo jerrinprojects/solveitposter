@@ -11,6 +11,10 @@ export type MultiplicationStageSpec = {
   inlineTagline: string;
   columnTagline: string;
   pool: () => InlineProblem[];
+  // Optional override for inline grid — wider stages (3.9, 4.x) need a 4-col
+  // layout instead of the default 5×5 so questions don't overflow horizontally.
+  inlineCols?: number;
+  inlineRows?: number;
 };
 
 // ── Pool generators ───────────────────────────────────────────────────────
@@ -218,6 +222,102 @@ function stage39Pool(): InlineProblem[] {
   return out;
 }
 
+// ── Stage 4 ──────────────────────────────────────────────────────────────
+
+function stage41Pool(): InlineProblem[] {
+  // 4.1: round thousands (1000, 2000, …, 9000) × 2–9
+  const out: InlineProblem[] = [];
+  for (const a of [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000]) {
+    for (let b = 2; b <= 9; b++) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage42Pool(): InlineProblem[] {
+  // 4.2: round 4-digit bases (1000, 1100, 1200, …, 2000) × 2–9
+  const out: InlineProblem[] = [];
+  for (const a of [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]) {
+    for (let b = 2; b <= 9; b++) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage43Pool(): InlineProblem[] {
+  // 4.3: 4-digit × 1-digit (×2 or ×3) with no carrying.
+  // solveit: oneDigit 2 or 3, maxDigit = 4 if 2 else 3, th 1-3,
+  // hu/te/on 0..maxDigit. Each digit × oneDigit stays < 10.
+  const out: InlineProblem[] = [];
+  for (const b of [2, 3]) {
+    const maxDigit = b === 2 ? 4 : 3;
+    for (let th = 1; th <= 3; th++) {
+      for (let hu = 0; hu <= maxDigit; hu++) {
+        for (let te = 0; te <= maxDigit; te++) {
+          for (let on = 0; on <= maxDigit; on++) {
+            out.push({ a: th * 1000 + hu * 100 + te * 10 + on, b });
+          }
+        }
+      }
+    }
+  }
+  return out;
+}
+
+function stage44Pool(): InlineProblem[] {
+  // 4.4: 4-digit 1000–8999 × 4–9 (solveit's Math.random()*8000 + 1000)
+  const out: InlineProblem[] = [];
+  for (let a = 1000; a <= 8999; a++) {
+    for (let b = 4; b <= 9; b++) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage45Pool(): InlineProblem[] {
+  // 4.5: 4-digit 1000–5000 × multiple of 10 (10, 20, 30, 40, 50)
+  const out: InlineProblem[] = [];
+  for (let a = 1000; a <= 5000; a++) {
+    for (const b of [10, 20, 30, 40, 50]) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage46Pool(): InlineProblem[] {
+  // 4.6: 4-digit 1000–3000 × teens (11–19)
+  const out: InlineProblem[] = [];
+  for (let a = 1000; a <= 3000; a++) {
+    for (let b = 11; b <= 19; b++) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage47Pool(): InlineProblem[] {
+  // 4.7: 4-digit 2000–7999 × 2-digit 20–40
+  // Full enumeration is 126 000 pairs; sample ~4200 evenly (more than enough
+  // variety across 3 versions of 50 problems each).
+  const out: InlineProblem[] = [];
+  for (let a = 2000; a <= 7999; a += 30) {
+    for (let b = 20; b <= 40; b++) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage48Pool(): InlineProblem[] {
+  // 4.8: 4-digit 1000–4999 × 3-digit 100–200 (full = 404 000; sample ~2500)
+  const out: InlineProblem[] = [];
+  for (let a = 1000; a <= 4999; a += 40) {
+    for (let b = 100; b <= 200; b += 4) out.push({ a, b });
+  }
+  return out;
+}
+
+function stage49Pool(): InlineProblem[] {
+  // 4.9: 4-digit 1000–3999 × 4-digit 1000–1999 (full = 3 000 000; sample ~1000)
+  const out: InlineProblem[] = [];
+  for (let a = 1000; a <= 3999; a += 60) {
+    for (let b = 1000; b <= 1999; b += 50) out.push({ a, b });
+  }
+  return out;
+}
+
 // ── Stage registry ────────────────────────────────────────────────────────
 
 export const MULTIPLICATION_STAGES: MultiplicationStageSpec[] = [
@@ -365,6 +465,85 @@ export const MULTIPLICATION_STAGES: MultiplicationStageSpec[] = [
     inlineTagline: "Two 3-digit numbers (100–299 × 100–199).",
     columnTagline: "Long multiplication — three partial products, then add them all.",
     pool: stage39Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  // ── Stage 4 ───────────────────────────────────────────────────────────
+  {
+    id: "stage-4-1",
+    fullId: "4.1",
+    shortTitle: "Thousands × one-digit",
+    inlineTagline: "Round thousands (1000, 2000, … × 2–9).",
+    columnTagline: "Round numbers — line up the zeros, multiply the thousands.",
+    pool: stage41Pool,
+  },
+  {
+    id: "stage-4-2",
+    fullId: "4.2",
+    shortTitle: "Round four-digit × one-digit",
+    inlineTagline: "Round 4-digit (1000, 1100, … 2000 × 2–9).",
+    columnTagline: "Round numbers ending in 00 — bring the zeros down.",
+    pool: stage42Pool,
+  },
+  {
+    id: "stage-4-3",
+    fullId: "4.3",
+    shortTitle: "Four-digit × one-digit, no carrying",
+    inlineTagline: "4-digit × 1-digit (×2 or ×3), no carrying.",
+    columnTagline: "Vertical column form — each digit on its own, no carries.",
+    pool: stage43Pool,
+  },
+  {
+    id: "stage-4-4",
+    fullId: "4.4",
+    shortTitle: "Four-digit × one-digit, with carrying",
+    inlineTagline: "4-digit × 1-digit (4–9), with carrying.",
+    columnTagline: "Vertical column form — carry across thousands when needed.",
+    pool: stage44Pool,
+  },
+  {
+    id: "stage-4-5",
+    fullId: "4.5",
+    shortTitle: "Four-digit × multiple of 10",
+    inlineTagline: "4-digit × a multiple of 10 (1000–5000 × 10/20/30/40/50).",
+    columnTagline: "Multiply by the tens digit, add a placeholder zero.",
+    pool: stage45Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-4-6",
+    fullId: "4.6",
+    shortTitle: "Four-digit × teens",
+    inlineTagline: "4-digit × teens (1000–3000 × 11–19).",
+    columnTagline: "Two partial products — multiply by ones, then tens.",
+    pool: stage46Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-4-7",
+    fullId: "4.7",
+    shortTitle: "Four-digit × two-digit",
+    inlineTagline: "4-digit × 2-digit (2000–7999 × 20–40).",
+    columnTagline: "Long multiplication — two partial products, then add.",
+    pool: stage47Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-4-8",
+    fullId: "4.8",
+    shortTitle: "Four-digit × three-digit",
+    inlineTagline: "4-digit × 3-digit (1000–4999 × 100–200).",
+    columnTagline: "Long multiplication — three partial products, then add them all.",
+    pool: stage48Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-4-9",
+    fullId: "4.9",
+    shortTitle: "Two four-digit numbers",
+    inlineTagline: "Two 4-digit numbers (1000–3999 × 1000–1999).",
+    columnTagline: "Long multiplication — four partial products, careful with carries.",
+    pool: stage49Pool,
+    inlineCols: 4, inlineRows: 5,
   },
 ];
 

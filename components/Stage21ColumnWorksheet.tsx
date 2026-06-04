@@ -53,10 +53,10 @@ function VerticalCell({
   // and the trailing digit gets clipped.
   const digitCols = Math.max(aStr.length, bStr.length, answerStr.length);
   const totalCols = digitCols + 1;
-  // PV labels from hundred-thousands down to ones — covers products up to
-  // 6 digits (Stage 3.9's 299 × 199 = 59 501 needs 5; future stages may need 6).
-  const PV_LABELS = ["HTh", "TTh", "Th", "H", "T", "O"];
-  const pvForCol = (i: number) => PV_LABELS[6 - digitCols + i];
+  // PV labels from millions down to ones — covers products up to 7 digits
+  // (Stage 4.9's 3999 × 1999 = ~8 million needs M; future stages may need more).
+  const PV_LABELS = ["M", "HTh", "TTh", "Th", "H", "T", "O"];
+  const pvForCol = (i: number) => PV_LABELS[7 - digitCols + i];
   const COL_W = 18;
   const monoStyle: React.CSSProperties = {
     fontFamily: "var(--font-mono), 'Courier New', monospace",

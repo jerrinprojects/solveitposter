@@ -33,7 +33,10 @@ export default function InlineWorksheetFrame({
 }: {
   stage: MultiplicationStageSpec; version: WorksheetVersion;
 }) {
-  const { page1, page2 } = buildPages(stage.pool(), version, 25);
+  const cols = stage.inlineCols ?? 5;
+  const rows = stage.inlineRows ?? 5;
+  const perPage = cols * rows;
+  const { page1, page2 } = buildPages(stage.pool(), version, perPage);
   const versionLabel = `V${version}`;
   const hint = stage.inlineTagline;
 
@@ -76,6 +79,7 @@ export default function InlineWorksheetFrame({
             <InlineProblemPage
               pageNumber={1} problems={page1} accent="pink" showAnswer={false}
               stageFullId={stage.fullId} instructionHint={hint}
+              cols={cols} rows={rows}
             />
           </div>
           <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 1`} />
@@ -91,6 +95,7 @@ export default function InlineWorksheetFrame({
             <InlineProblemPage
               pageNumber={2} problems={page2} accent="mint" showAnswer={false}
               stageFullId={stage.fullId} instructionHint={hint}
+              cols={cols} rows={rows}
             />
           </div>
           <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 2`} />
@@ -106,6 +111,7 @@ export default function InlineWorksheetFrame({
             <InlineProblemPage
               pageNumber={1} problems={page1} accent="pink" showAnswer={true}
               stageFullId={stage.fullId} instructionHint={hint}
+              cols={cols} rows={rows}
             />
           </div>
           <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 1 Answers`} />
@@ -121,6 +127,7 @@ export default function InlineWorksheetFrame({
             <InlineProblemPage
               pageNumber={2} problems={page2} accent="mint" showAnswer={true}
               stageFullId={stage.fullId} instructionHint={hint}
+              cols={cols} rows={rows}
             />
           </div>
           <PosterFooter rightLabel={`Multiplication · Stage ${stage.fullId} · ${versionLabel} · Page 2 Answers`} />
