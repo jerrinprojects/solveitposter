@@ -39,15 +39,19 @@ function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string;
 // One column-form problem with H/T/O place-value labels above each digit.
 // Shows either an empty answer space (dashed) or the answer filled in.
 function VerticalCell({
-  index, a, b, accent, showAnswer,
+  index, problem, accent, showAnswer,
 }: {
-  index: number; a: number; b: number; accent: AccentKey; showAnswer: boolean;
+  index: number; problem: InlineProblem; accent: AccentKey; showAnswer: boolean;
 }) {
+  const { a, b, aDisplay, bDisplay, answerDisplay } = problem;
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
-  const aStr = String(a);
-  const bStr = String(b);
-  const answer = a * b;
-  const answerStr = String(answer);
+  const aStr = aDisplay ?? String(a);
+  const bStr = bDisplay ?? String(b);
+  const answerStr = answerDisplay ?? String(a * b);
+  // Decimal problems are detected by the presence of a "." in any string —
+  // PV labels (H/T/O) don't apply, so we suppress them and let the layout
+  // right-align decimals (with the . treated as just another column slot).
+  const isDecimal = aStr.includes(".") || bStr.includes(".") || answerStr.includes(".");
   // Grid width fits the widest of multiplicand, multiplier, and product.
   // Otherwise 4-digit answers (e.g. 52 × 53 = 2756) overflow a 3-column grid
   // and the trailing digit gets clipped.
@@ -101,7 +105,7 @@ function VerticalCell({
           alignItems: "center",
           rowGap: 2,
         }}>
-          {/* Place-value labels */}
+          {/* Place-value labels — suppressed for decimal problems */}
           <span>&nbsp;</span>
           {Array.from({ length: digitCols }).map((_, i) => (
             <span key={"pv" + i} style={{
@@ -109,7 +113,7 @@ function VerticalCell({
               fontSize: 9, fontWeight: 800, color: ink, opacity: 0.6,
               letterSpacing: "0.04em",
             }}>
-              {pvForCol(i)}
+              {isDecimal ? " " : pvForCol(i)}
             </span>
           ))}
 
@@ -206,8 +210,7 @@ export function ColumnProblemPage({
           <VerticalCell
             key={i}
             index={startIndex + i}
-            a={p.a}
-            b={p.b}
+            problem={p}
             accent={accent}
             showAnswer={showAnswer}
           />

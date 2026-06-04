@@ -318,6 +318,174 @@ function stage49Pool(): InlineProblem[] {
   return out;
 }
 
+// ── Stage 5 (decimals) ───────────────────────────────────────────────────
+// Decimal arithmetic uses integer math to avoid float precision errors.
+// Each problem records display strings so trailing zeros (0.50) survive.
+
+function exactDecimalProduct(a: number, aDP: number, b: number, bDP: number): number {
+  const aInt = Math.round(a * Math.pow(10, aDP));
+  const bInt = Math.round(b * Math.pow(10, bDP));
+  return (aInt * bInt) / Math.pow(10, aDP + bDP);
+}
+
+function decimalProblem(a: number, aDP: number, b: number, bDP: number): InlineProblem {
+  const ans = exactDecimalProduct(a, aDP, b, bDP);
+  return {
+    a, b,
+    aDisplay: a.toFixed(aDP),
+    bDisplay: b.toFixed(bDP),
+    answerDisplay: ans.toFixed(aDP + bDP),
+  };
+}
+
+function stage51Pool(): InlineProblem[] {
+  // 5.1: whole 1–99 × {0.1, 0.01, 0.001}
+  const out: InlineProblem[] = [];
+  for (let whole = 1; whole <= 99; whole++) {
+    for (const [b, bDP] of [[0.1, 1], [0.01, 2], [0.001, 3]] as const) {
+      const ans = exactDecimalProduct(whole, 0, b, bDP);
+      out.push({
+        a: whole, b,
+        aDisplay: String(whole),
+        bDisplay: b.toFixed(bDP),
+        answerDisplay: ans.toFixed(bDP),
+      });
+    }
+  }
+  return out;
+}
+
+function stage52Pool(): InlineProblem[] {
+  // 5.2: decimal tenths (1.0–9.9) × whole (2–9)
+  const out: InlineProblem[] = [];
+  for (let d10 = 10; d10 <= 99; d10++) {
+    const a = d10 / 10;
+    for (let b = 2; b <= 9; b++) {
+      const ans = exactDecimalProduct(a, 1, b, 0);
+      out.push({
+        a, b,
+        aDisplay: a.toFixed(1),
+        bDisplay: String(b),
+        answerDisplay: ans.toFixed(1),
+      });
+    }
+  }
+  return out;
+}
+
+function stage53Pool(): InlineProblem[] {
+  // 5.3: hundredths (1.01–9.99) × whole (2–9) — sample to keep size reasonable
+  const out: InlineProblem[] = [];
+  for (let d100 = 101; d100 <= 999; d100 += 5) {
+    const a = d100 / 100;
+    for (let b = 2; b <= 9; b++) {
+      const ans = exactDecimalProduct(a, 2, b, 0);
+      out.push({
+        a, b,
+        aDisplay: a.toFixed(2),
+        bDisplay: String(b),
+        answerDisplay: ans.toFixed(2),
+      });
+    }
+  }
+  return out;
+}
+
+function stage54Pool(): InlineProblem[] {
+  // 5.4: tenths (0.5–9.9) × tenths (0.1–0.9)
+  const out: InlineProblem[] = [];
+  for (let a10 = 5; a10 <= 99; a10++) {
+    const a = a10 / 10;
+    for (let b10 = 1; b10 <= 9; b10++) {
+      const b = b10 / 10;
+      out.push(decimalProblem(a, 1, b, 1));
+    }
+  }
+  return out;
+}
+
+function stage55Pool(): InlineProblem[] {
+  // 5.5: tenths (2.0–9.9) × tenths (1.1–9.9)
+  const out: InlineProblem[] = [];
+  for (let a10 = 20; a10 <= 99; a10++) {
+    const a = a10 / 10;
+    for (let b10 = 11; b10 <= 99; b10++) {
+      const b = b10 / 10;
+      out.push(decimalProblem(a, 1, b, 1));
+    }
+  }
+  return out;
+}
+
+function stage56Pool(): InlineProblem[] {
+  // 5.6: hundredths (0.10–0.99) × tenths (0.1–0.9)
+  const out: InlineProblem[] = [];
+  for (let a100 = 10; a100 <= 99; a100++) {
+    const a = a100 / 100;
+    for (let b10 = 1; b10 <= 9; b10++) {
+      const b = b10 / 10;
+      out.push(decimalProblem(a, 2, b, 1));
+    }
+  }
+  return out;
+}
+
+function stage57Pool(): InlineProblem[] {
+  // 5.7: hundredths (0.10–0.99) × hundredths (0.10–0.99)
+  const out: InlineProblem[] = [];
+  for (let a100 = 10; a100 <= 99; a100++) {
+    const a = a100 / 100;
+    for (let b100 = 10; b100 <= 99; b100++) {
+      const b = b100 / 100;
+      out.push(decimalProblem(a, 2, b, 2));
+    }
+  }
+  return out;
+}
+
+function stage58Pool(): InlineProblem[] {
+  // 5.8: larger decimal (10.00–99.99) × tenths (0.1–0.9) — sample
+  const out: InlineProblem[] = [];
+  for (let a100 = 1000; a100 <= 9999; a100 += 10) {
+    const a = a100 / 100;
+    for (let b10 = 1; b10 <= 9; b10++) {
+      const b = b10 / 10;
+      out.push(decimalProblem(a, 2, b, 1));
+    }
+  }
+  return out;
+}
+
+function stage59Pool(): InlineProblem[] {
+  // 5.9: multi-digit decimals — mix three solveit scenarios.
+  const out: InlineProblem[] = [];
+  // scenario 0: 10.00–90.99 × 1.00–9.99
+  for (let a100 = 1000; a100 <= 9099; a100 += 40) {
+    const a = a100 / 100;
+    for (let b100 = 100; b100 <= 999; b100 += 20) {
+      const b = b100 / 100;
+      out.push(decimalProblem(a, 2, b, 2));
+    }
+  }
+  // scenario 1: 10.00–90.99 × 10.00–99.99
+  for (let a100 = 1000; a100 <= 9099; a100 += 80) {
+    const a = a100 / 100;
+    for (let b100 = 1000; b100 <= 9999; b100 += 40) {
+      const b = b100 / 100;
+      out.push(decimalProblem(a, 2, b, 2));
+    }
+  }
+  // scenario 2: 10.00–99.99 × 0.100–0.999
+  for (let a100 = 1000; a100 <= 9999; a100 += 40) {
+    const a = a100 / 100;
+    for (let b1000 = 100; b1000 <= 999; b1000 += 20) {
+      const b = b1000 / 1000;
+      out.push(decimalProblem(a, 2, b, 3));
+    }
+  }
+  return out;
+}
+
 // ── Stage registry ────────────────────────────────────────────────────────
 
 export const MULTIPLICATION_STAGES: MultiplicationStageSpec[] = [
@@ -543,6 +711,85 @@ export const MULTIPLICATION_STAGES: MultiplicationStageSpec[] = [
     inlineTagline: "Two 4-digit numbers (1000–3999 × 1000–1999).",
     columnTagline: "Long multiplication — four partial products, careful with carries.",
     pool: stage49Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  // ── Stage 5 (decimals) ────────────────────────────────────────────────
+  {
+    id: "stage-5-1",
+    fullId: "5.1",
+    shortTitle: "Whole number × 0.1, 0.01, 0.001",
+    inlineTagline: "Whole × tenth / hundredth / thousandth.",
+    columnTagline: "Move the digits — × 0.1 shifts one place right, × 0.01 two, × 0.001 three.",
+    pool: stage51Pool,
+  },
+  {
+    id: "stage-5-2",
+    fullId: "5.2",
+    shortTitle: "Decimal tenths × whole number",
+    inlineTagline: "Tenths (1.0–9.9) × whole (2–9).",
+    columnTagline: "Multiply as whole numbers, then place one decimal place in the answer.",
+    pool: stage52Pool,
+  },
+  {
+    id: "stage-5-3",
+    fullId: "5.3",
+    shortTitle: "Decimal hundredths × whole number",
+    inlineTagline: "Hundredths (1.01–9.99) × whole (2–9).",
+    columnTagline: "Multiply as whole numbers, then place two decimal places in the answer.",
+    pool: stage53Pool,
+  },
+  {
+    id: "stage-5-4",
+    fullId: "5.4",
+    shortTitle: "Tenths × tenths, simple",
+    inlineTagline: "Tenths × tenths (0.5–9.9 × 0.1–0.9).",
+    columnTagline: "Multiply as whole numbers, then place two decimal places (1 + 1).",
+    pool: stage54Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-5-5",
+    fullId: "5.5",
+    shortTitle: "Tenths × tenths, larger",
+    inlineTagline: "Tenths × tenths (2.0–9.9 × 1.1–9.9).",
+    columnTagline: "Multiply as whole numbers, then place two decimal places.",
+    pool: stage55Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-5-6",
+    fullId: "5.6",
+    shortTitle: "Hundredths × tenths",
+    inlineTagline: "Hundredths × tenths (0.10–0.99 × 0.1–0.9).",
+    columnTagline: "Multiply as whole numbers, then place three decimal places (2 + 1).",
+    pool: stage56Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-5-7",
+    fullId: "5.7",
+    shortTitle: "Hundredths × hundredths",
+    inlineTagline: "Hundredths × hundredths (0.10–0.99 × 0.10–0.99).",
+    columnTagline: "Multiply as whole numbers, then place four decimal places (2 + 2).",
+    pool: stage57Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-5-8",
+    fullId: "5.8",
+    shortTitle: "Larger decimal × tenths",
+    inlineTagline: "Larger decimal × tenths (10.00–99.99 × 0.1–0.9).",
+    columnTagline: "Multiply as whole numbers, then place three decimal places.",
+    pool: stage58Pool,
+    inlineCols: 4, inlineRows: 5,
+  },
+  {
+    id: "stage-5-9",
+    fullId: "5.9",
+    shortTitle: "Multi-digit decimals",
+    inlineTagline: "Multi-digit decimals (mix of hundredths and thousandths).",
+    columnTagline: "Multiply as whole numbers, then place the correct number of decimal places.",
+    pool: stage59Pool,
     inlineCols: 4, inlineRows: 5,
   },
 ];

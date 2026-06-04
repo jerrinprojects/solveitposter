@@ -15,10 +15,8 @@ const PAGE_PALETTE = {
 
 type AccentKey = keyof typeof PAGE_PALETTE;
 
-// 24 context templates, each parameterised on (a, b). a×b answers the question.
-// Scales across Stage 2.1–2.9: avoids currency contexts that get unrealistic
-// at high numbers; uses bulk-quantity, distance, time and group contexts
-// instead. Names are an NZ-flavoured mix.
+// 24 integer context templates — bulk-quantity, distance, time and group
+// contexts that scale across all Stage 2/3/4 integer ranges. NZ-flavoured.
 const TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `A box has ${a} marbles. There are ${b} boxes. How many marbles altogether?`,
   (a, b) => `A pack of stickers has ${a}. Liam buys ${b} packs. How many stickers does he have?`,
@@ -46,6 +44,35 @@ const TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Sione plants ${a} seedlings in each row. He plants ${b} rows. How many seedlings in total?`,
 ];
 
+// 24 decimal templates — money, measurement, area, rate contexts that work
+// with decimal × decimal, decimal × whole, and decimal × small-decimal pairs.
+const DECIMAL_TEMPLATES: Array<(a: string, b: string) => string> = [
+  (a, b) => `Each apple costs $${a}. Liam buys ${b} apples. How much altogether?`,
+  (a, b) => `Each pencil costs $${a}. Noah buys ${b} pencils. How much altogether?`,
+  (a, b) => `Each sticker costs $${a}. Kiri buys ${b} stickers. How much does she pay?`,
+  (a, b) => `Each book costs $${a}. ${b} books cost how much?`,
+  (a, b) => `Each board game costs $${a}. The school buys ${b} games. How much altogether?`,
+  (a, b) => `Each ribbon is ${a} m long. Aroha ties ${b} ribbons together. How long altogether?`,
+  (a, b) => `Each plank is ${a} m long. Tane uses ${b} planks. What is the total length?`,
+  (a, b) => `Each piece of string is ${a} m. Ava cuts ${b} pieces. How long altogether?`,
+  (a, b) => `Each ball of yarn is ${a} m long. The knitter uses ${b} balls. How many m in total?`,
+  (a, b) => `Each apple weighs ${a} kg. There are ${b} apples. What is the total weight?`,
+  (a, b) => `Each bag of rice weighs ${a} kg. The shop sells ${b} bags. How many kg in total?`,
+  (a, b) => `Each chocolate bar weighs ${a} g. The shop has ${b} bars. How many grams in total?`,
+  (a, b) => `A bottle holds ${a} L of juice. There are ${b} bottles. How many litres in total?`,
+  (a, b) => `Each cup holds ${a} ml. There are ${b} cups. How many ml altogether?`,
+  (a, b) => `A jug holds ${a} L of milk. ${b} jugs hold how many litres altogether?`,
+  (a, b) => `A water bottle holds ${a} L. Ella fills ${b} bottles. How many litres in total?`,
+  (a, b) => `Mia runs ${a} km each day for ${b} days. How many km has she run?`,
+  (a, b) => `Olivia walks ${a} km each morning for ${b} days. How many km in total?`,
+  (a, b) => `Sione runs ${a} km in each lap. He runs ${b} laps. How many km in total?`,
+  (a, b) => `A rectangle is ${a} m long and ${b} m wide. What is the area (in m²)?`,
+  (a, b) => `A garden bed is ${a} m by ${b} m. What is its area in m²?`,
+  (a, b) => `A tap pours ${a} L per minute. After ${b} minutes, how many litres have come out?`,
+  (a, b) => `A printer uses ${a} ml of ink per page. After ${b} pages, how much ink is used?`,
+  (a, b) => `Each cake needs ${a} cups of flour. The bakery makes ${b} cakes. How much flour altogether?`,
+];
+
 const WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number }> = {
   1: { problems: 1009, templates: 17 },
   2: { problems: 4357, templates: 53 },
@@ -65,24 +92,41 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 
 export type WordProblem = {
   prompt: string;
-  answer: number;
+  answer: number | string;
 };
 
-// 24 word problems per version. (a,b) pairs come from the supplied pool;
-// if the pool has < 24 unique pairs we cycle through with shuffling.
+// 24 word problems per version. (a,b) pairs come from the supplied pool.
+// When any problem has a display string with ".", we treat the whole batch
+// as decimal and use the decimal templates / displays instead.
 export function buildWordProblems(
   pool: InlineProblem[],
   version: WorksheetVersion,
 ): WordProblem[] {
   const seeds = WORD_SEEDS[version];
   const TOTAL = 24;
-  // Shuffle once, cycle through. Spaces any duplicates by `pool.length`
-  // positions (Stage 2.6's 21-item pool produces 3 duplicates across the
-  // 24-problem worksheet, separated by 21 problems).
   const shuffled = seededShuffle(pool, seeds.problems);
   const pairs: InlineProblem[] = [];
   for (let i = 0; i < TOTAL; i++) {
     pairs.push(shuffled[i % shuffled.length]);
+  }
+  const isDecimal = pairs.some((p) =>
+    (p.aDisplay && p.aDisplay.includes(".")) ||
+    (p.bDisplay && p.bDisplay.includes(".")) ||
+    (p.answerDisplay && p.answerDisplay.includes("."))
+  );
+  if (isDecimal) {
+    const templates = DECIMAL_TEMPLATES;
+    const templateOrder = seededShuffle(
+      Array.from({ length: templates.length }, (_, i) => i),
+      seeds.templates,
+    );
+    return pairs.map((p, i) => {
+      const template = templates[templateOrder[i % templates.length]];
+      const aStr = p.aDisplay ?? String(p.a);
+      const bStr = p.bDisplay ?? String(p.b);
+      const ansStr = p.answerDisplay ?? String(p.a * p.b);
+      return { prompt: template(aStr, bStr), answer: ansStr };
+    });
   }
   const templateOrder = seededShuffle(
     Array.from({ length: TEMPLATES.length }, (_, i) => i),

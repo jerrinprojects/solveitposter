@@ -10,7 +10,16 @@ const PAGE_PALETTE = {
 
 type AccentKey = keyof typeof PAGE_PALETTE;
 
-export type InlineProblem = { a: number; b: number };
+// `aDisplay/bDisplay/answerDisplay` let a stage override the default numeric
+// formatting (used by Stage 5 to show "0.37" instead of "0.37" coerced to
+// "0.37" — most importantly to preserve trailing zeros like "0.50").
+export type InlineProblem = {
+  a: number;
+  b: number;
+  aDisplay?: string;
+  bDisplay?: string;
+  answerDisplay?: string;
+};
 
 // Banner pill used at the top of each page's grid.
 function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string; hint: string }) {
@@ -40,12 +49,16 @@ function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string;
 // One inline problem cell. Shows "Qn  AA × B = ____" or with the answer filled in.
 // Font auto-scales down for wider content so 4-digit × 4-digit still fits.
 function InlineCell({
-  index, a, b, accent, showAnswer,
+  index, problem, accent, showAnswer,
 }: {
-  index: number; a: number; b: number; accent: AccentKey; showAnswer: boolean;
+  index: number; problem: InlineProblem; accent: AccentKey; showAnswer: boolean;
 }) {
+  const { a, b, aDisplay, bDisplay, answerDisplay } = problem;
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
-  const totalChars = String(a).length + String(b).length + String(a * b).length;
+  const aStr = aDisplay ?? String(a);
+  const bStr = bDisplay ?? String(b);
+  const ansStr = answerDisplay ?? String(a * b);
+  const totalChars = aStr.length + bStr.length + ansStr.length;
   const digitFont =
     totalChars >= 14 ? 14 :
     totalChars >= 11 ? 16 :
@@ -78,9 +91,9 @@ function InlineCell({
         fontFamily: "var(--font-mono), 'Courier New', monospace",
         fontSize: digitFont, fontWeight: 700, color: num, lineHeight: 1.1,
       }}>
-        <span>{a}</span>
+        <span>{aStr}</span>
         <span style={{ color: ink, fontSize: opFont }}>×</span>
-        <span>{b}</span>
+        <span>{bStr}</span>
         <span style={{ color: ink, fontSize: opFont }}>=</span>
         {showAnswer ? (
           <span style={{
@@ -89,7 +102,7 @@ function InlineCell({
             padding: "1px 8px",
             borderRadius: 8,
           }}>
-            {a * b}
+            {ansStr}
           </span>
         ) : (
           <span style={{
@@ -150,8 +163,7 @@ export function InlineProblemPage({
           <InlineCell
             key={i}
             index={startIndex + i}
-            a={p.a}
-            b={p.b}
+            problem={p}
             accent={accent}
             showAnswer={showAnswer}
           />
