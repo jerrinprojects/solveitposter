@@ -50,14 +50,23 @@ function DivisionCell({
   const { ink, chip, num, soft } = PAGE_PALETTE[accent];
   const dividendStr = aDisplay ?? String(a);
   const divisorStr = bDisplay ?? String(b);
-  // answerDisplay is the quotient (and optional remainder), e.g. "28 R 4".
-  const quotientStr = answerDisplay ?? String(a / b);
+  // Quotient and optional remainder. Split "Q R r" so the quotient lines up
+  // by place value with the dividend, and the "R r" sits to the right.
+  const rawAns = answerDisplay ?? String(a / b);
+  const remMatch = /^(.+?)\s*R\s*(\S+)$/i.exec(rawAns);
+  const quotientStr = remMatch ? remMatch[1] : rawAns;
+  const remainderStr = remMatch ? remMatch[2] : null;
+
   // Auto-scale font down for wider dividends.
   const totalLen = dividendStr.length + divisorStr.length + quotientStr.length;
   const digitFont =
     totalLen >= 14 ? 16 :
     totalLen >= 10 ? 18 :
                      22;
+  const COL_W = digitFont; // each digit column ~ one font-size wide
+  // Right-align quotient under dividend so each digit lines up by place value.
+  const dvdCols = dividendStr.length;
+  const qtrPadding = Math.max(0, dvdCols - quotientStr.length);
 
   return (
     <div style={{
@@ -94,7 +103,7 @@ function DivisionCell({
           }}>
             {divisorStr}
           </span>
-          {/* ")" bracket — uses a tall character so it visually contains the dividend */}
+          {/* ")" bracket */}
           <span style={{
             fontFamily: "var(--font-mono), 'Courier New', monospace",
             fontSize: digitFont * 1.5, fontWeight: 400, color: num,
@@ -103,40 +112,63 @@ function DivisionCell({
           }}>
             )
           </span>
-          {/* Stacked: top bar with quotient on top, dividend on bottom */}
+          {/* Stacked: quotient over bar over dividend, with a fixed-width grid
+              so each digit aligns by place value. */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "stretch" }}>
-            {/* Quotient (above the bar) */}
+            {/* Quotient row — fixed columns matching the dividend */}
             <div style={{
-              minHeight: digitFont + 4,
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-start",
-              paddingLeft: 2,
+              display: "grid",
+              gridTemplateColumns: `repeat(${dvdCols}, ${COL_W}px) auto`,
+              alignItems: "end",
+              justifyItems: "center",
+              minHeight: digitFont + 2,
               paddingBottom: 2,
             }}>
-              {showAnswer ? (
+              {/* Padding cells before quotient digits so the last quotient digit
+                  sits over the last (ones) dividend digit. */}
+              {Array.from({ length: qtrPadding }).map((_, i) => (
+                <span key={"qp" + i}>&nbsp;</span>
+              ))}
+              {showAnswer
+                ? quotientStr.split("").map((d, i) => (
+                    <span key={"q" + i} style={{
+                      fontFamily: "var(--font-mono), 'Courier New', monospace",
+                      fontSize: digitFont, fontWeight: 700, color: ink,
+                      background: soft, borderRadius: 4, padding: "0 2px",
+                      lineHeight: 1,
+                    }}>{d}</span>
+                  ))
+                : Array.from({ length: quotientStr.length }).map((_, i) => (
+                    <span key={"qb" + i}>&nbsp;</span>
+                  ))}
+              {/* Remainder (R n) sits in the extra "auto" column to the right */}
+              {showAnswer && remainderStr ? (
                 <span style={{
                   fontFamily: "var(--font-mono), 'Courier New', monospace",
-                  fontSize: digitFont, fontWeight: 700, color: ink,
-                  background: soft, padding: "1px 6px", borderRadius: 6,
-                }}>
-                  {quotientStr}
-                </span>
-              ) : null}
+                  fontSize: digitFont - 2, fontWeight: 700, color: ink,
+                  marginLeft: 6, lineHeight: 1,
+                }}>R {remainderStr}</span>
+              ) : <span />}
             </div>
             {/* Horizontal bar (vinculum) above dividend */}
             <div style={{
               borderTop: `2px solid ${ink}`,
               paddingTop: 2,
-              paddingLeft: 4,
-              minWidth: dividendStr.length * digitFont * 0.6 + 8,
             }}>
-              <span style={{
-                fontFamily: "var(--font-mono), 'Courier New', monospace",
-                fontSize: digitFont, fontWeight: 700, color: num,
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: `repeat(${dvdCols}, ${COL_W}px)`,
+                justifyItems: "center",
+                alignItems: "center",
               }}>
-                {dividendStr}
-              </span>
+                {dividendStr.split("").map((d, i) => (
+                  <span key={"d" + i} style={{
+                    fontFamily: "var(--font-mono), 'Courier New', monospace",
+                    fontSize: digitFont, fontWeight: 700, color: num,
+                    lineHeight: 1,
+                  }}>{d}</span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
