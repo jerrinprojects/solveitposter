@@ -75,8 +75,11 @@ export function buildWordProblems(
   version: WorksheetVersion,
 ): WordProblem[] {
   const seeds = WORD_SEEDS[version];
-  const shuffled = seededShuffle(pool, seeds.problems);
   const TOTAL = 24;
+  // Shuffle once, cycle through. Spaces any duplicates by `pool.length`
+  // positions (Stage 2.6's 21-item pool produces 3 duplicates across the
+  // 24-problem worksheet, separated by 21 problems).
+  const shuffled = seededShuffle(pool, seeds.problems);
   const pairs: InlineProblem[] = [];
   for (let i = 0; i < TOTAL; i++) {
     pairs.push(shuffled[i % shuffled.length]);

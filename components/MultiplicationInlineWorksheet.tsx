@@ -164,6 +164,10 @@ export function buildPages(
   perPage: number,
 ): { page1: InlineProblem[]; page2: InlineProblem[] } {
   const total = perPage * 2;
+  // Shuffle the unique pool once, then cycle through it. This places any
+  // duplicates `pool.length` positions apart — never adjacent. (Stage 2.6's
+  // pool of 21 is the only case where duplicates are inevitable; here a 25-
+  // cell page sees 4 duplicates spaced 21 cells away from their first copy.)
   const shuffled = seededShuffle(pool, VERSION_SEEDS[version]);
   const sequence: InlineProblem[] = [];
   for (let i = 0; i < total; i++) {
