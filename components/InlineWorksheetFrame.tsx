@@ -64,6 +64,10 @@ export default function InlineWorksheetFrame({
             page-break-before: always;
             margin-top: 0 !important;
           }
+          main {
+            min-height: 0 !important;
+            padding-bottom: 0 !important;
+          }
         }
       `}</style>
 
