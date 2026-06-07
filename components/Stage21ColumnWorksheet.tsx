@@ -213,7 +213,7 @@ export function ColumnProblemPage({
         accent={accent}
         label={`Stage ${stageFullId} · Column · Page ${pageNumber}${showAnswer ? " · Answers" : ""}`}
         hint={showAnswer
-          ? "Filled-in answers match the multiplicand and multiplier above."
+          ? "Filled-in answers match the numbers above."
           : instructionHint}
       />
       <div style={{

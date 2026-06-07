@@ -44,32 +44,38 @@ const TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Sione plants ${a} seedlings in each row. He plants ${b} rows. How many seedlings in total?`,
 ];
 
+// Pluralize a noun based on count (English regular plurals). Use for any
+// template where a number is followed by a count-noun, so "1 crayon" /
+// "2 crayons" both read correctly.
+const pl = (n: number, sg: string, plural?: string) =>
+  n === 1 ? sg : (plural ?? `${sg}s`);
+
 // 24 integer addition templates — "has X, gets/adds Y more" pattern.
 const ADDITION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Liam has ${a} marbles. He gets ${b} more. How many marbles altogether?`,
-  (a, b) => `Ella reads ${a} pages on Monday and ${b} pages on Tuesday. How many pages in total?`,
-  (a, b) => `A box has ${a} crayons. Another box has ${b} crayons. How many crayons in total?`,
-  (a, b) => `Aroha picks ${a} shells in the morning and ${b} shells in the afternoon. How many shells altogether?`,
-  (a, b) => `A bus has ${a} students. ${b} more students get on. How many students are on the bus now?`,
-  (a, b) => `A library has ${a} books. ${b} more books are donated. How many books in total?`,
-  (a, b) => `Mia swam ${a} metres yesterday and ${b} metres today. How many metres altogether?`,
-  (a, b) => `Olivia practises piano for ${a} minutes in the morning and ${b} minutes after school. How many minutes in total?`,
+  (a, b) => `Ella reads ${a} pages on Monday and ${b} ${pl(b, "page")} on Tuesday. How many pages in total?`,
+  (a, b) => `A box has ${a} crayons. Another box has ${b} ${pl(b, "crayon")}. How many crayons in total?`,
+  (a, b) => `Aroha picks ${a} shells in the morning and ${b} ${pl(b, "shell")} in the afternoon. How many shells altogether?`,
+  (a, b) => `A bus has ${a} students. ${b} more ${pl(b, "student gets", "students get")} on. How many students are on the bus now?`,
+  (a, b) => `A library has ${a} books. ${b} more ${pl(b, "book is", "books are")} donated. How many books in total?`,
+  (a, b) => `Mia swam ${a} metres yesterday and ${b} ${pl(b, "metre")} today. How many metres altogether?`,
+  (a, b) => `Olivia practises piano for ${a} minutes in the morning and ${b} ${pl(b, "minute")} after school. How many minutes in total?`,
   (a, b) => `Noah has ${a} stickers. His friend gives him ${b} more. How many does he have now?`,
-  (a, b) => `A garden has ${a} red flowers and ${b} yellow flowers. How many flowers altogether?`,
+  (a, b) => `A garden has ${a} red flowers and ${b} yellow ${pl(b, "flower")}. How many flowers altogether?`,
   (a, b) => `A jar has ${a} jellybeans. The shopkeeper adds ${b} more. How many jellybeans in total?`,
-  (a, b) => `An orchard has ${a} apple trees and ${b} pear trees. How many trees altogether?`,
-  (a, b) => `Lucas walked ${a} steps in the park and ${b} steps on the way home. How many steps in total?`,
+  (a, b) => `An orchard has ${a} apple trees and ${b} pear ${pl(b, "tree")}. How many trees altogether?`,
+  (a, b) => `Lucas walked ${a} steps in the park and ${b} ${pl(b, "step")} on the way home. How many steps in total?`,
   (a, b) => `Tane baked ${a} biscuits in one batch and ${b} in another. How many biscuits altogether?`,
   (a, b) => `Kiri gave ${a} stickers to her best friend and ${b} to her sister. How many stickers did she give in total?`,
-  (a, b) => `A beehive has ${a} bees in the morning. ${b} more bees return by evening. How many bees are in the hive?`,
+  (a, b) => `A beehive has ${a} bees in the morning. ${b} more ${pl(b, "bee returns", "bees return")} by evening. How many bees are in the hive?`,
   (a, b) => `A netball tournament has ${a} players on day 1 and ${b} more arrive on day 2. How many players in total?`,
-  (a, b) => `A hall has ${a} chairs set out. ${b} more chairs are added. How many chairs in total?`,
+  (a, b) => `A hall has ${a} chairs set out. ${b} more ${pl(b, "chair is", "chairs are")} added. How many chairs in total?`,
   (a, b) => `Sione plants ${a} seedlings before lunch and ${b} after lunch. How many seedlings altogether?`,
-  (a, b) => `A pavlova recipe uses ${a} eggs. Another recipe uses ${b} eggs. How many eggs are needed for both?`,
-  (a, b) => `Ava ran ${a} laps yesterday and ${b} laps today. How many laps altogether?`,
-  (a, b) => `A school van has ${a} bags. ${b} more bags are loaded on. How many bags in total?`,
+  (a, b) => `A pavlova recipe uses ${a} eggs. Another recipe uses ${b} ${pl(b, "egg")}. How many eggs are needed for both?`,
+  (a, b) => `Ava ran ${a} laps yesterday and ${b} ${pl(b, "lap")} today. How many laps altogether?`,
+  (a, b) => `A school van has ${a} bags. ${b} more ${pl(b, "bag is", "bags are")} loaded on. How many bags in total?`,
   (a, b) => `A kiwifruit orchard has ${a} ripe fruit. ${b} more ripen overnight. How many ripe kiwifruit?`,
-  (a, b) => `A pack has ${a} cards. Liam adds ${b} more cards from another pack. How many cards in total?`,
+  (a, b) => `A pack has ${a} cards. Liam adds ${b} more ${pl(b, "card")} from another pack. How many cards in total?`,
 ];
 
 // 24 integer division templates — "share X into Y groups" / "X ÷ Y per group".
