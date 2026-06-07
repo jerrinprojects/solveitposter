@@ -228,7 +228,7 @@ function FivesAndTensCard() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {[2, 4, 6, 8, 10].map(n => (
                 <div key={n} style={{ fontSize: 10, color: '#6b7280', fontWeight: 600 }}>
-                  {n}×10={n * 10} ÷2=<strong style={{ color: DARK.orange, fontSize: 11 }}> {n * 5}</strong>
+                  {n}×10 ÷ 2 =<strong style={{ color: DARK.orange, fontSize: 11 }}> {n * 5}</strong>
                 </div>
               ))}
             </div>
