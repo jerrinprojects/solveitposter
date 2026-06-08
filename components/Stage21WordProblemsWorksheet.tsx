@@ -108,6 +108,37 @@ const DIVISION_TEMPLATES: Array<(a: number, b: number) => string> = [
   (a, b) => `Sione plants ${a} seedlings in rows of ${b}. How many rows?`,
 ];
 
+// 24 remainder-division templates — Stage 2.6 specific. Every context
+// frames the answer as "how many full Y" (with leftover ignored) or
+// "how many in each, how many left over". This way "Q R r" answer reads
+// naturally — e.g. "16 biscuits, bags of 6 → 2 bags (4 left over)".
+const REMAINDER_DIVISION_TEMPLATES: Array<(a: number, b: number) => string> = [
+  (a, b) => `Liam shares ${a} marbles among ${b} friends as evenly as he can. How many does each friend get and how many are left over?`,
+  (a, b) => `A teacher has ${a} stickers to share among ${b} students. How many does each student get and how many are left?`,
+  (a, b) => `A bakery makes ${a} biscuits and packs them into bags of ${b}. How many full bags and how many left over?`,
+  (a, b) => `An orchard has ${a} apples. The pickers fill boxes of ${b}. How many full boxes and how many apples left?`,
+  (a, b) => `${a} students are split into ${b} groups as evenly as possible. How many in each group and how many extra?`,
+  (a, b) => `A library has ${a} books to put on shelves of ${b} books each. How many full shelves and how many left?`,
+  (a, b) => `Aroha has ${a} shells and ties them into bracelets of ${b}. How many bracelets and how many shells left?`,
+  (a, b) => `A teacher has ${a} crayons to split between ${b} tables as evenly as possible. How many per table and how many left over?`,
+  (a, b) => `${a} eggs are packed into cartons of ${b}. How many full cartons and how many eggs left?`,
+  (a, b) => `Mia has ${a} metres of rope. She cuts it into pieces of ${b} m. How many pieces and how many metres left?`,
+  (a, b) => `A school has ${a} chairs to set up in rows of ${b}. How many full rows and how many chairs left?`,
+  (a, b) => `Tane has ${a} biscuits to share among ${b} families. How many does each family get and how many are left?`,
+  (a, b) => `${a} students go to camp on ${b} buses, as evenly as possible. How many per bus and how many extra?`,
+  (a, b) => `Olivia has ${a} minutes of homework over ${b} days. How many minutes a day and how many minutes left?`,
+  (a, b) => `A garden has ${a} flowers to plant in rows of ${b}. How many full rows and how many flowers left?`,
+  (a, b) => `Ava swims ${a} lengths over ${b} sessions, as even as she can. How many per session and how many extra?`,
+  (a, b) => `A tournament has ${a} players to split into teams of ${b}. How many teams and how many players left over?`,
+  (a, b) => `Ella has ${a} pages to read over ${b} days. How many pages a day and how many pages left?`,
+  (a, b) => `Noah has ${a} cards to put into piles of ${b}. How many full piles and how many cards left?`,
+  (a, b) => `${a} cupcakes are shared among ${b} children. How many each and how many cupcakes left?`,
+  (a, b) => `An orchard has ${a} kiwifruit. They go into trays of ${b}. How many full trays and how many kiwifruit left?`,
+  (a, b) => `Lucas has ${a} metres of fencing to lay in sections of ${b} m. How many full sections and how many metres left?`,
+  (a, b) => `A beekeeper has ${a} bees to split across ${b} hives, as evenly as possible. How many per hive and how many left?`,
+  (a, b) => `Sione has ${a} seedlings to plant in rows of ${b}. How many full rows and how many seedlings left?`,
+];
+
 // 24 decimal division templates — for Stage 5 where divisor can be either a
 // whole or a decimal. All templates treat B as a measurement / per-unit
 // quantity (kg, m, L, ml, $ per item) so they still make sense whether B is
@@ -310,9 +341,16 @@ export function buildWordProblems(
     isDivision && isDecimal ? DECIMAL_DIVISION_TEMPLATES :
     isMul && isDecimal ? DECIMAL_TEMPLATES :
     null;
+  // If any problem has a remainder ("R" in answerDisplay), the whole batch
+  // is from a remainder-stage pool — use the remainder-friendly templates
+  // so the question framing matches a "Q R r" answer.
+  const isRemainder = isDivision && pairs.some((p) =>
+    p.answerDisplay && / R /.test(p.answerDisplay)
+  );
   const numberTemplates =
     isAddition && !isDecimal ? ADDITION_TEMPLATES :
     isSubtraction && !isDecimal ? SUBTRACTION_TEMPLATES :
+    isDivision && isRemainder ? REMAINDER_DIVISION_TEMPLATES :
     isDivision && !isDecimal ? DIVISION_TEMPLATES :
     isMul && !isDecimal ? TEMPLATES :
     null;
@@ -337,7 +375,10 @@ export function buildWordProblems(
       return { prompt: stringTemplates[idx](aStr, bStr), answer: ansStr };
     }
     const template = numberTemplates![idx];
-    return { prompt: template(p.a, p.b), answer: computeNum(p.a, p.b) };
+    // Prefer the problem's pre-computed answerDisplay (e.g. "2 R 4" for
+    // remainder problems) over the raw numeric a/b which would float.
+    const answer = p.answerDisplay ?? computeNum(p.a, p.b);
+    return { prompt: template(p.a, p.b), answer };
   });
 }
 
