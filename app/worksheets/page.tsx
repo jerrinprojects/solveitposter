@@ -3,6 +3,7 @@ import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { ADDITION_STAGES } from "@/data/additionStages";
 import { SUBTRACTION_STAGES } from "@/data/subtractionStages";
 import { DIVISION_STAGES } from "@/data/divisionStages";
+import { LENGTH_LEVELS } from "@/data/lengthLevels";
 
 function StageCard({ basePath, id, fullId, shortTitle }: {
   basePath: string; id: string; fullId: string; shortTitle: string;
@@ -108,6 +109,20 @@ export default function WorksheetsLandingPage() {
               stages={byStage(MULTIPLICATION_STAGES, `${n}.`)}
             />
           ))}
+        </div>
+
+        {/* ── Length (Area & Perimeter) ─────────────────────────── */}
+        <div className="space-y-8">
+          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
+            <span>📐</span> Length — Area & Perimeter
+          </h2>
+          <StageGroup
+            title="Year 4 — Rectangles & Squares"
+            basePath="/worksheets/length"
+            stages={LENGTH_LEVELS
+              .filter((l) => l.fullId.startsWith("Y4"))
+              .map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle }))}
+          />
         </div>
 
         {/* ── Division ─────────────────────────────────────────── */}
