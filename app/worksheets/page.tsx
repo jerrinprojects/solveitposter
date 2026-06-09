@@ -3,7 +3,7 @@ import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { ADDITION_STAGES } from "@/data/additionStages";
 import { SUBTRACTION_STAGES } from "@/data/subtractionStages";
 import { DIVISION_STAGES } from "@/data/divisionStages";
-import { LENGTH_LEVELS } from "@/data/lengthLevels";
+import { LENGTH_LEVELS, POLYGON_LEVELS, COMPARE_LEVELS } from "@/data/lengthLevels";
 
 function StageCard({ basePath, id, fullId, shortTitle }: {
   basePath: string; id: string; fullId: string; shortTitle: string;
@@ -116,6 +116,17 @@ export default function WorksheetsLandingPage() {
           <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
             <span>📐</span> Length — Area & Perimeter
           </h2>
+          <StageGroup
+            title="Year 3 — Counting Squares & Polygons"
+            basePath="/worksheets/length"
+            stages={[
+              ...POLYGON_LEVELS.filter((l) => l.fullId.startsWith("Y3")),
+              ...LENGTH_LEVELS.filter((l) => l.fullId.startsWith("Y3")),
+              ...COMPARE_LEVELS.filter((l) => l.fullId.startsWith("Y3")),
+            ]
+              .sort((a, b) => a.fullId.localeCompare(b.fullId))
+              .map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle }))}
+          />
           <StageGroup
             title="Year 4 — Rectangles & Squares"
             basePath="/worksheets/length"

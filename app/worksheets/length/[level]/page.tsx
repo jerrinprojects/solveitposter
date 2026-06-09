@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { LENGTH_LEVELS, getLengthLevel } from "@/data/lengthLevels";
+import {
+  LENGTH_LEVELS, getLengthLevel,
+  POLYGON_LEVELS, getPolygonLevel,
+  COMPARE_LEVELS, getCompareLevel,
+} from "@/data/lengthLevels";
 
 export function generateStaticParams() {
-  return LENGTH_LEVELS.map((l) => ({ level: l.id }));
+  return [
+    ...LENGTH_LEVELS.map((l) => ({ level: l.id })),
+    ...POLYGON_LEVELS.map((l) => ({ level: l.id })),
+    ...COMPARE_LEVELS.map((l) => ({ level: l.id })),
+  ];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ level: string }> }): Promise<Metadata> {
   const { level: levelId } = await params;
-  const level = getLengthLevel(levelId);
+  const level = getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId);
   if (!level) return { title: "Worksheet | Solve It Maths" };
   return { title: `Length ${level.fullId} Worksheets | Solve It Maths` };
 }
@@ -47,11 +55,18 @@ function VersionGroup({
 
 export default async function Page({ params }: { params: Promise<{ level: string }> }) {
   const { level: levelId } = await params;
-  const level = getLengthLevel(levelId);
+  const level = getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId);
   if (!level) notFound();
 
   const base = `/worksheets/length/${level.id}`;
+  const isGridLevel = level.id === "year-4-4" || level.id === "year-3-3";
+  const isPolygonLevel = level.id === "year-3-2";
+  const isCompareLevel = level.id === "year-3-4";
   const diagramVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/diagram-v${n}` }));
+  const wordVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/word-v${n}` }));
+  const gridVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/grid-v${n}` }));
+  const polygonVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/polygon-v${n}` }));
+  const compareVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/compare-v${n}` }));
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
@@ -68,11 +83,40 @@ export default async function Page({ params }: { params: Promise<{ level: string
       </div>
 
       <div className="w-full max-w-2xl space-y-8">
-        <VersionGroup
-          title="Diagram"
-          sub="Labelled shapes · 20 per page · 2 pages + answers · V1: 1-digit, V2: mixed, V3: 2-digit"
-          versions={diagramVersions}
-        />
+        {isGridLevel ? (
+          <VersionGroup
+            title="Counting Squares"
+            sub={level.id === "year-4-4"
+              ? "Right triangles on a unit grid · count whole + half squares · 15 per page"
+              : "Rectangles on a unit grid · count whole squares · 15 per page"}
+            versions={gridVersions}
+          />
+        ) : isPolygonLevel ? (
+          <VersionGroup
+            title="Polygons"
+            sub="Triangles, pentagons and hexagons with every side labelled · 15 per page"
+            versions={polygonVersions}
+          />
+        ) : isCompareLevel ? (
+          <VersionGroup
+            title="Compare Areas"
+            sub="Two rectangles side-by-side · count and compare · 12 per page"
+            versions={compareVersions}
+          />
+        ) : (
+          <>
+            <VersionGroup
+              title="Diagram"
+              sub="Labelled shapes · 15 per page · 2 pages + answers · V1: 1-digit, V2: mixed, V3: 2-digit"
+              versions={diagramVersions}
+            />
+            <VersionGroup
+              title="Word Problems"
+              sub="Real-life story problems · 6 per page · 4 pages + answers"
+              versions={wordVersions}
+            />
+          </>
+        )}
 
         <div className="pt-2">
           <Link
