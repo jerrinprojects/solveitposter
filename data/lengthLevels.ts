@@ -209,57 +209,77 @@ function y54Pool(): SameAreaPerimeterProblem[] {
     });
   };
 
-  // Generate pairs that demonstrate each category:
-  // 1) Same area, different perimeter (factor pairs of the same product)
+  // All pairs use balanced aspect ratios (max 1:2.5) so the rendered
+  // shapes look more square-ish and less ribbon-like.
+  //
+  // 1) Same area, different perimeter
   const sameAreaPairs: [[number, number], [number, number]][] = [
-    [[2, 12], [3, 8]],   // 24
-    [[2, 12], [4, 6]],
-    [[3, 8], [4, 6]],
-    [[2, 18], [3, 12]],  // 36
-    [[3, 12], [4, 9]],
-    [[4, 9], [6, 6]],
-    [[2, 24], [3, 16]],  // 48
-    [[3, 16], [4, 12]],
-    [[4, 12], [6, 8]],
-    [[2, 10], [4, 5]],   // 20
-    [[2, 16], [4, 8]],   // 32
-    [[2, 14], [4, 7]],   // 28
-    [[3, 6], [2, 9]],    // 18
-    [[5, 4], [2, 10]],   // 20
+    [[4, 6], [3, 8]],    // 24
+    [[4, 6], [5, 5]],    // close-area pair; per 20 vs 20 — also same per (skip if so)
+    [[4, 9], [6, 6]],    // 36
+    [[4, 9], [3, 12]],   // 36 — 3:12 is 1:4, skip
+    [[5, 8], [4, 10]],   // 40 — 4:10 is 1:2.5, OK
+    [[6, 8], [4, 12]],   // 48 — 4:12 is 1:3, skip
+    [[6, 10], [5, 12]],  // 60 — 5:12 is 1:2.4, OK
+    [[3, 4], [2, 6]],    // 12
+    [[5, 6], [3, 10]],   // 30 — 3:10 thin, skip
+    [[6, 6], [4, 9]],    // 36, dup
+    [[5, 6], [6, 5]],    // identical area swap, skip
+    [[4, 6], [6, 4]],    // identical, skip
+    [[6, 8], [4, 12]],   // skip
+    [[6, 10], [5, 12]],  // dup
+    [[7, 8], [4, 14]],   // 56 — thin
+    [[6, 9], [9, 6]],    // identical
+    [[6, 12], [8, 9]],   // 72 — 6:12 1:2 OK, 8:9 OK
+    [[5, 8], [4, 10]],   // dup
   ];
-  for (const [a, b] of sameAreaPairs) make(a, b);
 
   // 2) Same perimeter, different area
   const samePerimeterPairs: [[number, number], [number, number]][] = [
-    [[3, 7], [4, 6]],    // per 20
-    [[3, 7], [2, 8]],
-    [[4, 6], [5, 5]],
-    [[2, 8], [3, 7]],
+    [[3, 5], [4, 4]],    // per 16
+    [[4, 5], [3, 6]],    // per 18
+    [[4, 6], [5, 5]],    // per 20
+    [[3, 7], [5, 5]],    // per 20 (3:7 = 1:2.33)
+    [[4, 7], [5, 6]],    // per 22
+    [[5, 7], [6, 6]],    // per 24
     [[4, 8], [5, 7]],    // per 24
-    [[5, 7], [6, 6]],
-    [[3, 9], [5, 7]],
-    [[3, 11], [4, 10]],  // per 28
-    [[4, 10], [6, 8]],
-    [[6, 8], [5, 9]],
-    [[2, 10], [3, 9]],   // per 24
-    [[3, 9], [4, 8]],
-    [[4, 12], [6, 10]],  // per 32
-    [[5, 9], [3, 11]],
+    [[5, 8], [6, 7]],    // per 26
+    [[4, 9], [6, 7]],    // per 26
+    [[5, 9], [6, 8]],    // per 28
+    [[6, 9], [7, 8]],    // per 30
+    [[5, 10], [6, 9]],   // per 30 (5:10 = 1:2)
+    [[6, 10], [7, 9]],   // per 32
+    [[7, 10], [8, 9]],   // per 34
+    [[6, 11], [7, 10]],  // per 34
+    [[5, 12], [7, 10]],  // per 34 (5:12 = 1:2.4)
+    [[7, 12], [8, 11]],  // per 38
   ];
-  for (const [a, b] of samePerimeterPairs) make(a, b);
 
-  // 3) Both different (random pairs not in above)
+  // 3) Both different — random balanced pairs
   const bothDifferent: [[number, number], [number, number]][] = [
-    [[3, 5], [4, 7]],
-    [[2, 6], [5, 4]],
-    [[4, 4], [3, 6]],
-    [[5, 5], [3, 8]],
-    [[6, 7], [4, 10]],
-    [[2, 7], [3, 5]],
-    [[4, 5], [3, 8]],
-    [[5, 6], [4, 8]],
+    [[3, 5], [4, 6]],
+    [[4, 5], [5, 7]],
+    [[5, 6], [6, 8]],
+    [[4, 7], [5, 8]],
+    [[6, 7], [7, 9]],
+    [[5, 9], [6, 10]],
+    [[7, 8], [6, 10]],
+    [[8, 9], [7, 11]],
+    [[5, 7], [6, 9]],
+    [[6, 8], [7, 9]],
+    [[4, 6], [5, 8]],
+    [[5, 8], [6, 10]],
+    [[7, 9], [8, 11]],
   ];
-  for (const [a, b] of bothDifferent) make(a, b);
+
+  // Apply only pairs with max aspect ratio <= 2.5 in BOTH shapes.
+  const ok = ([L, W]: [number, number]) => {
+    const r = L / W;
+    return r >= 1 / 2.5 && r <= 2.5;
+  };
+  for (const [a, b] of sameAreaPairs) if (ok(a) && ok(b)) make(a, b);
+  for (const [a, b] of samePerimeterPairs) if (ok(a) && ok(b)) make(a, b);
+  for (const [a, b] of bothDifferent) if (ok(a) && ok(b)) make(a, b);
 
   return out;
 }

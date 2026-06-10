@@ -51,7 +51,7 @@ function LabelledRect({
   const { num, ink, fill } = PAGE_PALETTE[accent];
   // Fixed maximum shape height/width in pixels; everything scales relative
   // to the largest dimension on the page so the layout stays tight.
-  const maxPx = 56;
+  const maxPx = 58;
   const unit = maxPx / Math.max(maxDim, 6);
   const sw = L * unit;
   const sh = W * unit;
