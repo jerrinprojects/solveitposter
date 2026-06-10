@@ -2,7 +2,7 @@
 // Measurement/Length curriculum. Each year sub-level produces a pool of
 // shape problems (rectangle / square / triangle) with labelled dimensions.
 
-export type ShapeKind = "rectangle" | "square" | "triangle" | "rightTriangleGrid" | "rectangleGrid";
+export type ShapeKind = "rectangle" | "square" | "triangle" | "rightTriangle" | "rightTriangleGrid" | "rectangleGrid";
 export type LengthUnit = "cm" | "m" | "mm";
 export type LengthOperation = "perimeter" | "area";
 
@@ -237,6 +237,29 @@ function y43Pool(): ShapeProblem[] {
   return out;
 }
 
+// Y6.4: Area of right-angled triangles. Uses A = ½ × base × height.
+// Pairs are restricted to those where b × h is even so the area is a
+// whole number — keeps the focus on the formula rather than fractions.
+function y64Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  for (let b = 2; b <= 20; b++) {
+    for (let h = 2; h <= 20; h++) {
+      if ((b * h) % 2 !== 0) continue; // ensure integer area
+      // Skip very thin shapes that render poorly.
+      if (b / h > 4 || h / b > 4) continue;
+      out.push({
+        shape: "rightTriangle",
+        length: b,    // base
+        width: h,     // height
+        unit: "cm",
+        operation: "area",
+        answer: (b * h) / 2,
+      });
+    }
+  }
+  return out;
+}
+
 // Y4.4: Area with half-squares — right triangles drawn on a unit grid.
 // The bounding box is a square s × s so the diagonal cleanly halves
 // individual grid cells; counting (whole + half) squares yields the area.
@@ -296,6 +319,13 @@ export const LENGTH_LEVELS: LengthLevelSpec[] = [
     shortTitle: "Area with half-squares (right triangles on a grid)",
     diagramTagline: "Count whole squares and half squares to find the area.",
     pool: y44Pool,
+  },
+  {
+    id: "year-6-4",
+    fullId: "Y6.4",
+    shortTitle: "Right-angled triangle area = ½ × base × height",
+    diagramTagline: "Find the area (A) of each right-angled triangle.",
+    pool: y64Pool,
   },
 ];
 

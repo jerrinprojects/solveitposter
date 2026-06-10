@@ -1,55 +1,112 @@
 import Link from "next/link";
-import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { ADDITION_STAGES } from "@/data/additionStages";
 import { SUBTRACTION_STAGES } from "@/data/subtractionStages";
+import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { DIVISION_STAGES } from "@/data/divisionStages";
 import { LENGTH_LEVELS, POLYGON_LEVELS, COMPARE_LEVELS } from "@/data/lengthLevels";
 
-function StageCard({ basePath, id, fullId, shortTitle }: {
-  basePath: string; id: string; fullId: string; shortTitle: string;
-}) {
+type Category = {
+  href: string;
+  icon: string;
+  title: string;
+  subtitle: string;
+  count: string;
+  // Tailwind colour classes — kept inline so tailwind picks them up.
+  borderClass: string;
+  bgClass: string;
+  textClass: string;
+  hoverClass: string;
+};
+
+function CategoryCard({ category }: { category: Category }) {
+  const { href, icon, title, subtitle, count, borderClass, bgClass, textClass, hoverClass } = category;
   return (
     <Link
-      href={`${basePath}/${id}`}
-      className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
+      href={href}
+      className={`group flex flex-col items-start gap-3 ${bgClass} border-2 ${borderClass} rounded-3xl px-6 py-7 transition-all hover:shadow-lg ${hoverClass}`}
     >
-      <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
-        Stage {fullId}
+      <div className="flex items-center gap-3">
+        <span className="text-4xl">{icon}</span>
+        <h2 className={`font-fredoka font-bold text-3xl ${textClass} leading-none`}>
+          {title}
+        </h2>
+      </div>
+      <p className="font-nunito text-sm font-semibold text-gray-600">
+        {subtitle}
       </p>
-      <p className="font-nunito text-xs font-semibold text-gray-400 mt-1 leading-tight">
-        {shortTitle}
-      </p>
-      <span className="text-pink-300 group-hover:text-pink-500 text-sm mt-2 transition-colors">
-        →
-      </span>
+      <div className="flex w-full items-center justify-between mt-2">
+        <span className="font-nunito text-xs font-bold text-gray-400 uppercase tracking-wider">
+          {count}
+        </span>
+        <span className={`${textClass} text-lg font-bold group-hover:translate-x-1 transition-transform`}>
+          →
+        </span>
+      </div>
     </Link>
   );
 }
 
-function StageGroup({
-  title, basePath, stages,
-}: {
-  title: string;
-  basePath: string;
-  stages: { id: string; fullId: string; shortTitle: string }[];
-}) {
-  return (
-    <section>
-      <div className="flex items-center gap-2 mb-3 px-1">
-        <h2 className="font-fredoka font-bold text-2xl text-gray-700">{title}</h2>
-      </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-        {stages.map((s) => <StageCard key={s.id} basePath={basePath} {...s} />)}
-      </div>
-    </section>
-  );
-}
-
 export default function WorksheetsLandingPage() {
-  const addBase = "/worksheets/addition";
-  const mulBase = "/worksheets/multiplication";
-  const byStage = (stages: typeof MULTIPLICATION_STAGES, prefix: string) =>
-    stages.filter((s) => s.fullId.startsWith(prefix));
+  const lengthCount =
+    LENGTH_LEVELS.length + POLYGON_LEVELS.length + COMPARE_LEVELS.length;
+
+  const categories: Category[] = [
+    {
+      href: "/worksheets/addition",
+      icon: "➕",
+      title: "Addition",
+      subtitle: "Inline, column and word problems",
+      count: `Stages 1–5 · ${ADDITION_STAGES.length} levels`,
+      borderClass: "border-pink-200",
+      bgClass: "bg-pink-50",
+      textClass: "text-pink-600",
+      hoverClass: "hover:border-pink-400",
+    },
+    {
+      href: "/worksheets/subtraction",
+      icon: "➖",
+      title: "Subtraction",
+      subtitle: "Inline, column and word problems",
+      count: `Stages 1–5 · ${SUBTRACTION_STAGES.length} levels`,
+      borderClass: "border-amber-200",
+      bgClass: "bg-amber-50",
+      textClass: "text-amber-600",
+      hoverClass: "hover:border-amber-400",
+    },
+    {
+      href: "/worksheets/multiplication",
+      icon: "✖️",
+      title: "Multiplication",
+      subtitle: "Inline, column and word problems",
+      count: `Stages 1–5 · ${MULTIPLICATION_STAGES.length} levels`,
+      borderClass: "border-teal-200",
+      bgClass: "bg-teal-50",
+      textClass: "text-teal-600",
+      hoverClass: "hover:border-teal-400",
+    },
+    {
+      href: "/worksheets/division",
+      icon: "➗",
+      title: "Division",
+      subtitle: "Inline, long division and word problems",
+      count: `Stages 1–5 · ${DIVISION_STAGES.length} levels`,
+      borderClass: "border-purple-200",
+      bgClass: "bg-purple-50",
+      textClass: "text-purple-600",
+      hoverClass: "hover:border-purple-400",
+    },
+    {
+      href: "/worksheets/length",
+      icon: "📐",
+      title: "Length — Area & Perimeter",
+      subtitle: "Diagrams, counting squares, polygons and word problems",
+      count: `Years 3, 4, 6 · ${lengthCount} levels`,
+      borderClass: "border-rose-200",
+      bgClass: "bg-rose-50",
+      textClass: "text-rose-600",
+      hoverClass: "hover:border-rose-400",
+    },
+  ];
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
@@ -60,105 +117,24 @@ export default function WorksheetsLandingPage() {
         <h1 className="font-fredoka font-bold text-4xl sm:text-5xl text-pink-600 leading-tight">
           Worksheets
         </h1>
-        <p className="font-nunito text-sm text-gray-400 mt-2">
-          Printable practice sheets — Inline, Column, and Word Problems
+        <p className="font-nunito text-sm text-gray-500 mt-2">
+          Printable practice sheets — pick a topic to begin.
         </p>
       </div>
 
-      <div className="w-full max-w-2xl space-y-12">
-        {/* ── Addition ─────────────────────────────────────────── */}
-        <div className="space-y-8">
-          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
-            <span>➕</span> Addition
-          </h2>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <StageGroup
-              key={`add-${n}`}
-              title={`Stage ${n}${n === 1 ? " — Single Digit" : n === 5 ? " — Decimals" : ""}`}
-              basePath={addBase}
-              stages={byStage(ADDITION_STAGES, `${n}.`)}
-            />
-          ))}
-        </div>
+      <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {categories.map((c) => (
+          <CategoryCard key={c.href} category={c} />
+        ))}
+      </div>
 
-        {/* ── Subtraction ───────────────────────────────────────── */}
-        <div className="space-y-8">
-          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
-            <span>➖</span> Subtraction
-          </h2>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <StageGroup
-              key={`sub-${n}`}
-              title={`Stage ${n}${n === 1 ? " — Under 20" : n === 5 ? " — Decimals" : ""}`}
-              basePath="/worksheets/subtraction"
-              stages={byStage(SUBTRACTION_STAGES, `${n}.`)}
-            />
-          ))}
-        </div>
-
-        {/* ── Multiplication ────────────────────────────────────── */}
-        <div className="space-y-8">
-          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
-            <span>✖️</span> Multiplication
-          </h2>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <StageGroup
-              key={`mul-${n}`}
-              title={`Stage ${n}${n === 1 ? " — Times Tables" : n === 5 ? " — Decimals" : ""}`}
-              basePath={mulBase}
-              stages={byStage(MULTIPLICATION_STAGES, `${n}.`)}
-            />
-          ))}
-        </div>
-
-        {/* ── Length (Area & Perimeter) ─────────────────────────── */}
-        <div className="space-y-8">
-          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
-            <span>📐</span> Length — Area & Perimeter
-          </h2>
-          <StageGroup
-            title="Year 3 — Counting Squares & Polygons"
-            basePath="/worksheets/length"
-            stages={[
-              ...POLYGON_LEVELS.filter((l) => l.fullId.startsWith("Y3")),
-              ...LENGTH_LEVELS.filter((l) => l.fullId.startsWith("Y3")),
-              ...COMPARE_LEVELS.filter((l) => l.fullId.startsWith("Y3")),
-            ]
-              .sort((a, b) => a.fullId.localeCompare(b.fullId))
-              .map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle }))}
-          />
-          <StageGroup
-            title="Year 4 — Rectangles & Squares"
-            basePath="/worksheets/length"
-            stages={LENGTH_LEVELS
-              .filter((l) => l.fullId.startsWith("Y4"))
-              .map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle }))}
-          />
-        </div>
-
-        {/* ── Division ─────────────────────────────────────────── */}
-        <div className="space-y-8">
-          <h2 className="font-fredoka font-bold text-3xl text-pink-600 flex items-center gap-2">
-            <span>➗</span> Division
-          </h2>
-          {[1, 2, 3, 4, 5].map((n) => (
-            <StageGroup
-              key={`div-${n}`}
-              title={`Stage ${n}${n === 1 ? " — Facts" : n === 5 ? " — Decimals" : ""}`}
-              basePath="/worksheets/division"
-              stages={byStage(DIVISION_STAGES, `${n}.`)}
-            />
-          ))}
-        </div>
-
-        <div className="pt-4">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 hover:text-pink-700 transition-colors"
-          >
-            <span>←</span> Back to Posters
-          </Link>
-        </div>
+      <div className="pt-10">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 hover:text-pink-700 transition-colors"
+        >
+          <span>←</span> Back to Posters
+        </Link>
       </div>
     </main>
   );

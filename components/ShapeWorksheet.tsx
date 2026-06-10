@@ -86,18 +86,27 @@ function ShapeSvg({
     h = Math.min(scale(W), availH);
   }
 
-  const x = (cellW - w) / 2;
-  const y = (cellH - h) / 2 + 4;
+  // Right triangle: bottom-left aligned with room for left/bottom labels.
+  // Other shapes: centered with room for top/right labels.
+  const isRightTriangleForPos = shape === "rightTriangle";
+  const x = isRightTriangleForPos
+    ? Math.max(38, (cellW - w) / 2)
+    : (cellW - w) / 2;
+  const y = isRightTriangleForPos
+    ? Math.max(10, (cellH - h - 16) / 2)
+    : (cellH - h) / 2 + 4;
 
   const labelStyle: React.CSSProperties = {
     fontFamily: "var(--font-mono), 'Courier New', monospace",
     fontSize: 12, fontWeight: 700, fill: ink,
   };
 
+  const isRightTri = shape === "rightTriangle";
+
   return (
     <svg width={cellW} height={cellH} style={{ display: "block" }}>
       {/* Outline */}
-      {shape === "triangle" ? (
+      {(shape === "triangle" || isRightTri) ? (
         <polygon
           points={`${x},${y + h} ${x + w},${y + h} ${x},${y}`}
           fill="none" stroke={num} strokeWidth={2}
@@ -128,19 +137,46 @@ function ShapeSvg({
         );
       })()}
 
-      {/* Top label (length L) */}
-      <text x={x + w / 2} y={y - 6} textAnchor="middle" style={labelStyle}>
-        {L} {unit}
-      </text>
+      {/* Right triangle: right-angle marker at the bottom-left corner */}
+      {isRightTri && (() => {
+        const s = 8; // marker size
+        const cornerX = x;
+        const cornerY = y + h;
+        return (
+          <path
+            d={`M ${cornerX + s} ${cornerY} L ${cornerX + s} ${cornerY - s} L ${cornerX} ${cornerY - s}`}
+            fill="none" stroke={num} strokeWidth={1.5}
+          />
+        );
+      })()}
 
-      {/* Right label (width W) — for non-square shapes; squares show only one label */}
-      {shape !== "square" && (
-        <text
-          x={x + w + 8} y={y + h / 2}
-          textAnchor="start" dominantBaseline="middle" style={labelStyle}
-        >
-          {W} {unit}
-        </text>
+      {isRightTri ? (
+        <>
+          {/* Base label below the bottom leg */}
+          <text x={x + w / 2} y={y + h + 14} textAnchor="middle" style={labelStyle}>
+            {L} {unit}
+          </text>
+          {/* Height label to the left of the vertical leg */}
+          <text x={x - 8} y={y + h / 2} textAnchor="end" dominantBaseline="middle" style={labelStyle}>
+            {W} {unit}
+          </text>
+        </>
+      ) : (
+        <>
+          {/* Top label (length L) */}
+          <text x={x + w / 2} y={y - 6} textAnchor="middle" style={labelStyle}>
+            {L} {unit}
+          </text>
+          {/* Right label (width W) — for non-square shapes */}
+          {shape !== "square" && (
+            <text
+              x={x + w + 8} y={y + h / 2}
+              textAnchor="start" dominantBaseline="middle" style={labelStyle}
+            >
+              {W} {unit}
+            </text>
+          )}
+        </>
       )}
     </svg>
   );
@@ -241,12 +277,19 @@ function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string;
 }
 
 function OperationHero({
-  accent, operation,
-}: { accent: AccentKey; operation: "perimeter" | "area" }) {
+  accent, operation, shapeKind,
+}: {
+  accent: AccentKey;
+  operation: "perimeter" | "area";
+  shapeKind?: string;
+}) {
   const { ink, chip } = PAGE_PALETTE[accent];
   const label = operation === "perimeter" ? "Perimeter" : "Area";
+  const isRightTri = shapeKind === "rightTriangle";
   const subtitle = operation === "perimeter"
     ? "Add all sides — distance around the shape."
+    : isRightTri
+    ? "Use the formula: A = ½ × base × height."
     : "Multiply length × width — squares inside the shape.";
   return (
     <div style={{
@@ -291,9 +334,10 @@ export function ShapeProblemPage({
   const maxDim = problems.reduce(
     (m, p) => Math.max(m, p.length, p.width), 1,
   );
+  const sampleShapeKind = problems[0]?.shape;
   return (
     <div style={{ padding: "14px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
-      <OperationHero accent={accent} operation={operation} />
+      <OperationHero accent={accent} operation={operation} shapeKind={sampleShapeKind} />
       <div style={{
         flex: 1, display: "grid",
         gridTemplateColumns: `repeat(${cols}, 1fr)`,
