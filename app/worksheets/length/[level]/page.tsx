@@ -5,6 +5,7 @@ import {
   LENGTH_LEVELS, getLengthLevel,
   POLYGON_LEVELS, getPolygonLevel,
   COMPARE_LEVELS, getCompareLevel,
+  SAME_AP_LEVELS, getSameAPLevel,
 } from "@/data/lengthLevels";
 
 export function generateStaticParams() {
@@ -12,12 +13,13 @@ export function generateStaticParams() {
     ...LENGTH_LEVELS.map((l) => ({ level: l.id })),
     ...POLYGON_LEVELS.map((l) => ({ level: l.id })),
     ...COMPARE_LEVELS.map((l) => ({ level: l.id })),
+    ...SAME_AP_LEVELS.map((l) => ({ level: l.id })),
   ];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ level: string }> }): Promise<Metadata> {
   const { level: levelId } = await params;
-  const level = getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId);
+  const level = getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId) ?? getSameAPLevel(levelId);
   if (!level) return { title: "Worksheet | Solve It Maths" };
   return { title: `Length ${level.fullId} Worksheets | Solve It Maths` };
 }
@@ -55,18 +57,20 @@ function VersionGroup({
 
 export default async function Page({ params }: { params: Promise<{ level: string }> }) {
   const { level: levelId } = await params;
-  const level = getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId);
+  const level = getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId) ?? getSameAPLevel(levelId);
   if (!level) notFound();
 
   const base = `/worksheets/length/${level.id}`;
   const isGridLevel = level.id === "year-4-4" || level.id === "year-3-3";
   const isPolygonLevel = level.id === "year-3-2";
   const isCompareLevel = level.id === "year-3-4";
+  const isSameAPLevel = level.id === "year-5-4";
   const diagramVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/diagram-v${n}` }));
   const wordVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/word-v${n}` }));
   const gridVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/grid-v${n}` }));
   const polygonVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/polygon-v${n}` }));
   const compareVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/compare-v${n}` }));
+  const sameapVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/sameap-v${n}` }));
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
@@ -102,6 +106,12 @@ export default async function Page({ params }: { params: Promise<{ level: string
             title="Compare Areas"
             sub="Two rectangles side-by-side · count and compare · 12 per page"
             versions={compareVersions}
+          />
+        ) : isSameAPLevel ? (
+          <VersionGroup
+            title="Same A or Same P"
+            sub="Two rectangles · find A and P of each, then decide what is the same · 12 per page"
+            versions={sameapVersions}
           />
         ) : (
           <>

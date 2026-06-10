@@ -175,6 +175,117 @@ function y34Pool(): ComparePairProblem[] {
   return out;
 }
 
+// Y5.4: Same area vs same perimeter. Pairs of rectangles where the
+// student computes A and P for each and decides whether they match.
+export type SameAreaPerimeterProblem = {
+  shapeA: { length: number; width: number };
+  shapeB: { length: number; width: number };
+  areaA: number;
+  areaB: number;
+  perA: number;
+  perB: number;
+  sameArea: boolean;
+  samePerimeter: boolean;
+};
+
+function y54Pool(): SameAreaPerimeterProblem[] {
+  const out: SameAreaPerimeterProblem[] = [];
+  const seen = new Set<string>();
+  const make = (a: [number, number], b: [number, number]) => {
+    const key = `${a[0]}x${a[1]}|${b[0]}x${b[1]}`;
+    const keyRev = `${b[0]}x${b[1]}|${a[0]}x${a[1]}`;
+    if (seen.has(key) || seen.has(keyRev)) return;
+    seen.add(key);
+    const areaA = a[0] * a[1];
+    const areaB = b[0] * b[1];
+    const perA = 2 * (a[0] + a[1]);
+    const perB = 2 * (b[0] + b[1]);
+    out.push({
+      shapeA: { length: a[0], width: a[1] },
+      shapeB: { length: b[0], width: b[1] },
+      areaA, areaB, perA, perB,
+      sameArea: areaA === areaB,
+      samePerimeter: perA === perB,
+    });
+  };
+
+  // Generate pairs that demonstrate each category:
+  // 1) Same area, different perimeter (factor pairs of the same product)
+  const sameAreaPairs: [[number, number], [number, number]][] = [
+    [[2, 12], [3, 8]],   // 24
+    [[2, 12], [4, 6]],
+    [[3, 8], [4, 6]],
+    [[2, 18], [3, 12]],  // 36
+    [[3, 12], [4, 9]],
+    [[4, 9], [6, 6]],
+    [[2, 24], [3, 16]],  // 48
+    [[3, 16], [4, 12]],
+    [[4, 12], [6, 8]],
+    [[2, 10], [4, 5]],   // 20
+    [[2, 16], [4, 8]],   // 32
+    [[2, 14], [4, 7]],   // 28
+    [[3, 6], [2, 9]],    // 18
+    [[5, 4], [2, 10]],   // 20
+  ];
+  for (const [a, b] of sameAreaPairs) make(a, b);
+
+  // 2) Same perimeter, different area
+  const samePerimeterPairs: [[number, number], [number, number]][] = [
+    [[3, 7], [4, 6]],    // per 20
+    [[3, 7], [2, 8]],
+    [[4, 6], [5, 5]],
+    [[2, 8], [3, 7]],
+    [[4, 8], [5, 7]],    // per 24
+    [[5, 7], [6, 6]],
+    [[3, 9], [5, 7]],
+    [[3, 11], [4, 10]],  // per 28
+    [[4, 10], [6, 8]],
+    [[6, 8], [5, 9]],
+    [[2, 10], [3, 9]],   // per 24
+    [[3, 9], [4, 8]],
+    [[4, 12], [6, 10]],  // per 32
+    [[5, 9], [3, 11]],
+  ];
+  for (const [a, b] of samePerimeterPairs) make(a, b);
+
+  // 3) Both different (random pairs not in above)
+  const bothDifferent: [[number, number], [number, number]][] = [
+    [[3, 5], [4, 7]],
+    [[2, 6], [5, 4]],
+    [[4, 4], [3, 6]],
+    [[5, 5], [3, 8]],
+    [[6, 7], [4, 10]],
+    [[2, 7], [3, 5]],
+    [[4, 5], [3, 8]],
+    [[5, 6], [4, 8]],
+  ];
+  for (const [a, b] of bothDifferent) make(a, b);
+
+  return out;
+}
+
+export type SameAreaPerimeterLevelSpec = {
+  id: string;
+  fullId: string;
+  shortTitle: string;
+  diagramTagline: string;
+  pool: () => SameAreaPerimeterProblem[];
+};
+
+export const SAME_AP_LEVELS: SameAreaPerimeterLevelSpec[] = [
+  {
+    id: "year-5-4",
+    fullId: "Y5.4",
+    shortTitle: "Same area vs same perimeter",
+    diagramTagline: "Find A and P for each shape, then decide what is the same.",
+    pool: y54Pool,
+  },
+];
+
+export function getSameAPLevel(id: string): SameAreaPerimeterLevelSpec | undefined {
+  return SAME_AP_LEVELS.find((l) => l.id === id);
+}
+
 export type ComparePairLevelSpec = {
   id: string;
   fullId: string;
@@ -234,6 +345,38 @@ function y42Pool(): ShapeProblem[] {
 function y43Pool(): ShapeProblem[] {
   const out: ShapeProblem[] = [];
   for (let s = 2; s <= 12; s++) out.push(square(s, "area"));
+  return out;
+}
+
+// ── Year 5 ───────────────────────────────────────────────────────────────
+
+// Y5.2: Perimeter of straight-sided shapes — rectangles and squares with
+// larger dimensions than Y4.1 (review and extension).
+function y52Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  for (let L = 5; L <= 30; L++) {
+    for (let W = 5; W <= L; W++) {
+      if (L === W) continue;
+      out.push(rect(L, W, "perimeter"));
+    }
+  }
+  for (let s = 5; s <= 30; s++) out.push(square(s, "perimeter"));
+  return out;
+}
+
+// Y5.3: Rectangle and square area review — extends Y4.2/Y4.3 to larger
+// 2-digit dimensions so students practice bigger multiplications.
+function y53Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  // Rectangles 4..20 in each dim (skip squares).
+  for (let L = 4; L <= 20; L++) {
+    for (let W = 4; W <= L; W++) {
+      if (L === W) continue;
+      out.push(rect(L, W, "area"));
+    }
+  }
+  // Squares with side 4..15.
+  for (let s = 4; s <= 15; s++) out.push(square(s, "area"));
   return out;
 }
 
@@ -326,6 +469,20 @@ export const LENGTH_LEVELS: LengthLevelSpec[] = [
     shortTitle: "Right-angled triangle area = ½ × base × height",
     diagramTagline: "Find the area (A) of each right-angled triangle.",
     pool: y64Pool,
+  },
+  {
+    id: "year-5-2",
+    fullId: "Y5.2",
+    shortTitle: "Perimeter of straight-sided shapes",
+    diagramTagline: "Find the perimeter (P) of each shape.",
+    pool: y52Pool,
+  },
+  {
+    id: "year-5-3",
+    fullId: "Y5.3",
+    shortTitle: "Rectangle and square area",
+    diagramTagline: "Find the area (A) of each rectangle or square.",
+    pool: y53Pool,
   },
 ];
 
@@ -512,6 +669,69 @@ const AREA_CONTEXTS: Ctx[] = [
   },
 ];
 
+const TRIANGLE_AREA_CONTEXTS: Ctx[] = [
+  {
+    preferUnit: "cm",
+    buildArea: (b, h, u) =>
+      `A right-angled triangular flag has a base of ${b} ${u} and a height of ${h} ${u}. What is the area of the flag?`,
+  },
+  {
+    preferUnit: "m",
+    buildArea: (b, h, u) =>
+      `A wooden ramp is shaped as a right-angled triangle with a base of ${b} ${u} and a height of ${h} ${u}. Find its area.`,
+  },
+  {
+    preferUnit: "cm",
+    buildArea: (b, h, u) =>
+      `A piece of card is cut into a right-angled triangle. The base is ${b} ${u} and the height is ${h} ${u}. What is its area?`,
+  },
+  {
+    preferUnit: "m",
+    buildArea: (b, h, u) =>
+      `A sail on a small boat is a right-angled triangle. Its base is ${b} ${u} and its height is ${h} ${u}. What is the area of the sail?`,
+  },
+  {
+    preferUnit: "cm",
+    buildArea: (b, h, u) =>
+      `A triangular sticker has a right angle at one corner. The base is ${b} ${u} and the height is ${h} ${u}. Find its area.`,
+  },
+  {
+    preferUnit: "m",
+    buildArea: (b, h, u) =>
+      `The end of a tent is a right-angled triangle with a base of ${b} ${u} and a height of ${h} ${u}. What is its area?`,
+  },
+  {
+    preferUnit: "cm",
+    buildArea: (b, h, u) =>
+      `Sione cuts a right-angled triangle out of paper with a base of ${b} ${u} and a height of ${h} ${u}. What is the area?`,
+  },
+  {
+    preferUnit: "m",
+    buildArea: (b, h, u) =>
+      `A road sign is shaped as a right-angled triangle. The base measures ${b} ${u} and the height measures ${h} ${u}. Find its area.`,
+  },
+  {
+    preferUnit: "cm",
+    buildArea: (b, h, u) =>
+      `A right-angled triangular tile has a base of ${b} ${u} and a height of ${h} ${u}. What is the area of one tile?`,
+  },
+  {
+    preferUnit: "m",
+    buildArea: (b, h, u) =>
+      `A triangular garden corner has a right angle at the fence. The base is ${b} ${u} and the height is ${h} ${u}. Find its area.`,
+  },
+  {
+    preferUnit: "cm",
+    buildArea: (b, h, u) =>
+      `Aroha folds paper into a right-angled triangle with a base of ${b} ${u} and a height of ${h} ${u}. What is its area?`,
+  },
+  {
+    preferUnit: "m",
+    buildArea: (b, h, u) =>
+      `A triangular flower bed has a base of ${b} ${u} and a height of ${h} ${u} with a right angle in one corner. Find the area.`,
+  },
+];
+
 const SQUARE_AREA_CONTEXTS: Ctx[] = [
   {
     preferUnit: "cm",
@@ -591,8 +811,10 @@ export function buildLengthWordProblems(
   if (pool.length === 0) return [];
   const operation = pool[0].operation;
   const isSquareLevel = pool.every((p) => p.shape === "square");
+  const isRightTriangleLevel = pool.every((p) => p.shape === "rightTriangle");
   const contexts =
     operation === "perimeter" ? PERIMETER_CONTEXTS
+    : isRightTriangleLevel ? TRIANGLE_AREA_CONTEXTS
     : isSquareLevel ? SQUARE_AREA_CONTEXTS
     : AREA_CONTEXTS;
 
@@ -611,7 +833,9 @@ export function buildLengthWordProblems(
     const prompt = build!(p.length, p.width, unit);
     const answerVal = operation === "perimeter"
       ? (p.shape === "square" ? 4 * p.length : 2 * (p.length + p.width))
-      : (p.shape === "square" ? p.length * p.length : p.length * p.width);
+      : (p.shape === "square" ? p.length * p.length
+        : p.shape === "rightTriangle" ? (p.length * p.width) / 2
+        : p.length * p.width);
     const ansUnit = operation === "area" ? `${unit}²` : unit;
     return {
       prompt,

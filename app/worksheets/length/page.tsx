@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LENGTH_LEVELS, POLYGON_LEVELS, COMPARE_LEVELS } from "@/data/lengthLevels";
+import { LENGTH_LEVELS, POLYGON_LEVELS, COMPARE_LEVELS, SAME_AP_LEVELS } from "@/data/lengthLevels";
 
 function LevelCard({ id, fullId, shortTitle }: {
   id: string; fullId: string; shortTitle: string;
@@ -27,6 +27,7 @@ type LevelMeta = { id: string; fullId: string; shortTitle: string };
 const YEAR_DESCRIPTIONS: Record<number, string> = {
   3: "Counting Squares, Polygons & Comparing",
   4: "Rectangles & Squares",
+  5: "Bigger Numbers, Same A vs Same P",
   6: "Right-angled Triangles",
 };
 
@@ -35,6 +36,7 @@ export default function LengthLandingPage() {
     ...POLYGON_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
     ...LENGTH_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
     ...COMPARE_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
+    ...SAME_AP_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
   ];
 
   // Group by year (extracted from fullId like "Y4.1").
