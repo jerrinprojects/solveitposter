@@ -47,9 +47,10 @@ function LShapeSvg({
 }) {
   const { num, ink, fill } = PAGE_PALETTE[accent];
   const { outerW, outerH, notchW, notchH, unit } = problem;
+  const kind = problem.kind ?? "L";
 
   const padX = 28;
-  const padY = 28;  // extra room for bottom outerW label
+  const padY = 28;
   const availW = cellW - padX * 2;
   const availH = cellH - padY * 2;
   const unitPx = Math.min(availW, availH) / Math.max(maxDim, 6) * 0.9;
@@ -61,6 +62,104 @@ function LShapeSvg({
 
   const x0 = (cellW - fullW) / 2;
   const y0 = (cellH - fullH) / 2 + 4;
+
+  const labelStyle: React.CSSProperties = {
+    fontFamily: "var(--font-mono), 'Courier New', monospace",
+    fontSize: 10, fontWeight: 700, fill: ink,
+  };
+
+  if (kind === "T") {
+    // T-shape: two notches removed from top-left and top-right corners.
+    // Outline (clockwise from top-left of top bar — actually from the
+    // top-edge of the middle column):
+    //
+    //                 +--------+              ← top of stem
+    //                 |        |
+    //         +-------+        +-------+      ← top of base bar
+    //         |                        |
+    //         +------------------------+      ← bottom
+    //
+    // We'll build the vertices clockwise starting at the top-left of
+    // the central stem (above the base bar).
+    const stemLeft = x0 + nW;
+    const stemRight = x0 + fullW - nW;
+    const baseTop = y0 + nH;
+    const baseBottom = y0 + fullH;
+    const pts = [
+      [stemLeft, y0],
+      [stemRight, y0],
+      [stemRight, baseTop],
+      [x0 + fullW, baseTop],
+      [x0 + fullW, baseBottom],
+      [x0, baseBottom],
+      [x0, baseTop],
+      [stemLeft, baseTop],
+    ];
+    const pointsStr = pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+    // Side labels (clockwise from top):
+    const sides = [
+      // 1. top of stem (stemRight - stemLeft) = outerW - 2*notchW
+      { x1: pts[0][0], y1: pts[0][1], x2: pts[1][0], y2: pts[1][1],
+        value: outerW - 2 * notchW, position: "above" },
+      // 2. right side of stem (vertical, height notchH)
+      { x1: pts[1][0], y1: pts[1][1], x2: pts[2][0], y2: pts[2][1],
+        value: notchH, position: "rightOfInside" },
+      // 3. notch horizontal right (length notchW)
+      { x1: pts[2][0], y1: pts[2][1], x2: pts[3][0], y2: pts[3][1],
+        value: notchW, position: "above" },
+      // 4. right side of base bar (height outerH - notchH)
+      { x1: pts[3][0], y1: pts[3][1], x2: pts[4][0], y2: pts[4][1],
+        value: outerH - notchH, position: "right" },
+      // 5. bottom of base bar (outerW)
+      { x1: pts[4][0], y1: pts[4][1], x2: pts[5][0], y2: pts[5][1],
+        value: outerW, position: "belowBottom" },
+      // 6. left side of base bar (height outerH - notchH)
+      { x1: pts[5][0], y1: pts[5][1], x2: pts[6][0], y2: pts[6][1],
+        value: outerH - notchH, position: "left" },
+      // 7. notch horizontal left (length notchW)
+      { x1: pts[6][0], y1: pts[6][1], x2: pts[7][0], y2: pts[7][1],
+        value: notchW, position: "above" },
+      // 8. left side of stem (height notchH)
+      { x1: pts[7][0], y1: pts[7][1], x2: pts[0][0], y2: pts[0][1],
+        value: notchH, position: "leftOfInside" },
+    ];
+
+    return (
+      <svg width={cellW} height={cellH} style={{ display: "block" }}>
+        <polygon points={pointsStr}
+          fill={fill} fillOpacity={0.5}
+          stroke={num} strokeWidth={1.8} />
+        {sides.map((s, i) => {
+          const mx = (s.x1 + s.x2) / 2;
+          const my = (s.y1 + s.y2) / 2;
+          let lx = mx, ly = my;
+          let anchor: "middle" | "start" | "end" = "middle";
+          let dom: "central" | "hanging" | "middle" = "middle";
+          switch (s.position) {
+            case "above":
+              ly = my - 4; anchor = "middle"; break;
+            case "belowBottom":
+              ly = my + 14; anchor = "middle"; break;
+            case "rightOfInside":
+              lx = mx + 4; anchor = "start"; dom = "central"; break;
+            case "leftOfInside":
+              lx = mx - 4; anchor = "end"; dom = "central"; break;
+            case "right":
+              lx = mx + 6; anchor = "start"; dom = "central"; break;
+            case "left":
+              lx = mx - 6; anchor = "end"; dom = "central"; break;
+          }
+          return (
+            <text key={i} x={lx} y={ly}
+              textAnchor={anchor} dominantBaseline={dom} style={labelStyle}>
+              {s.value} {unit}
+            </text>
+          );
+        })}
+      </svg>
+    );
+  }
+
   // L-shape vertices going clockwise from top-left:
   // (x0, y0) → (x0+fullW-nW, y0) → (x0+fullW-nW, y0+nH)
   //   → (x0+fullW, y0+nH) → (x0+fullW, y0+fullH) → (x0, y0+fullH) → close
@@ -73,11 +172,6 @@ function LShapeSvg({
     [x0, y0 + fullH],
   ];
   const pointsStr = pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
-
-  const labelStyle: React.CSSProperties = {
-    fontFamily: "var(--font-mono), 'Courier New', monospace",
-    fontSize: 10, fontWeight: 700, fill: ink,
-  };
 
   // Sides (clockwise, indexed by pts pair):
   const sides = [
@@ -213,8 +307,16 @@ function CompositeCell({
   );
 }
 
-function OperationHero({ accent }: { accent: AccentKey }) {
+function OperationHero({
+  accent, hasTShapes,
+}: { accent: AccentKey; hasTShapes: boolean }) {
   const { ink, chip } = PAGE_PALETTE[accent];
+  const title = hasTShapes
+    ? "Find the Area of the Composite Shape"
+    : "Find the Area of the L-shape";
+  const subtitle = hasTShapes
+    ? "Split each shape into rectangles, find each area, then add them."
+    : "Split each L-shape into two rectangles, then add the areas.";
   return (
     <div style={{
       padding: "12px 18px", borderRadius: 16,
@@ -225,14 +327,14 @@ function OperationHero({ accent }: { accent: AccentKey }) {
         fontSize: 28, fontWeight: 800, color: ink,
         letterSpacing: "-0.02em", lineHeight: 1,
       }}>
-        Find the Area of the L-shape
+        {title}
       </div>
       <div style={{
         fontFamily: "var(--font-body), sans-serif",
         fontSize: 12, fontWeight: 600, color: ink, opacity: 0.85,
         marginTop: 4,
       }}>
-        Split each shape into two rectangles, find each area, then add them.
+        {subtitle}
       </div>
     </div>
   );
@@ -251,9 +353,10 @@ export function CompositeProblemPage({
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   const maxDim = problems.reduce((m, p) => Math.max(m, p.outerW, p.outerH), 6);
+  const hasTShapes = problems.some((p) => p.kind === "T");
   return (
     <div style={{ padding: "14px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
-      <OperationHero accent={accent} />
+      <OperationHero accent={accent} hasTShapes={hasTShapes} />
       <div style={{
         flex: 1, display: "grid",
         gridTemplateColumns: `repeat(${cols}, 1fr)`,

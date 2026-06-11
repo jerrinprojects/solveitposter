@@ -61,6 +61,161 @@ export type PolygonProblem = {
 
 // ── Year 3 ───────────────────────────────────────────────────────────────
 
+// Y8.4: Use area and perimeter together. Each problem shows a rectangle;
+// students compute both A and P.
+export type APBothProblem = {
+  length: number;
+  width: number;
+  unit: LengthUnit;
+  area: number;
+  perimeter: number;
+};
+
+function y84Pool(): APBothProblem[] {
+  const out: APBothProblem[] = [];
+  for (let L = 5; L <= 25; L++) {
+    for (let W = 3; W <= L; W++) {
+      if (L === W) continue;
+      out.push({
+        length: L, width: W, unit: "cm",
+        area: L * W, perimeter: 2 * (L + W),
+      });
+    }
+  }
+  return out;
+}
+
+export type APBothLevelSpec = {
+  id: string;
+  fullId: string;
+  shortTitle: string;
+  diagramTagline: string;
+  pool: () => APBothProblem[];
+};
+
+export const AP_BOTH_LEVELS: APBothLevelSpec[] = [
+  {
+    id: "year-8-4",
+    fullId: "Y8.4",
+    shortTitle: "Area and perimeter together",
+    diagramTagline: "Find both A and P for each rectangle.",
+    pool: y84Pool,
+  },
+];
+
+export function getAPBothLevel(id: string): APBothLevelSpec | undefined {
+  return AP_BOTH_LEVELS.find((l) => l.id === id);
+}
+
+// ── Unit conversion levels (Y5.1 / Y6.1 / Y8.1) ──────────────────────────
+
+export type ConvertProblem = {
+  fromValue: number;
+  fromValueDisplay: string;  // pre-formatted number (handles decimals like "3.5")
+  fromUnit: string;
+  toUnit: string;
+  answer: number;
+  answerDisplay: string;
+};
+
+// Helper to render a value without trailing zeros (so "3" not "3.0" but
+// "3.5" stays "3.5").
+function fmtNumber(n: number): string {
+  if (Number.isInteger(n)) return String(n);
+  // Round to 3 decimal places to avoid floating point noise.
+  return parseFloat(n.toFixed(3)).toString();
+}
+
+function mk(fromValue: number, fromUnit: string, toUnit: string, factor: number): ConvertProblem {
+  const ans = fromValue * factor;
+  return {
+    fromValue, fromValueDisplay: fmtNumber(fromValue),
+    fromUnit, toUnit,
+    answer: ans, answerDisplay: fmtNumber(ans),
+  };
+}
+
+// Y5.1: Convert m ↔ cm. 100 cm = 1 m.
+function y51Pool(): ConvertProblem[] {
+  const out: ConvertProblem[] = [];
+  // m → cm (multiply by 100)
+  for (let m = 1; m <= 20; m++) out.push(mk(m, "m", "cm", 100));
+  for (const m of [1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5]) out.push(mk(m, "m", "cm", 100));
+  // cm → m (divide by 100)
+  for (let cm of [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 150, 250, 350, 450, 550, 650, 750, 850, 950]) {
+    out.push(mk(cm, "cm", "m", 1 / 100));
+  }
+  return out;
+}
+
+// Y6.1: Mixed mm ↔ cm ↔ m. Combines all three.
+function y61Pool(): ConvertProblem[] {
+  const out: ConvertProblem[] = [];
+  // mm ↔ cm (10 mm = 1 cm)
+  for (let cm = 1; cm <= 12; cm++) out.push(mk(cm, "cm", "mm", 10));
+  for (const mm of [10, 20, 30, 50, 80, 100, 150, 200, 250, 300, 400, 500]) out.push(mk(mm, "mm", "cm", 1 / 10));
+  // m ↔ cm (100 cm = 1 m)
+  for (let m = 1; m <= 10; m++) out.push(mk(m, "m", "cm", 100));
+  for (const cm of [100, 200, 300, 500, 700, 1000]) out.push(mk(cm, "cm", "m", 1 / 100));
+  // m ↔ mm (1000 mm = 1 m)
+  for (let m = 1; m <= 8; m++) out.push(mk(m, "m", "mm", 1000));
+  for (const mm of [1000, 2000, 3000, 5000, 8000]) out.push(mk(mm, "mm", "m", 1 / 1000));
+  return out;
+}
+
+// Y8.1: Area unit conversion mm² ↔ cm² ↔ m².
+// 1 cm² = 100 mm², 1 m² = 10,000 cm².
+function y81Pool(): ConvertProblem[] {
+  const out: ConvertProblem[] = [];
+  // cm² ↔ mm² (×100)
+  for (let cm2 of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25]) {
+    out.push(mk(cm2, "cm²", "mm²", 100));
+  }
+  for (const mm2 of [100, 200, 300, 500, 800, 1000, 1500, 2000]) out.push(mk(mm2, "mm²", "cm²", 1 / 100));
+  // m² ↔ cm² (×10,000)
+  for (const m2 of [1, 2, 3, 5, 10]) out.push(mk(m2, "m²", "cm²", 10000));
+  for (const cm2 of [10000, 20000, 50000, 100000]) out.push(mk(cm2, "cm²", "m²", 1 / 10000));
+  // m² ↔ mm² (×1,000,000) — kept simple
+  for (const m2 of [1, 2, 5]) out.push(mk(m2, "m²", "mm²", 1000000));
+  return out;
+}
+
+export type ConvertLevelSpec = {
+  id: string;
+  fullId: string;
+  shortTitle: string;
+  diagramTagline: string;
+  pool: () => ConvertProblem[];
+};
+
+export const CONVERT_LEVELS: ConvertLevelSpec[] = [
+  {
+    id: "year-5-1",
+    fullId: "Y5.1",
+    shortTitle: "Convert m and cm",
+    diagramTagline: "100 cm = 1 m. Convert each measurement.",
+    pool: y51Pool,
+  },
+  {
+    id: "year-6-1",
+    fullId: "Y6.1",
+    shortTitle: "Convert mixed length units (mm, cm, m)",
+    diagramTagline: "10 mm = 1 cm · 100 cm = 1 m · 1000 mm = 1 m.",
+    pool: y61Pool,
+  },
+  {
+    id: "year-8-1",
+    fullId: "Y8.1",
+    shortTitle: "Convert area units (mm², cm², m²)",
+    diagramTagline: "1 cm² = 100 mm² · 1 m² = 10,000 cm².",
+    pool: y81Pool,
+  },
+];
+
+export function getConvertLevel(id: string): ConvertLevelSpec | undefined {
+  return CONVERT_LEVELS.find((l) => l.id === id);
+}
+
 // ── Year 2 ───────────────────────────────────────────────────────────────
 
 // Y2.4: Perimeter by counting side units — rectangle drawn on a unit
@@ -505,14 +660,100 @@ export function getMissingDimLevel(id: string): MissingDimLevelSpec | undefined 
   return MISSING_DIM_LEVELS.find((l) => l.id === id);
 }
 
+// ── Year 8 ───────────────────────────────────────────────────────────────
+
+// Y8.2: Parallelogram area = base × height.
+// Y8.3: Trapezium area = ½ × (a + b) × h.
+export type Quadrilateral = "parallelogram" | "trapezium";
+export type QuadProblem = {
+  shape: Quadrilateral;
+  // For parallelogram: base, height, slant offset (visual only).
+  // For trapezium: a (top), b (bottom), h (height).
+  a: number;
+  b: number;
+  h: number;
+  slant?: number;
+  unit: LengthUnit;
+  area: number;
+};
+
+function y82Pool(): QuadProblem[] {
+  const out: QuadProblem[] = [];
+  for (let base = 4; base <= 20; base++) {
+    for (let h = 3; h <= 14; h++) {
+      // Slant offset for visual variety; not used in formula.
+      const slant = Math.max(1, Math.floor(h / 3));
+      out.push({
+        shape: "parallelogram",
+        a: base, b: base, h, slant,
+        unit: "cm",
+        area: base * h,
+      });
+    }
+  }
+  return out;
+}
+
+function y83Pool(): QuadProblem[] {
+  const out: QuadProblem[] = [];
+  // Use (a + b) even so the answer is an integer.
+  for (let topA = 3; topA <= 14; topA++) {
+    for (let botB = topA + 2; botB <= 20; botB++) {
+      if ((topA + botB) % 2 !== 0) continue;
+      for (let h = 4; h <= 12; h += 2) {
+        out.push({
+          shape: "trapezium",
+          a: topA, b: botB, h,
+          unit: "cm",
+          area: ((topA + botB) * h) / 2,
+        });
+      }
+    }
+  }
+  return out;
+}
+
+export type QuadLevelSpec = {
+  id: string;
+  fullId: string;
+  shortTitle: string;
+  diagramTagline: string;
+  pool: () => QuadProblem[];
+};
+
+export const QUAD_LEVELS: QuadLevelSpec[] = [
+  {
+    id: "year-8-2",
+    fullId: "Y8.2",
+    shortTitle: "Parallelogram area = base × height",
+    diagramTagline: "Use the formula A = base × height.",
+    pool: y82Pool,
+  },
+  {
+    id: "year-8-3",
+    fullId: "Y8.3",
+    shortTitle: "Trapezium area = ½ × (a + b) × h",
+    diagramTagline: "Use the formula A = ½ × (a + b) × h.",
+    pool: y83Pool,
+  },
+];
+
+export function getQuadLevel(id: string): QuadLevelSpec | undefined {
+  return QUAD_LEVELS.find((l) => l.id === id);
+}
+
 // Y7.5: Composite area — L-shapes. Each shape is a big rectangle with
 // a rectangular notch removed from the top-right corner; students
 // usually split it into 2 rectangles and add the areas.
 export type CompositeShapeProblem = {
-  // Outer rectangle dimensions (the L sits inside).
+  // Shape variant.
+  kind?: "L" | "T";
+  // Outer rectangle dimensions (the L/T sits inside).
   outerW: number;
   outerH: number;
-  // Notch removed from the top-right corner.
+  // Notch removed from the top-right corner (for L-shape).
+  // For T-shape: two notches removed from top-left and top-right corners
+  // of equal width (notchW each, height notchH).
   notchW: number;
   notchH: number;
   area: number;
@@ -523,8 +764,6 @@ function y75Pool(): CompositeShapeProblem[] {
   const out: CompositeShapeProblem[] = [];
   for (let W = 6; W <= 14; W++) {
     for (let H = 5; H <= 12; H++) {
-      // Notch sizes — keep notch smaller than half the rectangle so the
-      // L is recognisable. Pick a couple of variants per (W,H).
       const notchOptions: [number, number][] = [
         [Math.floor(W / 2) - 1, Math.floor(H / 2)],
         [Math.floor(W / 3), Math.floor(H / 3) + 1],
@@ -535,10 +774,47 @@ function y75Pool(): CompositeShapeProblem[] {
         if (nw >= W - 1 || nh >= H - 1) continue;
         const area = W * H - nw * nh;
         out.push({
+          kind: "L",
           outerW: W, outerH: H, notchW: nw, notchH: nh,
           area, unit: "cm",
         });
       }
+    }
+  }
+  return out;
+}
+
+// Y8.6: Advanced composite — larger numbers + T-shape variety.
+function y86Pool(): CompositeShapeProblem[] {
+  const out: CompositeShapeProblem[] = [];
+  // Bigger L-shapes (10–20)
+  for (let W = 10; W <= 20; W++) {
+    for (let H = 8; H <= 18; H++) {
+      const nw = Math.floor(W / 3);
+      const nh = Math.floor(H / 3);
+      if (nw < 3 || nh < 3) continue;
+      out.push({
+        kind: "L",
+        outerW: W, outerH: H, notchW: nw, notchH: nh,
+        area: W * H - nw * nh, unit: "cm",
+      });
+    }
+  }
+  // T-shapes — top horizontal bar + vertical stem.
+  // For T-shape we represent it as outer W×H with two equal notches removed
+  // from the top-left and top-right corners. The "notch" parameters here
+  // refer to ONE of those notches (both have the same dimensions).
+  for (let W = 8; W <= 18; W += 2) {
+    for (let H = 8; H <= 16; H++) {
+      const nw = Math.floor((W - 4) / 2);
+      const nh = Math.floor(H / 2);
+      if (nw < 2 || nh < 2) continue;
+      if (nw * 2 >= W) continue;
+      out.push({
+        kind: "T",
+        outerW: W, outerH: H, notchW: nw, notchH: nh,
+        area: W * H - 2 * (nw * nh), unit: "cm",
+      });
     }
   }
   return out;
@@ -559,6 +835,13 @@ export const COMPOSITE_LEVELS: CompositeShapeLevelSpec[] = [
     shortTitle: "Composite area — L-shapes",
     diagramTagline: "Split each L-shape into rectangles, then add the areas.",
     pool: y75Pool,
+  },
+  {
+    id: "year-8-6",
+    fullId: "Y8.6",
+    shortTitle: "Advanced composite area — L-shapes and T-shapes",
+    diagramTagline: "Split each shape into rectangles, find each area, then add.",
+    pool: y86Pool,
   },
 ];
 
@@ -1046,6 +1329,84 @@ const WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number
   3: { problems: 9871, templates: 8237 },
 };
 
+// ── Composite L-shape word problems (Y7.5) ──────────────────────────────
+
+type CompositeCtx = {
+  preferUnit: LengthUnit;
+  build: (outerW: number, outerH: number, area: number, u: LengthUnit) => string;
+};
+
+const COMPOSITE_AREA_CONTEXTS: CompositeCtx[] = [
+  {
+    preferUnit: "m",
+    build: (W, H, _A, u) =>
+      `A garden is shaped like an L. It fits inside a ${W} ${u} by ${H} ${u} rectangle, with a smaller rectangular corner removed. Find the total area of the garden.`,
+  },
+  {
+    preferUnit: "m",
+    build: (W, H, _A, u) =>
+      `A classroom floor is L-shaped. The outer rectangle is ${W} ${u} by ${H} ${u}, and a corner has been cut off. What is the floor area?`,
+  },
+  {
+    preferUnit: "cm",
+    build: (W, H, _A, u) =>
+      `A piece of card is cut into an L-shape. The outer rectangle is ${W} ${u} by ${H} ${u}, and a corner rectangle has been removed. What is the area of the L-shape?`,
+  },
+  {
+    preferUnit: "m",
+    build: (W, H, _A, u) =>
+      `An L-shaped patio fits in a ${W} ${u} by ${H} ${u} rectangle with a corner taken away. Find the total paved area.`,
+  },
+  {
+    preferUnit: "cm",
+    build: (W, H, _A, u) =>
+      `An L-shaped name tag fits in a ${W} ${u} by ${H} ${u} rectangle with a corner rectangle removed. Find its area.`,
+  },
+  {
+    preferUnit: "m",
+    build: (W, H, _A, u) =>
+      `A playground is L-shaped. Its outer rectangle is ${W} ${u} by ${H} ${u}, and a corner is taken out. What is the total area of the playground?`,
+  },
+  {
+    preferUnit: "cm",
+    build: (W, H, _A, u) =>
+      `A jigsaw piece is L-shaped, fitting in a ${W} ${u} by ${H} ${u} rectangle with a corner cut away. What is its area?`,
+  },
+  {
+    preferUnit: "m",
+    build: (W, H, _A, u) =>
+      `A swimming pool deck is L-shaped. It fits inside a ${W} ${u} by ${H} ${u} rectangle with a rectangular section missing. Find the deck area.`,
+  },
+];
+
+export function buildCompositeWordProblems(
+  pool: CompositeShapeProblem[],
+  version: WorksheetVersion,
+  count: number,
+): LengthWordProblem[] {
+  if (pool.length === 0) return [];
+  // Filter to L-shape only for word problems (simpler real-life contexts).
+  const lOnly = pool.filter((p) => (p.kind ?? "L") === "L");
+  const filtered = lOnly.length ? lOnly : pool;
+  const seeds = WORD_SEEDS[version];
+  const shuffledProblems = lwShuffle(filtered, seeds.problems);
+  const templateOrder = lwShuffle(
+    Array.from({ length: COMPOSITE_AREA_CONTEXTS.length }, (_, i) => i),
+    seeds.templates,
+  );
+  return Array.from({ length: count }, (_, i) => {
+    const p = shuffledProblems[i % shuffledProblems.length];
+    const ctx = COMPOSITE_AREA_CONTEXTS[templateOrder[i % templateOrder.length]];
+    const unit = ctx.preferUnit;
+    const prompt = ctx.build(p.outerW, p.outerH, p.area, unit);
+    return {
+      prompt,
+      answer: `${p.area} ${unit}²`,
+      operation: "area" as LengthOperation,
+    };
+  });
+}
+
 export function buildLengthWordProblems(
   pool: ShapeProblem[],
   version: WorksheetVersion,
@@ -1054,7 +1415,9 @@ export function buildLengthWordProblems(
   if (pool.length === 0) return [];
   const operation = pool[0].operation;
   const isSquareLevel = pool.every((p) => p.shape === "square");
-  const isRightTriangleLevel = pool.every((p) => p.shape === "rightTriangle");
+  const isRightTriangleLevel = pool.every(
+    (p) => p.shape === "rightTriangle" || p.shape === "rightTriangleGrid"
+  );
   const contexts =
     operation === "perimeter" ? PERIMETER_CONTEXTS
     : isRightTriangleLevel ? TRIANGLE_AREA_CONTEXTS
@@ -1077,7 +1440,8 @@ export function buildLengthWordProblems(
     const answerVal = operation === "perimeter"
       ? (p.shape === "square" ? 4 * p.length : 2 * (p.length + p.width))
       : (p.shape === "square" ? p.length * p.length
-        : p.shape === "rightTriangle" ? (p.length * p.width) / 2
+        : p.shape === "rightTriangle" || p.shape === "rightTriangleGrid"
+          ? (p.length * p.width) / 2
         : p.length * p.width);
     const ansUnit = operation === "area" ? `${unit}²` : unit;
     return {

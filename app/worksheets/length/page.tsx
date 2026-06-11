@@ -1,7 +1,8 @@
 import Link from "next/link";
 import {
   LENGTH_LEVELS, POLYGON_LEVELS, COMPARE_LEVELS, SAME_AP_LEVELS,
-  MISSING_DIM_LEVELS, COMPOSITE_LEVELS,
+  MISSING_DIM_LEVELS, COMPOSITE_LEVELS, QUAD_LEVELS,
+  CONVERT_LEVELS, AP_BOTH_LEVELS,
 } from "@/data/lengthLevels";
 
 function LevelCard({ id, fullId, shortTitle }: {
@@ -34,6 +35,7 @@ const YEAR_DESCRIPTIONS: Record<number, string> = {
   5: "Bigger Numbers, Same A vs Same P",
   6: "Right-angled Triangles",
   7: "Formulas, Missing Sides, Composite Area",
+  8: "Parallelograms, Trapeziums, Advanced Composite",
 };
 
 export default function LengthLandingPage() {
@@ -44,6 +46,9 @@ export default function LengthLandingPage() {
     ...SAME_AP_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
     ...MISSING_DIM_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
     ...COMPOSITE_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
+    ...QUAD_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
+    ...CONVERT_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
+    ...AP_BOTH_LEVELS.map((l) => ({ id: l.id, fullId: l.fullId, shortTitle: l.shortTitle })),
   ];
 
   // Group by year (extracted from fullId like "Y4.1").

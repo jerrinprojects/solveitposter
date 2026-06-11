@@ -8,6 +8,9 @@ import {
   SAME_AP_LEVELS, getSameAPLevel,
   MISSING_DIM_LEVELS, getMissingDimLevel,
   COMPOSITE_LEVELS, getCompositeLevel,
+  QUAD_LEVELS, getQuadLevel,
+  CONVERT_LEVELS, getConvertLevel,
+  AP_BOTH_LEVELS, getAPBothLevel,
 } from "@/data/lengthLevels";
 
 export function generateStaticParams() {
@@ -18,6 +21,9 @@ export function generateStaticParams() {
     ...SAME_AP_LEVELS.map((l) => ({ level: l.id })),
     ...MISSING_DIM_LEVELS.map((l) => ({ level: l.id })),
     ...COMPOSITE_LEVELS.map((l) => ({ level: l.id })),
+    ...QUAD_LEVELS.map((l) => ({ level: l.id })),
+    ...CONVERT_LEVELS.map((l) => ({ level: l.id })),
+    ...AP_BOTH_LEVELS.map((l) => ({ level: l.id })),
   ];
 }
 
@@ -25,7 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ level: st
   const { level: levelId } = await params;
   const level =
     getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId)
-    ?? getSameAPLevel(levelId) ?? getMissingDimLevel(levelId) ?? getCompositeLevel(levelId);
+    ?? getSameAPLevel(levelId) ?? getMissingDimLevel(levelId) ?? getCompositeLevel(levelId)
+    ?? getQuadLevel(levelId) ?? getConvertLevel(levelId) ?? getAPBothLevel(levelId);
   if (!level) return { title: "Worksheet | Solve It Maths" };
   return { title: `Length ${level.fullId} Worksheets | Solve It Maths` };
 }
@@ -65,7 +72,8 @@ export default async function Page({ params }: { params: Promise<{ level: string
   const { level: levelId } = await params;
   const level =
     getLengthLevel(levelId) ?? getPolygonLevel(levelId) ?? getCompareLevel(levelId)
-    ?? getSameAPLevel(levelId) ?? getMissingDimLevel(levelId) ?? getCompositeLevel(levelId);
+    ?? getSameAPLevel(levelId) ?? getMissingDimLevel(levelId) ?? getCompositeLevel(levelId)
+    ?? getQuadLevel(levelId) ?? getConvertLevel(levelId) ?? getAPBothLevel(levelId);
   if (!level) notFound();
 
   const base = `/worksheets/length/${level.id}`;
@@ -74,7 +82,11 @@ export default async function Page({ params }: { params: Promise<{ level: string
   const isCompareLevel = level.id === "year-3-4";
   const isSameAPLevel = level.id === "year-5-4";
   const isMissingDimLevel = level.id === "year-7-2" || level.id === "year-7-4";
-  const isCompositeLevel = level.id === "year-7-5";
+  const isCompositeLevel = level.id === "year-7-5" || level.id === "year-8-6";
+  const hasCompositeWords = level.id === "year-7-5";
+  const isQuadLevel = level.id === "year-8-2" || level.id === "year-8-3";
+  const isConvertLevel = level.id === "year-5-1" || level.id === "year-6-1" || level.id === "year-8-1";
+  const isAPBothLevel = level.id === "year-8-4";
   const diagramVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/diagram-v${n}` }));
   const wordVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/word-v${n}` }));
   const gridVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/grid-v${n}` }));
@@ -83,6 +95,10 @@ export default async function Page({ params }: { params: Promise<{ level: string
   const sameapVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/sameap-v${n}` }));
   const missingVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/missing-v${n}` }));
   const compositeVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/composite-v${n}` }));
+  const compositeWordVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/composite-word-v${n}` }));
+  const quadVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/quad-v${n}` }));
+  const convertVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/convert-v${n}` }));
+  const apbothVersions = [1, 2, 3].map((n) => ({ label: `V${n}`, href: `${base}/apboth-v${n}` }));
 
   return (
     <main className="min-h-screen bg-pink-50 flex flex-col items-center px-4 sm:px-6 py-12">
@@ -132,10 +148,39 @@ export default async function Page({ params }: { params: Promise<{ level: string
             versions={missingVersions}
           />
         ) : isCompositeLevel ? (
+          <>
+            <VersionGroup
+              title="Composite Area"
+              sub="L-shapes with all sides labelled · split into rectangles and add · 12 per page"
+              versions={compositeVersions}
+            />
+            {hasCompositeWords && (
+              <VersionGroup
+                title="Word Problems"
+                sub="Real-life L-shape stories · 6 per page · 4 pages + answers"
+                versions={compositeWordVersions}
+              />
+            )}
+          </>
+        ) : isQuadLevel ? (
           <VersionGroup
-            title="Composite Area"
-            sub="L-shapes with all sides labelled · split into rectangles and add · 12 per page"
-            versions={compositeVersions}
+            title={level.id === "year-8-2" ? "Parallelograms" : "Trapeziums"}
+            sub={level.id === "year-8-2"
+              ? "Use A = base × height · 12 per page"
+              : "Use A = ½ × (a + b) × h · 12 per page"}
+            versions={quadVersions}
+          />
+        ) : isConvertLevel ? (
+          <VersionGroup
+            title="Convert Units"
+            sub="25 conversions per page · 2 pages + answers"
+            versions={convertVersions}
+          />
+        ) : isAPBothLevel ? (
+          <VersionGroup
+            title="Area + Perimeter Together"
+            sub="Rectangle · find both A and P · 15 per page · 2 pages + answers"
+            versions={apbothVersions}
           />
         ) : (
           <>
