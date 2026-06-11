@@ -1333,49 +1333,53 @@ const WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number
 
 type CompositeCtx = {
   preferUnit: LengthUnit;
-  build: (outerW: number, outerH: number, area: number, u: LengthUnit) => string;
+  build: (
+    outerW: number, outerH: number,
+    notchW: number, notchH: number,
+    u: LengthUnit,
+  ) => string;
 };
 
 const COMPOSITE_AREA_CONTEXTS: CompositeCtx[] = [
   {
     preferUnit: "m",
-    build: (W, H, _A, u) =>
-      `A garden is shaped like an L. It fits inside a ${W} ${u} by ${H} ${u} rectangle, with a smaller rectangular corner removed. Find the total area of the garden.`,
+    build: (W, H, nW, nH, u) =>
+      `A garden is L-shaped. It fits inside a ${W} ${u} by ${H} ${u} rectangle, with a ${nW} ${u} by ${nH} ${u} corner removed. Find the area of the garden.`,
   },
   {
     preferUnit: "m",
-    build: (W, H, _A, u) =>
-      `A classroom floor is L-shaped. The outer rectangle is ${W} ${u} by ${H} ${u}, and a corner has been cut off. What is the floor area?`,
+    build: (W, H, nW, nH, u) =>
+      `A classroom floor is L-shaped. The outer rectangle is ${W} ${u} by ${H} ${u}, and a ${nW} ${u} by ${nH} ${u} corner has been cut off. What is the floor area?`,
   },
   {
     preferUnit: "cm",
-    build: (W, H, _A, u) =>
-      `A piece of card is cut into an L-shape. The outer rectangle is ${W} ${u} by ${H} ${u}, and a corner rectangle has been removed. What is the area of the L-shape?`,
+    build: (W, H, nW, nH, u) =>
+      `A piece of card is cut into an L-shape. The outer rectangle is ${W} ${u} by ${H} ${u}, and a ${nW} ${u} by ${nH} ${u} corner rectangle has been removed. What is the area?`,
   },
   {
     preferUnit: "m",
-    build: (W, H, _A, u) =>
-      `An L-shaped patio fits in a ${W} ${u} by ${H} ${u} rectangle with a corner taken away. Find the total paved area.`,
+    build: (W, H, nW, nH, u) =>
+      `An L-shaped patio fits in a ${W} ${u} by ${H} ${u} rectangle with a ${nW} ${u} by ${nH} ${u} corner taken away. Find the paved area.`,
   },
   {
     preferUnit: "cm",
-    build: (W, H, _A, u) =>
-      `An L-shaped name tag fits in a ${W} ${u} by ${H} ${u} rectangle with a corner rectangle removed. Find its area.`,
+    build: (W, H, nW, nH, u) =>
+      `An L-shaped name tag fits in a ${W} ${u} by ${H} ${u} rectangle with a ${nW} ${u} by ${nH} ${u} corner rectangle removed. Find its area.`,
   },
   {
     preferUnit: "m",
-    build: (W, H, _A, u) =>
-      `A playground is L-shaped. Its outer rectangle is ${W} ${u} by ${H} ${u}, and a corner is taken out. What is the total area of the playground?`,
+    build: (W, H, nW, nH, u) =>
+      `A playground is L-shaped. Its outer rectangle is ${W} ${u} by ${H} ${u}, and a ${nW} ${u} by ${nH} ${u} corner is taken out. What is the total area?`,
   },
   {
     preferUnit: "cm",
-    build: (W, H, _A, u) =>
-      `A jigsaw piece is L-shaped, fitting in a ${W} ${u} by ${H} ${u} rectangle with a corner cut away. What is its area?`,
+    build: (W, H, nW, nH, u) =>
+      `A jigsaw piece is L-shaped, fitting in a ${W} ${u} by ${H} ${u} rectangle with a ${nW} ${u} by ${nH} ${u} corner cut away. What is its area?`,
   },
   {
     preferUnit: "m",
-    build: (W, H, _A, u) =>
-      `A swimming pool deck is L-shaped. It fits inside a ${W} ${u} by ${H} ${u} rectangle with a rectangular section missing. Find the deck area.`,
+    build: (W, H, nW, nH, u) =>
+      `A swimming pool deck is L-shaped. It fits inside a ${W} ${u} by ${H} ${u} rectangle with a ${nW} ${u} by ${nH} ${u} section missing. Find the deck area.`,
   },
 ];
 
@@ -1398,7 +1402,7 @@ export function buildCompositeWordProblems(
     const p = shuffledProblems[i % shuffledProblems.length];
     const ctx = COMPOSITE_AREA_CONTEXTS[templateOrder[i % templateOrder.length]];
     const unit = ctx.preferUnit;
-    const prompt = ctx.build(p.outerW, p.outerH, p.area, unit);
+    const prompt = ctx.build(p.outerW, p.outerH, p.notchW, p.notchH, unit);
     return {
       prompt,
       answer: `${p.area} ${unit}²`,
