@@ -182,6 +182,9 @@ function GridShapeCell({
   const answerStr = Number.isInteger(answer)
     ? `${answer}`
     : `${Math.floor(answer)}½`;
+  const isPerimeter = problem.operation === "perimeter";
+  const labelText = isPerimeter ? "Perimeter =" : "Area =";
+  const unitText = isPerimeter ? "units" : "squares";
 
   return (
     <div style={{
@@ -220,7 +223,7 @@ function GridShapeCell({
           fontSize: 13, fontWeight: 800, color: ink,
           whiteSpace: "nowrap",
         }}>
-          Area =
+          {labelText}
         </span>
         {showAnswer ? (
           <span style={{
@@ -228,7 +231,7 @@ function GridShapeCell({
             fontSize: 14, fontWeight: 700, color: ink,
             background: soft, padding: "2px 8px", borderRadius: 6,
           }}>
-            {answerStr} squares
+            {answerStr} {unitText}
           </span>
         ) : (
           <div style={{
@@ -242,9 +245,21 @@ function GridShapeCell({
 }
 
 function OperationHero({
-  accent, hasHalfSquares,
-}: { accent: AccentKey; hasHalfSquares: boolean }) {
+  accent, hasHalfSquares, isPerimeter,
+}: {
+  accent: AccentKey;
+  hasHalfSquares: boolean;
+  isPerimeter: boolean;
+}) {
   const { ink, chip } = PAGE_PALETTE[accent];
+  const title = isPerimeter
+    ? "Count Unit Edges to Find the Perimeter"
+    : "Count Squares to Find the Area";
+  const subtitle = isPerimeter
+    ? "Trace around the shape and count each unit edge along the border."
+    : hasHalfSquares
+    ? "Whole squares = 1.  Half squares = ½.  Add them up."
+    : "Each square inside the shape = 1 square unit.  Count them up.";
   return (
     <div style={{
       padding: "12px 18px", borderRadius: 16,
@@ -255,16 +270,14 @@ function OperationHero({
         fontSize: 28, fontWeight: 800, color: ink,
         letterSpacing: "-0.02em", lineHeight: 1,
       }}>
-        Count Squares to Find the Area
+        {title}
       </div>
       <div style={{
         fontFamily: "var(--font-body), sans-serif",
         fontSize: 12, fontWeight: 600, color: ink, opacity: 0.85,
         marginTop: 4,
       }}>
-        {hasHalfSquares
-          ? "Whole squares = 1.  Half squares = ½.  Add them up."
-          : "Each square inside the shape = 1 square unit.  Count them up."}
+        {subtitle}
       </div>
     </div>
   );
@@ -283,9 +296,10 @@ export function GridShapeProblemPage({
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   const hasHalfSquares = problems.some((p) => p.shape === "rightTriangleGrid");
+  const isPerimeter = problems[0]?.operation === "perimeter";
   return (
     <div style={{ padding: "14px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
-      <OperationHero accent={accent} hasHalfSquares={hasHalfSquares} />
+      <OperationHero accent={accent} hasHalfSquares={hasHalfSquares} isPerimeter={isPerimeter} />
       <div style={{
         flex: 1, display: "grid",
         gridTemplateColumns: `repeat(${cols}, 1fr)`,

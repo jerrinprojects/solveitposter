@@ -51,6 +51,12 @@ export default function ShapeWorksheetFrame({
   const operation = (pool[0]?.operation ?? "perimeter") as "perimeter" | "area";
   const operationLabel = operation === "perimeter" ? "Perimeter" : "Area";
   const versionLabel = `V${version}`;
+  // For Y7.1 / Y7.3 the formula itself is the focus of the lesson — push
+  // it into the hero subtitle instead of the generic "Add all sides…" text.
+  const heroSubtitle =
+    level.id === "year-7-1" ? "Use the formula P = 2 × (length + width)."
+    : level.id === "year-7-3" ? "Use the formula A = length × width."
+    : undefined;
 
   return (
     <>
@@ -95,7 +101,7 @@ export default function ShapeWorksheetFrame({
             <ShapeProblemPage
               pageNumber={1} problems={page1} accent="pink" showAnswer={false}
               levelFullId={level.fullId} instructionHint={level.diagramTagline}
-              operation={operation} cols={COLS} rows={ROWS}
+              operation={operation} cols={COLS} rows={ROWS} heroSubtitle={heroSubtitle}
             />
           </div>
           <PosterFooter rightLabel={`Length · ${level.fullId} · ${versionLabel} · Page 1`} />
@@ -111,7 +117,7 @@ export default function ShapeWorksheetFrame({
             <ShapeProblemPage
               pageNumber={2} problems={page2} accent="mint" showAnswer={false}
               levelFullId={level.fullId} instructionHint={level.diagramTagline}
-              operation={operation} cols={COLS} rows={ROWS}
+              operation={operation} cols={COLS} rows={ROWS} heroSubtitle={heroSubtitle}
             />
           </div>
           <PosterFooter rightLabel={`Length · ${level.fullId} · ${versionLabel} · Page 2`} />
@@ -127,7 +133,7 @@ export default function ShapeWorksheetFrame({
             <ShapeProblemPage
               pageNumber={1} problems={page1} accent="pink" showAnswer={true}
               levelFullId={level.fullId} instructionHint={level.diagramTagline}
-              operation={operation} cols={COLS} rows={ROWS}
+              operation={operation} cols={COLS} rows={ROWS} heroSubtitle={heroSubtitle}
             />
           </div>
           <PosterFooter rightLabel={`Length · ${level.fullId} · ${versionLabel} · Page 1 Answers`} />
@@ -143,7 +149,7 @@ export default function ShapeWorksheetFrame({
             <ShapeProblemPage
               pageNumber={2} problems={page2} accent="mint" showAnswer={true}
               levelFullId={level.fullId} instructionHint={level.diagramTagline}
-              operation={operation} cols={COLS} rows={ROWS}
+              operation={operation} cols={COLS} rows={ROWS} heroSubtitle={heroSubtitle}
             />
           </div>
           <PosterFooter rightLabel={`Length · ${level.fullId} · ${versionLabel} · Page 2 Answers`} />

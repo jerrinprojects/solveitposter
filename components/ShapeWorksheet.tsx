@@ -277,20 +277,22 @@ function PageBanner({ accent, label, hint }: { accent: AccentKey; label: string;
 }
 
 function OperationHero({
-  accent, operation, shapeKind,
+  accent, operation, shapeKind, customSubtitle,
 }: {
   accent: AccentKey;
   operation: "perimeter" | "area";
   shapeKind?: string;
+  customSubtitle?: string;
 }) {
   const { ink, chip } = PAGE_PALETTE[accent];
   const label = operation === "perimeter" ? "Perimeter" : "Area";
   const isRightTri = shapeKind === "rightTriangle";
-  const subtitle = operation === "perimeter"
+  const defaultSubtitle = operation === "perimeter"
     ? "Add all sides — distance around the shape."
     : isRightTri
     ? "Use the formula: A = ½ × base × height."
     : "Multiply length × width — squares inside the shape.";
+  const subtitle = customSubtitle ?? defaultSubtitle;
   return (
     <div style={{
       padding: "12px 18px", borderRadius: 16,
@@ -316,7 +318,7 @@ function OperationHero({
 
 export function ShapeProblemPage({
   pageNumber, problems, accent, showAnswer, levelFullId,
-  instructionHint, operation, cols = 5, rows = 3,
+  instructionHint, operation, cols = 5, rows = 3, heroSubtitle,
 }: {
   pageNumber: 1 | 2;
   problems: ShapeProblem[];
@@ -327,6 +329,7 @@ export function ShapeProblemPage({
   operation: "perimeter" | "area";
   cols?: number;
   rows?: number;
+  heroSubtitle?: string;
 }) {
   const startIndex = (pageNumber - 1) * problems.length + 1;
   // Largest single dimension on the page — used to scale shapes
@@ -337,7 +340,10 @@ export function ShapeProblemPage({
   const sampleShapeKind = problems[0]?.shape;
   return (
     <div style={{ padding: "14px 22px 12px", display: "flex", flexDirection: "column", flex: 1, minHeight: 0 }}>
-      <OperationHero accent={accent} operation={operation} shapeKind={sampleShapeKind} />
+      <OperationHero
+        accent={accent} operation={operation} shapeKind={sampleShapeKind}
+        customSubtitle={heroSubtitle}
+      />
       <div style={{
         flex: 1, display: "grid",
         gridTemplateColumns: `repeat(${cols}, 1fr)`,

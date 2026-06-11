@@ -61,6 +61,41 @@ export type PolygonProblem = {
 
 // ── Year 3 ───────────────────────────────────────────────────────────────
 
+// ── Year 2 ───────────────────────────────────────────────────────────────
+
+// Y2.4: Perimeter by counting side units — rectangle drawn on a unit
+// grid; the student counts the unit edges around its border (= 2L+2W).
+function y24Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  for (let L = 2; L <= 8; L++) {
+    for (let W = 2; W <= L; W++) {
+      out.push({
+        shape: "rectangleGrid",
+        length: L, width: W,
+        unit: "cm",
+        operation: "perimeter",
+        answer: 2 * (L + W),
+      });
+    }
+  }
+  return out;
+}
+
+// Y2.3: First perimeter — small labelled rectangles. Like Y4.1 but
+// restricted to single-digit sides so Y2 students can sum them
+// without renaming. Includes squares.
+function y23Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  for (let L = 2; L <= 9; L++) {
+    for (let W = 2; W <= L; W++) {
+      if (L === W) continue;
+      out.push(rect(L, W, "perimeter"));
+    }
+  }
+  for (let s = 2; s <= 9; s++) out.push(square(s, "perimeter"));
+  return out;
+}
+
 // Y3.2: Perimeter of polygons — triangles, pentagons and hexagons with
 // every side labelled. Students sum the side lengths to find the perimeter.
 function y32Pool(): PolygonProblem[] {
@@ -400,6 +435,166 @@ function y53Pool(): ShapeProblem[] {
   return out;
 }
 
+// Y7.2: Find a missing side from the perimeter. Given a rectangle with
+// one labelled side and the perimeter, work backwards to the missing side.
+// Y7.4: Same idea but with area.
+export type MissingDimProblem = {
+  // Which dimension is known.
+  knownDim: "L" | "W";
+  knownValue: number;     // value of the known side
+  missingValue: number;   // value of the side to find
+  // Either P (when operation === "perimeter") or A (when "area").
+  given: number;
+  operation: "perimeter" | "area";
+  unit: LengthUnit;
+};
+
+function y72Pool(): MissingDimProblem[] {
+  const out: MissingDimProblem[] = [];
+  for (let L = 5; L <= 25; L++) {
+    for (let W = 3; W <= L; W++) {
+      if (L === W) continue;
+      const P = 2 * (L + W);
+      // Two variants — known L → find W; known W → find L.
+      out.push({ knownDim: "L", knownValue: L, missingValue: W, given: P, operation: "perimeter", unit: "cm" });
+      out.push({ knownDim: "W", knownValue: W, missingValue: L, given: P, operation: "perimeter", unit: "cm" });
+    }
+  }
+  return out;
+}
+
+function y74Pool(): MissingDimProblem[] {
+  const out: MissingDimProblem[] = [];
+  for (let L = 3; L <= 15; L++) {
+    for (let W = 2; W <= L; W++) {
+      if (L === W) continue;
+      const A = L * W;
+      out.push({ knownDim: "L", knownValue: L, missingValue: W, given: A, operation: "area", unit: "cm" });
+      out.push({ knownDim: "W", knownValue: W, missingValue: L, given: A, operation: "area", unit: "cm" });
+    }
+  }
+  return out;
+}
+
+export type MissingDimLevelSpec = {
+  id: string;
+  fullId: string;
+  shortTitle: string;
+  diagramTagline: string;
+  pool: () => MissingDimProblem[];
+};
+
+export const MISSING_DIM_LEVELS: MissingDimLevelSpec[] = [
+  {
+    id: "year-7-2",
+    fullId: "Y7.2",
+    shortTitle: "Missing side from the perimeter",
+    diagramTagline: "Work out the unknown side using the perimeter.",
+    pool: y72Pool,
+  },
+  {
+    id: "year-7-4",
+    fullId: "Y7.4",
+    shortTitle: "Missing side from the area",
+    diagramTagline: "Work out the unknown side using the area.",
+    pool: y74Pool,
+  },
+];
+
+export function getMissingDimLevel(id: string): MissingDimLevelSpec | undefined {
+  return MISSING_DIM_LEVELS.find((l) => l.id === id);
+}
+
+// Y7.5: Composite area — L-shapes. Each shape is a big rectangle with
+// a rectangular notch removed from the top-right corner; students
+// usually split it into 2 rectangles and add the areas.
+export type CompositeShapeProblem = {
+  // Outer rectangle dimensions (the L sits inside).
+  outerW: number;
+  outerH: number;
+  // Notch removed from the top-right corner.
+  notchW: number;
+  notchH: number;
+  area: number;
+  unit: LengthUnit;
+};
+
+function y75Pool(): CompositeShapeProblem[] {
+  const out: CompositeShapeProblem[] = [];
+  for (let W = 6; W <= 14; W++) {
+    for (let H = 5; H <= 12; H++) {
+      // Notch sizes — keep notch smaller than half the rectangle so the
+      // L is recognisable. Pick a couple of variants per (W,H).
+      const notchOptions: [number, number][] = [
+        [Math.floor(W / 2) - 1, Math.floor(H / 2)],
+        [Math.floor(W / 3), Math.floor(H / 3) + 1],
+        [Math.max(2, Math.floor(W / 4)), Math.max(2, Math.floor(H / 4))],
+      ];
+      for (const [nw, nh] of notchOptions) {
+        if (nw < 2 || nh < 2) continue;
+        if (nw >= W - 1 || nh >= H - 1) continue;
+        const area = W * H - nw * nh;
+        out.push({
+          outerW: W, outerH: H, notchW: nw, notchH: nh,
+          area, unit: "cm",
+        });
+      }
+    }
+  }
+  return out;
+}
+
+export type CompositeShapeLevelSpec = {
+  id: string;
+  fullId: string;
+  shortTitle: string;
+  diagramTagline: string;
+  pool: () => CompositeShapeProblem[];
+};
+
+export const COMPOSITE_LEVELS: CompositeShapeLevelSpec[] = [
+  {
+    id: "year-7-5",
+    fullId: "Y7.5",
+    shortTitle: "Composite area — L-shapes",
+    diagramTagline: "Split each L-shape into rectangles, then add the areas.",
+    pool: y75Pool,
+  },
+];
+
+export function getCompositeLevel(id: string): CompositeShapeLevelSpec | undefined {
+  return COMPOSITE_LEVELS.find((l) => l.id === id);
+}
+
+// ── Year 7 ───────────────────────────────────────────────────────────────
+
+// Y7.1: Use the perimeter formula P = 2(L + W). Span small-to-larger
+// dimensions so V1 has variety; V2/V3 push to 2-digit.
+function y71Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  for (let L = 4; L <= 30; L++) {
+    for (let W = 3; W <= L; W++) {
+      if (L === W) continue;
+      out.push(rect(L, W, "perimeter"));
+    }
+  }
+  for (let s = 4; s <= 25; s++) out.push(square(s, "perimeter"));
+  return out;
+}
+
+// Y7.3: Use the area formula A = L × W (and s²).
+function y73Pool(): ShapeProblem[] {
+  const out: ShapeProblem[] = [];
+  for (let L = 4; L <= 20; L++) {
+    for (let W = 3; W <= L; W++) {
+      if (L === W) continue;
+      out.push(rect(L, W, "area"));
+    }
+  }
+  for (let s = 4; s <= 15; s++) out.push(square(s, "area"));
+  return out;
+}
+
 // Y6.4: Area of right-angled triangles. Uses A = ½ × base × height.
 // Pairs are restricted to those where b × h is even so the area is a
 // whole number — keeps the focus on the formula rather than fractions.
@@ -448,6 +643,20 @@ function y44Pool(): ShapeProblem[] {
 // ── Level registry ──────────────────────────────────────────────────────
 
 export const LENGTH_LEVELS: LengthLevelSpec[] = [
+  {
+    id: "year-2-3",
+    fullId: "Y2.3",
+    shortTitle: "First perimeter (small numbers)",
+    diagramTagline: "Find the perimeter (P) of each shape.",
+    pool: y23Pool,
+  },
+  {
+    id: "year-2-4",
+    fullId: "Y2.4",
+    shortTitle: "Perimeter by counting side units",
+    diagramTagline: "Count the unit edges around each shape to find the perimeter.",
+    pool: y24Pool,
+  },
   {
     id: "year-3-3",
     fullId: "Y3.3",
@@ -503,6 +712,20 @@ export const LENGTH_LEVELS: LengthLevelSpec[] = [
     shortTitle: "Rectangle and square area",
     diagramTagline: "Find the area (A) of each rectangle or square.",
     pool: y53Pool,
+  },
+  {
+    id: "year-7-1",
+    fullId: "Y7.1",
+    shortTitle: "Use the perimeter formula P = 2(L + W)",
+    diagramTagline: "Use the formula P = 2 × (length + width) for each shape.",
+    pool: y71Pool,
+  },
+  {
+    id: "year-7-3",
+    fullId: "Y7.3",
+    shortTitle: "Use the area formula A = L × W",
+    diagramTagline: "Use the formula A = length × width for each shape.",
+    pool: y73Pool,
   },
 ];
 
