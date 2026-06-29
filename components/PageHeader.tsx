@@ -25,7 +25,7 @@ export default function PageHeader({ meta }: PageHeaderProps) {
         {/* Mascot — bottom-right of the pink banner */}
         <div className="absolute right-2 sm:right-3 bottom-0 pointer-events-none select-none">
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/againsolveit.firebasestorage.app/o/Solvie_Number-removebg.png?alt=media&token=dec56a1b-bf95-4490-bb06-c642b8b9f753"
+            src={meta.mascot ?? "https://firebasestorage.googleapis.com/v0/b/againsolveit.firebasestorage.app/o/Solvie_Number-removebg.png?alt=media&token=dec56a1b-bf95-4490-bb06-c642b8b9f753"}
             alt="Solvie mascot"
             width={72}
             className="object-contain sm:w-24"

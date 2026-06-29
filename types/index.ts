@@ -10,6 +10,8 @@ export interface PosterMeta {
   year: string;
   theme: string;
   brand: string;
+  /** Optional header mascot image (defaults to the Solvie number mascot). */
+  mascot?: string;
 }
 
 export interface FooterData {
