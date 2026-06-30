@@ -7,6 +7,14 @@ body {
   font-family: var(--font-nunito), sans-serif;
 }
 
+/* Keep exercise-preview SVGs inside their card: scale down to fit the
+   container width instead of overflowing (e.g. long dot rows like 24 ÷ 3).
+   viewBox preserves proportions; only oversized SVGs shrink. */
+.print-card svg {
+  max-width: 100%;
+  height: auto;
+}
+
 @layer utilities {
   .no-print { }
 
