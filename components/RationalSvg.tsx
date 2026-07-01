@@ -1297,6 +1297,10 @@ export const Caption: React.FC<{ children: React.ReactNode; color?: string }> = 
       fontWeight: 700,
       color,
       marginTop: 4,
+      display: "block",
+      maxWidth: 250,
+      textAlign: "center",
+      lineHeight: 1.35,
     }}
   >
     {children}
