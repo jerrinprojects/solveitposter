@@ -4,6 +4,7 @@ import { SUBTRACTION_STAGES } from "@/data/subtractionStages";
 import { MULTIPLICATION_STAGES } from "@/data/multiplicationStages";
 import { DIVISION_STAGES } from "@/data/divisionStages";
 import { LENGTH_LEVELS, POLYGON_LEVELS, COMPARE_LEVELS } from "@/data/lengthLevels";
+import { SPOT_LEVELS } from "@/data/rationalWsLevels";
 
 type Category = {
   href: string;
@@ -105,6 +106,17 @@ export default function WorksheetsLandingPage() {
       bgClass: "bg-rose-50",
       textClass: "text-rose-600",
       hoverClass: "hover:border-rose-400",
+    },
+    {
+      href: "/worksheets/rational",
+      icon: "🍕",
+      title: "Fractions",
+      subtitle: "Spot halves, thirds and quarters in shapes",
+      count: `Year 2 · ${SPOT_LEVELS.length} level`,
+      borderClass: "border-fuchsia-200",
+      bgClass: "bg-fuchsia-50",
+      textClass: "text-fuchsia-600",
+      hoverClass: "hover:border-fuchsia-400",
     },
   ];
 
