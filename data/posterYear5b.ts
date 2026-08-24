@@ -9,9 +9,9 @@ export const posterMeta: PosterMeta = {
 };
 
 export const posterSkills: PosterSkill[] = [
-  { code: "5.1b", description: "I can skip count in hundred thousands and write the missing number." },
+  { code: "5.1b", description: "I can skip count in millions and write the missing number." },
   { code: "5.2b", description: "I can identify the digit in a given place value position." },
-  { code: "5.3b", description: "I can work out how many thousands, ten thousands, or hundred thousands are in a given number." },
+  { code: "5.3b", description: "I can work out how many thousands, ten thousands, hundred thousands, or millions are in a given number." },
   { code: "5.4b", description: "I can write a number up to 1,000,000 in expanded form." },
   { code: "5.5b", description: "I can write a number up to 1,000,000 in place value form." },
   { code: "5.6b", description: "I can write a number up to 1,000,000 in words." },

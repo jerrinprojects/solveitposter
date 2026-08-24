@@ -9,7 +9,7 @@ export const posterMeta: PosterMeta = {
 };
 
 export const posterSkills: PosterSkill[] = [
-  { code: "8.1", description: "I can change 10 to a negative power into a decimal (and a decimal into the correct power)." },
+  { code: "8.1", description: "I can write a negative power of 10 as a decimal, and a decimal as a negative power of 10." },
   { code: "8.2", description: "I can write a decimal as a number multiplied by 10 to a negative power." },
   { code: "8.3", description: "I can expand a number with decimals using powers of 10 (including negative powers)." },
   { code: "8.4", description: "I can convert an expanded form with negative powers into the correct decimal number." },
