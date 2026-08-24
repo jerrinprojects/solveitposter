@@ -260,6 +260,9 @@ const DECIMAL_ADDITION_TEMPLATES: Array<(a: string, b: string) => string> = [
 ];
 
 // 24 decimal multiplication templates — money, measurement, area, rate contexts.
+// B IS A COUNT OF OBJECTS in most of these, so this bank is only safe when the
+// second value is a whole number ("buys 0.3 pencils" is nonsense). See
+// pickDecimalMulTemplate for the whole/decimal routing.
 const DECIMAL_TEMPLATES: Array<(a: string, b: string) => string> = [
   (a, b) => `Each apple costs $${a}. Liam buys ${b} apples. How much altogether?`,
   (a, b) => `Each pencil costs $${a}. Noah buys ${b} pencils. How much altogether?`,
@@ -285,6 +288,66 @@ const DECIMAL_TEMPLATES: Array<(a: string, b: string) => string> = [
   (a, b) => `A tap pours ${a} L per minute. After ${b} minutes, how many litres have come out?`,
   (a, b) => `A printer uses ${a} ml of ink per page. After ${b} pages, how much ink is used?`,
   (a, b) => `Each cake needs ${a} cups of flour. The bakery makes ${b} cakes. How much flour altogether?`,
+];
+
+// 24 templates for when BOTH values are decimals (Stage 5.4 and up). No counts
+// of objects here: every context is measurement × measurement, a per-unit rate
+// times a measured amount, or an area.
+const DECIMAL_MEASURE_TEMPLATES: Array<(a: string, b: string) => string> = [
+  (a, b) => `A rectangle is ${a} m long and ${b} m wide. What is the area (in m²)?`,
+  (a, b) => `A garden bed is ${a} m by ${b} m. What is its area in m²?`,
+  (a, b) => `A room floor is ${a} m by ${b} m. What is the floor area in m²?`,
+  (a, b) => `A rug measures ${a} m by ${b} m. What is its area in m²?`,
+  (a, b) => `A path is ${a} m wide and ${b} m long. What area does it cover in m²?`,
+  (a, b) => `A window pane is ${a} m by ${b} m. What is its area in m²?`,
+  (a, b) => `Fabric costs $${a} per metre. Aroha buys ${b} m. How much does she pay?`,
+  (a, b) => `Rope costs $${a} per metre. Tane buys ${b} m. What does it cost?`,
+  (a, b) => `Cheese costs $${a} per kg. Mia buys ${b} kg. How much does she pay?`,
+  (a, b) => `Juice costs $${a} per litre. Sione buys ${b} L. How much does he pay?`,
+  (a, b) => `Sand costs $${a} per kg. The builder buys ${b} kg. What is the cost?`,
+  (a, b) => `Ribbon costs $${a} per metre. Ella buys ${b} m. How much does she pay?`,
+  (a, b) => `A tap pours ${a} L per minute. It runs for ${b} minutes. How many litres come out?`,
+  (a, b) => `A hose fills ${a} L each second. It runs for ${b} seconds. How many litres?`,
+  (a, b) => `A car uses ${a} L of petrol per km. It travels ${b} km. How much petrol is used?`,
+  (a, b) => `A machine prints ${a} m of paper per minute. In ${b} minutes, how many metres?`,
+  (a, b) => `Paint covers a wall using ${a} L per m². The wall is ${b} m². How many litres of paint?`,
+  (a, b) => `A printer uses ${a} ml of ink per metre of banner. It prints ${b} m. How much ink?`,
+  (a, b) => `Sand weighs ${a} kg per litre. There are ${b} L of sand. What is its mass in kg?`,
+  (a, b) => `Soil weighs ${a} kg per litre. A pot holds ${b} L. What is the mass of the soil?`,
+  (a, b) => `Mia walks ${a} km every hour. She walks for ${b} hours. How far does she walk?`,
+  (a, b) => `Noah swims ${a} km each hour. He swims for ${b} hours. How many km?`,
+  (a, b) => `A tank drains ${a} L per hour for ${b} hours. How many litres drain out?`,
+  (a, b) => `Wire weighs ${a} g per metre. Kiri cuts ${b} m. What is its mass in grams?`,
+];
+
+// 24 templates for a WHOLE count of objects where the per-object amount is a
+// small decimal (Stage 5.1: 47 × 0.001). Measurement units only — a price of
+// $0.001 each would not be believable.
+const DECIMAL_SMALL_UNIT_TEMPLATES: Array<(a: string, b: string) => string> = [
+  (a, b) => `Each bead weighs ${a} g. There are ${b} beads. What is the total mass in g?`,
+  (a, b) => `Each seed weighs ${a} g. There are ${b} seeds. What is the total mass in g?`,
+  (a, b) => `Each paper clip weighs ${a} g. A box holds ${b} clips. Total mass in g?`,
+  (a, b) => `Each grain of rice weighs ${a} g. There are ${b} grains. Total mass in g?`,
+  (a, b) => `Each button weighs ${a} g. Aroha has ${b} buttons. What do they weigh in total?`,
+  (a, b) => `Each drop holds ${a} ml. There are ${b} drops. How many ml altogether?`,
+  (a, b) => `Each spoonful holds ${a} ml. Mia uses ${b} spoonfuls. How many ml in total?`,
+  (a, b) => `Each syringe holds ${a} ml. The nurse fills ${b} syringes. How many ml?`,
+  (a, b) => `Each sheet of paper is ${a} mm thick. ${b} sheets are stacked. How thick is the stack?`,
+  (a, b) => `Each card is ${a} mm thick. A pile has ${b} cards. How tall is the pile in mm?`,
+  (a, b) => `Each coin is ${a} mm thick. ${b} coins are stacked. How tall is the stack in mm?`,
+  (a, b) => `Each tile is ${a} m wide. ${b} tiles are placed in a row. How wide is the row?`,
+  (a, b) => `Each strip of tape is ${a} m long. Ava uses ${b} strips. How much tape in total?`,
+  (a, b) => `Each wire is ${a} m long. Tane joins ${b} wires. How long is the joined wire?`,
+  (a, b) => `Each straw is ${a} m long. Lucas lines up ${b} straws. What is the total length?`,
+  (a, b) => `Each step is ${a} m long. Olivia takes ${b} steps. How far does she walk?`,
+  (a, b) => `Each cube holds ${a} L. There are ${b} cubes. How many litres in total?`,
+  (a, b) => `Each small bottle holds ${a} L. There are ${b} bottles. How many litres in total?`,
+  (a, b) => `Each sachet holds ${a} kg of sugar. A box has ${b} sachets. Total mass in kg?`,
+  (a, b) => `Each teabag holds ${a} g of tea. A packet has ${b} teabags. Total mass in g?`,
+  (a, b) => `Each nail weighs ${a} kg. A builder uses ${b} nails. What is the total mass?`,
+  (a, b) => `Each marble weighs ${a} kg. There are ${b} marbles. What is the total mass?`,
+  (a, b) => `Each thread is ${a} m long. The weaver uses ${b} threads. How many m in total?`,
+  (a, b) => `Each drip is ${a} L. A tap drips ${b} times. How many litres are lost?`,
 ];
 
 const WORD_SEEDS: Record<WorksheetVersion, { problems: number; templates: number }> = {
@@ -334,12 +397,13 @@ export function buildWordProblems(
     (p.answerDisplay && p.answerDisplay.includes("."))
   );
 
-  // Pick the right template bank
+  // Pick the right template bank. Decimal multiplication is routed per problem
+  // (see below) because the right bank depends on which value is a whole number.
+  const isMulDecimal = isMul && isDecimal;
   const stringTemplates =
     isAddition && isDecimal ? DECIMAL_ADDITION_TEMPLATES :
     isSubtraction && isDecimal ? DECIMAL_SUBTRACTION_TEMPLATES :
     isDivision && isDecimal ? DECIMAL_DIVISION_TEMPLATES :
-    isMul && isDecimal ? DECIMAL_TEMPLATES :
     null;
   // If any problem has a remainder ("R" in answerDisplay), the whole batch
   // is from a remainder-stage pool — use the remainder-friendly templates
@@ -355,7 +419,11 @@ export function buildWordProblems(
     isMul && !isDecimal ? TEMPLATES :
     null;
 
-  const templateLen = stringTemplates?.length ?? numberTemplates?.length ?? 0;
+  // All three decimal-multiplication banks are the same length, so one shuffled
+  // order serves whichever bank a problem lands in.
+  const templateLen = isMulDecimal
+    ? DECIMAL_TEMPLATES.length
+    : stringTemplates?.length ?? numberTemplates?.length ?? 0;
   const templateOrder = seededShuffle(
     Array.from({ length: templateLen }, (_, i) => i),
     seeds.templates,
@@ -368,6 +436,23 @@ export function buildWordProblems(
       isSubtraction ? x - y :
       isDivision ? x / y :
       x * y;
+    if (isMulDecimal) {
+      const aStr = p.aDisplay ?? String(p.a);
+      const bStr = p.bDisplay ?? String(p.b);
+      const ansStr = p.answerDisplay ?? String(computeNum(p.a, p.b));
+      const aDec = aStr.includes(".");
+      const bDec = bStr.includes(".");
+      // The count sits in the second slot, so it has to be a whole number.
+      if (aDec && !bDec) {
+        return { prompt: DECIMAL_TEMPLATES[idx](aStr, bStr), answer: ansStr };
+      }
+      // Whole × decimal: swap the pair (a × b = b × a) to keep the count whole.
+      if (!aDec && bDec) {
+        return { prompt: DECIMAL_SMALL_UNIT_TEMPLATES[idx](bStr, aStr), answer: ansStr };
+      }
+      // Both decimal: measurement, rate and area contexts only.
+      return { prompt: DECIMAL_MEASURE_TEMPLATES[idx](aStr, bStr), answer: ansStr };
+    }
     if (stringTemplates) {
       const aStr = p.aDisplay ?? String(p.a);
       const bStr = p.bDisplay ?? String(p.b);
