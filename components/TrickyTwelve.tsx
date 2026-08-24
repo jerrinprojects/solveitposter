@@ -3,7 +3,7 @@
 // rounded chunky icons, and a Caveat handwritten accent.
 
 import {
-  IconScissors,
+  IconPlus,
   IconRepeat,
   IconQuote,
   IconArrowDown,
@@ -28,7 +28,7 @@ const FACTS: {
   a: number; b: number; result: number;
   trick: string; Icon: IconFC; accent: AccentKey; star?: boolean;
 }[] = [
-  { a: 6, b: 6, result: 36, trick: "Half of 6 is 3 — write 36",      Icon: IconScissors,  accent: "pink" },
+  { a: 6, b: 6, result: 36, trick: "6 × 5 = 30, add one more 6",     Icon: IconPlus,       accent: "pink" },
   { a: 6, b: 7, result: 42, trick: "Double 21 to get 42",            Icon: IconRepeat,    accent: "mint" },
   { a: 6, b: 8, result: 48, trick: 'Six "ate" (8) forty-eight',      Icon: IconQuote,     accent: "sunny" },
   { a: 6, b: 9, result: 54, trick: "Count down — 5, 4 makes 54",     Icon: IconArrowDown, accent: "grape" },

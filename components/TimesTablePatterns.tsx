@@ -180,7 +180,8 @@ function NinesCard() {
             }}>
               <div style={{ fontSize: 9, color: '#9ca3af', fontWeight: 600, lineHeight: 1 }}>{n}×9</div>
               <div style={{ fontSize: 16, fontWeight: 900, lineHeight: 1.1 }}>
-                <span style={{ color: DARK.purple }}>{tens}</span>
+                {/* 1×9 = 9 is a single digit: printing the 0 tens digit would show "09". */}
+                {tens > 0 && <span style={{ color: DARK.purple }}>{tens}</span>}
                 <span style={{ color: ACCENT.purple }}>{ones}</span>
               </div>
             </div>
@@ -190,8 +191,11 @@ function NinesCard() {
           <span style={{ fontSize: 10, fontWeight: 700, color: DARK.purple }}>
             Shortcut: 9×n = (10×n) − n
           </span>
-          <div style={{ fontSize: 9, color: '#6b7280', fontWeight: 600, marginTop: 1 }}>
-            e.g. 9×7 = 70 − 7 = 63
+          {/* Two separate steps: writing "9×7 = 70 − 7 = 63" reads as "9×7 = 70". */}
+          <div style={{ fontSize: 9, color: '#6b7280', fontWeight: 600, marginTop: 2, lineHeight: 1.5 }}>
+            <div>e.g. 9 × 7</div>
+            <div style={{ color: DARK.purple }}>10 × 7 = 70</div>
+            <div style={{ color: DARK.purple }}>70 − 7 = 63</div>
           </div>
         </div>
       </CardBody>

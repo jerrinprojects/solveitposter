@@ -69,6 +69,14 @@ export const IconMinus = ({ size = 20 }: Props) => (
   </svg>
 );
 
+export const IconPlus = ({ size = 20 }: Props) => (
+  <svg {...base(size)}>
+    <circle cx="12" cy="12" r="8.5" />
+    <line x1="8" y1="12" x2="16" y2="12" />
+    <line x1="12" y1="8" x2="12" y2="16" />
+  </svg>
+);
+
 export const IconChecker = ({ size = 20 }: Props) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" stroke="none">
     <rect x="3" y="3" width="6" height="6" rx="1" />
