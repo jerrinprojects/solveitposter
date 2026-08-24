@@ -30,3 +30,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# Generated poster PDFs (re-exportable from the poster pages)
+pdf-exports/
