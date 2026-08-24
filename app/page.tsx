@@ -39,8 +39,116 @@ const topics = [
   },
 ];
 
+const algebraTopics = [
+  {
+    name: "Phase 1 · Year 0–3",
+    emoji: "🔢",
+    items: [
+      { label: "All Y0–3", sub: "Combined Pack", href: "/algebra/phase-1" },
+      { label: "Year 0", sub: "Patterns & Position", href: "/algebra/year-0" },
+      { label: "Year 1", sub: "Patterns & Equations", href: "/algebra/year-1" },
+      { label: "Year 2", sub: "Compare & Operations", href: "/algebra/year-2" },
+      { label: "Year 3", sub: "Bigger Numbers & Growing", href: "/algebra/year-3" },
+    ],
+  },
+  {
+    name: "Phase 2 · Year 4–6",
+    emoji: "🔣",
+    items: [
+      { label: "All Y4–6", sub: "Combined Pack", href: "/algebra/phase-2" },
+      { label: "Year 4", sub: "Large Numbers & Patterns", href: "/algebra/year-4" },
+      { label: "Year 5", sub: "Compare Expressions", href: "/algebra/year-5" },
+      { label: "Year 6", sub: "BEDMAS & Coordinates", href: "/algebra/year-6" },
+    ],
+  },
+  {
+    name: "Phase 3 · Year 7–8",
+    emoji: "𝑥",
+    items: [
+      { label: "All Y7–8", sub: "Combined Pack", href: "/algebra/phase-3" },
+      { label: "Year 7", sub: "Variables & Equations", href: "/algebra/year-7" },
+      { label: "Year 8", sub: "Expand · Factorise · Inequality", href: "/algebra/year-8" },
+    ],
+  },
+];
+
 const measurementPosters = [
   { label: "Shapes · Length, Width & Height", href: "/measurement/shapes" },
+];
+
+const rationalTopics = [
+  {
+    name: "Phase 1 · Year 1–3",
+    emoji: "½",
+    items: [
+      { label: "All Y1–3", sub: "Combined Pack", href: "/rational/phase-1" },
+      { label: "Year 1", sub: "Halves & Quarters", href: "/rational/year-1" },
+      { label: "Year 2", sub: "Halves · Thirds · Quarters", href: "/rational/year-2" },
+      { label: "Year 3", sub: "Unit Fractions · Add & Subtract", href: "/rational/year-3" },
+    ],
+  },
+  {
+    name: "Phase 2 · Year 4–6",
+    emoji: "¾",
+    items: [
+      { label: "All Y4–6", sub: "Combined Pack", href: "/rational/phase-2" },
+      { label: "Year 4", sub: "Simplify · Tenths · Scaling", href: "/rational/year-4" },
+      { label: "Year 5", sub: "Hundredths · Percentages · Ratio", href: "/rational/year-5" },
+      { label: "Year 6", sub: "F ⇄ D ⇄ % · Ratio · Mixed", href: "/rational/year-6" },
+    ],
+  },
+  {
+    name: "Phase 3 · Year 7–8",
+    emoji: "⅜",
+    items: [
+      { label: "All Y7–8", sub: "Combined Pack", href: "/rational/phase-3" },
+      { label: "Year 7", sub: "Unlike F · Ratio · Operations", href: "/rational/year-7" },
+      { label: "Year 8", sub: "F × F · Decimal Ops · Equivalence", href: "/rational/year-8" },
+    ],
+  },
+  {
+    name: "Decimal PV · Stage 1–4",
+    emoji: "0.1",
+    items: [
+      { label: "Stage 1", sub: "Tenths · Year 4", href: "/decimal-pv/stage-1" },
+      { label: "Stage 2", sub: "Hundredths · Year 5", href: "/decimal-pv/stage-2" },
+      { label: "Stage 3", sub: "Thousandths · Year 6", href: "/decimal-pv/stage-3" },
+      { label: "Stage 4", sub: "Mixed · Year 6+", href: "/decimal-pv/stage-4" },
+    ],
+  },
+];
+
+const yearOpsTopics = [
+  {
+    name: "Phase 1 · Year 0–3",
+    emoji: "🌱",
+    items: [
+      { label: "All Y0–3", sub: "Combined Pack", href: "/year-ops/phase-1" },
+      { label: "Year 0", sub: "Within 5", href: "/year-ops/year-0" },
+      { label: "Year 1", sub: "Facts to 10 & to 20", href: "/year-ops/year-1" },
+      { label: "Year 2", sub: "Two-Digit & First Tables", href: "/year-ops/year-2" },
+      { label: "Year 3", sub: "Three-Digit & More Tables", href: "/year-ops/year-3" },
+    ],
+  },
+  {
+    name: "Phase 2 · Year 4–6",
+    emoji: "🌿",
+    items: [
+      { label: "All Y4–6", sub: "Combined Pack", href: "/year-ops/phase-2" },
+      { label: "Year 4", sub: "Four-Digit & Tenths", href: "/year-ops/year-4" },
+      { label: "Year 5", sub: "Big Numbers & Hundredths", href: "/year-ops/year-5" },
+      { label: "Year 6", sub: "Thousandths & BEDMAS", href: "/year-ops/year-6" },
+    ],
+  },
+  {
+    name: "Phase 3 · Year 7–8",
+    emoji: "🌳",
+    items: [
+      { label: "All Y7–8", sub: "Combined Pack", href: "/year-ops/phase-3" },
+      { label: "Year 7", sub: "Integers & Exponents", href: "/year-ops/year-7" },
+      { label: "Year 8", sub: "Decimal Ops · % · Ratios", href: "/year-ops/year-8" },
+    ],
+  },
 ];
 
 const measurementTopics = [
@@ -89,6 +197,15 @@ const measurementTopics = [
       { label: "Phase 3", sub: "Year 7–8", href: "/measurement/temperature/phase-3" },
     ],
   },
+  {
+    name: "Angle",
+    emoji: "📐",
+    items: [
+      { label: "Phase 1", sub: "Year 0–3", href: "/measurement/angle/phase-1" },
+      { label: "Phase 2", sub: "Year 4–6", href: "/measurement/angle/phase-2" },
+      { label: "Phase 3", sub: "Year 7–8", href: "/measurement/angle/phase-3" },
+    ],
+  },
 ];
 
 // ── Page ─────────────────────────────────────────────────────────
@@ -135,6 +252,114 @@ export default function LandingPage() {
             </div>
           </section>
         ))}
+
+        {/* Rational Numbers — mint themed */}
+        <section>
+          <SectionHeading emoji="½" title="Rational Numbers" />
+          <div className="space-y-5">
+            {rationalTopics.map((topic) => (
+              <div key={topic.name}>
+                <div className="flex items-center gap-2 mb-2 px-1">
+                  <span className="text-base">{topic.emoji}</span>
+                  <h3 className="font-nunito text-sm font-bold text-gray-500 uppercase tracking-widest">
+                    {topic.name}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  {topic.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
+                    >
+                      <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
+                        {item.label}
+                      </p>
+                      <p className="font-nunito text-xs font-semibold text-gray-400 mt-1">
+                        {item.sub}
+                      </p>
+                      <span className="text-pink-300 group-hover:text-pink-400 text-sm mt-2 transition-colors">
+                        →
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Year Operations — pink themed */}
+        <section>
+          <SectionHeading emoji="🧮" title="Year Operations" />
+          <div className="space-y-5">
+            {yearOpsTopics.map((topic) => (
+              <div key={topic.name}>
+                <div className="flex items-center gap-2 mb-2 px-1">
+                  <span className="text-base">{topic.emoji}</span>
+                  <h3 className="font-nunito text-sm font-bold text-gray-500 uppercase tracking-widest">
+                    {topic.name}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  {topic.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
+                    >
+                      <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
+                        {item.label}
+                      </p>
+                      <p className="font-nunito text-xs font-semibold text-gray-400 mt-1">
+                        {item.sub}
+                      </p>
+                      <span className="text-pink-300 group-hover:text-pink-400 text-sm mt-2 transition-colors">
+                        →
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Algebra — pink themed */}
+        <section>
+          <SectionHeading emoji="🅰️" title="Algebra" />
+          <div className="space-y-5">
+            {algebraTopics.map((topic) => (
+              <div key={topic.name}>
+                <div className="flex items-center gap-2 mb-2 px-1">
+                  <span className="text-base">{topic.emoji}</span>
+                  <h3 className="font-nunito text-sm font-bold text-gray-500 uppercase tracking-widest">
+                    {topic.name}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                  {topic.items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex flex-col items-center justify-center bg-white rounded-2xl border-2 border-pink-200 px-3 py-4 hover:border-pink-400 hover:shadow-md transition-all group text-center"
+                    >
+                      <p className="font-fredoka font-bold text-base sm:text-lg text-pink-500 leading-none">
+                        {item.label}
+                      </p>
+                      <p className="font-nunito text-xs font-semibold text-gray-400 mt-1">
+                        {item.sub}
+                      </p>
+                      <span className="text-pink-300 group-hover:text-pink-400 text-sm mt-2 transition-colors">
+                        →
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* Measurement — groups Length and Mass together */}
         <section>
